@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Logo from '../assets/icons/main-icon.png';
 
 const Container = styled.section`
     max-width: 1000px;
@@ -14,11 +15,11 @@ const Title = styled.div`
     align-items: center;
 `;
 
-const Image = styled.div`
+const Image = styled.img`
     width: 120px;
     height: 120px;
+    background-position: center center;
     margin: 0 20px;
-    background-image: ${props => props.imageUrl};
 `;
 
 const Header = styled.h1`
@@ -38,7 +39,7 @@ const Paragraph = styled.p`
 const MainTitle = () => (
     <Container>
         <Title>
-            <Image imageUrl="../assets/icons/main-icon.png" alt="main-icon"></Image>
+            <Image src={Logo} alt="main-icon" />
             <div>
                 <Paragraph>나만의 물류 파트너 찾기</Paragraph>
                 <Header>온라인 셀러를 위한 <br/>단 하나의 솔루션</Header>

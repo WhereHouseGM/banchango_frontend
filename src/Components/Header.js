@@ -101,7 +101,7 @@ const HeaderComponent = () => {
                     ABOUT US
                 </UserButton>
                 {login ? null : <UserButton to="/join">회원가입</UserButton>}
-                {login ? <UserButton onClick={logout}>로그아웃</UserButton> : <UserButton to="/login">로그인</UserButton>}
+                {login ? <UserButton to="/" onClick={logout}>로그아웃</UserButton> : <UserButton to="/login">로그인</UserButton>}
             </HeaderRight>
         </NavContainer>
     );
