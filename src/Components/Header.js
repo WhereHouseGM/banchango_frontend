@@ -60,6 +60,7 @@ const PageLink = styled.a`
     border: 1px solid #333;
     border-radius: 5px;
     transition: all 0.2s ease;
+    color: #333;
     &:hover {
         background-color: #333;
         border-color: #333;
