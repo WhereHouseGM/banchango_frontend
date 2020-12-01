@@ -75,10 +75,11 @@ const DescriptionHeader1 = styled.h1`
 `;
 
 const DescriptionHeader2 = styled.h2`
+    margin-top: 11px;
     margin-bottom: 10px;
     font-family: "Nanum Gothic", sans-serif;
     font-weight: bold;
-    font-size: 1em;
+    font-size: 0.86em;
     color: #aaa;
     &:hover {
         color: #30475e;
@@ -88,7 +89,7 @@ const DescriptionHeader2 = styled.h2`
 const DescriptionHeader3 = styled.h3`
     font-family: "Nanum Gothic", sans-serif;
     font-weight: bold;
-    font-size: 0.85em;
+    font-size: 0.75em;
     line-height: 1.2;
     &:hover {
         color: #30475e;

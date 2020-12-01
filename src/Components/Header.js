@@ -5,12 +5,12 @@ import { message } from 'antd';
 
 const NavContainer = styled.div`
     width: 100%;
-    height: 80px;
+    height: 60px;
     padding: 0 30px;
     position: fixed;
     top: 0;
     display: flex;
-    background-color: transparent;
+    background-color: #FFFFFF;
     box-sizing: border-box;
     transition: all 0.3s ease;
     z-index: 1;
@@ -46,12 +46,15 @@ const UserButton = styled(Link)`
     color: #333;
     transition: 0.2s ease;
     &:hover {
-        color: #eebb4d;
+        color: #1c57b0;
     }
 `;
 
 const PageLink = styled.a`
-    padding: 2px 1px 1px 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
     height: 30px;
     margin-right: 5px;
     display: flex;
@@ -62,8 +65,8 @@ const PageLink = styled.a`
     transition: all 0.2s ease;
     color: #333;
     &:hover {
-        background-color: #333;
-        border-color: #333;
+        background-color: #1c57b0;
+        border-color: #1c57b0;
         color: #fff;
         cursor: pointer;
     }

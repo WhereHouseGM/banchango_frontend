@@ -2,6 +2,7 @@ import MainTitle from '../../Components/MainTitle';
 import MainSearch from '../../Components/MainSearch';
 import MainCategory from '../../Components/MainCategory';
 import Helmet from 'react-helmet';
+import MainDescription from '../../Components/MainDescription';
 
 const MainPresenter = () => {
     return (
@@ -12,7 +13,9 @@ const MainPresenter = () => {
             <MainTitle />
             <MainSearch />
             <MainCategory />
-            {/* <MainCategory push={history.push} /> */}
+            <hr/>
+            <MainDescription/>
+            <hr/>
         </>
     )
 }
