@@ -94,10 +94,10 @@ const HeaderComponent = () => {
                 <LogoLink to="/">BANCHANGO</LogoLink>
             </NavLeftContainer>
             <HeaderRight>
-                <PageLink onClick={warningMessage}>
+                <PageLink to ="/" onClick={warningMessage}>
                     창고 등록하기
                 </PageLink>
-                <UserButton onClick={warningMessage}>
+                <UserButton to="/" onClick={warningMessage}>
                     ABOUT US
                 </UserButton>
                 {login ? null : <UserButton to="/join">회원가입</UserButton>}

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import Header from './Header';
 import Main from '../Routes/Main';
 
-export default () => (
+const RouterComponent = () => (
     <Router>
         <>
             <Header />
@@ -14,4 +14,6 @@ export default () => (
             </Switch>
         </>
     </Router>
-)
+);
+
+export default RouterComponent;
