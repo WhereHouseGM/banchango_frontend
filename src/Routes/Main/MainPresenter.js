@@ -3,6 +3,8 @@ import MainSearch from '../../Components/MainSearch';
 import MainCategory from '../../Components/MainCategory';
 import Helmet from 'react-helmet';
 import MainDescription from '../../Components/MainDescription';
+import Footer from '../../Components/Footer';
+import WhiteLabel from '../../Components/WhiteLabel';
 
 const MainPresenter = () => {
     return (
@@ -13,9 +15,10 @@ const MainPresenter = () => {
             <MainTitle />
             <MainSearch />
             <MainCategory />
-            <hr/>
-            <MainDescription/>
-            <hr/>
+            <WhiteLabel />
+            <MainDescription />
+            <WhiteLabel />
+            <Footer />
         </>
     )
 }
