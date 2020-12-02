@@ -86,8 +86,8 @@ const HeaderComponent = () => {
         setLogin(false);
         localStorage.setItem("Login", false);
         localStorage.removeItem("AccessToken");
-        localStorage.removeItemo("RefreshToken");
-        alert("로그인 되었습니다.");
+        localStorage.removeItem("RefreshToken");
+        alert("로그아웃 되었습니다.");
         window.location.replace("/");
     }
 
