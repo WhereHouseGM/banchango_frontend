@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from '../assets/icons/main-icon.png';
+import Logo from '../../assets/icons/main-icon.png';
 
 const Container = styled.section`
     max-width: 1000px;

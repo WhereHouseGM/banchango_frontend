@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Cloth from '../assets/images/cloth.jpg';
-import Cosmetic from '../assets/images/cosmetic.jpg';
-import Food from '../assets/images/food.jpg';
-import Furniture from '../assets/images/furniture.jpg';
-import GeneralMerchandise from '../assets/images/general_merchandise.jpg';
-import Jewelry from '../assets/images/jewelry.jpg';
+import Cloth from '../../assets/images/cloth.jpg';
+import Cosmetic from '../../assets/images/cosmetic.jpg';
+import Food from '../../assets/images/food.jpg';
+import Furniture from '../../assets/images/furniture.jpg';
+import GeneralMerchandise from '../../assets/images/general_merchandise.jpg';
+import Jewelry from '../../assets/images/jewelry.jpg';
 
 const Categories = {
     COSMETIC: "cosmetic",
@@ -68,14 +68,13 @@ const DescriptionHeader1 = styled.h1`
     font-family: "Nanum Gothic", sans-serif;
     font-weight: bold;
     font-size: 1.1em;
-    margin-bottom: 4px;
     &:hover {
         color: #30475e;
     }
 `;
 
 const DescriptionHeader2 = styled.h2`
-    margin-top: 11px;
+    margin-top: 7px;
     margin-bottom: 10px;
     font-family: "Nanum Gothic", sans-serif;
     font-weight: bold;
@@ -91,6 +90,7 @@ const DescriptionHeader3 = styled.h3`
     font-weight: bold;
     font-size: 0.75em;
     line-height: 1.2;
+    margin-top: 16px;
     &:hover {
         color: #30475e;
     }

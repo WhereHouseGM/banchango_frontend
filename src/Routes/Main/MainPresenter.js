@@ -1,10 +1,11 @@
-import MainTitle from '../../Components/MainTitle';
-import MainSearch from '../../Components/MainSearch';
-import MainCategory from '../../Components/MainCategory';
+import MainTitle from '../../Components/Main/MainTitle';
+import MainSearch from '../../Components/Main/MainSearch';
+import MainCategory from '../../Components/Main/MainCategory';
 import Helmet from 'react-helmet';
-import MainDescription from '../../Components/MainDescription';
-import Footer from '../../Components/Footer';
-import WhiteLabel from '../../Components/WhiteLabel';
+import MainDescription from '../../Components/Main/MainDescription';
+import MainFooter from '../../Components/Main/MainFooter';
+import WhiteLabel from '../../Components/Main/WhiteLabel';
+import Header from '../../Components/Header';
 
 const MainPresenter = () => {
     return (
@@ -12,13 +13,14 @@ const MainPresenter = () => {
             <Helmet>
                 <title>반창고 | 창고중개플랫폼</title>
             </Helmet>
+            <Header />
             <MainTitle />
             <MainSearch />
             <MainCategory />
             <WhiteLabel />
             <MainDescription />
             <WhiteLabel />
-            <Footer />
+            <MainFooter />
         </>
     )
 }

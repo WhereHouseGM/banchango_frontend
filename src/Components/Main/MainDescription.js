@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import MapIcon from '../assets/icons/map-icon.png';
-import TruckIcon from '../assets/icons/truck-icon.png';
-import BoxIcon from '../assets/icons/box-icon.png';
+import MapIcon from '../../assets/icons/map-icon.png';
+import TruckIcon from '../../assets/icons/truck-icon.png';
+import BoxIcon from '../../assets/icons/box-icon.png';
 
 const Container = styled.section`
     max-width: 1000px;
