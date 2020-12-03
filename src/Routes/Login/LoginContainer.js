@@ -2,6 +2,8 @@ import React from 'react';
 import LoginPresenter from './LoginPresenter';
 import sha256 from 'crypto';
 import { userApi } from '../../api';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const InputType = {
   EMAIL: 'email',
@@ -26,10 +28,11 @@ class LoginContainer extends React.Component {
     }
   };
 
-  saveToken = (tokenSet) => {
+  saveToken = (tokenSet, name) => {
     localStorage.setItem('AccessToken', tokenSet.AccessToken);
     localStorage.setItem('RefreshToken', tokenSet.RefreshToken);
     localStorage.setItem('Login', true);
+    localStorage.setItem('name', name);
   };
 
   handleInput = (event) => {
@@ -51,6 +54,14 @@ class LoginContainer extends React.Component {
         return;
     }
   };
+
+  notify = (name) =>
+    toast.success(`${name}님 환영합니다!`, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 5000,
+      hideProgressBar: false,
+      draggable: false,
+    });
 
   handleSubmit = async (e) => {
     e.preventDefault();
@@ -77,12 +88,11 @@ class LoginContainer extends React.Component {
           User: { name },
         },
       } = result;
-      alert(`${name}님 환영합니다!`);
       const tokenSet = {
         AccessToken: accessToken,
         RefreshToken: refreshToken,
       };
-      this.saveToken(tokenSet);
+      this.saveToken(tokenSet, name);
       window.location.replace('/');
     } catch {
       alert('이메일 또는 비밀번호가 일치하지 않습니다.');
@@ -92,10 +102,13 @@ class LoginContainer extends React.Component {
 
   render() {
     return (
-      <LoginPresenter
-        handleInput={this.handleInput}
-        handleSubmit={this.handleSubmit}
-      />
+      <>
+        <LoginPresenter
+          handleInput={this.handleInput}
+          handleSubmit={this.handleSubmit}
+        />
+        <ToastContainer />
+      </>
     );
   }
 }
