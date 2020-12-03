@@ -13,6 +13,7 @@ const InputType = {
 };
 
 const regEx = {
+    // TODO: 정규식 바꾸기
   email: /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+.[A-Za-z0-9]+/,
   telephoneNumber: /^\d{2,3}-\d{3,4}-\d{4}$/,
   phoneNumber: /^\d{3}-\d{3,4}-\d{4}$/,
@@ -23,7 +24,7 @@ class SignUpContainer extends React.Component {
     super(props);
     this.state = {
       email: '',
-      name: '',
+      realName: '',
       password: '',
       type: 'OWNER',
       telephoneNumber: '',
@@ -31,12 +32,6 @@ class SignUpContainer extends React.Component {
       phoneNumber: '',
     };
   }
-
-  saveToken = (tokenSet) => {
-    localStorage.setItem('AccessToken', tokenSet.AccessToken);
-    localStorage.setItem('RefreshToken', tokenSet.RefreshToken);
-    localStorage.setItem('SignUp', true);
-  };
 
   handleInput = (event) => {
     event.preventDefault();
@@ -46,24 +41,25 @@ class SignUpContainer extends React.Component {
     const {
       target: { value },
     } = event;
+    let trimmedValue = value.trim();
     switch (name) {
       case InputType.EMAIL:
-        this.setState({ email: value });
+        this.setState({ email: trimmedValue });
         return;
       case InputType.REALNAME:
-        this.setState({ realName: value });
+        this.setState({ realName: trimmedValue });
         return;
       case InputType.PASSWORD:
-        this.setState({ password: value });
+        this.setState({ password: trimmedValue });
         return;
       case InputType.TELEPHONENUMBER:
-        this.setState({ telephoneNumber: value });
+        this.setState({ telephoneNumber: trimmedValue });
         return;
       case InputType.PHONENUMBER:
-        this.setState({ phoneNumber: value });
+        this.setState({ phoneNumber: trimmedValue });
         return;
       case InputType.COMPANYNAME:
-        this.setState({ companyName: value });
+        this.setState({ companyName: trimmedValue });
         return;
       default:
         return;
@@ -80,6 +76,13 @@ class SignUpContainer extends React.Component {
     const { phoneNumber } = this.state;
     const { companyName } = this.state;
 
+    for (let item in this.state) {
+      if (this.state[item] === '') {
+        document.getElementById(item).focus();
+        return;
+      }
+    }
+
     if (!regEx.email.test(email)) {
       alert('이메일 형식이 올바르지 않습니다.');
     }
@@ -89,6 +92,9 @@ class SignUpContainer extends React.Component {
     if (!regEx.phoneNumber.test(phoneNumber)) {
       alert('휴대폰 번호 형식이 올바르지 않습니다.');
     }
+    // TODO:
+    // 정규식 바꾸기.
+    // 위에 state json으로 묶기.
 
     const hashCode = sha256.createHash('sha256').update(password).digest('hex');
     const requestBody = {
@@ -102,15 +108,17 @@ class SignUpContainer extends React.Component {
     };
 
     try {
-      const result = await userApi.signUp(requestBody);
+      await userApi.signUp(requestBody);
 
       alert(`회원가입이 완료되었습니다! 로그인 페이지로 이동합니다.`);
 
       window.location.replace('/login');
-    } catch (error) {
-
-      alert(error);
-      console.log(error.code);
+    } catch ({ response: { status } }) {
+      if (status === 400) {
+        alert('서버 오류: 관리자에게 문의해주세요.');
+      } else if (status === 409) {
+        alert('이미 존재하는 이메일입니다. 다시 확인해주세요.');
+      }
 
       window.location.reload();
     }

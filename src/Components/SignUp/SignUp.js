@@ -87,14 +87,6 @@ const HeaderTitleTop = styled.div`
   text-align: center;
 `;
 
-const HeaderTitleBottom = styled.div`
-  color: #1d489b;
-  font-family: 'Nanum Gothic', sans-serif;
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-`;
-
 const InputTitle = styled.div`
   color: black;
   font-family: 'Nanum Gothic', sans-serif;
@@ -161,6 +153,7 @@ const SignUp = ({ handleSubmit, handleInput }) => {
 
             <InputTitle>이메일</InputTitle>
             <Input
+              id="email"
               type="email"
               placeholder="example@example.com"
               name="email"
@@ -169,6 +162,7 @@ const SignUp = ({ handleSubmit, handleInput }) => {
             />
             <InputTitle>성함</InputTitle>
             <Input
+              id="realName"
               type="realName"
               placeholder="홍길동"
               name="realName"
