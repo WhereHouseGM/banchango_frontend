@@ -122,5 +122,3 @@ Login.propTypes = {
 }
 
 export default Login;
-
-
