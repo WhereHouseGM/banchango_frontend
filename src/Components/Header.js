@@ -100,7 +100,7 @@ const HeaderComponent = () => {
         <UserButton to="/" onClick={warningMessage}>
           ABOUT US
         </UserButton>
-        {login ? null : <UserButton to="/join">회원가입</UserButton>}
+        {login ? null : <UserButton to="/signup">회원가입</UserButton>}
         {login ? (
           <UserButton to="/" onClick={logout}>
             로그아웃
