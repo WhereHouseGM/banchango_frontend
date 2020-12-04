@@ -41,30 +41,43 @@ class SignUpContainer extends React.Component {
     let isVerified = value !== '' && this.state.password === value;
 
     if (isVerified) {
-      document.getElementById('rePasswordText').innerHTML = '확인됨.';
-
-      document.getElementById('password').style.border = 'none';
-      document.getElementById('rePassword').style.border = 'none';
-
-      document.getElementById('password').style.borderBottom = '3px solid #33c41f';
-      document.getElementById('rePassword').style.borderBottom = '3px solid #33c41f';
-      
+      this.swithToPasswordMatch();
     } else {
-      document.getElementById('rePasswordText').innerHTML = '비밀번호가 다릅니다.';
-      document.getElementById('password').style.border = '2px solid red';
-      document.getElementById('rePassword').style.border = '2px solid red';
+      this.switchToPasswordMisMatch();
     }
+  };
+
+  swithToPasswordMatch = () => {
+    document.getElementById('rePasswordText').innerHTML = '확인됨.';
+
+    document.getElementById('password').style.border = 'none';
+    document.getElementById('rePassword').style.border = 'none';
+
+    document.getElementById('password').style.borderBottom =
+      '3px solid #33c41f';
+    document.getElementById('rePassword').style.borderBottom =
+      '3px solid #33c41f';
+  };
+
+  switchToPasswordMisMatch = () => {
+    document.getElementById('rePasswordText').innerHTML =
+      '비밀번호가 다릅니다.';
+    document.getElementById('password').style.border = '2px solid red';
+    document.getElementById('rePassword').style.border = '2px solid red';
   };
 
   handleInput = (event) => {
     event.preventDefault();
+
     const {
       target: { name },
     } = event;
     const {
       target: { value },
     } = event;
+
     let trimmedValue = value.trim();
+
     switch (name) {
       case InputType.EMAIL:
         this.setState({ email: trimmedValue });
@@ -73,8 +86,16 @@ class SignUpContainer extends React.Component {
         this.setState({ realName: trimmedValue });
         return;
       case InputType.PASSWORD:
-        this.setState({ password: trimmedValue });
-        return;
+        let rePasswordValue = document.getElementById('rePassword').value;
+        if (trimmedValue !== rePasswordValue) {
+          this.switchToPasswordMisMatch();
+          this.setState({ password: trimmedValue });
+          return;
+        } else {
+          this.swithToPasswordMatch();
+          this.setState({ password: trimmedValue });
+          return;
+        }
       case InputType.TELEPHONENUMBER:
         this.setState({ telephoneNumber: trimmedValue });
         return;
@@ -90,8 +111,6 @@ class SignUpContainer extends React.Component {
   };
 
   handleSubmit = async (e) => {
-    // TODO : 패스워드 확인 만들기
-
     e.preventDefault();
     const { email } = this.state;
     const { realName } = this.state;
@@ -100,6 +119,7 @@ class SignUpContainer extends React.Component {
     const { telephoneNumber } = this.state;
     const { phoneNumber } = this.state;
     const { companyName } = this.state;
+
     for (let item in this.state) {
       if (this.state[item] === '') {
         document.getElementById(item).focus();
@@ -111,16 +131,19 @@ class SignUpContainer extends React.Component {
       alert('이메일 형식이 올바르지 않습니다.');
       return;
     }
+
     if (!regEx.telephoneNumber.test(telephoneNumber)) {
       alert('전화번호 형식이 올바르지 않습니다.');
       return;
     }
+
     if (!regEx.phoneNumber.test(phoneNumber)) {
       alert('휴대폰 번호 형식이 올바르지 않습니다.');
       return;
     }
 
     const hashCode = sha256.createHash('sha256').update(password).digest('hex');
+
     const requestBody = {
       email: email,
       name: realName,

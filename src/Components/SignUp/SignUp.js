@@ -235,8 +235,11 @@ const SignUp = ({ handleSubmit, handleInput, handlePasswordInput }) => {
     </Container>
   );
 };
+
 SignUp.propTypes = {
   handleInput: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  handlePasswordInput: PropTypes.func.isRequired,
 };
+
 export default SignUp;
