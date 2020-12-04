@@ -10,10 +10,11 @@ const NavContainer = styled.div`
   position: fixed;
   top: 0;
   display: flex;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.8);
   box-sizing: border-box;
   transition: all 0.3s ease;
   z-index: 1;
+  backdrop-filter: saturate(200%) blur(10px);
 `;
 
 const NavLeftContainer = styled.div`
