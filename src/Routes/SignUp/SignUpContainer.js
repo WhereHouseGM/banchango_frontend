@@ -32,6 +32,30 @@ class SignUpContainer extends React.Component {
     };
   }
 
+  handlePasswordInput = (event) => {
+    event.preventDefault();
+    const {
+      target: { value },
+    } = event;
+
+    let isVerified = value !== '' && this.state.password === value;
+
+    if (isVerified) {
+      document.getElementById('rePasswordText').innerHTML = '확인됨.';
+
+      document.getElementById('password').style.border = 'none';
+      document.getElementById('rePassword').style.border = 'none';
+
+      document.getElementById('password').style.borderBottom = '3px solid #33c41f';
+      document.getElementById('rePassword').style.borderBottom = '3px solid #33c41f';
+      
+    } else {
+      document.getElementById('rePasswordText').innerHTML = '비밀번호가 다릅니다.';
+      document.getElementById('password').style.border = '2px solid red';
+      document.getElementById('rePassword').style.border = '2px solid red';
+    }
+  };
+
   handleInput = (event) => {
     event.preventDefault();
     const {
@@ -67,9 +91,7 @@ class SignUpContainer extends React.Component {
 
   handleSubmit = async (e) => {
     // TODO : 패스워드 확인 만들기
-    // 유선 전화
-    // 휴대 전화
-    // 회사명
+
     e.preventDefault();
     const { email } = this.state;
     const { realName } = this.state;
@@ -78,7 +100,6 @@ class SignUpContainer extends React.Component {
     const { telephoneNumber } = this.state;
     const { phoneNumber } = this.state;
     const { companyName } = this.state;
-
     for (let item in this.state) {
       if (this.state[item] === '') {
         document.getElementById(item).focus();
@@ -88,12 +109,15 @@ class SignUpContainer extends React.Component {
 
     if (!regEx.email.test(email)) {
       alert('이메일 형식이 올바르지 않습니다.');
+      return;
     }
     if (!regEx.telephoneNumber.test(telephoneNumber)) {
       alert('전화번호 형식이 올바르지 않습니다.');
+      return;
     }
     if (!regEx.phoneNumber.test(phoneNumber)) {
       alert('휴대폰 번호 형식이 올바르지 않습니다.');
+      return;
     }
 
     const hashCode = sha256.createHash('sha256').update(password).digest('hex');
@@ -129,6 +153,7 @@ class SignUpContainer extends React.Component {
       <SignUpPresenter
         handleInput={this.handleInput}
         handleSubmit={this.handleSubmit}
+        handlePasswordInput={this.handlePasswordInput}
       />
     );
   }

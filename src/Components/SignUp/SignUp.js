@@ -94,6 +94,15 @@ const InputTitle = styled.div`
   margin-left: 60px;
 `;
 
+const RePasswordText = styled.div`
+  color: black;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 10px;
+  margin-top: 10px;
+  align-self: flex-start;
+  margin-left: 60px;
+`;
+
 const Input = styled.input`
   border: none;
   border-bottom: 1px solid #1d489b;
@@ -133,7 +142,7 @@ const TextBottom = styled.a`
   color: gray;
 `;
 
-const SignUp = ({ handleSubmit, handleInput }) => {
+const SignUp = ({ handleSubmit, handleInput, handlePasswordInput }) => {
   return (
     <Container>
       <Wrapper>
@@ -166,34 +175,50 @@ const SignUp = ({ handleSubmit, handleInput }) => {
               onChange={handleInput}
               required
             />
-            <InputTitle>패스워드</InputTitle>
+            <InputTitle>비밀번호</InputTitle>
             <Input
+              id="password"
               type="password"
-              placeholder="password"
+              placeholder="비밀번호 입력"
               name="password"
               onChange={handleInput}
               required
             />
-            <InputTitle>전화번호 (02)</InputTitle>
+            <InputTitle>비밀번호 재입력</InputTitle>
             <Input
+              id="rePassword"
+              type="password"
+              placeholder=""
+              name="rePassword"
+              onChange={handlePasswordInput}
+              required
+            />
+            <RePasswordText id="rePasswordText">
+              비밀번호가 다릅니다.
+            </RePasswordText>
+            <InputTitle>유선전화 번호</InputTitle>
+            <Input
+              id="telephoneNumber"
               type="telephoneNumber"
               placeholder="02-123-4567"
               name="telephoneNumber"
               onChange={handleInput}
               required
             />
-            <InputTitle>전화번호 (010)</InputTitle>
+            <InputTitle>휴대전화 번호</InputTitle>
             <Input
-              type="phoneNum"
+              id="phoneNumber"
+              type="phoneNumber"
               placeholder="010-1234-5678"
-              name="phoneNum"
+              name="phoneNumber"
               onChange={handleInput}
               required
             />
-            <InputTitle>회사 이름</InputTitle>
+            <InputTitle>회사명</InputTitle>
             <Input
+              id="companyName"
               type="companyName"
-              placeholder="회사 이름"
+              placeholder="회사명"
               name="companyName"
               onChange={handleInput}
               required
