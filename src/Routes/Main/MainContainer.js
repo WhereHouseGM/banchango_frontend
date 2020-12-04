@@ -12,6 +12,9 @@ const notify = (name) => {
   });
 };
 
+const a = () => {
+  document.getElementById('email').focus();
+};
 const MainContainer = () => {
   useEffect(() => {
     if (localStorage.getItem('name')) {

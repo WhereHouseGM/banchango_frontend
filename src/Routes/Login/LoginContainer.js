@@ -69,6 +69,7 @@ class LoginContainer extends React.Component {
     const { password } = this.state;
     if (!this.checkEmail(email)) {
       alert('이메일 형식이 올바르지 않습니다.');
+      return;
     }
     const hashCode = sha256.createHash('sha256').update(password).digest('hex');
     const requestBody = {
