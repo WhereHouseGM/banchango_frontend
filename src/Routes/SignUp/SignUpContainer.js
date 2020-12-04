@@ -13,10 +13,9 @@ const InputType = {
 };
 
 const regEx = {
-    // TODO: 정규식 바꾸기
-  email: /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+.[A-Za-z0-9]+/,
+  email: /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9]+/,
   telephoneNumber: /^\d{2,3}-\d{3,4}-\d{4}$/,
-  phoneNumber: /^\d{3}-\d{3,4}-\d{4}$/,
+  phoneNumber: /^\d{2,3}-\d{3,4}-\d{4}$/,
 };
 
 class SignUpContainer extends React.Component {
@@ -67,6 +66,10 @@ class SignUpContainer extends React.Component {
   };
 
   handleSubmit = async (e) => {
+    // TODO : 패스워드 확인 만들기
+    // 유선 전화
+    // 휴대 전화
+    // 회사명
     e.preventDefault();
     const { email } = this.state;
     const { realName } = this.state;
@@ -92,9 +95,6 @@ class SignUpContainer extends React.Component {
     if (!regEx.phoneNumber.test(phoneNumber)) {
       alert('휴대폰 번호 형식이 올바르지 않습니다.');
     }
-    // TODO:
-    // 정규식 바꾸기.
-    // 위에 state json으로 묶기.
 
     const hashCode = sha256.createHash('sha256').update(password).digest('hex');
     const requestBody = {
