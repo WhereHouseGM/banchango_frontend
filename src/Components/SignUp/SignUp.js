@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-// Reuse for signup page
 import LoginBackground from '../../assets/images/login-background.jpg';
-
 import MainImage from '../../assets/images/banchango-main.png';
 import PropTypes from 'prop-types';
 
