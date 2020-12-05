@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import LoginBackground from '../../assets/images/login-background.jpg';
+import Background from '../../assets/images/login-background.jpg';
 import MainImage from '../../assets/images/banchango-main.png';
 import PropTypes from 'prop-types';
 
@@ -33,7 +33,7 @@ const BackgroundImage = styled.div`
   z-index: -1;
 `;
 
-const LoginContainer = styled.div`
+const SignUpContainer = styled.div`
   background-color: #1d489b;
   width: 375px;
   border-radius: 15px;
@@ -53,7 +53,7 @@ const ImageContainer = styled.div`
   flex-direction: column;
 `;
 
-const LoginImage = styled.div`
+const Image = styled.div`
   width: 270px;
   height: 90px;
   background-image: url(${(props) => props.bgImage});
@@ -147,12 +147,12 @@ const SignUp = ({ handleSubmit, handleInput, handlePasswordInput }) => {
     <Container>
       <Wrapper>
         <BackgroundImage
-          bgImage={LoginBackground}
+          bgImage={Background}
           alt="Background Image."
         ></BackgroundImage>
-        <LoginContainer>
+        <SignUpContainer>
           <ImageContainer>
-            <LoginImage bgImage={MainImage} alt="Main image."></LoginImage>
+            <Image bgImage={MainImage} alt="Main image."></Image>
           </ImageContainer>
           <TextContainer>
             <HeaderTitleTop>간단한 정보를 입력해주세요.</HeaderTitleTop>
@@ -230,7 +230,7 @@ const SignUp = ({ handleSubmit, handleInput, handlePasswordInput }) => {
               <TextBottom> 개인 정보 처리 방침</TextBottom>
             </TextBottomContainer>
           </TextContainer>
-        </LoginContainer>
+        </SignUpContainer>
       </Wrapper>
     </Container>
   );

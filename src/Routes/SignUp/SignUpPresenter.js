@@ -1,5 +1,6 @@
 import Helmet from 'react-helmet';
 import SignUp from '../../Components/SignUp/SignUp';
+import PropTypes from 'prop-types';
 
 const SignUpPresenter = ({
   handleInput,
@@ -17,5 +18,11 @@ const SignUpPresenter = ({
     />
   </>
 );
+
+SignUpPresenter.propTypes = {
+  handleInput: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handlePasswordInput: PropTypes.func.isRequired,
+};
 
 export default SignUpPresenter;
