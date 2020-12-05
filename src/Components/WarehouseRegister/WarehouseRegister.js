@@ -72,21 +72,59 @@ const TextContainer = styled.div`
   background-color: white;
 `;
 
-const WarehouseRegister = () => (
-  <Container>
-    <Wrapper>
-      <BackgroundImage
-        bgImage={Background}
-        alt="Background Image."
-      ></BackgroundImage>
-      <RegisterContainer>
-        <ImageContainer>
-          <Image bgImage={MainImage} alt="Main image."></Image>
-        </ImageContainer>
-        <TextContainer>HI</TextContainer>
-      </RegisterContainer>
-    </Wrapper>
-  </Container>
-);
+const HeaderTitle = styled.div`
+  color: black;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 20px;
+  line-height: 1.8;
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
+`;
+
+const InputContainer = styled.div``;
+
+const InputTitle = styled.div`
+  color: black;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: bold;
+  margin-top: 30px;
+  align-self: flex-start;
+  font-size: 16px;
+  margin-left: 20px;
+`;
+
+const Input = styled.input`
+  border: none;
+  border-bottom: 1px solid #1d489b;
+  width: 256px;
+  margin-top: 10px;
+  transition: all 0.2s ease;
+  &:focus {
+    background-color: lightgray;
+    border-bottom: 3px solid #1d489b;
+  }
+`;
+
+const WarehouseRegister = () => {
+  return (
+    <Container>
+      <Wrapper>
+        <BackgroundImage
+          bgImage={Background}
+          alt="Background Image."
+        ></BackgroundImage>
+        <RegisterContainer>
+          <ImageContainer>
+            <Image bgImage={MainImage} alt="Main image."></Image>
+          </ImageContainer>
+          <TextContainer>
+            <HeaderTitle>창고 등록하기</HeaderTitle>
+          </TextContainer>
+        </RegisterContainer>
+      </Wrapper>
+    </Container>
+  );
+};
 
 export default WarehouseRegister;

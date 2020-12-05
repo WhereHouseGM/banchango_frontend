@@ -163,7 +163,7 @@ const TextBottom = styled.a`
   color: gray;
 `;
 
-const Login = ({ handleSubmit, handleInput }) => (
+const Login = ({ handleSubmit, handleInput, toSignupPage }) => (
   <Container>
     <Wrapper>
       <BackgroundImage
@@ -196,7 +196,7 @@ const Login = ({ handleSubmit, handleInput }) => (
 
           <PasswordFindText>비밀번호를 잃어버리셨나요?</PasswordFindText>
           <LoginButton onClick={handleSubmit}>로그인</LoginButton>
-          <RegisterButton>회원 가입</RegisterButton>
+          <RegisterButton onClick={toSignupPage}>회원 가입</RegisterButton>
           <TextBottomContainer>
             <TextBottom>이용 약관 </TextBottom>|
             <TextBottom> 개인 정보 처리 방침</TextBottom>
@@ -210,6 +210,7 @@ const Login = ({ handleSubmit, handleInput }) => (
 Login.propTypes = {
   handleInput: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  toSignupPage: PropTypes.func.isRequired,
 };
 
 export default Login;

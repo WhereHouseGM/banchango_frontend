@@ -51,7 +51,7 @@ const UserButton = styled(Link)`
   }
 `;
 
-const PageLink = styled.a`
+const RegisterLink = styled.button`
   padding-left: 5px;
   padding-right: 5px;
   padding-top: 2px;
@@ -64,6 +64,7 @@ const PageLink = styled.a`
   border: 1px solid #333;
   border-radius: 5px;
   transition: all 0.2s ease;
+  background-color: white;
   color: #333;
   &:hover {
     background-color: #1c57b0;
@@ -75,6 +76,15 @@ const PageLink = styled.a`
 
 const warningMessage = () => {
   message.warn('아직 준비중입니다.');
+};
+
+const toLoginOrRegister = () => {
+  if (localStorage.getItem('AccessToken')) {
+    window.location.href = '/register';
+  } else {
+    alert('로그인을 먼저 해주세요!');
+    window.location.href = '/login';
+  }
 };
 
 const HeaderComponent = () => {
@@ -95,9 +105,7 @@ const HeaderComponent = () => {
         <LogoLink to="/">BANCHANGO</LogoLink>
       </NavLeftContainer>
       <HeaderRight>
-        <PageLink to="/" onClick={warningMessage}>
-          창고 등록하기
-        </PageLink>
+        <RegisterLink onClick={toLoginOrRegister}>창고 등록하기</RegisterLink>
         <UserButton to="/" onClick={warningMessage}>
           ABOUT US
         </UserButton>
