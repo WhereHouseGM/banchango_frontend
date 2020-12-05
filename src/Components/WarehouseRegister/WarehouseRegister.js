@@ -82,30 +82,6 @@ const HeaderTitle = styled.div`
   text-align: center;
 `;
 
-const InputContainer = styled.div``;
-
-const InputTitle = styled.div`
-  color: black;
-  font-family: 'Nanum Gothic', sans-serif;
-  font-weight: bold;
-  margin-top: 30px;
-  align-self: flex-start;
-  font-size: 16px;
-  margin-left: 20px;
-`;
-
-const Input = styled.input`
-  border: none;
-  border-bottom: 1px solid #1d489b;
-  width: 256px;
-  margin-top: 10px;
-  transition: all 0.2s ease;
-  &:focus {
-    background-color: lightgray;
-    border-bottom: 3px solid #1d489b;
-  }
-`;
-
 const WarehouseRegister = () => {
   return (
     <Container>
