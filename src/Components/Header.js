@@ -78,15 +78,6 @@ const warningMessage = () => {
   message.warn('아직 준비중입니다.');
 };
 
-const toLoginOrRegister = () => {
-  if (localStorage.getItem('AccessToken')) {
-    window.location.href = '/register';
-  } else {
-    alert('로그인을 먼저 해주세요!');
-    window.location.href = '/login';
-  }
-};
-
 const HeaderComponent = () => {
   const [login, setLogin] = useState(JSON.parse(localStorage.getItem('Login')));
 
@@ -99,13 +90,19 @@ const HeaderComponent = () => {
     window.location.replace('/');
   };
 
+  const openRegisterForm = () => {
+    window.open(
+      'https://www.cognitoforms.com/WhereHouseGM/%EB%B0%98%EC%B0%BD%EA%B3%A0%ED%94%8C%EB%9E%AB%ED%8F%BC%EC%B0%BD%EA%B3%A0%EB%93%B1%EB%A1%9D%ED%95%98%EA%B8%B0',
+    );
+  };
+
   return (
     <NavContainer>
       <NavLeftContainer>
         <LogoLink to="/">BANCHANGO</LogoLink>
       </NavLeftContainer>
       <HeaderRight>
-        <RegisterLink onClick={toLoginOrRegister}>창고 등록하기</RegisterLink>
+        <RegisterLink onClick={openRegisterForm}>창고 등록하기</RegisterLink>
         <UserButton to="/" onClick={warningMessage}>
           ABOUT US
         </UserButton>
