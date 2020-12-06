@@ -14,9 +14,9 @@ const notify = (name) => {
 
 const MainContainer = () => {
   useEffect(() => {
-    if (localStorage.getItem('name')) {
-      notify(localStorage.getItem('name'));
-      localStorage.removeItem('name');
+    if (localStorage.getItem('LoginFirst')) {
+      notify(localStorage.getItem('Name'));
+      localStorage.removeItem('LoginFirst');
     }
   }, []);
 

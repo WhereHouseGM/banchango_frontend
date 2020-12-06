@@ -2,7 +2,6 @@ import React from 'react';
 import LoginPresenter from './LoginPresenter';
 import sha256 from 'crypto';
 import { userApi } from '../../api';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const InputType = {
@@ -28,11 +27,15 @@ class LoginContainer extends React.Component {
     }
   };
 
-  saveToken = (tokenSet, name) => {
+  saveToken = (tokenSet, { telephoneNumber, phoneNumber, name, email }) => {
     localStorage.setItem('AccessToken', tokenSet.AccessToken);
     localStorage.setItem('RefreshToken', tokenSet.RefreshToken);
     localStorage.setItem('Login', true);
-    localStorage.setItem('name', name);
+    localStorage.setItem('Name', name);
+    localStorage.setItem('PhoneNumber', phoneNumber);
+    localStorage.setItem('TelephoneNumber', telephoneNumber);
+    localStorage.setItem('Email', email);
+    localStorage.setItem('LoginFirst', true);
   };
 
   handleInput = (event) => {
@@ -54,14 +57,6 @@ class LoginContainer extends React.Component {
         return;
     }
   };
-
-  notify = (name) =>
-    toast.success(`${name}님 환영합니다!`, {
-      position: toast.POSITION.TOP_RIGHT,
-      autoClose: 5000,
-      hideProgressBar: false,
-      draggable: false,
-    });
 
   handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,19 +80,18 @@ class LoginContainer extends React.Component {
         data: { refreshToken },
       } = result;
       const {
-        data: {
-          User: { name },
-        },
+        data: { User },
       } = result;
       const tokenSet = {
         AccessToken: accessToken,
         RefreshToken: refreshToken,
       };
-      this.saveToken(tokenSet, name);
+      this.saveToken(tokenSet, User);
       window.location.replace('/');
     } catch {
       alert('이메일 또는 비밀번호가 일치하지 않습니다.');
-      window.location.reload();
+      document.getElementById('password').value = '';
+      document.getElementById('email').focus();
     }
   };
 
@@ -113,7 +107,6 @@ class LoginContainer extends React.Component {
           handleSubmit={this.handleSubmit}
           toSignupPage={this.toSignupPage}
         />
-        <ToastContainer />
       </>
     );
   }

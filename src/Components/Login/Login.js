@@ -179,6 +179,7 @@ const Login = ({ handleSubmit, handleInput, toSignupPage }) => (
           <HeaderTitleBottom>통합 물류 파트너</HeaderTitleBottom>
           <InputTitle>이메일</InputTitle>
           <Input
+            id="email"
             type="email"
             placeholder="example@example.com"
             name="email"
@@ -187,6 +188,7 @@ const Login = ({ handleSubmit, handleInput, toSignupPage }) => (
           />
           <InputTitle>패스워드</InputTitle>
           <Input
+            id="password"
             type="password"
             placeholder="password"
             name="password"
