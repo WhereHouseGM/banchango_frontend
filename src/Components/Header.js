@@ -51,7 +51,7 @@ const UserButton = styled(Link)`
   }
 `;
 
-const PageLink = styled.a`
+const RegisterLink = styled.button`
   padding-left: 5px;
   padding-right: 5px;
   padding-top: 2px;
@@ -64,6 +64,7 @@ const PageLink = styled.a`
   border: 1px solid #333;
   border-radius: 5px;
   transition: all 0.2s ease;
+  background-color: white;
   color: #333;
   &:hover {
     background-color: #1c57b0;
@@ -89,15 +90,19 @@ const HeaderComponent = () => {
     window.location.replace('/');
   };
 
+  const openRegisterForm = () => {
+    window.open(
+      'https://www.cognitoforms.com/WhereHouseGM/%EB%B0%98%EC%B0%BD%EA%B3%A0%ED%94%8C%EB%9E%AB%ED%8F%BC%EC%B0%BD%EA%B3%A0%EB%93%B1%EB%A1%9D%ED%95%98%EA%B8%B0',
+    );
+  };
+
   return (
     <NavContainer>
       <NavLeftContainer>
         <LogoLink to="/">BANCHANGO</LogoLink>
       </NavLeftContainer>
       <HeaderRight>
-        <PageLink to="/" onClick={warningMessage}>
-          창고 등록하기
-        </PageLink>
+        <RegisterLink onClick={openRegisterForm}>창고 등록하기</RegisterLink>
         <UserButton to="/" onClick={warningMessage}>
           ABOUT US
         </UserButton>

@@ -101,12 +101,17 @@ class LoginContainer extends React.Component {
     }
   };
 
+  toSignupPage = () => {
+    window.location.href = '/signup';
+  };
+
   render() {
     return (
       <>
         <LoginPresenter
           handleInput={this.handleInput}
           handleSubmit={this.handleSubmit}
+          toSignupPage={this.toSignupPage}
         />
         <ToastContainer />
       </>
