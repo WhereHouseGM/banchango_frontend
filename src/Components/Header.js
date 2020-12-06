@@ -99,9 +99,19 @@ const HeaderComponent = () => {
     }
   };
 
+  const BodyForCognitoForm = {
+    UserInfo: {
+      Email: localStorage.getItem('Email'),
+      TelephoneNumber: localStorage.getItem('TelephoneNumber'),
+      PhoneNumber: localStorage.getItem('PhoneNumber'),
+      Name: localStorage.getItem('Name'),
+    },
+  };
+
   const openRegisterForm = () => {
     window.open(
-      'https://www.cognitoforms.com/WhereHouseGM/%EB%B0%98%EC%B0%BD%EA%B3%A0%ED%94%8C%EB%9E%AB%ED%8F%BC%EC%B0%BD%EA%B3%A0%EB%93%B1%EB%A1%9D%ED%95%98%EA%B8%B0',
+      'https://www.cognitoforms.com/WhereHouseGM/%EB%B0%98%EC%B0%BD%EA%B3%A0%ED%94%8C%EB%9E%AB%ED%8F%BC%EC%B0%BD%EA%B3%A0%EB%93%B1%EB%A1%9D%ED%95%98%EA%B8%B0?entry=' +
+        encodeURIComponent(JSON.stringify(BodyForCognitoForm)),
     );
   };
 
