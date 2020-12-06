@@ -90,7 +90,8 @@ class LoginContainer extends React.Component {
       window.location.replace('/');
     } catch {
       alert('이메일 또는 비밀번호가 일치하지 않습니다.');
-      window.location.reload();
+      document.getElementById('password').value = '';
+      document.getElementById('email').focus();
     }
   };
 
