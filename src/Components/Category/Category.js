@@ -272,14 +272,12 @@ const Category = ({ warehouses, category }) => {
       <ItemContainer className="row">
         {warehouses.map((warehouse, index) => (
           <ItemWrapper key={index} className="col-md-4 col-sm-6 col-xs-12">
-            <Item
-              onClick={() =>
-                (window.location.href = `/warehouses/${warehouse.warehouseId}`)
-              }
-            >
+            <Item>
               <Image bgImage={warehouse.mainImageUrl}></Image>
               <InformationWrapper>
-                <LinkToDetailPage href={`/warehouses/${warehouse.warehouseId}`}>
+                <LinkToDetailPage
+                  href={`/warehouses/detail/${warehouse.warehouseId}`}
+                >
                   <Address>{warehouse.address}</Address>
                   <Name>
                     <div>{warehouse.name}</div>
