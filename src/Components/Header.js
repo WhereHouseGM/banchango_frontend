@@ -30,6 +30,9 @@ const LogoLink = styled(Link)`
   font-weight: bold;
   text-decoration: none;
   color: #333;
+  &:hover {
+    text-decoration: none;
+  }
 `;
 
 const HeaderRight = styled.div`

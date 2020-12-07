@@ -197,6 +197,7 @@ const Name = styled.div`
   overflow-wrap: break-word;
   line-height: 1.4em;
   height: 56px;
+  font-weight: bold;
 `;
 
 const StickerContainer = styled.div`
