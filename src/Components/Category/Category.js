@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Categories = {
-  CLOTH: 'cloth',
-  COSMETIC: 'cosmetic',
-  FURNITURE: 'furniture',
-  GENERAL: 'general_merchandise',
-  FOOD: 'temperature_sensitive',
-  JEWELRY: 'accessory',
+  CLOTH: 'CLOTH',
+  COSMETIC: 'COSMETIC',
+  FURNITURE: 'FURNITURE',
+  GENERAL: 'GENERAL_MERCHANDISE',
+  FOOD: 'TEMPERATURE_SENSITIVE',
+  JEWELRY: 'ACCESSORY',
 };
 
 const WarehouseConditions = {
@@ -197,6 +197,8 @@ const Name = styled.div`
   overflow-wrap: break-word;
   line-height: 1.4em;
   height: 56px;
+  font-weight: bold;
+  font-family: 'Nanum Gothic', sans-serif;
 `;
 
 const StickerContainer = styled.div`
@@ -249,6 +251,12 @@ const InfoValue = styled.span`
   font-size: 12px;
 `;
 
+const MinReleaseValue = styled.span`
+  font-size: 16px;
+  font-weight: bold;
+  color: #1d489b;
+`;
+
 const AdditionalInfo = styled.div`
   flex: 1 1 0%;
   text-align: center;
@@ -262,8 +270,8 @@ const Category = ({ warehouses, category }) => {
         <MainTitle>{categoryName(category)} 리스트</MainTitle>
       </MainTitleContainer>
       <ItemContainer className="row">
-        {warehouses.map((warehouse) => (
-          <ItemWrapper className="col-md-4 col-sm-6 col-xs-12">
+        {warehouses.map((warehouse, index) => (
+          <ItemWrapper key={index} className="col-md-4 col-sm-6 col-xs-12">
             <Item
               onClick={() =>
                 (window.location.href = `/warehouses/${warehouse.warehouseId}`)
@@ -291,7 +299,9 @@ const Category = ({ warehouses, category }) => {
                   <MonthlyMinimumExports>
                     <InfoTitle>월 최소 출고량</InfoTitle>
                     <br />
-                    <InfoValue>{warehouse.minReleasePerMonth}</InfoValue>
+                    <MinReleaseValue>
+                      {warehouse.minReleasePerMonth}
+                    </MinReleaseValue>
                   </MonthlyMinimumExports>
                   <AdditionalInfo>
                     <InfoTitle>평수</InfoTitle>
