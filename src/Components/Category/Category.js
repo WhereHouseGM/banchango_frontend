@@ -17,7 +17,7 @@ const WarehouseConditions = {
   BONDED: 'BONDED',
   SAVAGE: 'SAVAGE',
   HAZARDOUS: 'HAZARDOUS',
-  SELF_STORAGE: '셀프 창고',
+  SELF_STORAGE: 'SELF_STORAGE',
   CONTAINER: 'CONTAINER',
 };
 
