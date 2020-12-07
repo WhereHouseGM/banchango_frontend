@@ -8,7 +8,12 @@ import {
 import Main from '../Routes/Main';
 import Login from '../Routes/Login';
 import SignUp from '../Routes/SignUp';
+<<<<<<< HEAD
 import Category from '../Routes/Category';
+=======
+import Detail from '../Routes/Detail';
+
+>>>>>>> warehouse detail page working
 
 const RouterComponent = () => (
   <Router>
@@ -17,7 +22,11 @@ const RouterComponent = () => (
         <Route path="/" exact component={Main} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
+<<<<<<< HEAD
         <Route path="/category/:type" component={Category} />
+=======
+        <Route path="/detail" component={Detail} />
+>>>>>>> warehouse detail page working
         <Redirect path="*" to="/" />
       </Switch>
     </>
