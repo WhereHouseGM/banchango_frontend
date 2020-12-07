@@ -13,7 +13,7 @@ const NavContainer = styled.div`
   background-color: rgba(255, 255, 255, 0.8);
   box-sizing: border-box;
   transition: all 0.3s ease;
-  z-index: 1;
+  z-index: 100;
   backdrop-filter: saturate(200%) blur(10px);
 `;
 

@@ -8,12 +8,12 @@ import GeneralMerchandise from '../../assets/images/general_merchandise.jpg';
 import Jewelry from '../../assets/images/jewelry.jpg';
 
 const Categories = {
-  COSMETIC: 'cosmetic',
-  CLOTH: 'cloth',
-  FURNITURE: 'furniture',
-  GENERAL: 'general',
-  FOOD: 'food',
-  JEWELRY: 'jewelry',
+  COSMETIC: 'COSMETIC',
+  CLOTH: 'CLOTH',
+  FURNITURE: 'FURNITURE',
+  GENERAL: 'GENERAL_MERCHANDISE',
+  FOOD: 'TEMPERATURE_SENSITIVE',
+  JEWELRY: 'ACCESSORY',
 };
 
 const Container = styled.section`
