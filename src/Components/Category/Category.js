@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Categories = {
-  CLOTH: 'cloth',
-  COSMETIC: 'cosmetic',
-  FURNITURE: 'furniture',
-  GENERAL: 'general_merchandise',
-  FOOD: 'temperature_sensitive',
-  JEWELRY: 'accessory',
+  CLOTH: 'CLOTH',
+  COSMETIC: 'COSMETIC',
+  FURNITURE: 'FURNITURE',
+  GENERAL: 'GENERAL_MERCHANDISE',
+  FOOD: 'TEMPERATURE_SENSITIVE',
+  JEWELRY: 'ACCESSORY',
 };
 
 const WarehouseConditions = {
@@ -198,6 +198,7 @@ const Name = styled.div`
   line-height: 1.4em;
   height: 56px;
   font-weight: bold;
+  font-family: 'Nanum Gothic', sans-serif;
 `;
 
 const StickerContainer = styled.div`
