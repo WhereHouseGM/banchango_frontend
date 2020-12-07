@@ -9,7 +9,7 @@ class CategoryContainer extends React.Component {
     loading: true,
   };
 
-  componentWillMount = async () => {
+  componentDidMount = async () => {
     const {
       match: {
         params: { type },

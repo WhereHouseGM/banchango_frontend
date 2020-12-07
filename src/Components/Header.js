@@ -48,6 +48,7 @@ const UserButton = styled(Link)`
   transition: 0.2s ease;
   &:hover {
     color: #1c57b0;
+    text-decoration: none;
   }
 `;
 

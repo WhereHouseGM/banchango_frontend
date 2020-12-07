@@ -249,6 +249,12 @@ const InfoValue = styled.span`
   font-size: 12px;
 `;
 
+const MinReleaseValue = styled.span`
+  font-size: 16px;
+  font-weight: bold;
+  color: #1d489b;
+`;
+
 const AdditionalInfo = styled.div`
   flex: 1 1 0%;
   text-align: center;
@@ -262,8 +268,8 @@ const Category = ({ warehouses, category }) => {
         <MainTitle>{categoryName(category)} 리스트</MainTitle>
       </MainTitleContainer>
       <ItemContainer className="row">
-        {warehouses.map((warehouse) => (
-          <ItemWrapper className="col-md-4 col-sm-6 col-xs-12">
+        {warehouses.map((warehouse, index) => (
+          <ItemWrapper key={index} className="col-md-4 col-sm-6 col-xs-12">
             <Item
               onClick={() =>
                 (window.location.href = `/warehouses/${warehouse.warehouseId}`)
@@ -291,7 +297,9 @@ const Category = ({ warehouses, category }) => {
                   <MonthlyMinimumExports>
                     <InfoTitle>월 최소 출고량</InfoTitle>
                     <br />
-                    <InfoValue>{warehouse.minReleasePerMonth}</InfoValue>
+                    <MinReleaseValue>
+                      {warehouse.minReleasePerMonth}
+                    </MinReleaseValue>
                   </MonthlyMinimumExports>
                   <AdditionalInfo>
                     <InfoTitle>평수</InfoTitle>
