@@ -1,19 +1,15 @@
 import React from 'react';
 import CategoryPresenter from './CategoryPresenter';
 import { warehouseApi } from '../../api';
-import Category from '../../Components/Category/Category';
 
 class CategoryContainer extends React.Component {
   state = {
     warehouses: null,
     error: null,
+    loading: true,
   };
 
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount = async () => {
+  componentWillMount = async () => {
     const {
       match: {
         params: { type },
@@ -28,15 +24,30 @@ class CategoryContainer extends React.Component {
       const {
         data: { warehouses },
       } = result;
-      this.setState({ warehouses: warehouses });
+      this.setState({ warehouses: warehouses, loading: false });
     } catch (Error) {
-      this.setState({ error: '해당 카테고리의 창고가 존재하지 않습니다.' });
+      this.setState({
+        error: '해당 카테고리의 창고가 존재하지 않습니다.',
+        loading: false,
+      });
     }
   };
 
   render() {
-    const { warehouses } = this.state;
-    return <CategoryPresenter warehouses={warehouses} />;
+    const {
+      match: {
+        params: { type },
+      },
+    } = this.props;
+    const { warehouses, error, loading } = this.state;
+    return (
+      <CategoryPresenter
+        warehouses={warehouses}
+        error={error}
+        category={type}
+        loading={loading}
+      />
+    );
   }
 }
 
