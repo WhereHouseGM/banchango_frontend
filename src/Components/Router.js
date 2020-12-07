@@ -10,6 +10,7 @@ import Login from '../Routes/Login';
 import SignUp from '../Routes/SignUp';
 import Category from '../Routes/Category';
 import Detail from '../Routes/Detail';
+import Detail from '../Routes/Detail';
 
 const RouterComponent = () => (
   <Router>
