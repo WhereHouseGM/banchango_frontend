@@ -1,7 +1,6 @@
 import Helmet from 'react-helmet';
 import Detail from '../../Components/Detail/Detail';
 import Header from '../../Components/Header';
-import PropTypes from 'prop-types';
 
 const DetailPresenter = () => (
   <>
@@ -13,8 +12,6 @@ const DetailPresenter = () => (
   </>
 );
 
-DetailPresenter.propTypes = {
-  
-};
+DetailPresenter.propTypes = {};
 
 export default DetailPresenter;
