@@ -9,7 +9,7 @@ import Main from '../Routes/Main';
 import Login from '../Routes/Login';
 import SignUp from '../Routes/SignUp';
 import Detail from '../Routes/Detail';
-
+import Category from '../Routes/Category';
 
 const RouterComponent = () => (
   <Router>
@@ -19,6 +19,7 @@ const RouterComponent = () => (
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
         <Route path="/detail" component={Detail} />
+        <Route path="/category/:type" component={Category} />
         <Redirect path="*" to="/" />
       </Switch>
     </>
