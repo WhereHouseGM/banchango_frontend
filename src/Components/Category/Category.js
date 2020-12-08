@@ -93,52 +93,50 @@ const convertDeliveryTypes = (deliveryTypes) => {
 };
 
 const Container = styled.div`
+  width: 100%;
   margin-top: 80px;
-  max-width: 1024px;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
   margin-left: auto;
-  box-sizing: border-box;
-  @media (min-width: 992px) {
-    width: 970px;
-  }
-
-  @media (min-width: 768px) {
-    width: 750px;
-  }
-`;
-
-const MainTitleContainer = styled.div`
-  display: flex;
-  align-items: baseline;
-`;
-
-const MainTitle = styled.div`
-  display: flex;
-  align-items: baseline;
-  margin-top: 80px;
-  margin-left: 15px;
-  margin-right: -15px;
-  font-family: 'Nanum Gothic', sans-serif;
-  font-weight: bold;
+  margin-right: auto;
+  max-width: 1920px;
+  padding: 30px;
 `;
 
 const ItemContainer = styled.div`
-  margin-left: -15px;
-  margin-right: -15px;
-  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  @media screen and (min-width: 481px) {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+  @media screen and (min-width: 768px) {
+    margin-right: -10px;
+    margin-left: -10px;
+  }
+  @media screen and (min-width: 992px) {
+    margin-right: -10px;
+    margin-left: -10px;
+  }
 `;
 
 const ItemWrapper = styled.div`
-  float: left;
-  @media (min-width: 768px) {
+  width: 100%;
+  padding-right: 10px;
+  padding-left: 10px;
+  @media screen and (min-width: 481px) {
     width: 50%;
+    padding-right: 10px;
+    padding-left: 10px;
   }
-  margin-right: 15px;
-  margin-left: 15px;
-  padding: 0;
-  margin-bottom: 10px;
+  @media screen and (min-width: 768px) {
+    width: 33.33333333333333%;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  @media screen and (min-width: 992px) {
+    width: 25%;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
 `;
 
 const Item = styled.div`
@@ -149,6 +147,7 @@ const Item = styled.div`
   overflow: hidden;
   box-shadow: rgba(136, 136, 136, 0.3) 0px 0px 15px;
   transition: transform 0.2s ease 02;
+  margin-bottom: 30px;
 `;
 
 const Image = styled.div`
@@ -266,12 +265,9 @@ const AdditionalInfo = styled.div`
 const Category = ({ warehouses, category }) => {
   return (
     <Container>
-      <MainTitleContainer className="row">
-        <MainTitle>{categoryName(category)} 리스트</MainTitle>
-      </MainTitleContainer>
-      <ItemContainer className="row">
+      <ItemContainer>
         {warehouses.map((warehouse, index) => (
-          <ItemWrapper key={index} className="col-md-4 col-sm-6 col-xs-12">
+          <ItemWrapper key={index}>
             <Item
               onClick={() =>
                 (window.location.href = `/warehouses/${warehouse.warehouseId}`)
