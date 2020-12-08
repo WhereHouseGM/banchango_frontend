@@ -8,8 +8,8 @@ import {
 import Main from '../Routes/Main';
 import Login from '../Routes/Login';
 import SignUp from '../Routes/SignUp';
-import Category from '../Routes/Category';
 import Detail from '../Routes/Detail';
+import Category from '../Routes/Category';
 
 const RouterComponent = () => (
   <Router>
@@ -19,7 +19,7 @@ const RouterComponent = () => (
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
         <Route path="/category/:type" sensitive={true} component={Category} />
-        <Route path="/detail" component={Detail} />
+        <Route path="/warehouses/detail/:warehouseId" component={Detail} />
         <Redirect path="*" to="/" />
       </Switch>
     </>
