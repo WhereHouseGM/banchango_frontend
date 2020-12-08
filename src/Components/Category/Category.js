@@ -92,6 +92,17 @@ const convertDeliveryTypes = (deliveryTypes) => {
   }
 };
 
+const MainTitleContainer = styled.div`
+  margin-top: 70px;
+`;
+
+const MainTitle = styled.div`
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: bold;
+  font-size: 1.3em;
+  text-align: center;
+`;
+
 const Container = styled.div`
   width: 100%;
   margin-top: 80px;
@@ -264,60 +275,67 @@ const AdditionalInfo = styled.div`
 
 const Category = ({ warehouses, category }) => {
   return (
-    <Container>
-      <ItemContainer>
-        {warehouses.map((warehouse, index) => (
-          <ItemWrapper key={index}>
-            <Item
-              onClick={() =>
-                (window.location.href = `/warehouses/${warehouse.warehouseId}`)
-              }
-            >
-              <Image bgImage={warehouse.mainImageUrl}></Image>
-              <InformationWrapper>
-                <LinkToDetailPage href={`/warehouses/${warehouse.warehouseId}`}>
-                  <Address>{warehouse.address}</Address>
-                  <Name>
-                    <div>{warehouse.name}</div>
-                  </Name>
-                </LinkToDetailPage>
-                <StickerContainer>
-                  <StickerWrapper>
-                    <Stickers>
-                      <Sticker>
-                        {condition(warehouse.warehouseCondition[0])}
-                      </Sticker>
-                      <Sticker>{types(warehouse.warehouseType)}</Sticker>
-                    </Stickers>
-                  </StickerWrapper>
-                </StickerContainer>
-                <AdditionInformationWrapper>
-                  <MonthlyMinimumExports>
-                    <InfoTitle>월 최소 출고량</InfoTitle>
-                    <br />
-                    <MinReleaseValue>
-                      {warehouse.minReleasePerMonth}
-                    </MinReleaseValue>
-                  </MonthlyMinimumExports>
-                  <AdditionalInfo>
-                    <InfoTitle>평수</InfoTitle>
-                    <br />
-                    <InfoValue>{warehouse.totalArea}</InfoValue>
-                  </AdditionalInfo>
-                  <AdditionalInfo>
-                    <InfoTitle>택배사</InfoTitle>
-                    <br />
-                    <InfoValue>
-                      {convertDeliveryTypes(warehouse.deliveryTypes)}
-                    </InfoValue>
-                  </AdditionalInfo>
-                </AdditionInformationWrapper>
-              </InformationWrapper>
-            </Item>
-          </ItemWrapper>
-        ))}
-      </ItemContainer>
-    </Container>
+    <>
+      <MainTitleContainer>
+        <MainTitle>{categoryName(category)} 리스트</MainTitle>
+      </MainTitleContainer>
+      <Container>
+        <ItemContainer>
+          {warehouses.map((warehouse, index) => (
+            <ItemWrapper key={index}>
+              <Item
+                onClick={() =>
+                  (window.location.href = `/warehouses/${warehouse.warehouseId}`)
+                }
+              >
+                <Image bgImage={warehouse.mainImageUrl}></Image>
+                <InformationWrapper>
+                  <LinkToDetailPage
+                    href={`/warehouses/${warehouse.warehouseId}`}
+                  >
+                    <Address>{warehouse.address}</Address>
+                    <Name>
+                      <div>{warehouse.name}</div>
+                    </Name>
+                  </LinkToDetailPage>
+                  <StickerContainer>
+                    <StickerWrapper>
+                      <Stickers>
+                        <Sticker>
+                          {condition(warehouse.warehouseCondition[0])}
+                        </Sticker>
+                        <Sticker>{types(warehouse.warehouseType)}</Sticker>
+                      </Stickers>
+                    </StickerWrapper>
+                  </StickerContainer>
+                  <AdditionInformationWrapper>
+                    <MonthlyMinimumExports>
+                      <InfoTitle>월 최소 출고량</InfoTitle>
+                      <br />
+                      <MinReleaseValue>
+                        {warehouse.minReleasePerMonth}
+                      </MinReleaseValue>
+                    </MonthlyMinimumExports>
+                    <AdditionalInfo>
+                      <InfoTitle>평수</InfoTitle>
+                      <br />
+                      <InfoValue>{warehouse.totalArea}</InfoValue>
+                    </AdditionalInfo>
+                    <AdditionalInfo>
+                      <InfoTitle>택배사</InfoTitle>
+                      <br />
+                      <InfoValue>
+                        {convertDeliveryTypes(warehouse.deliveryTypes)}
+                      </InfoValue>
+                    </AdditionalInfo>
+                  </AdditionInformationWrapper>
+                </InformationWrapper>
+              </Item>
+            </ItemWrapper>
+          ))}
+        </ItemContainer>
+      </Container>
+    </>
   );
 };
 
