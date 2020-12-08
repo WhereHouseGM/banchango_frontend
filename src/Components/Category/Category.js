@@ -163,7 +163,8 @@ const Item = styled.div`
 
 const Image = styled.div`
   width: 100%;
-  height: 150px;
+  //height: 150px; : 기존 값
+  height: 31vh;
   background-size: cover;
   background-position: center center;
   position: relative;
