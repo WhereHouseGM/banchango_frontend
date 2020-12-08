@@ -59,7 +59,7 @@ const condition = (warehouseCondition) => {
 };
 
 const categoryName = (category) => {
-  switch (category) {
+  switch (category.toString().toUpperCase()) {
     case Categories.CLOTH:
       return '의류 창고 ';
     case Categories.COSMETIC:

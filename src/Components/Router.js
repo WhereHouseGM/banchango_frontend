@@ -18,7 +18,7 @@ const RouterComponent = () => (
         <Route path="/" exact component={Main} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
-        <Route path="/category/:type" component={Category} />
+        <Route path="/category/:type" sensitive={true} component={Category} />
         <Route path="/detail" component={Detail} />
         <Redirect path="*" to="/" />
       </Switch>
