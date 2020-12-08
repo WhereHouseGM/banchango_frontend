@@ -59,7 +59,7 @@ const condition = (warehouseCondition) => {
 };
 
 const categoryName = (category) => {
-  switch (category) {
+  switch (category.toString().toUpperCase()) {
     case Categories.CLOTH:
       return '의류 창고 ';
     case Categories.COSMETIC:
@@ -92,53 +92,62 @@ const convertDeliveryTypes = (deliveryTypes) => {
   }
 };
 
-const Container = styled.div`
-  margin-top: 80px;
-  max-width: 1024px;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-  box-sizing: border-box;
-  @media (min-width: 992px) {
-    width: 970px;
-  }
-
-  @media (min-width: 768px) {
-    width: 750px;
-  }
-`;
-
 const MainTitleContainer = styled.div`
-  display: flex;
-  align-items: baseline;
+  margin-top: 70px;
 `;
 
 const MainTitle = styled.div`
-  display: flex;
-  align-items: baseline;
-  margin-top: 80px;
-  margin-left: 15px;
-  margin-right: -15px;
   font-family: 'Nanum Gothic', sans-serif;
   font-weight: bold;
+  font-size: 1.3em;
+  text-align: center;
+`;
+
+const Container = styled.div`
+  width: 100%;
+  margin-top: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1920px;
+  padding: 30px;
 `;
 
 const ItemContainer = styled.div`
-  margin-left: -15px;
-  margin-right: -15px;
-  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  @media screen and (min-width: 481px) {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+  @media screen and (min-width: 768px) {
+    margin-right: -10px;
+    margin-left: -10px;
+  }
+  @media screen and (min-width: 992px) {
+    margin-right: -10px;
+    margin-left: -10px;
+  }
 `;
 
 const ItemWrapper = styled.div`
-  float: left;
-  @media (min-width: 768px) {
+  width: 100%;
+  padding-right: 10px;
+  padding-left: 10px;
+  @media screen and (min-width: 481px) {
     width: 50%;
+    padding-right: 10px;
+    padding-left: 10px;
   }
-  margin-right: 15px;
-  margin-left: 15px;
-  padding: 0;
-  margin-bottom: 10px;
+  @media screen and (min-width: 768px) {
+    width: 33.33333333333333%;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  @media screen and (min-width: 992px) {
+    width: 25%;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
 `;
 
 const Item = styled.div`
@@ -149,11 +158,13 @@ const Item = styled.div`
   overflow: hidden;
   box-shadow: rgba(136, 136, 136, 0.3) 0px 0px 15px;
   transition: transform 0.2s ease 02;
+  margin-bottom: 30px;
 `;
 
 const Image = styled.div`
   width: 100%;
-  height: 150px;
+  //height: 150px; : 기존 값
+  height: 31vh;
   background-size: cover;
   background-position: center center;
   position: relative;
@@ -265,61 +276,67 @@ const AdditionalInfo = styled.div`
 
 const Category = ({ warehouses, category }) => {
   return (
-    <Container>
-      <MainTitleContainer className="row">
+    <>
+      <MainTitleContainer>
         <MainTitle>{categoryName(category)} 리스트</MainTitle>
       </MainTitleContainer>
-      <ItemContainer className="row">
-        {warehouses.map((warehouse, index) => (
-          <ItemWrapper key={index} className="col-md-4 col-sm-6 col-xs-12">
-            <Item>
-              <Image bgImage={warehouse.mainImageUrl}></Image>
-              <InformationWrapper>
-                <LinkToDetailPage
-                  href={`/warehouses/detail/${warehouse.warehouseId}`}
-                >
-                  <Address>{warehouse.address}</Address>
-                  <Name>
-                    <div>{warehouse.name}</div>
-                  </Name>
-                </LinkToDetailPage>
-                <StickerContainer>
-                  <StickerWrapper>
-                    <Stickers>
-                      <Sticker>
-                        {condition(warehouse.warehouseCondition[0])}
-                      </Sticker>
-                      <Sticker>{types(warehouse.warehouseType)}</Sticker>
-                    </Stickers>
-                  </StickerWrapper>
-                </StickerContainer>
-                <AdditionInformationWrapper>
-                  <MonthlyMinimumExports>
-                    <InfoTitle>월 최소 출고량</InfoTitle>
-                    <br />
-                    <MinReleaseValue>
-                      {warehouse.minReleasePerMonth}
-                    </MinReleaseValue>
-                  </MonthlyMinimumExports>
-                  <AdditionalInfo>
-                    <InfoTitle>평수</InfoTitle>
-                    <br />
-                    <InfoValue>{warehouse.totalArea}</InfoValue>
-                  </AdditionalInfo>
-                  <AdditionalInfo>
-                    <InfoTitle>택배사</InfoTitle>
-                    <br />
-                    <InfoValue>
-                      {convertDeliveryTypes(warehouse.deliveryTypes)}
-                    </InfoValue>
-                  </AdditionalInfo>
-                </AdditionInformationWrapper>
-              </InformationWrapper>
-            </Item>
-          </ItemWrapper>
-        ))}
-      </ItemContainer>
-    </Container>
+      <Container>
+        <ItemContainer>
+          {warehouses.map((warehouse, index) => (
+            <ItemWrapper key={index}>
+              <Item
+                onClick={() =>
+                  (window.location.href = `/warehouses/${warehouse.warehouseId}`)
+                }
+              >
+                <Image bgImage={warehouse.mainImageUrl}></Image>
+                <InformationWrapper>
+                  <LinkToDetailPage
+                    href={`/warehouses/${warehouse.warehouseId}`}
+                  >
+                    <Address>{warehouse.address}</Address>
+                    <Name>
+                      <div>{warehouse.name}</div>
+                    </Name>
+                  </LinkToDetailPage>
+                  <StickerContainer>
+                    <StickerWrapper>
+                      <Stickers>
+                        <Sticker>
+                          {condition(warehouse.warehouseCondition[0])}
+                        </Sticker>
+                        <Sticker>{types(warehouse.warehouseType)}</Sticker>
+                      </Stickers>
+                    </StickerWrapper>
+                  </StickerContainer>
+                  <AdditionInformationWrapper>
+                    <MonthlyMinimumExports>
+                      <InfoTitle>월 최소 출고량</InfoTitle>
+                      <br />
+                      <MinReleaseValue>
+                        {warehouse.minReleasePerMonth}
+                      </MinReleaseValue>
+                    </MonthlyMinimumExports>
+                    <AdditionalInfo>
+                      <InfoTitle>평수</InfoTitle>
+                      <br />
+                      <InfoValue>{warehouse.totalArea}</InfoValue>
+                    </AdditionalInfo>
+                    <AdditionalInfo>
+                      <InfoTitle>택배사</InfoTitle>
+                      <br />
+                      <InfoValue>
+                        {convertDeliveryTypes(warehouse.deliveryTypes)}
+                      </InfoValue>
+                    </AdditionalInfo>
+                  </AdditionInformationWrapper>
+                </InformationWrapper>
+              </Item>
+            </ItemWrapper>
+          ))}
+        </ItemContainer>
+      </Container>
+    </>
   );
 };
 

@@ -18,9 +18,8 @@ const RouterComponent = () => (
         <Route path="/" exact component={Main} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
-        <Route path="/detail" component={Detail} />
-        <Route path="/category/:type" component={Category} />
-        <Route path="/warehouses/detail/:houseId" component={Detail} />
+        <Route path="/category/:type" sensitive={true} component={Category} />
+        <Route path="/warehouses/detail/:warehouseId" component={Detail} />
         <Redirect path="*" to="/" />
       </Switch>
     </>
