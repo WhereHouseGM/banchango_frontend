@@ -42,7 +42,6 @@ const LoginButton = styled(Link)`
   border-radius: 4px;
   margin: auto;
   outline: none;
-  //border: 1px solid black;
   font-size: 18px;
   color: white;
   font-weight: bold;
