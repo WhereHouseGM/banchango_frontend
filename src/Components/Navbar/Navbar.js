@@ -1,43 +1,28 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
+import './Navbar.css';
+import styled from 'styled-components';
 import { message } from 'antd';
 
-const Container = styled.nav`
-  background-color: rgba(255, 255, 255, 0.8);
-  height: 60px;
+const NavContainer = styled.div`
   width: 100%;
+  height: 60px;
+  padding: 0 30px;
+  position: fixed;
   top: 0;
   display: flex;
-  position: fixed;
-  align-items: center;
-  font-size: 1.2em;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-sizing: border-box;
   transition: all 0.3s ease;
   z-index: 100;
   backdrop-filter: saturate(200%) blur(10px);
 `;
 
-const RegisterLink = styled.button`
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  height: 30px;
-  margin-right: 5px;
+const NavLeftContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  border: 1px solid #333;
-  border-radius: 5px;
-  transition: all 0.2s ease;
-  background-color: white;
-  color: #333;
-  &:hover {
-    background-color: #1c57b0;
-    border-color: #1c57b0;
-    color: #fff;
-    cursor: pointer;
-  }
+  flex: 1;
 `;
 
 const LogoLink = styled(Link)`
@@ -49,69 +34,26 @@ const LogoLink = styled(Link)`
   &:hover {
     text-decoration: none;
   }
-  @media screen and (max-width: 960px) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(25%, 50%);
+`;
+
+const LoginButton = styled(Link)`
+  white-space: nowrap;
+  padding: 8px 20px;
+  border-radius: 4px;
+  margin: auto;
+  outline: none;
+  border: 1px solid black;
+  font-size: 18px;
+  color: black;
+  transition: 0.2s ease;
+  cursor: pointer;
+  &:hover {
+    color: #1c57b0;
+    text-decoration: none;
   }
-`;
-
-const MenuIcon = styled.div`
-  display: none;
   @media screen and (max-width: 960px) {
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(-100%, 60%);
-    font-size: 1.8em;
-    cursor: pointer;
+    display: none;
   }
-`;
-
-const NavMenu = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(5, auto);
-  grid-gap: 10px;
-  list-style: none;
-  text-align: center;
-  width: 70vw;
-  justify-content: end;
-  margin-right: 2rem;
-  @media screen and (max-width: 960px) {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 90vh;
-    position: absolute;
-    top: 80px;
-    left: -100%;
-    opacity: 1;
-    transition: all 0.5s ease;
-  }
-`;
-
-const NavMenuActive = styled.ul`
-  background: #242222;
-  left: 0;
-  opacity: 1;
-  transition: all 0.5s ease;
-  z-index: 1;
-`;
-
-const FaFirstDraft = styled.i`
-  margin-left: 0.5rem;
-  font-size: 1.6rem;
-`;
-
-const FaTimes = styled.i`
-  color: #fff;
-  font-size: 2rem;
-`;
-
-const FaBars = styled.i`
-  color: #fff;
 `;
 
 const NavItem = styled.li`
@@ -120,16 +62,15 @@ const NavItem = styled.li`
   height: 60px;
 `;
 
-const NavLinks = styled(Link)`
-  color: white;
+const NavLink = styled(Link)`
+  color: black;
   text-decoration: none;
   padding: 0.5rem 1rem;
+  transition: 0.2s ease;
   &:hover {
-    background-color: #1888ff;
-    border-radius: 4px;
-    transition: all 0.2s ease-out;
+    color: #1c57b0;
+    text-decoration: none;
   }
-
   @media screen and (max-width: 960px) {
     text-align: center;
     padding: 2rem;
@@ -142,7 +83,7 @@ const NavLinks = styled(Link)`
   }
 `;
 
-const NavLinksMobile = styled(Link)`
+const NavLinkMobile = styled(Link)`
   display: none;
   @media screen and (max-width: 960px) {
     display: block;
@@ -153,21 +94,20 @@ const NavLinksMobile = styled(Link)`
     width: 80%;
     background: #1888ff;
     text-decoration: none;
-    color: #fff;
+    color: black;
     font-size: 1.5rem;
     &:hover {
-      background: #fff;
+      background: black;
       color: #1888ff;
       transition: 250ms;
     }
   }
 `;
 
-const NavbarComponent = () => {
-  const [login, setLogin] = useState(JSON.parse(localStorage.getItem('Login')));
+const Navbar = () => {
   const [click, setClick] = useState(false);
 
-  const handleClick = () => setClick(!click);
+  const [login, setLogin] = useState(JSON.parse(localStorage.getItem('Login')));
 
   const logout = () => {
     setLogin(false);
@@ -203,66 +143,66 @@ const NavbarComponent = () => {
     );
   };
 
+  const handleClick = () => setClick(!click);
+
   const closeMobileMenu = () => setClick(false);
 
+  const warningMessage = () => {
+    setClick(false);
+    message.warn('아직 준비중입니다.');
+  };
+
   return (
-    <Container>
-      <LogoLink to="/" onClick={closeMobileMenu}>
-        BANCHANGO
-        <i class="fab fa-firstdraft" />
-      </LogoLink>
-      <MenuIcon onClick={handleClick}>
-        {click ? <FaTimes /> : <FaBars />}
-      </MenuIcon>
-      {click ? (
-        <NavMenuActive>
+    <>
+      <NavContainer>
+        <NavLeftContainer>
+          <LogoLink to="/">BANCHANGO</LogoLink>
+        </NavLeftContainer>
+        <div className="menu-icon" onClick={handleClick}>
+          <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+        </div>
+        <ul className={click ? 'nav-menu active' : 'nav-menu'}>
           <NavItem>
-            <NavLinks to="/" onClick={closeMobileMenu}>
-              HOME
-            </NavLinks>
+            <NavLink to="/" onClick={toLoginOrRegisterForm}>
+              창고 등록하기
+            </NavLink>
           </NavItem>
           <NavItem>
-            <NavLinks to="/" onClick={closeMobileMenu}>
-              PRODUCTS
-            </NavLinks>
+            <NavLink to="/" onClick={warningMessage}>
+              ABOUT US
+            </NavLink>
           </NavItem>
-          <NavItem>
-            <NavLinks to="/" onClick={closeMobileMenu}>
-              CONTACT US
-            </NavLinks>
-          </NavItem>
-          <li>
-            <NavLinksMobile to="/" onClick={closeMobileMenu}>
-              SIGN UP
-            </NavLinksMobile>
-          </li>
-        </NavMenuActive>
-      ) : (
-        <NavMenu>
-          <NavItem>
-            <NavLinks to="/" onClick={closeMobileMenu}>
-              HOME
-            </NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks to="/" onClick={closeMobileMenu}>
-              PRODUCTS
-            </NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks to="/" onClick={closeMobileMenu}>
-              CONTACT US
-            </NavLinks>
-          </NavItem>
-          <li>
-            <NavLinksMobile to="/" onClick={closeMobileMenu}>
-              SIGN UP
-            </NavLinksMobile>
-          </li>
-        </NavMenu>
-      )}
-    </Container>
+          {login ? (
+            <>
+              <NavLinkMobile to="/" onClick={logout}>
+                로그아웃
+              </NavLinkMobile>
+            </>
+          ) : (
+            <>
+              <NavItem>
+                <NavLink to="/" onClick={closeMobileMenu}>
+                  회원 가입
+                </NavLink>
+              </NavItem>
+              <li>
+                <NavLinkMobile to="/login" onClick={closeMobileMenu}>
+                  로그인
+                </NavLinkMobile>
+              </li>
+            </>
+          )}
+        </ul>
+        {login ? (
+          <LoginButton to="/" onClick={logout}>
+            로그아웃
+          </LoginButton>
+        ) : (
+          <LoginButton to="/login">로그인</LoginButton>
+        )}
+      </NavContainer>
+    </>
   );
 };
 
-export default withRouter(NavbarComponent);
+export default withRouter(Navbar);
