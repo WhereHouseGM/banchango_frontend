@@ -42,14 +42,17 @@ const LoginButton = styled(Link)`
   border-radius: 4px;
   margin: auto;
   outline: none;
-  border: 1px solid black;
+  //border: 1px solid black;
   font-size: 18px;
-  color: black;
+  color: white;
+  font-weight: bold;
+  background-color: #3090f0;
   transition: 0.2s ease;
   cursor: pointer;
   &:hover {
-    color: #1c57b0;
+    color: white;
     text-decoration: none;
+    background-color: #202cab;
   }
   @media screen and (max-width: 960px) {
     display: none;
@@ -69,6 +72,7 @@ const NavLink = styled(Link)`
   font-weight: bold;
   text-decoration: none;
   transition: 0.2s ease;
+  margin-right: 4px;
   &:hover {
     color: #1c57b0;
     text-decoration: none;
@@ -188,7 +192,7 @@ const Navbar = () => {
           ) : (
             <>
               <NavItem>
-                <NavLink to="/" onClick={closeMobileMenu}>
+                <NavLink to="/signup" onClick={closeMobileMenu}>
                   회원 가입
                 </NavLink>
               </NavItem>
