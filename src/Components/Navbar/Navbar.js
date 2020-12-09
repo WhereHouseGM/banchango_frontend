@@ -60,12 +60,14 @@ const NavItem = styled.li`
   display: flex;
   align-items: center;
   height: 60px;
+  justify-content: center;
 `;
 
 const NavLink = styled(Link)`
   color: black;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: bold;
   text-decoration: none;
-  padding: 0.5rem 1rem;
   transition: 0.2s ease;
   &:hover {
     color: #1c57b0;
@@ -73,8 +75,12 @@ const NavLink = styled(Link)`
   }
   @media screen and (max-width: 960px) {
     text-align: center;
-    padding: 2rem;
     width: 100%;
+    height: 100%;
+    padding-top: 15px;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: white;
     display: table;
     &:hover {
       background-color: #1888ff;
@@ -98,6 +104,7 @@ const NavLinkMobile = styled(Link)`
     font-size: 1.5rem;
     &:hover {
       background: black;
+      text-decoration: none;
       color: #1888ff;
       transition: 250ms;
     }
