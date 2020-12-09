@@ -2,14 +2,14 @@ import Helmet from 'react-helmet';
 import Category from '../../Components/Category/Category';
 import PropTypes from 'prop-types';
 import Message from '../../Components/Message';
-import Header from '../../Components/Header';
+import Navbar from '../../Components/Navbar/Navbar';
 
 const CategoryPresenter = ({ warehouses, error, category, loading }) => (
   <>
     <Helmet>
       <title>반창고 | 창고 목록 보기</title>
     </Helmet>
-    <Header />
+    <Navbar />
     {loading ? null : (
       <>
         {error ? (
