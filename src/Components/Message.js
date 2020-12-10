@@ -6,6 +6,7 @@ const Container = styled.div`
   margin-top: 80px;
   display: flex;
   justify-content: center;
+  white-space: nowrap;
 `;
 
 const Text = styled.span`
