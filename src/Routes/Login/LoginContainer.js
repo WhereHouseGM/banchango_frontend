@@ -27,7 +27,11 @@ class LoginContainer extends React.Component {
     }
   };
 
-  saveToken = (tokenSet, { telephoneNumber, phoneNumber, name, email }) => {
+  saveToken = (
+    tokenSet,
+    { telephoneNumber, phoneNumber, name, email },
+    isAdmin,
+  ) => {
     localStorage.setItem('AccessToken', tokenSet.AccessToken);
     localStorage.setItem('RefreshToken', tokenSet.RefreshToken);
     localStorage.setItem('Login', true);
@@ -36,6 +40,9 @@ class LoginContainer extends React.Component {
     localStorage.setItem('TelephoneNumber', telephoneNumber);
     localStorage.setItem('Email', email);
     localStorage.setItem('LoginFirst', true);
+    if (isAdmin) {
+      localStorage.setItem('IsAdmin', true);
+    }
   };
 
   handleInput = (event) => {
@@ -86,7 +93,15 @@ class LoginContainer extends React.Component {
         AccessToken: accessToken,
         RefreshToken: refreshToken,
       };
-      this.saveToken(tokenSet, User);
+      if (
+        result.data.isAdmin !== undefined &&
+        result.data.isAdmin !== null &&
+        result.data.isAdmin === true
+      ) {
+        this.saveToken(tokenSet, User, true);
+      } else {
+        this.saveToken(tokenSet, User, false);
+      }
       window.location.replace('/');
     } catch {
       alert('이메일 또는 비밀번호가 일치하지 않습니다.');
@@ -101,13 +116,11 @@ class LoginContainer extends React.Component {
 
   render() {
     return (
-      <>
-        <LoginPresenter
-          handleInput={this.handleInput}
-          handleSubmit={this.handleSubmit}
-          toSignupPage={this.toSignupPage}
-        />
-      </>
+      <LoginPresenter
+        handleInput={this.handleInput}
+        handleSubmit={this.handleSubmit}
+        toSignupPage={this.toSignupPage}
+      />
     );
   }
 }
