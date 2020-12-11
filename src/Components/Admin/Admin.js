@@ -148,7 +148,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
           <textarea
             id="description"
             name="description"
-            style={{ width: '100%' }}
+            style={{ width: '100%', height: '70px' }}
           />
           <br />
           <br />
@@ -173,6 +173,17 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
             id="closeAt"
             placeholder="ex) 18:30 -> 오후 6시 30분"
           />
+          &nbsp;&nbsp;&nbsp;
+          <span>
+            월 최소 출고량<span style={{ color: 'red' }}>*</span>
+          </span>
+          &nbsp;
+          <input
+            type="text"
+            name="minReleasePerMonth"
+            id="minReleasePerMonth"
+            placeholder="숫자만 입력"
+          />
           <br />
           <br />
           <span>
@@ -182,7 +193,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
           <textarea
             id="availableTimeDetail"
             name="availableTimeDetail"
-            style={{ width: '100%' }}
+            style={{ width: '100%', height: '70px' }}
             placeholder="ex) 물류 센터 사정에 따라 상이할 수 있습니다."
           />
           <br />
@@ -322,7 +333,91 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
               <label for="FULFULLMENT">풀필먼트</label>
             </span>
           </div>
+          <br />
+          <div style={{ border: '1px solid black' }}>
+            <div>
+              창고 대표 품목(1개만 선택)<span style={{ color: 'red' }}>*</span>
+            </div>
+            <br />
+            <span>
+              <input type="checkbox" id="CLOTH" value="CLOTH" />
+              <label for="CLOTH"> 의류</label>&nbsp;&nbsp;&nbsp;
+              <input type="checkbox" id="COSMETIC" value="COSMETIC" />
+              <label for="COSMETIC">화장품</label>&nbsp;&nbsp;&nbsp;
+              <input
+                type="checkbox"
+                id="GENERAL_MERCHANDISE"
+                value="GENERAL_MERCHANDISE"
+              />
+              <label for="GENERAL_MERCHANDISE"> 잡화</label>&nbsp;&nbsp;&nbsp;
+              <input type="checkbox" id="ACCESSORY" value="ACCESSORY" />
+              <label for="ACCESSORY"> 악세사리</label>&nbsp;&nbsp;&nbsp;
+              <input
+                type="checkbox"
+                id="TEMPERATURE_SENSITIVE"
+                value="TEMPERATURE_SENSITIVE"
+              />
+              <label for="TEMPERATURE_SENSITIVE"> 음식</label>&nbsp;&nbsp;&nbsp;
+              <input type="checkbox" id="FURNITURE" value="FURNITURE" />
+              <label for="FURNITURE"> 가구</label>&nbsp;&nbsp;&nbsp;
+            </span>
+          </div>
+          <br />
+          <div style={{ border: '1px solid black' }}>
+            <div>
+              택배사(여러 개 있을 시 <span style={{ color: 'red' }}>+++</span>로
+              구분)
+            </div>
+            <br />
+            <textarea
+              id="deliveryTypes"
+              name="deliveryTypes"
+              style={{ width: '100%', height: '70px' }}
+              placeholder="ex. 우체국 택베와 EMS가 있을 경우 --> 우체국 택배+++EMS"
+            />
+          </div>
+          <br />
+          <div style={{ border: '1px solid black' }}>
+            <div>
+              창고 시설 이용 유의사항(여러 개 있을 시{' '}
+              <span style={{ color: 'red' }}>+++</span>로 구분, 최대 10개)
+            </div>
+            <br />
+            <textarea
+              id="warehouseFacilityUsages"
+              name="warehouseFacilityUsages"
+              placeholder="창고 시설 이용 유의사항"
+              style={{ width: '100%', height: '70px' }}
+            />
+          </div>
+          <br />
+          <div style={{ border: '1px solid black' }}>
+            <div>
+              창고 시설 이용 시 주의사항(여러 개 있을 시{' '}
+              <span style={{ color: 'red' }}>+++</span>로 구분, 최대 10개)
+            </div>
+            <br />
+            <textarea
+              id="warehouseUsageCautions"
+              name="warehouseUsageCautions"
+              placeholder="창고 이용 시 주의사항"
+              style={{ width: '100%', height: '70px' }}
+            />
+          </div>
         </div>
+        <br />
+        <span
+          onClick={refreshUser}
+          id="warehouseRegisterBtn"
+          style={{
+            borderRadius: '3px',
+            backgroundColor: '#14c70e',
+            border: '2px solid black',
+            cursor: 'pointer',
+          }}
+        >
+          창고 정보 등록하기
+        </span>
       </form>
     </div>
   </>
