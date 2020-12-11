@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Admin = ({ handleLoginInput, handleLoginSubmit }) => (
+const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
   <>
     <div style={{ fontSize: '30px' }}>
       창고 등록 절차 간편화를 위한 어드민 페이지!
@@ -69,7 +69,20 @@ const Admin = ({ handleLoginInput, handleLoginSubmit }) => (
         cursor: 'pointer',
       }}
     >
-      회원 가입 하기
+      창고주 로그인 하기
+    </span>
+    &nbsp;&nbsp;&nbsp;
+    <span
+      onClick={refreshUser}
+      id="refreshUserBtn"
+      style={{
+        borderRadius: '3px',
+        backgroundColor: '#14c70e',
+        border: '2px solid black',
+        cursor: 'pointer',
+      }}
+    >
+      창고주 로그아웃 하기
     </span>
   </>
 );
@@ -77,6 +90,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit }) => (
 Admin.propTypes = {
   handleLoginInput: PropTypes.func.isRequired,
   handleLoginSubmit: PropTypes.func.isRequired,
+  refreshUser: PropTypes.func.isRequired,
 };
 
 export default Admin;

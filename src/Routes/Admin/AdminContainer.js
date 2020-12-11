@@ -62,11 +62,19 @@ class AdminContainer extends React.Component {
     }
   };
 
+  refreshUser = () => {
+    localStorage.removeItem('TokenForRegister');
+    document.getElementById('userEmail').value = '';
+    document.getElementById('userPass').value = '';
+    alert('창고주 로그아웃 되었습니다.');
+  };
+
   render() {
     return (
       <AdminPresenter
         handleLoginInput={this.handleLoginInput}
         handleLoginSubmit={this.handleLoginSubmit}
+        refreshUser={this.refreshUser}
       />
     );
   }
