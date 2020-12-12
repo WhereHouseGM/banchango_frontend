@@ -2,7 +2,6 @@ import React from 'react';
 import AdminPresenter from './AdminPresenter';
 import sha256 from 'crypto';
 import { userApi, warehouseApi } from '../../api';
-//import { warehouseApi } from '../../api';
 
 const WarehouseOwnerInputTypes = {
   USER_EMAIL: 'userEmail',
@@ -265,6 +264,7 @@ class AdminContainer extends React.Component {
       deliveryTypes: this.getDeliveryTypes(deliveryTypes),
     };
     const registerRequestBody = {
+      accessToken: localStorage.getItem('TokenForRegister'),
       canUse: 1,
       name: name,
       serviceType: 'AGENCY',
@@ -300,25 +300,13 @@ class AdminContainer extends React.Component {
       agencyDetail: agencyDetailObject,
     };
     try {
-      const result = warehouseApi.register(
-        registerRequestBody,
-        localStorage.getItem('TokenForRegister'),
-      );
-      const {
-        response: {
-          status,
-          data: { message },
-        },
-      } = result;
-      if (status === 200) {
-        alert('창고 정보가 정상적으로 등록되었습니다.');
-        return;
-      } else {
-        throw new Error(message);
-      }
+      const config = {
+        Authorization: `Bearer ${localStorage.getItem('AccessToken')}`,
+      };
+      await warehouseApi.register(registerRequestBody, config);
+      alert('창고 정보가 정상적으로 등록되었습니다.');
     } catch (Error) {
-      alert(message);
-      return;
+      console.log(Error);
     }
   };
 

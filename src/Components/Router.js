@@ -34,11 +34,10 @@ const RouterComponent = () => {
               isLogin ? () => <Message text={BadAccessText} /> : SignUp
             }
           />
-          {/*아래 /admin Route 삼항 연산자 순서만  바꿔주면 댐*/}
           <Route
             path="/admin"
             component={
-              isAdminLogin ? () => <Message text={BadAccessText} /> : Admin
+              isAdminLogin ? Admin : () => <Message text={BadAccessText} />
             }
           />
           <Route path="/category/:type" sensitive={true} component={Category} />

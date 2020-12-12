@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://api.banchango.shop:8080/v2/',
+  baseURL: 'localhost:8080/v2/',
 });
 
 export const userApi = {
@@ -11,10 +11,5 @@ export const userApi = {
 
 export const warehouseApi = {
   itemsByType: (type) => api.get(`warehouses/agency/${type}`),
-  register: (body, token) =>
-    api.post('warehouses/agency', body, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }),
+  register: (body, config) => api.post('warehouses/agency', body, config),
 };
