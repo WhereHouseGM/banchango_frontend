@@ -98,7 +98,7 @@ class AdminContainer extends React.Component {
         this.setState({ availableTimeDetail: value });
         return;
       case WarehouseInfoInputTypes.MIN_RELEASE_PER_MONTH:
-        this.setState({ minreleasePerMonth: value });
+        this.setState({ minReleasePerMonth: value });
         return;
       case WarehouseInfoInputTypes.DESCRIPTION:
         this.setState({ description: value });
@@ -120,6 +120,9 @@ class AdminContainer extends React.Component {
         return;
       case WarehouseInfoInputTypes.WH_USAGE_CAUTIONS:
         this.setState({ warehouseUsageCautions: value });
+        return;
+      case WarehouseInfoInputTypes.DELIVERY_TYPES:
+        this.setState({ deliveryTypes: value });
         return;
       default:
         return;
@@ -158,6 +161,76 @@ class AdminContainer extends React.Component {
     alert('창고주 로그아웃 되었습니다.');
   };
 
+  getSelectedWarehouseType = () => {
+    let radioList = document.getElementsByName('warehouseType');
+    for (let i = 0; i < radioList.length; i++) {
+      if (radioList[i].checked) {
+        return radioList[i].value;
+      }
+    }
+  };
+
+  getSelectedMainItemType = () => {
+    let radioList = document.getElementsByName('mainItemType');
+    for (let i = 0; i < radioList.length; i++) {
+      if (radioList[i].checked) {
+        return radioList[i].value;
+      }
+    }
+  };
+
+  getSelectedAirConditioningType = () => {
+    let radioList = document.getElementsByName('airConditioningType');
+    for (let i = 0; i < radioList.length; i++) {
+      if (radioList[i].checked) {
+        return radioList[i].value;
+      }
+    }
+  };
+
+  getSelectedWarehouseConditions = () => {
+    let checkboxList = document.getElementsByName('warehouseConditions');
+    let list = [];
+    for (let i = 0; i < checkboxList.length; i++) {
+      if (checkboxList[i].checked) {
+        list.push(checkboxList[i].value);
+      }
+    }
+    return list;
+  };
+
+  getDeliveryTypes = (deliveryTypes) => {
+    let typesList = deliveryTypes.split('+++');
+    let list = [];
+    for (let i = 0; i < typesList.length; i++) {
+      list.push(typesList[i]);
+    }
+    return list;
+  };
+
+  getWarehouseFacilityUsages = (warehouseFacilityUsages) => {
+    let list = [];
+    if (warehouseFacilityUsages !== null) {
+      let usagesList = warehouseFacilityUsages.split('+++');
+      for (let i = 0; i < usagesList.length; i++) {
+        list.push(usagesList[i]);
+      }
+    }
+    return list;
+  };
+
+  getWarehouseUsageCautions = (warehouseUsageCautions) => {
+    let list = [];
+
+    if (warehouseUsageCautions !== null) {
+      let cautionsList = warehouseUsageCautions.split('+++');
+      for (let i = 0; i < cautionsList.length; i++) {
+        list.push(cautionsList[i]);
+      }
+    }
+    return list;
+  };
+
   handleRegisterSubmit = async (e) => {
     e.preventDefault();
     const {
@@ -175,6 +248,8 @@ class AdminContainer extends React.Component {
       insuranceName,
       minReleasePerMonth,
       deliveryTypes,
+      warehouseFacilityUsages,
+      warehouseUsageCautions,
     } = this.state;
     const locationObject = {
       latitude: parseFloat(latitude),
@@ -184,10 +259,10 @@ class AdminContainer extends React.Component {
       name: insuranceName,
     };
     const agencyDetailObject = {
-      warehouseType: 'TODO',
-      minReleasePerMonth: minReleasePerMonth,
-      mainItemType: 'TODO',
-      deliveryTypes: deliveryTypes,
+      warehouseType: this.getSelectedWarehouseType(),
+      minReleasePerMonth: parseInt(minReleasePerMonth),
+      mainItemType: this.getSelectedMainItemType(),
+      deliveryTypes: this.getDeliveryTypes(deliveryTypes),
     };
     const registerRequestBody = {
       canUse: 1,
@@ -202,18 +277,24 @@ class AdminContainer extends React.Component {
       openAt: openAt,
       closeAt: closeAt,
       availableTimeDetail: availableTimeDetail,
-      cctvExist: 'TODO',
-      securityCompanyExist: 'TODO',
+      cctvExist: document.getElementById('cctvExist').checked ? 1 : 0,
+      securityCompanyExist: document.getElementById('securityCompanyExist')
+        ? 1
+        : 0,
       securityCompanyName: securityCompanyName,
-      doorLockExist: 'TODO',
-      airConditioningType: 'TODO',
-      workerExist: 'TODO',
-      canPickup: 'TODO',
-      canPark: 'TODO',
+      doorLockExist: document.getElementById('doorLockExist').checked ? 1 : 0,
+      airConditioningType: this.getSelectedAirConditioningType(),
+      workerExist: document.getElementById('workerExist').checked ? 1 : 0,
+      canPickup: document.getElementById('canPickup').checked ? 1 : 0,
+      canPark: document.getElementById('canPark').checked ? 1 : 0,
       parkingScale: 10,
-      warehouseCondition: 'TODO',
-      warehouseFacilityUsages: 'TODO',
-      warehouseUsageCautions: 'TODO',
+      warehouseCondition: this.getSelectedWarehouseConditions(),
+      warehouseFacilityUsages: this.getWarehouseFacilityUsages(
+        warehouseFacilityUsages,
+      ),
+      warehouseUsageCautions: this.getWarehouseUsageCautions(
+        warehouseUsageCautions,
+      ),
       insurance: insuranceObject,
       location: locationObject,
       agencyDetail: agencyDetailObject,

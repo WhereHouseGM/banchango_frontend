@@ -230,11 +230,12 @@ const Admin = ({
           </div>
           <br />
           <span style={{ border: '1px solid gray' }}>
-            {CheckBoxTypes.map((type) => (
-              <>
+            {CheckBoxTypes.map((type, index) => (
+              <React.Fragment key={index + `CB`}>
                 <input type="checkbox" value={type.value} id={type.id} />
-                <label htmlFor={type.value}>{type.children}</label>&nbsp;&nbsp;
-              </>
+                <label htmlFor={type.value}>{type.children}</label>
+                &nbsp;&nbsp;
+              </React.Fragment>
             ))}
           </span>
           <br />
@@ -249,7 +250,10 @@ const Admin = ({
               onChange={handleInfoInput}
             />
             &nbsp;&nbsp;&nbsp;
-            <span>보험사명(있을 시에만 기재)</span>&nbsp;
+            <span>
+              보험사명<span style={{ color: 'red' }}>*</span>
+            </span>
+            &nbsp;
             <input
               type="text"
               id="insuranceName"
@@ -265,16 +269,17 @@ const Admin = ({
               창고 유형(중복 선택 가능)<span style={{ color: 'red' }}>*</span>
             </legend>
             <br />
-            {WarehouseConditions.map((condition) => (
-              <>
+            {WarehouseConditions.map((condition, index) => (
+              <React.Fragment key={index + `WC`}>
                 <input
                   type="checkbox"
                   id={condition.id}
                   value={condition.value}
+                  name="warehouseConditions"
                 />
                 <label htmlFor={condition.id}>{condition.children}</label>
                 &nbsp;&nbsp;
-              </>
+              </React.Fragment>
             ))}
           </div>
           <br />
@@ -287,16 +292,17 @@ const Admin = ({
               <br />
               <br />
               <div>
-                {AirConditioningTypes.map((type) => (
-                  <>
+                {AirConditioningTypes.map((type, index) => (
+                  <React.Fragment key={index + `AC`}>
                     <input
                       type="radio"
                       name="airConditioningType"
                       id={type.id}
                       value={type.value}
                     />
-                    <label for={type.id}>{type.children}</label>&nbsp;&nbsp;
-                  </>
+                    <label htmlFor={type.id}>{type.children}</label>
+                    &nbsp;&nbsp;
+                  </React.Fragment>
                 ))}
               </div>
             </legend>
@@ -304,7 +310,10 @@ const Admin = ({
           <br />
           <div style={{ border: '1px solid black' }}>
             <span>
-              <span>위도 값</span>&nbsp;
+              <span>
+                위도 값<span style={{ color: 'red' }}>*</span>
+              </span>
+              &nbsp;
               <input
                 type="text"
                 id="latitude"
@@ -312,7 +321,10 @@ const Admin = ({
                 placeholder="37.XXXXXX"
                 onChange={handleInfoInput}
               />
-              <span>경도 값</span>&nbsp;
+              <span>
+                경도 값<span style={{ color: 'red' }}>*</span>
+              </span>
+              &nbsp;
               <input
                 type="text"
                 id="longitude"
@@ -324,7 +336,9 @@ const Admin = ({
           </div>
           <br />
           <div style={{ border: '1px solid black' }}>
-            <div>창고 종류 (둘 중 하나 선택)</div>
+            <div>
+              창고 종류 (둘 중 하나 선택)<span style={{ color: 'red' }}>*</span>
+            </div>
             <br />
             <span>
               <input
@@ -352,8 +366,8 @@ const Admin = ({
             </div>
             <br />
             <span>
-              {MainItemTypes.map((type) => (
-                <>
+              {MainItemTypes.map((type, index) => (
+                <React.Fragment key={index + `MI`}>
                   <input
                     type="radio"
                     name="mainItemType"
@@ -362,7 +376,7 @@ const Admin = ({
                   />
                   <label htmlFor={type.value}>{type.children}</label>
                   &nbsp;&nbsp;&nbsp;
-                </>
+                </React.Fragment>
               ))}
             </span>
           </div>
@@ -370,7 +384,7 @@ const Admin = ({
           <div style={{ border: '1px solid black' }}>
             <div>
               택배사(여러 개 있을 시 <span style={{ color: 'red' }}>+++</span>로
-              구분)
+              구분)<span style={{ color: 'red' }}>*</span>
             </div>
             <br />
             <textarea
