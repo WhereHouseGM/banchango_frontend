@@ -1,7 +1,7 @@
 import React from 'react';
 import AdminPresenter from './AdminPresenter';
 import sha256 from 'crypto';
-import { userApi } from '../../api';
+import { userApi, warehouseApi } from '../../api';
 //import { warehouseApi } from '../../api';
 
 const WarehouseOwnerInputTypes = {
@@ -299,7 +299,27 @@ class AdminContainer extends React.Component {
       location: locationObject,
       agencyDetail: agencyDetailObject,
     };
-    console.log(registerRequestBody);
+    try {
+      const result = warehouseApi.register(
+        registerRequestBody,
+        localStorage.getItem('TokenForRegister'),
+      );
+      const {
+        response: {
+          status,
+          data: { message },
+        },
+      } = result;
+      if (status === 200) {
+        alert('창고 정보가 정상적으로 등록되었습니다.');
+        return;
+      } else {
+        throw new Error(message);
+      }
+    } catch (Error) {
+      alert(message);
+      return;
+    }
   };
 
   render() {
