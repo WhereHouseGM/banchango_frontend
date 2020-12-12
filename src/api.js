@@ -11,4 +11,5 @@ export const userApi = {
 
 export const warehouseApi = {
   itemsByType: (type) => api.get(`warehouses/agency/${type}`),
+  houseDetail: (id) => api.get(`warehouses/${id}`),
 };

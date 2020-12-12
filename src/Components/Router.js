@@ -33,7 +33,10 @@ const RouterComponent = () => {
             }
           />
           <Route path="/category/:type" sensitive={true} component={Category} />
-          <Route path="/warehouses/detail/:warehouseId" component={Detail} />
+          <Route
+            path="/warehouses/detail/:id"
+            component={Detail}
+          />
           <Redirect path="*" to="/" />
         </Switch>
       </>
