@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
+const Admin = ({
+  handleLoginInput,
+  handleLoginSubmit,
+  refreshUser,
+  handleInfoInput,
+  handleRegisterSubmit,
+}) => (
   <>
     <div style={{ fontSize: '30px' }}>
       창고 등록 절차 간편화를 위한 어드민 페이지!
@@ -100,7 +106,13 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
               창고명<span style={{ color: 'red' }}>*</span>
             </span>
             &nbsp;
-            <input type="text" name="name" placeholder="창고명" id="name" />
+            <input
+              type="text"
+              name="name"
+              placeholder="창고명"
+              id="name"
+              onChange={handleInfoInput}
+            />
             &nbsp;&nbsp;&nbsp;
             <span>
               면적(평 단위)<span style={{ color: 'red' }}>*</span>
@@ -111,6 +123,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
               name="area"
               placeholder="숫자만 입력"
               id="area"
+              onChange={handleInfoInput}
             />
           </span>
           <br />
@@ -125,6 +138,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
               name="address"
               placeholder="XX시 XX구 XX동"
               id="address"
+              onChange={handleInfoInput}
             />
             &nbsp;&nbsp;&nbsp;
             <span>
@@ -136,6 +150,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
               name="addressDetail"
               placeholder="XX로 XX"
               id="addressDetail"
+              onChange={handleInfoInput}
             />
           </span>
           <br />
@@ -149,6 +164,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
             id="description"
             name="description"
             style={{ width: '100%', height: '70px' }}
+            onChange={handleInfoInput}
           />
           <br />
           <br />
@@ -161,6 +177,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
             name="openAt"
             id="openAt"
             placeholder="ex) 09:00 -> 오전 9시"
+            onChange={handleInfoInput}
           />
           &nbsp;&nbsp;&nbsp;
           <span>
@@ -172,6 +189,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
             name="closeAt"
             id="closeAt"
             placeholder="ex) 18:30 -> 오후 6시 30분"
+            onChange={handleInfoInput}
           />
           &nbsp;&nbsp;&nbsp;
           <span>
@@ -183,6 +201,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
             name="minReleasePerMonth"
             id="minReleasePerMonth"
             placeholder="숫자만 입력"
+            onChange={handleInfoInput}
           />
           <br />
           <br />
@@ -195,6 +214,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
             name="availableTimeDetail"
             style={{ width: '100%', height: '70px' }}
             placeholder="ex) 물류 센터 사정에 따라 상이할 수 있습니다."
+            onChange={handleInfoInput}
           />
           <br />
           <br />
@@ -230,6 +250,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
               id="securityCompanyName"
               name="securityCompanyName"
               placeholder="업체명"
+              onChange={handleInfoInput}
             />
             &nbsp;&nbsp;&nbsp;
             <span>보험사명(있을 시에만 기재)</span>&nbsp;
@@ -238,6 +259,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
               id="insuranceName"
               name="insuranceName"
               placeholder="업체명"
+              onChange={handleInfoInput}
             />
           </span>
           <br />
@@ -300,6 +322,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
                 id="latitude"
                 name="latitude"
                 placeholder="37.XXXXXX"
+                onChange={handleInfoInput}
               />
               <span>경도 값</span>&nbsp;
               <input
@@ -307,6 +330,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
                 id="longitude"
                 name="longitude"
                 placeholder="128.XXXXXX"
+                onChange={handleInfoInput}
               />
             </span>
           </div>
@@ -374,6 +398,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
               name="deliveryTypes"
               style={{ width: '100%', height: '70px' }}
               placeholder="ex. 우체국 택베와 EMS가 있을 경우 --> 우체국 택배+++EMS"
+              onChange={handleInfoInput}
             />
           </div>
           <br />
@@ -388,6 +413,7 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
               name="warehouseFacilityUsages"
               placeholder="창고 시설 이용 유의사항"
               style={{ width: '100%', height: '70px' }}
+              onChange={handleInfoInput}
             />
           </div>
           <br />
@@ -402,12 +428,13 @@ const Admin = ({ handleLoginInput, handleLoginSubmit, refreshUser }) => (
               name="warehouseUsageCautions"
               placeholder="창고 이용 시 주의사항"
               style={{ width: '100%', height: '70px' }}
+              onChange={handleInfoInput}
             />
           </div>
         </div>
         <br />
         <span
-          onClick={refreshUser}
+          onClick={handleRegisterSubmit}
           id="warehouseRegisterBtn"
           style={{
             borderRadius: '3px',
@@ -427,6 +454,7 @@ Admin.propTypes = {
   handleLoginInput: PropTypes.func.isRequired,
   handleLoginSubmit: PropTypes.func.isRequired,
   refreshUser: PropTypes.func.isRequired,
+  handleRegisterSubmit: PropTypes.func.isRequired,
 };
 
 export default Admin;
