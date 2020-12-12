@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080/v2/',
+  baseURL: 'http://api.banchango.shop:8080/v2/',
 });
 
 export const userApi = {
