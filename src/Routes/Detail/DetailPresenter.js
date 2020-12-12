@@ -1,6 +1,7 @@
 import Helmet from 'react-helmet';
 import Detail from '../../Components/Detail/Detail';
 import Navbar from '../../Components/Navbar/Navbar';
+import MainFooter from '../../Components/Main/MainFooter';
 
 const DetailPresenter = () => (
   <>
@@ -9,6 +10,7 @@ const DetailPresenter = () => (
     </Helmet>
     <Navbar />
     <Detail />
+    <MainFooter />
   </>
 );
 
