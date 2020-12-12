@@ -121,9 +121,7 @@ const Navbar = () => {
 
   const logout = () => {
     setLogin(false);
-    localStorage.setItem('Login', false);
-    localStorage.removeItem('AccessToken');
-    localStorage.removeItem('RefreshToken');
+    localStorage.clear();
     alert('로그아웃 되었습니다.');
     window.location.replace('/');
   };
