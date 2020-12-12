@@ -297,16 +297,23 @@ class AdminContainer extends React.Component {
       ),
       insurance: insuranceObject,
       location: locationObject,
-      agencyDetail: agencyDetailObject,
+      agencyDetails: agencyDetailObject,
     };
     try {
-      const config = {
-        Authorization: `Bearer ${localStorage.getItem('AccessToken')}`,
-      };
-      await warehouseApi.register(registerRequestBody, config);
+      await warehouseApi.register(
+        registerRequestBody,
+        localStorage.getItem('AccessToken'),
+      );
       alert('창고 정보가 정상적으로 등록되었습니다.');
-    } catch (Error) {
-      console.log(Error);
+      localStorage.removeItem('TokenForRegister');
+    } catch (error) {
+      if (error.toString().includes('400')) {
+        alert('뭔가 빼먹었거나 형식대로 안썼군. 죽빵이야~~');
+      } else if (error.toString().includes('401')) {
+        alert('혹시 창고주 로그인 먼저 안함????');
+      } else {
+        alert('먼가 잘못됨.. 나한테 와,,');
+      }
     }
   };
 
