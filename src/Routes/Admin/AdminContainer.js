@@ -41,7 +41,7 @@ class AdminContainer extends React.Component {
       description: null,
       openAt: null,
       closeAt: null,
-      minreleasePerMonth: null,
+      minReleasePerMonth: null,
       availableTimeDetail: null,
       securityCompanyName: null,
       insuranceName: null,
@@ -93,6 +93,9 @@ class AdminContainer extends React.Component {
         return;
       case WarehouseInfoInputTypes.CLOSE_AT:
         this.setState({ closeAt: value });
+        return;
+      case WarehouseInfoInputTypes.AVAILABLE_TIME_DETAIL:
+        this.setState({ availableTimeDetail: value });
         return;
       case WarehouseInfoInputTypes.MIN_RELEASE_PER_MONTH:
         this.setState({ minreleasePerMonth: value });
@@ -155,8 +158,67 @@ class AdminContainer extends React.Component {
     alert('창고주 로그아웃 되었습니다.');
   };
 
-  handleRegisterSubmit = () => {
-    console.log(this.state);
+  handleRegisterSubmit = async (e) => {
+    e.preventDefault();
+    const {
+      name,
+      area,
+      address,
+      closeAt,
+      securityCompanyName,
+      availableTimeDetail,
+      openAt,
+      description,
+      addressDetail,
+      latitude,
+      longitude,
+      insuranceName,
+      minReleasePerMonth,
+      deliveryTypes,
+    } = this.state;
+    const locationObject = {
+      latitude: parseFloat(latitude),
+      longitude: parseFloat(longitude),
+    };
+    const insuranceObject = {
+      name: insuranceName,
+    };
+    const agencyDetailObject = {
+      warehouseType: 'TODO',
+      minReleasePerMonth: minReleasePerMonth,
+      mainItemType: 'TODO',
+      deliveryTypes: deliveryTypes,
+    };
+    const registerRequestBody = {
+      canUse: 1,
+      name: name,
+      serviceType: 'AGENCY',
+      landArea: parseInt(area),
+      totalArea: parseInt(area),
+      address: address,
+      addressDetail: addressDetail,
+      description: description,
+      availableWeekdays: 111110,
+      openAt: openAt,
+      closeAt: closeAt,
+      availableTimeDetail: availableTimeDetail,
+      cctvExist: 'TODO',
+      securityCompanyExist: 'TODO',
+      securityCompanyName: securityCompanyName,
+      doorLockExist: 'TODO',
+      airConditioningType: 'TODO',
+      workerExist: 'TODO',
+      canPickup: 'TODO',
+      canPark: 'TODO',
+      parkingScale: 10,
+      warehouseCondition: 'TODO',
+      warehouseFacilityUsages: 'TODO',
+      warehouseUsageCautions: 'TODO',
+      insurance: insuranceObject,
+      location: locationObject,
+      agencyDetail: agencyDetailObject,
+    };
+    console.log(registerRequestBody);
   };
 
   render() {

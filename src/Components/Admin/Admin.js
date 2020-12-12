@@ -1,5 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  WarehouseConditions,
+  AirConditioningTypes,
+  MainItemTypes,
+  CheckBoxTypes,
+} from '../../static/admin';
 
 const Admin = ({
   handleLoginInput,
@@ -224,22 +230,12 @@ const Admin = ({
           </div>
           <br />
           <span style={{ border: '1px solid gray' }}>
-            <input type="checkbox" value="cctvExist" id="cctvExist" />
-            <label for="cctvExist"> CCTV</label>&nbsp;&nbsp;
-            <input type="checkbox" value="doorLockExist" id="doorLockExist" />
-            <label for="doorLockExist"> 도어락</label>&nbsp;&nbsp;
-            <input
-              type="checkbox"
-              value="securityCompanyExist"
-              id="securityCompanyExist"
-            />
-            <label for="securityCompanyExist"> 보안 업체</label>&nbsp;&nbsp;
-            <input type="checkbox" value="workerExist" id="workerExist" />
-            <label for="workerExist">현장 인력 </label>&nbsp;&nbsp;
-            <input type="checkbox" value="canPickup" id="canPickup" />
-            <label for="canPickup">픽업 </label>&nbsp;&nbsp;
-            <input type="checkbox" value="canPark" id="canPark" />
-            <label for="canPark">주차 </label>
+            {CheckBoxTypes.map((type) => (
+              <>
+                <input type="checkbox" value={type.value} id={type.id} />
+                <label htmlFor={type.value}>{type.children}</label>&nbsp;&nbsp;
+              </>
+            ))}
           </span>
           <br />
           <br />
@@ -269,28 +265,17 @@ const Admin = ({
               창고 유형(중복 선택 가능)<span style={{ color: 'red' }}>*</span>
             </legend>
             <br />
-            <input
-              type="checkbox"
-              id="ROOM_TEMPERATURE"
-              value="ROOM_TEMPERATURE"
-            />
-            <label for="ROOM_TEMPERATURE"> 상온 창고</label>&nbsp;&nbsp;
-            <input
-              type="checkbox"
-              id="LOW_TEMPERATURE"
-              value="LOW_TEMPERATURE"
-            />
-            <label for="LOW_TEMPERATURE"> 저온 창고</label>&nbsp;&nbsp;
-            <input type="checkbox" id="BONDED" value="BONDED" />
-            <label for="BONDED"> 보세 창고</label>&nbsp;&nbsp;
-            <input type="checkbox" id="SAVAGE" value="SAVAGE" />
-            <label for="SAVAGE"> 상온 창고</label>&nbsp;&nbsp;
-            <input type="checkbox" id="HAZARDOUS" value="HAZARDOUS" />
-            <label for="HAZARDOUS"> 야적 창고</label>&nbsp;&nbsp;
-            <input type="checkbox" id="SELF_STORAGE" value="SELF_STORAGE" />
-            <label for="SELF_STORAGE"> 셀프 스토리지</label>&nbsp;&nbsp;
-            <input type="checkbox" id="CONTAINER" value="CONTAINER" />
-            <label for="CONTAINER"> 컨테이너</label>&nbsp;&nbsp;
+            {WarehouseConditions.map((condition) => (
+              <>
+                <input
+                  type="checkbox"
+                  id={condition.id}
+                  value={condition.value}
+                />
+                <label htmlFor={condition.id}>{condition.children}</label>
+                &nbsp;&nbsp;
+              </>
+            ))}
           </div>
           <br />
           <div style={{ border: '1px solid black' }}>
@@ -302,14 +287,17 @@ const Admin = ({
               <br />
               <br />
               <div>
-                <input type="checkbox" id="HEATING" value="HEATING" />
-                <label for="HEATING"> 난방</label>&nbsp;&nbsp;
-                <input type="checkbox" id="COOLING" value="COOLING" />
-                <label for="COOLING"> 냉방</label>&nbsp;&nbsp;
-                <input type="checkbox" id="BOTH" value="BOTH" />
-                <label for="BOTH"> 모두</label>&nbsp;&nbsp;
-                <input type="checkbox" id="NONE" value="NONE" />
-                <label for="NONE"> 없음</label>&nbsp;&nbsp;
+                {AirConditioningTypes.map((type) => (
+                  <>
+                    <input
+                      type="radio"
+                      name="airConditioningType"
+                      id={type.id}
+                      value={type.value}
+                    />
+                    <label for={type.id}>{type.children}</label>&nbsp;&nbsp;
+                  </>
+                ))}
               </div>
             </legend>
           </div>
@@ -340,21 +328,21 @@ const Admin = ({
             <br />
             <span>
               <input
-                type="checkbox"
-                className="warehouseType"
+                type="radio"
+                name="warehouseType"
                 id="THREEPL"
                 value="THREEPL"
               />
               &nbsp;
-              <label for="THREEPL">3PL</label>&nbsp;&nbsp;&nbsp;
+              <label htmlFor="THREEPL">3PL</label>&nbsp;&nbsp;&nbsp;
               <input
-                type="checkbox"
-                className="warehouseType"
+                type="radio"
+                name="warehouseType"
                 id="FULFILLMEMT"
                 value="FULFULLMENT"
               />
               &nbsp;
-              <label for="FULFULLMENT">풀필먼트</label>
+              <label htmlFor="FULFULLMENT">풀필먼트</label>
             </span>
           </div>
           <br />
@@ -364,26 +352,18 @@ const Admin = ({
             </div>
             <br />
             <span>
-              <input type="checkbox" id="CLOTH" value="CLOTH" />
-              <label for="CLOTH"> 의류</label>&nbsp;&nbsp;&nbsp;
-              <input type="checkbox" id="COSMETIC" value="COSMETIC" />
-              <label for="COSMETIC">화장품</label>&nbsp;&nbsp;&nbsp;
-              <input
-                type="checkbox"
-                id="GENERAL_MERCHANDISE"
-                value="GENERAL_MERCHANDISE"
-              />
-              <label for="GENERAL_MERCHANDISE"> 잡화</label>&nbsp;&nbsp;&nbsp;
-              <input type="checkbox" id="ACCESSORY" value="ACCESSORY" />
-              <label for="ACCESSORY"> 악세사리</label>&nbsp;&nbsp;&nbsp;
-              <input
-                type="checkbox"
-                id="TEMPERATURE_SENSITIVE"
-                value="TEMPERATURE_SENSITIVE"
-              />
-              <label for="TEMPERATURE_SENSITIVE"> 음식</label>&nbsp;&nbsp;&nbsp;
-              <input type="checkbox" id="FURNITURE" value="FURNITURE" />
-              <label for="FURNITURE"> 가구</label>&nbsp;&nbsp;&nbsp;
+              {MainItemTypes.map((type) => (
+                <>
+                  <input
+                    type="radio"
+                    name="mainItemType"
+                    id={type.id}
+                    value={type.value}
+                  />
+                  <label htmlFor={type.value}>{type.children}</label>
+                  &nbsp;&nbsp;&nbsp;
+                </>
+              ))}
             </span>
           </div>
           <br />
