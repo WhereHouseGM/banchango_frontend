@@ -324,8 +324,13 @@ class AdminContainer extends React.Component {
       target: { files },
     } = event;
     let mainImageFile = files[0];
+    this.setState({ mainImage: mainImageFile });
     const { size } = mainImageFile;
-    document.getElementById('fileSize').innerHTML = `${size} 바이트`;
+    document.getElementById('fileSize').innerHTML = `사진 크기: ${size} 바이트`;
+  };
+
+  handleMainImageSubmit = () => {
+    const { mainImage } = this.state;
   };
 
   render() {

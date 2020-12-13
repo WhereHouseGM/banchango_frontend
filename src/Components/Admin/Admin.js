@@ -452,9 +452,16 @@ const Admin = ({
       <br />
       <div id="selectMainPhoto">
         <input type="file" id="mainImage" onChange={handleMainImageSelect} />
+        <br />
         <span id="fileSize" style={{ color: 'red' }}></span>
       </div>
-      <div id="mainPhotoRegisterBtn">메인 이미지 추가</div>
+      <br />
+      <span
+        id="mainPhotoRegisterBtn"
+        style={{ backgroundColor: '#14c70e', border: '1px solid black' }}
+      >
+        메인 이미지 등록하기
+      </span>
     </div>
   </>
 );
