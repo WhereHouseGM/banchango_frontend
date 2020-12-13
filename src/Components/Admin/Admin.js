@@ -13,6 +13,7 @@ const Admin = ({
   refreshUser,
   handleInfoInput,
   handleRegisterSubmit,
+  handleMainImageSelect,
 }) => (
   <>
     <div style={{ fontSize: '30px' }}>
@@ -441,6 +442,20 @@ const Admin = ({
         </span>
       </form>
     </div>
+    <br />
+    <br />
+    <div style={{ border: '2px solid black' }}>
+      <div>3. 창고 메인 이미지 등록하기</div>
+      <div style={{ clor: 'red' }}>
+        사진크기는 800000 바이트 이하로 해주셈요~
+      </div>
+      <br />
+      <div id="selectMainPhoto">
+        <input type="file" id="mainImage" onChange={handleMainImageSelect} />
+        <span id="fileSize" style={{ color: 'red' }}></span>
+      </div>
+      <div id="mainPhotoRegisterBtn">메인 이미지 추가</div>
+    </div>
   </>
 );
 
@@ -449,6 +464,7 @@ Admin.propTypes = {
   handleLoginSubmit: PropTypes.func.isRequired,
   refreshUser: PropTypes.func.isRequired,
   handleRegisterSubmit: PropTypes.func.isRequired,
+  handleMainImageSelect: PropTypes.func.isRequired,
 };
 
 export default Admin;

@@ -49,6 +49,7 @@ class AdminContainer extends React.Component {
       deliveryTypes: null,
       warehouseFacilityUsages: null,
       warehouseUsageCautions: null,
+      mainImage: null,
     };
   }
 
@@ -317,6 +318,16 @@ class AdminContainer extends React.Component {
     }
   };
 
+  handleMainImageSelect = (event) => {
+    event.preventDefault();
+    const {
+      target: { files },
+    } = event;
+    let mainImageFile = files[0];
+    const { size } = mainImageFile;
+    document.getElementById('fileSize').innerHTML = `${size} 바이트`;
+  };
+
   render() {
     return (
       <AdminPresenter
@@ -325,6 +336,7 @@ class AdminContainer extends React.Component {
         refreshUser={this.refreshUser}
         handleInfoInput={this.handleInfoInput}
         handleRegisterSubmit={this.handleRegisterSubmit}
+        handleMainImageSelect={this.handleMainImageSelect}
       />
     );
   }

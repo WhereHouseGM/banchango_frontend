@@ -9,6 +9,7 @@ const AdminPresenter = ({
   refreshUser,
   handleInfoInput,
   handleRegisterSubmit,
+  handleMainImageSelect,
 }) => (
   <>
     <Helmet>
@@ -20,6 +21,7 @@ const AdminPresenter = ({
       refreshUser={refreshUser}
       handleInfoInput={handleInfoInput}
       handleRegisterSubmit={handleRegisterSubmit}
+      handleMainImageSelect={handleMainImageSelect}
     />
   </>
 );
@@ -30,6 +32,7 @@ AdminPresenter.propTypes = {
   refreshUser: PropTypes.func.isRequired,
   handleInfoInput: PropTypes.func.isRequired,
   handleRegisterSubmit: PropTypes.func.isRequired,
+  handleMainImageSelect: PropTypes.func.isRequired,
 };
 
 export default AdminPresenter;
