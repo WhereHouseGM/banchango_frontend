@@ -301,10 +301,14 @@ class AdminContainer extends React.Component {
       agencyDetails: agencyDetailObject,
     };
     try {
-      await warehouseApi.register(
+      const result = await warehouseApi.register(
         registerRequestBody,
         localStorage.getItem('AccessToken'),
       );
+      const {
+        data: { warehouseId },
+      } = result;
+      localStorage.setItem('warehouseId', warehouseId);
       alert('창고 정보가 정상적으로 등록되었습니다.');
       localStorage.removeItem('TokenForRegister');
     } catch (error) {
@@ -327,10 +331,13 @@ class AdminContainer extends React.Component {
     this.setState({ mainImage: mainImageFile });
     const { size } = mainImageFile;
     document.getElementById('fileSize').innerHTML = `사진 크기: ${size} 바이트`;
+    // Below code is for testing, 가야물류
+    localStorage.setItem('warehouseId', 31);
   };
 
   handleMainImageSubmit = () => {
     const { mainImage } = this.state;
+    // Need to call parseInt() after calling localStorage.getItem()
   };
 
   render() {
