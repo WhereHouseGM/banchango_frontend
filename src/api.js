@@ -18,3 +18,20 @@ export const warehouseApi = {
       },
     }),
 };
+
+export const imageApi = {
+  uploadMainImage: (warehouseId, formData, token) =>
+    api.post(`images/upload/main/${warehouseId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`,
+      },
+    }),
+  uploadExtraImage: (warehouseId, formData, token) =>
+    api.post(`images/upload/${warehouseId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`,
+      },
+    }),
+};
