@@ -263,7 +263,7 @@ const Detail = ({ houseDetail }) => (
     <HouseContainer>
       <Image src={HouseImage} alt="HouseImage image" />
       <Description>
-        <HouseNameText>{houseDetail.name}</HouseNameText>
+        <HouseNameText>{'세방 SPL 물류'}</HouseNameText>
         <HouseLocationText>경기도 고양시 동구</HouseLocationText>
         <TagContainer>
           <TagBox>상온보관</TagBox>
