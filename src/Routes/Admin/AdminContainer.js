@@ -328,14 +328,10 @@ class AdminContainer extends React.Component {
       target: { files },
     } = event;
     let mainImageFile = files[0];
-    console.log(mainImageFile);
-    //console.log(typeof mainImage);
 
     this.setState({ mainImage: mainImageFile });
     const { size } = mainImageFile;
     document.getElementById('fileSize').innerHTML = `사진 크기: ${size} 바이트`;
-    // Below code is for testing, 가야물류
-    localStorage.setItem('warehouseId', 31);
   };
 
   handleMainImageSubmit = async (e) => {
@@ -343,8 +339,6 @@ class AdminContainer extends React.Component {
     const { mainImage } = this.state;
     const formData = new FormData();
     formData.append('file', mainImage);
-    console.log(formData);
-    console.log(formData.get('file'));
     try {
       await imageApi.uploadMainImage(
         parseInt(localStorage.getItem('warehouseId')),
