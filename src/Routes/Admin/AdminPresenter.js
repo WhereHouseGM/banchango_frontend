@@ -10,6 +10,7 @@ const AdminPresenter = ({
   handleInfoInput,
   handleRegisterSubmit,
   handleMainImageSelect,
+  handleMainImageSubmit,
 }) => (
   <>
     <Helmet>
@@ -22,6 +23,7 @@ const AdminPresenter = ({
       handleInfoInput={handleInfoInput}
       handleRegisterSubmit={handleRegisterSubmit}
       handleMainImageSelect={handleMainImageSelect}
+      handleMainImageSubmit={handleMainImageSubmit}
     />
   </>
 );
@@ -33,6 +35,7 @@ AdminPresenter.propTypes = {
   handleInfoInput: PropTypes.func.isRequired,
   handleRegisterSubmit: PropTypes.func.isRequired,
   handleMainImageSelect: PropTypes.func.isRequired,
+  handleMainImageSubmit: PropTypes.func.isRequired,
 };
 
 export default AdminPresenter;

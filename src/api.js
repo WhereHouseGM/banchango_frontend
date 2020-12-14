@@ -18,3 +18,15 @@ export const warehouseApi = {
       },
     }),
 };
+
+export const imageApi = {
+  uploadMainImage: (warehouseId, formData, token) =>
+    api.post(`warehouses/upload/main/${warehouseId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`,
+      },
+    }),
+};
+
+axios.post();

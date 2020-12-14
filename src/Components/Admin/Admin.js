@@ -14,6 +14,7 @@ const Admin = ({
   handleInfoInput,
   handleRegisterSubmit,
   handleMainImageSelect,
+  handleMainImageSubmit,
 }) => (
   <>
     <div style={{ fontSize: '30px' }}>
@@ -451,14 +452,24 @@ const Admin = ({
       </div>
       <br />
       <div id="selectMainPhoto">
-        <input type="file" id="mainImage" onChange={handleMainImageSelect} />
+        <input
+          type="file"
+          id="mainImage"
+          formEncType="multipart/form-data"
+          onChange={handleMainImageSelect}
+        />
         <br />
         <span id="fileSize" style={{ color: 'red' }}></span>
       </div>
       <br />
       <span
         id="mainPhotoRegisterBtn"
-        style={{ backgroundColor: '#14c70e', border: '1px solid black' }}
+        style={{
+          backgroundColor: '#14c70e',
+          border: '1px solid black',
+          cursor: 'pointer',
+        }}
+        onClick={handleMainImageSubmit}
       >
         메인 이미지 등록하기
       </span>
@@ -472,6 +483,7 @@ Admin.propTypes = {
   refreshUser: PropTypes.func.isRequired,
   handleRegisterSubmit: PropTypes.func.isRequired,
   handleMainImageSelect: PropTypes.func.isRequired,
+  handleMainImageSubmit: PropTypes.func.isRequired,
 };
 
 export default Admin;

@@ -1,7 +1,7 @@
 import React from 'react';
 import AdminPresenter from './AdminPresenter';
 import sha256 from 'crypto';
-import { userApi, warehouseApi } from '../../api';
+import { userApi, warehouseApi, imageApi } from '../../api';
 
 const WarehouseOwnerInputTypes = {
   USER_EMAIL: 'userEmail',
@@ -328,6 +328,9 @@ class AdminContainer extends React.Component {
       target: { files },
     } = event;
     let mainImageFile = files[0];
+    console.log(mainImageFile);
+    //console.log(typeof mainImage);
+
     this.setState({ mainImage: mainImageFile });
     const { size } = mainImageFile;
     document.getElementById('fileSize').innerHTML = `사진 크기: ${size} 바이트`;
@@ -335,9 +338,31 @@ class AdminContainer extends React.Component {
     localStorage.setItem('warehouseId', 31);
   };
 
-  handleMainImageSubmit = () => {
+  handleMainImageSubmit = async (e) => {
+    e.preventDefault();
     const { mainImage } = this.state;
-    // Need to call parseInt() after calling localStorage.getItem()
+    const formData = new FormData();
+    formData.append('file', mainImage);
+    console.log(formData);
+    console.log(formData.get('file'));
+    try {
+      await imageApi.uploadMainImage(
+        parseInt(localStorage.getItem('warehouseId')),
+        formData,
+        localStorage.getItem('TokenForRegister'),
+      );
+      alert('메인 이미지가 정상적으로 등록되었습니다.');
+    } catch (error) {
+      if (error.toString().includes('400')) {
+        alert('뭔가 잘못됨. 창고주 로그인을 안했다던가 등등..');
+      } else if (error.toString().includes('401')) {
+        alert('창고주 로그인 다시 해주세용');
+      } else if (error.toString().includes('403')) {
+        alert('창고주 로그인한 계정이 잘못됨.');
+      } else if (error.toString().includes('406')) {
+        alert('이미 메인 사진 등록되어 있음... 나한테 지워달라고 하세요,,');
+      }
+    }
   };
 
   render() {
@@ -349,6 +374,7 @@ class AdminContainer extends React.Component {
         handleInfoInput={this.handleInfoInput}
         handleRegisterSubmit={this.handleRegisterSubmit}
         handleMainImageSelect={this.handleMainImageSelect}
+        handleMainImageSubmit={this.handleMainImageSubmit}
       />
     );
   }
