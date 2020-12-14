@@ -11,6 +11,8 @@ const AdminPresenter = ({
   handleRegisterSubmit,
   handleMainImageSelect,
   handleMainImageSubmit,
+  handleExtraImageSelect,
+  handleExtraImageSubmit,
 }) => (
   <>
     <Helmet>
@@ -24,6 +26,8 @@ const AdminPresenter = ({
       handleRegisterSubmit={handleRegisterSubmit}
       handleMainImageSelect={handleMainImageSelect}
       handleMainImageSubmit={handleMainImageSubmit}
+      handleExtraImageSelect={handleExtraImageSelect}
+      handleExtraImageSubmit={handleExtraImageSubmit}
     />
   </>
 );
@@ -36,6 +40,8 @@ AdminPresenter.propTypes = {
   handleRegisterSubmit: PropTypes.func.isRequired,
   handleMainImageSelect: PropTypes.func.isRequired,
   handleMainImageSubmit: PropTypes.func.isRequired,
+  handleExtraImageSelect: PropTypes.func.isRequired,
+  handleExtraImageSelect: PropTypes.func.isRequired,
 };
 
 export default AdminPresenter;

@@ -50,6 +50,7 @@ class AdminContainer extends React.Component {
       warehouseFacilityUsages: null,
       warehouseUsageCautions: null,
       mainImage: null,
+      extraImages: [],
     };
   }
 
@@ -328,14 +329,65 @@ class AdminContainer extends React.Component {
       target: { files },
     } = event;
     let mainImageFile = files[0];
-
     this.setState({ mainImage: mainImageFile });
     const { size } = mainImageFile;
     document.getElementById('fileSize').innerHTML = `사진 크기: ${size} 바이트`;
   };
 
-  handleMainImageSubmit = async (e) => {
-    e.preventDefault();
+  handleExtraImageSelect = (event) => {
+    event.preventDefault();
+    const {
+      target: { files },
+    } = event;
+    let imageFile = files[0];
+    const { size } = imageFile;
+    const { extraImages } = this.state;
+    if (extraImages.length >= 5) {
+      alert(
+        '등록할 수 있는 최대 추가사진은 5개여.. 화면 새로고침하고 다시 넣으세요',
+      );
+      return;
+    } else {
+      extraImages.push(imageFile);
+      document.getElementById(
+        'extraFileSize',
+      ).innerHTML = `사진 크기: ${size} 바이트`;
+      this.setState({ extraImages });
+    }
+  };
+
+  handleExtraImageSubmit = async (event) => {
+    event.preventDefault();
+    const { extraImages } = this.state;
+    try {
+      for (let i = 0; i < extraImages.length; i++) {
+        let formData = new FormData();
+        formData.append('file', extraImages[i]);
+
+        await imageApi.uploadExtraImage(
+          parseInt(localStorage.getItem('warehouseId')),
+          formData,
+          localStorage.getItem('TokenForRegister'),
+        );
+      }
+      alert('추가 사진이 모두 등록되었습니다.');
+    } catch (error) {
+      if (error.toString().includes('400')) {
+        alert('뭔가 잘못됨. 창고주 로그인을 안했다던가 등등..');
+      } else if (error.toString().includes('401')) {
+        alert('창고주 로그인 다시 해주세용');
+      } else if (error.toString().includes('403')) {
+        alert('창고주 로그인한 계정이 잘못됨.');
+      } else if (error.toString().includes('406')) {
+        alert(
+          '이미 추가 사진 이미 5개 등록되어 있음... 나한테 지워달라고 하세요,,',
+        );
+      }
+    }
+  };
+
+  handleMainImageSubmit = async (event) => {
+    event.preventDefault();
     const { mainImage } = this.state;
     const formData = new FormData();
     formData.append('file', mainImage);
@@ -369,6 +421,8 @@ class AdminContainer extends React.Component {
         handleRegisterSubmit={this.handleRegisterSubmit}
         handleMainImageSelect={this.handleMainImageSelect}
         handleMainImageSubmit={this.handleMainImageSubmit}
+        handleExtraImageSelect={this.handleExtraImageSelect}
+        handleExtraImageSubmit={this.handleExtraImageSubmit}
       />
     );
   }
