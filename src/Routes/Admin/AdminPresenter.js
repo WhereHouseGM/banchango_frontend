@@ -41,7 +41,7 @@ AdminPresenter.propTypes = {
   handleMainImageSelect: PropTypes.func.isRequired,
   handleMainImageSubmit: PropTypes.func.isRequired,
   handleExtraImageSelect: PropTypes.func.isRequired,
-  handleExtraImageSelect: PropTypes.func.isRequired,
+  handleExtraImageSubmit: PropTypes.func.isRequired,
 };
 
 export default AdminPresenter;
