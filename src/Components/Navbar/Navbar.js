@@ -174,7 +174,6 @@ const CenterItemContainer = styled.div`
   justify-content: space-between;
   box-flex: 0;
   flex-grow: 0;
-  // flex-basis: 409px;
   @media screen and (max-width: 768px) {
     display: flex;
   }
