@@ -46,7 +46,6 @@ const NavItemWrapper = styled.div`
   flex-direction: row;
   margin: 0;
   padding: 0px 35px;
-  max-width: 1350px;
   width: 100%;
   height: 60px;
   box-align: center;
