@@ -1,7 +1,7 @@
 import React from 'react';
 import AdminPresenter from './AdminPresenter';
 import sha256 from 'crypto';
-import { userApi, warehouseApi } from '../../api';
+import { userApi, warehouseApi, imageApi } from '../../api';
 
 const WarehouseOwnerInputTypes = {
   USER_EMAIL: 'userEmail',
@@ -49,6 +49,8 @@ class AdminContainer extends React.Component {
       deliveryTypes: null,
       warehouseFacilityUsages: null,
       warehouseUsageCautions: null,
+      mainImage: null,
+      extraImages: [],
     };
   }
 
@@ -300,10 +302,14 @@ class AdminContainer extends React.Component {
       agencyDetails: agencyDetailObject,
     };
     try {
-      await warehouseApi.register(
+      const result = await warehouseApi.register(
         registerRequestBody,
         localStorage.getItem('AccessToken'),
       );
+      const {
+        data: { warehouseId },
+      } = result;
+      localStorage.setItem('warehouseId', warehouseId);
       alert('창고 정보가 정상적으로 등록되었습니다.');
       localStorage.removeItem('TokenForRegister');
     } catch (error) {
@@ -317,6 +323,94 @@ class AdminContainer extends React.Component {
     }
   };
 
+  handleMainImageSelect = (event) => {
+    event.preventDefault();
+    const {
+      target: { files },
+    } = event;
+    let mainImageFile = files[0];
+    this.setState({ mainImage: mainImageFile });
+    const { size } = mainImageFile;
+    document.getElementById('fileSize').innerHTML = `사진 크기: ${size} 바이트`;
+  };
+
+  handleExtraImageSelect = (event) => {
+    event.preventDefault();
+    const {
+      target: { files },
+    } = event;
+    let imageFile = files[0];
+    const { size } = imageFile;
+    const { extraImages } = this.state;
+    if (extraImages.length >= 5) {
+      alert(
+        '등록할 수 있는 최대 추가사진은 5개여.. 화면 새로고침하고 다시 넣으세요',
+      );
+      return;
+    } else {
+      extraImages.push(imageFile);
+      document.getElementById(
+        'extraFileSize',
+      ).innerHTML = `사진 크기: ${size} 바이트`;
+      this.setState({ extraImages });
+    }
+  };
+
+  handleExtraImageSubmit = async (event) => {
+    event.preventDefault();
+    const { extraImages } = this.state;
+    try {
+      for (let i = 0; i < extraImages.length; i++) {
+        let formData = new FormData();
+        formData.append('file', extraImages[i]);
+
+        await imageApi.uploadExtraImage(
+          parseInt(localStorage.getItem('warehouseId')),
+          formData,
+          localStorage.getItem('TokenForRegister'),
+        );
+      }
+      alert('추가 사진이 모두 등록되었습니다.');
+    } catch (error) {
+      if (error.toString().includes('400')) {
+        alert('뭔가 잘못됨. 창고주 로그인을 안했다던가 등등..');
+      } else if (error.toString().includes('401')) {
+        alert('창고주 로그인 다시 해주세용');
+      } else if (error.toString().includes('403')) {
+        alert('창고주 로그인한 계정이 잘못됨.');
+      } else if (error.toString().includes('406')) {
+        alert(
+          '이미 추가 사진 이미 5개 등록되어 있음... 나한테 지워달라고 하세요,,',
+        );
+      }
+    }
+  };
+
+  handleMainImageSubmit = async (event) => {
+    event.preventDefault();
+    const { mainImage } = this.state;
+    const formData = new FormData();
+    formData.append('file', mainImage);
+    try {
+      await imageApi.uploadMainImage(
+        parseInt(localStorage.getItem('warehouseId')),
+        formData,
+        localStorage.getItem('TokenForRegister'),
+      );
+      alert('메인 이미지가 정상적으로 등록되었습니다.');
+    } catch (error) {
+      if (error.toString().includes('400')) {
+        alert('뭔가 잘못됨. 창고주 로그인을 안했다던가 등등..');
+      } else if (error.toString().includes('401')) {
+        alert('창고주 로그인 다시 해주세용');
+      } else if (error.toString().includes('403')) {
+        alert('창고주 로그인한 계정이 잘못됨.');
+      } else if (error.toString().includes('406')) {
+        alert('이미 메인 사진 등록되어 있음... 나한테 지워달라고 하세요,,');
+      }
+    }
+  };
+
   render() {
     return (
       <AdminPresenter
@@ -325,6 +419,10 @@ class AdminContainer extends React.Component {
         refreshUser={this.refreshUser}
         handleInfoInput={this.handleInfoInput}
         handleRegisterSubmit={this.handleRegisterSubmit}
+        handleMainImageSelect={this.handleMainImageSelect}
+        handleMainImageSubmit={this.handleMainImageSubmit}
+        handleExtraImageSelect={this.handleExtraImageSelect}
+        handleExtraImageSubmit={this.handleExtraImageSubmit}
       />
     );
   }

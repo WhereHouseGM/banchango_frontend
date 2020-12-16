@@ -13,6 +13,10 @@ const Admin = ({
   refreshUser,
   handleInfoInput,
   handleRegisterSubmit,
+  handleMainImageSelect,
+  handleMainImageSubmit,
+  handleExtraImageSelect,
+  handleExtraImageSubmit,
 }) => (
   <>
     <div style={{ fontSize: '30px' }}>
@@ -441,6 +445,69 @@ const Admin = ({
         </span>
       </form>
     </div>
+    <br />
+    <br />
+    <div style={{ border: '2px solid black' }}>
+      <div>3. 창고 메인 이미지 등록하기</div>
+      <div style={{ color: 'red' }}>
+        사진크기는 800000 바이트 이하로 해주셈요~
+      </div>
+      <br />
+      <div id="selectMainPhoto">
+        <input
+          type="file"
+          id="mainImage"
+          formEncType="multipart/form-data"
+          onChange={handleMainImageSelect}
+        />
+        <br />
+        <span id="fileSize" style={{ color: 'red' }}></span>
+      </div>
+      <br />
+      <span
+        id="mainPhotoRegisterBtn"
+        style={{
+          backgroundColor: '#14c70e',
+          border: '1px solid black',
+          cursor: 'pointer',
+        }}
+        onClick={handleMainImageSubmit}
+      >
+        메인 이미지 등록하기
+      </span>
+    </div>
+    <br />
+    <br />
+    <div style={{ border: '2px solid black' }}>
+      <div>4. 창고 추가 이미지 등록하기</div>
+      <div style={{ color: 'red' }}>
+        사진 크기는 800000 바이트 이하로 해주셈요~
+      </div>
+      <br />
+      <div id="selectExtraPhoto">
+        <input
+          type="file"
+          id="extraImages"
+          formEncType="multipart/form-data"
+          onChange={handleExtraImageSelect}
+          multiple="multiple"
+        />
+        <br />
+        <span id="extraFileSize" style={{ color: 'red' }}></span>
+      </div>
+      <br />
+      <span
+        id="extraPhotoRegisterBtn"
+        style={{
+          backgroundColor: '#14c70e',
+          border: '1px solid black',
+          cursor: 'pointer',
+        }}
+        onClick={handleExtraImageSubmit}
+      >
+        추가 이미지 등록하기
+      </span>
+    </div>
   </>
 );
 
@@ -449,6 +516,10 @@ Admin.propTypes = {
   handleLoginSubmit: PropTypes.func.isRequired,
   refreshUser: PropTypes.func.isRequired,
   handleRegisterSubmit: PropTypes.func.isRequired,
+  handleMainImageSelect: PropTypes.func.isRequired,
+  handleMainImageSubmit: PropTypes.func.isRequired,
+  handleExtraImageSelect: PropTypes.func.isRequired,
+  handleExtraImageSubmit: PropTypes.func.isRequired,
 };
 
 export default Admin;
