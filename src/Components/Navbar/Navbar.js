@@ -174,7 +174,7 @@ const CenterItemContainer = styled.div`
   justify-content: space-between;
   box-flex: 0;
   flex-grow: 0;
-  flex-basis: 409px;
+  // flex-basis: 409px;
   @media screen and (max-width: 768px) {
     display: flex;
   }
@@ -190,6 +190,7 @@ const Item = styled(Link)`
   white-space: nowrap;
   letter-spacing: -0.84px;
   text-decoration: none;
+  margin-right: 30px;
   &:hover {
     color: #1c57b0;
     text-decoration: none;
