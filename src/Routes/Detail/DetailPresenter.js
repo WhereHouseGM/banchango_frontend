@@ -5,7 +5,7 @@ import Message from '../../Components/Message';
 import MainFooter from '../../Components/Main/MainFooter';
 import PropTypes from 'prop-types';
 
-const DetailPresenter = ({ houseDetail, error, loading }) => (
+const DetailPresenter = ({ houseDetail, houseInfosArr, error, loading }) => (
   <>
     <Helmet>
       <title>반창고 | 상세페이지</title>
@@ -16,11 +16,10 @@ const DetailPresenter = ({ houseDetail, error, loading }) => (
         {error ? (
           <Message text={error} />
         ) : (
-          <Detail houseDetail={houseDetail} />
+          <Detail houseDetail={houseDetail} houseInfosArr={houseInfosArr} />
         )}
       </>
     )}
-    <Detail />
     <MainFooter />
   </>
 );

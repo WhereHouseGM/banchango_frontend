@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import HouseImage from '../../assets/images/TEMP.jpeg';
 
 const WarehouseConditions = {
   ROOM_TEMPERATURE: 'ROOM_TEMPERATURE',
@@ -32,6 +31,56 @@ const conditionDic = (warehouseCondition) => {
     default:
       return '';
   }
+};
+
+const Categories = {
+  CLOTH: 'CLOTH',
+  COSMETIC: 'COSMETIC',
+  FURNITURE: 'FURNITURE',
+  GENERAL: 'GENERAL_MERCHANDISE',
+  FOOD: 'TEMPERATURE_SENSITIVE',
+  JEWELRY: 'ACCESSORY',
+};
+
+const categoryDic = (category) => {
+  switch (category.toString().toUpperCase()) {
+    case Categories.CLOTH:
+      return '의류 창고 ';
+    case Categories.COSMETIC:
+      return '화장품 창고 ';
+    case Categories.FURNITURE:
+      return '가구 창고 ';
+    case Categories.GENERAL:
+      return '잡화 창고 ';
+    case Categories.FOOD:
+      return '식품 창고 ';
+    case Categories.JEWELRY:
+      return '악세사리 창고 ';
+    default:
+      return '';
+  }
+};
+
+const convertNewLine = (original) => {
+  return original.split('\r').map(function (item, idx) {
+    return (
+      <span key={idx}>
+        • {item}
+        <br />
+      </span>
+    );
+  });
+};
+
+const convertDayBox = (originalDay) => {
+  let dayCharArray = [];
+  let arrOriginalDay = originalDay.toString().split('');
+  for (let i = 0; i < 7 - arrOriginalDay.length; i++) {
+    dayCharArray.push('0');
+  }
+  dayCharArray = [...dayCharArray, ...arrOriginalDay];
+  // TODO: map으로 월 화 수 목 금 카드 만들기
+  dayCharArray.map();
 };
 
 const Container = styled.div`
@@ -111,7 +160,6 @@ const TagContainer = styled.div`
 const TagBox = styled.div`
   padding: 8px 8px 8px 8px;
   margin-right: 10px;
-  /* background-color: rgb(180, 196, 223); */
   background-color: black;
   border-radius: 10px 10px 10px 10px;
   font-family: 'Nanum Gothic', sans-serif;
@@ -139,6 +187,11 @@ const MonthlyMinimumExports = styled.div`
   border-left: none;
   flex: 1 1 0%;
   text-align: center;
+`;
+
+const MainDescriptionMinReleaseText = styled.h4`
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 25px;
 `;
 
 const InfoTitle = styled.h1`
@@ -175,7 +228,9 @@ const DeliveryTypesTitle = styled.h1`
   margin-bottom: 5px;
 `;
 
-const DeliveryTypesListText = styled.h3``;
+const DeliveryTypesListText = styled.h3`
+  font-size: 14px;
+`;
 
 const ButtonWrapper = styled.div`
   width: 75%;
@@ -227,129 +282,248 @@ const MainDescriptionWrapper = styled.div`
   min-width: 350px;
   margin-left: auto;
   margin-right: auto;
+  padding-bottom: 50px;
 `;
 
 const MainDescriptionTitle = styled.h1`
-  font-size: 26px;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 24px;
   font-weight: bold;
-  margin-top: 30px;
-  margin-bottom: 10px;
+  margin-top: 100px;
+  margin-bottom: 12px;
 `;
 
 const MainDescriptionText = styled.span`
-  /* padding-left: 20px; */
-  font-size: 22px;
-  line-height: 40px;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 16px;
+  line-height: 35px;
 `;
 
-const MainDescriptionOpenTime = styled.h4`
-  font-size: 20px;
+const MainDescriptionTimeContainer = styled.div`
+  display: flex;
+`;
+
+const MainDescriptionWorkHourTitle = styled.h4`
   font-weight: bold;
+  margin-right: 25px;
+  margin-bottom: 6px;
+`;
+
+const MainDescriptionWorkHourText = styled.h4`
+  color: grey;
 `;
 
 const MainDescriptionMinimumExports = styled.h4`
+  margin-top: 7px;
   font-size: 14px;
 `;
 
 const MainDescriptionInfoBox = styled.div`
+  width: 90%;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: white;
-  display: flex;
   border: 1px solid rgb(229, 232, 240);
   box-shadow: rgba(136, 136, 136, 0.3) 0px 0px 15px;
 `;
 
-const Detail = ({ houseDetail }) => (
-  <Container>
-    <HouseContainer>
-      <Image src={HouseImage} alt="HouseImage image" />
-      <Description>
-        <HouseNameText>{'세방 SPL 물류'}</HouseNameText>
-        <HouseLocationText>경기도 고양시 동구</HouseLocationText>
-        <TagContainer>
-          <TagBox>상온보관</TagBox>
-          <TagBox>냉동보관</TagBox>
-        </TagContainer>
-        <AdditionInformationWrapper>
-          <MonthlyMinimumExports>
-            <InfoTitle>월 최소 출고량</InfoTitle>
-            <MinReleaseValue>{'최소 출고량'}</MinReleaseValue>
-          </MonthlyMinimumExports>
-          <AdditionalInfo>
-            <InfoTitle>평수</InfoTitle>
-            <InfoValue>{'평수'}</InfoValue>
-          </AdditionalInfo>
-          <AdditionalInfo>
-            <InfoTitle>주력 제품</InfoTitle>
-            <InfoValue>{'주력 제품'}</InfoValue>
-          </AdditionalInfo>
-        </AdditionInformationWrapper>
-        <DeliveryTypesWrapper>
-          <DeliveryTypesTitle>사용 택배사</DeliveryTypesTitle>
-          <DeliveryTypesListText>CJ 대한통운, 로젠택배</DeliveryTypesListText>
-        </DeliveryTypesWrapper>
-        <ButtonWrapper>
-          <RequestInquireButton>견적 문의</RequestInquireButton>
-          <RequestTourButton>투어 신청</RequestTourButton>
-        </ButtonWrapper>
-      </Description>
-    </HouseContainer>
-    <MainDescriptionWrapper>
-      <MainDescriptionTitle>📢창고 소개</MainDescriptionTitle>
-      <MainDescriptionText>
-        - 서울 내 한시간 거리의 창고와 계약 / 제휴가 되어 있어 탄력적 운영이
-        가능하고 물량 증가에 대응이 가능합니다.
-        <br />
-        - 상품별 특화 창고를 운영합니다.
-        <br />
-        - 창고용 물류관리시스템이 온라인으로 구축되어 있어 일련의 출고 과정을
-        실시간으로 조회할 수 있습니다.
-        <br />
-      </MainDescriptionText>
-      <MainDescriptionTitle>📢영업 시간</MainDescriptionTitle>
-      <MainDescriptionOpenTime>09:00 ~ 18:00</MainDescriptionOpenTime>
-      <MainDescriptionText>
-        -월, 화, 수
-        <br />
-      </MainDescriptionText>
-      <MainDescriptionMinimumExports>
-        *창고 상황에 따라 달라집니다.
-      </MainDescriptionMinimumExports>
-      <MainDescriptionTitle>📢월 최소 출고량</MainDescriptionTitle>
-      <MainDescriptionText>
-        - 1건
-        <br />
-      </MainDescriptionText>
-      <MainDescriptionMinimumExports>
-        * 월 최소 출고량은 창고측에서 희망하는 고객들의 월 출고량을 나타냅니다.
-      </MainDescriptionMinimumExports>
-      <MainDescriptionTitle>📢시설 정보</MainDescriptionTitle>
-      <MainDescriptionInfoBox>
-        여기에 시설 정보 들어감.
-        <br />
-      </MainDescriptionInfoBox>
-      <MainDescriptionTitle>
-        <br />
-        📢시설 안내
-      </MainDescriptionTitle>
-      <MainDescriptionText>
-        1. 물품을 바코딩 및 박싱 작업.
-        <br />
-        2.asdf
-        <br />
-      </MainDescriptionText>
-      <MainDescriptionTitle>📢시설 이용 시 주의사항</MainDescriptionTitle>
-      <MainDescriptionText>
-        1. 물품을 바코딩 및 박싱 작업.
-        <br />
-        2.asdf
-        <br />
-        <br />
-      </MainDescriptionText>{' '}
-    </MainDescriptionWrapper>
-  </Container>
-);
+const MainDescriptionInfoFloor = styled.div`
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  display: flex;
+`;
+
+const MainDescriptionInfoCard = styled.div`
+  width: 20%;
+  font-size: 17px;
+  font-weight: bold;
+  text-align: center;
+`;
+
+const ExtraDescriptionWrapper = styled.div`
+  width: 60%;
+  min-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 50px;
+`;
+const ExtraDescriptionMap = styled.div`
+  margin-top: 50px;
+  width: 500px;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: rgba(136, 136, 136, 0.3) 0px 0px 15px;
+`;
+
+const ExtraDescriptionMapTitle = styled.div`
+  width: 100%;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+const Detail = ({ houseDetail, houseInfosArr }) => {
+  useEffect(() => {
+    let mapElement = document.getElementById('map');
+    // DUMMY
+    let position = new window.daum.maps.LatLng(37.496314, 126.9553);
+    let map = new window.daum.maps.Map(mapElement, {
+      center: position,
+      level: 5,
+    });
+    let marker = new window.daum.maps.Marker({
+      position: position,
+    });
+    marker.setMap(map);
+  }, []);
+  return (
+    <Container>
+      <HouseContainer>
+        <Image src={houseDetail.mainImageUrl} alt="HouseImage image" />
+        <Description>
+          <HouseNameText>{houseDetail.name}</HouseNameText>
+          <HouseLocationText>{houseDetail.address}</HouseLocationText>
+          <TagContainer>
+            {houseDetail.warehouseCondition.map((condition) => (
+              <TagBox key={condition}>
+                {conditionDic(WarehouseConditions[condition])}
+              </TagBox>
+            ))}
+          </TagContainer>
+          <AdditionInformationWrapper>
+            <MonthlyMinimumExports>
+              <InfoTitle>월 최소 출고량</InfoTitle>
+              <MinReleaseValue>
+                {houseDetail.agencyDetails.minReleasePerMonth}
+              </MinReleaseValue>
+            </MonthlyMinimumExports>
+            <AdditionalInfo>
+              <InfoTitle>평수</InfoTitle>
+              <InfoValue>{houseDetail.landArea}</InfoValue>
+            </AdditionalInfo>
+            <AdditionalInfo>
+              <InfoTitle>주력 제품</InfoTitle>
+              <InfoValue>
+                {categoryDic(
+                  Categories[houseDetail.agencyDetails.mainItemType],
+                )}
+              </InfoValue>
+            </AdditionalInfo>
+          </AdditionInformationWrapper>
+          <DeliveryTypesWrapper>
+            <DeliveryTypesTitle>사용 택배사</DeliveryTypesTitle>
+            <DeliveryTypesListText>
+              {houseDetail.agencyDetails.deliveryTypes.map((typeName) => {
+                return typeName + ', ';
+              })}
+            </DeliveryTypesListText>
+          </DeliveryTypesWrapper>
+          <ButtonWrapper>
+            <RequestInquireButton>견적 문의</RequestInquireButton>
+            <RequestTourButton>투어 신청</RequestTourButton>
+          </ButtonWrapper>
+        </Description>
+      </HouseContainer>
+      <MainDescriptionWrapper>
+        <MainDescriptionTitle>📢창고 소개</MainDescriptionTitle>
+        <MainDescriptionText>
+          {convertNewLine(houseDetail.description)}
+        </MainDescriptionText>
+        <MainDescriptionTitle>📢영업 시간</MainDescriptionTitle>
+        <MainDescriptionTimeContainer>
+          <MainDescriptionWorkHourTitle>영업 시간</MainDescriptionWorkHourTitle>
+          <MainDescriptionWorkHourText>
+            {houseDetail.openAt} ~ {houseDetail.closeAt}
+          </MainDescriptionWorkHourText>
+        </MainDescriptionTimeContainer>
+        <MainDescriptionTimeContainer>
+          <MainDescriptionWorkHourTitle>영업 요일</MainDescriptionWorkHourTitle>
+          <MainDescriptionWorkHourText>
+            {convertDayBox(houseDetail.availableWeekdays)}
+          </MainDescriptionWorkHourText>
+        </MainDescriptionTimeContainer>
+        <MainDescriptionMinimumExports>
+          *창고 상황에 따라 달라집니다.
+        </MainDescriptionMinimumExports>
+        <MainDescriptionTitle>📢월 최소 출고량</MainDescriptionTitle>
+        <MainDescriptionMinReleaseText>
+          - {houseDetail.agencyDetails.minReleasePerMonth}건
+        </MainDescriptionMinReleaseText>
+        <MainDescriptionMinimumExports>
+          * 월 최소 출고량은 창고측에서 희망하는 고객들의 월 출고량을
+          나타냅니다.
+        </MainDescriptionMinimumExports>
+        <MainDescriptionTitle>📢시설 정보</MainDescriptionTitle>
+        <MainDescriptionInfoBox>
+          <MainDescriptionInfoFloor>
+            <MainDescriptionInfoCard>
+              {houseInfosArr[0]}
+            </MainDescriptionInfoCard>
+            <MainDescriptionInfoCard>
+              {houseInfosArr[1]}
+            </MainDescriptionInfoCard>
+            <MainDescriptionInfoCard>
+              {houseInfosArr[2]}
+            </MainDescriptionInfoCard>
+            <MainDescriptionInfoCard>
+              {houseInfosArr[3]}
+            </MainDescriptionInfoCard>
+            <MainDescriptionInfoCard>
+              {houseInfosArr[4]}
+            </MainDescriptionInfoCard>
+          </MainDescriptionInfoFloor>
+          <MainDescriptionInfoFloor>
+            <MainDescriptionInfoCard>
+              {houseInfosArr[5]}
+            </MainDescriptionInfoCard>
+            <MainDescriptionInfoCard>
+              {houseInfosArr[6]}
+            </MainDescriptionInfoCard>
+            <MainDescriptionInfoCard>
+              {houseInfosArr[7]}
+            </MainDescriptionInfoCard>
+            <MainDescriptionInfoCard>
+              {houseInfosArr[8]}
+            </MainDescriptionInfoCard>
+            <MainDescriptionInfoCard>
+              {houseInfosArr[9]}
+            </MainDescriptionInfoCard>
+          </MainDescriptionInfoFloor>
+        </MainDescriptionInfoBox>
+        {/* TODO: string array using map */}
+        {houseDetail.warehouseFacilityUsages.length !== 0 && (
+          <>
+            <MainDescriptionTitle>📢시설 안내</MainDescriptionTitle>
+            <MainDescriptionText>
+              1. 물품을 바코딩 및 박싱 작업.
+            </MainDescriptionText>
+          </>
+        )}
+        {houseDetail.warehouseUsageCautions.length !== 0 && (
+          <>
+            <MainDescriptionTitle>📢시설 이용 시 주의사항</MainDescriptionTitle>
+            <MainDescriptionText>
+              1. 물품을 바코딩 및 박싱 작업.
+            </MainDescriptionText>
+          </>
+        )}
+      </MainDescriptionWrapper>
+      <ExtraDescriptionWrapper>
+        <ExtraDescriptionMapTitle>위치 정보</ExtraDescriptionMapTitle>
+        <ExtraDescriptionMap id="map"></ExtraDescriptionMap>
+      </ExtraDescriptionWrapper>
+    </Container>
+  );
+};
 
 Detail.propTypes = {
+  // TODO: propTypes edit
   handleInput: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   toSignupPage: PropTypes.func.isRequired,
