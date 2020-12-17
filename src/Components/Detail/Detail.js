@@ -317,6 +317,9 @@ const MainDescText = styled.span`
 const MainDescTimeContainer = styled.div`
   margin-bottom: 10px;
   display: flex;
+  @media screen and (max-width: 1000px) {
+    display: block;
+  }
 `;
 
 const MainDescWorkHourTitle = styled.h4`
@@ -327,6 +330,9 @@ const MainDescWorkHourTitle = styled.h4`
 
 const MainDescWorkHourText = styled.h4`
   color: grey;
+`;
+const MainDescWorkDayWrapper = styled.div`
+  display: flex;
 `;
 
 const MainDescRestDayCard = styled.div`
@@ -375,6 +381,9 @@ const MainDescInfoCard = styled.div`
   font-size: 17px;
   font-weight: bold;
   text-align: center;
+  @media screen and (max-width: 1000px) {
+    font-size: 14px;
+  }
 `;
 
 const ExtraDescWrapper = styled.div`
@@ -391,6 +400,9 @@ const ExtraDescMap = styled.div`
   margin-left: auto;
   margin-right: auto;
   box-shadow: rgba(136, 136, 136, 0.3) 0px 0px 15px;
+  @media screen and (max-width: 1000px) {
+    width: 90%;
+  }
 `;
 
 const ExtraDescMapTitle = styled.div`
@@ -407,7 +419,7 @@ const Detail = ({ houseDetail, houseInfosArr }) => {
     const script = document.createElement('script');
     script.async = true;
     script.src =
-      'https://dapi.kakao.com/v2/maps/sdk.js?appkey=d698315979c98f65a32752dc88bd959d&autoload=false';
+      'https://dapi.kakao.com/v2/maps/sdk.js?appkey=27af2ff52796d884554beee394faa49e&autoload=false';
     document.head.appendChild(script);
 
     script.onload = () => {
@@ -485,7 +497,9 @@ const Detail = ({ houseDetail, houseInfosArr }) => {
         </MainDescTimeContainer>
         <MainDescTimeContainer>
           <MainDescWorkHourTitle>영업 요일</MainDescWorkHourTitle>
-          {returnDayBox(houseDetail.availableWeekdays)}
+          <MainDescWorkDayWrapper>
+            {returnDayBox(houseDetail.availableWeekdays)}
+          </MainDescWorkDayWrapper>
         </MainDescTimeContainer>
         <MainDescMinimumExports>
           *창고 상황에 따라 달라집니다.
