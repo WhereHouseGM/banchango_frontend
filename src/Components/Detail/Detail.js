@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { dayOfWeek } from '../../static/admin';
 
 const WarehouseConditions = {
   ROOM_TEMPERATURE: 'ROOM_TEMPERATURE',
@@ -61,26 +62,40 @@ const categoryDic = (category) => {
   }
 };
 
-const convertNewLine = (original) => {
-  return original.split('\r').map(function (item, idx) {
+const convertNewLine = (originalText) => {
+  return originalText.split('\r').map((line, index) => {
     return (
-      <span key={idx}>
-        • {item}
+      <span key={index}>
+        • {line}
         <br />
       </span>
     );
   });
 };
 
-const convertDayBox = (originalDay) => {
+const returnDayBox = (originalDay) => {
   let dayCharArray = [];
   let arrOriginalDay = originalDay.toString().split('');
   for (let i = 0; i < 7 - arrOriginalDay.length; i++) {
     dayCharArray.push('0');
   }
   dayCharArray = [...dayCharArray, ...arrOriginalDay];
-  // TODO: map으로 월 화 수 목 금 카드 만들기
-  dayCharArray.map();
+  return dayCharArray.map((char, index) => {
+    if (char === '0') {
+      return (
+        <MainDescRestDayCard key={index}>
+          {dayOfWeek[index].value}
+        </MainDescRestDayCard>
+      );
+    } else if (char === '1') {
+      return (
+        <MainDescWorkDayCard key={index}>
+          {dayOfWeek[index].value}
+        </MainDescWorkDayCard>
+      );
+    }
+    return null;
+  });
 };
 
 const Container = styled.div`
@@ -124,7 +139,7 @@ const Image = styled.img`
   }
 `;
 
-const Description = styled.div`
+const Desc = styled.div`
   width: 330px;
   padding: 10px;
 `;
@@ -189,7 +204,7 @@ const MonthlyMinimumExports = styled.div`
   text-align: center;
 `;
 
-const MainDescriptionMinReleaseText = styled.h4`
+const MainDescMinReleaseText = styled.h4`
   font-family: 'Nanum Gothic', sans-serif;
   font-size: 25px;
 `;
@@ -277,7 +292,7 @@ const RequestTourButton = styled.div`
   }
 `;
 
-const MainDescriptionWrapper = styled.div`
+const MainDescWrapper = styled.div`
   width: 60%;
   min-width: 350px;
   margin-left: auto;
@@ -285,7 +300,7 @@ const MainDescriptionWrapper = styled.div`
   padding-bottom: 50px;
 `;
 
-const MainDescriptionTitle = styled.h1`
+const MainDescTitle = styled.h1`
   font-family: 'Nanum Gothic', sans-serif;
   font-size: 24px;
   font-weight: bold;
@@ -293,32 +308,51 @@ const MainDescriptionTitle = styled.h1`
   margin-bottom: 12px;
 `;
 
-const MainDescriptionText = styled.span`
+const MainDescText = styled.span`
   font-family: 'Nanum Gothic', sans-serif;
   font-size: 16px;
   line-height: 35px;
 `;
 
-const MainDescriptionTimeContainer = styled.div`
+const MainDescTimeContainer = styled.div`
+  margin-bottom: 10px;
   display: flex;
 `;
 
-const MainDescriptionWorkHourTitle = styled.h4`
+const MainDescWorkHourTitle = styled.h4`
   font-weight: bold;
   margin-right: 25px;
   margin-bottom: 6px;
 `;
 
-const MainDescriptionWorkHourText = styled.h4`
+const MainDescWorkHourText = styled.h4`
   color: grey;
 `;
 
-const MainDescriptionMinimumExports = styled.h4`
+const MainDescRestDayCard = styled.div`
+  background-color: rgb(157, 158, 163);
+  color: white;
+  border-radius: 10px 10px 10px 10px;
+  padding: 10px;
+  margin-right: 10px;
+  font-weight: bold;
+`;
+
+const MainDescWorkDayCard = styled.div`
+  background-color: black;
+  color: white;
+  border-radius: 10px 10px 10px 10px;
+  padding: 10px;
+  margin-right: 10px;
+  font-weight: bold;
+`;
+
+const MainDescMinimumExports = styled.h4`
   margin-top: 7px;
   font-size: 14px;
 `;
 
-const MainDescriptionInfoBox = styled.div`
+const MainDescInfoBox = styled.div`
   width: 90%;
   margin-top: 30px;
   margin-left: auto;
@@ -328,7 +362,7 @@ const MainDescriptionInfoBox = styled.div`
   box-shadow: rgba(136, 136, 136, 0.3) 0px 0px 15px;
 `;
 
-const MainDescriptionInfoFloor = styled.div`
+const MainDescInfoFloor = styled.div`
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 24px;
@@ -336,21 +370,21 @@ const MainDescriptionInfoFloor = styled.div`
   display: flex;
 `;
 
-const MainDescriptionInfoCard = styled.div`
+const MainDescInfoCard = styled.div`
   width: 20%;
   font-size: 17px;
   font-weight: bold;
   text-align: center;
 `;
 
-const ExtraDescriptionWrapper = styled.div`
+const ExtraDescWrapper = styled.div`
   width: 60%;
   min-width: 350px;
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 50px;
 `;
-const ExtraDescriptionMap = styled.div`
+const ExtraDescMap = styled.div`
   margin-top: 50px;
   width: 500px;
   height: 400px;
@@ -359,7 +393,7 @@ const ExtraDescriptionMap = styled.div`
   box-shadow: rgba(136, 136, 136, 0.3) 0px 0px 15px;
 `;
 
-const ExtraDescriptionMapTitle = styled.div`
+const ExtraDescMapTitle = styled.div`
   width: 100%;
   font-size: 30px;
   font-weight: bold;
@@ -370,23 +404,32 @@ const ExtraDescriptionMapTitle = styled.div`
 
 const Detail = ({ houseDetail, houseInfosArr }) => {
   useEffect(() => {
-    let mapElement = document.getElementById('map');
-    // DUMMY
-    let position = new window.daum.maps.LatLng(37.496314, 126.9553);
-    let map = new window.daum.maps.Map(mapElement, {
-      center: position,
-      level: 5,
-    });
-    let marker = new window.daum.maps.Marker({
-      position: position,
-    });
-    marker.setMap(map);
+    const script = document.createElement('script');
+    script.async = true;
+    script.src =
+      'https://dapi.kakao.com/v2/maps/sdk.js?appkey=d698315979c98f65a32752dc88bd959d&autoload=false';
+    document.head.appendChild(script);
+
+    script.onload = () => {
+      window.daum.maps.load(() => {
+        let mapElement = document.getElementById('mapDiv');
+        let position = new window.daum.maps.LatLng(37.496314, 126.9553); // DUMMY Pos
+        let map = new window.daum.maps.Map(mapElement, {
+          center: position,
+          level: 5,
+        });
+        let marker = new window.daum.maps.Marker({
+          position: position,
+        });
+        marker.setMap(map);
+      });
+    };
   }, []);
   return (
     <Container>
       <HouseContainer>
         <Image src={houseDetail.mainImageUrl} alt="HouseImage image" />
-        <Description>
+        <Desc>
           <HouseNameText>{houseDetail.name}</HouseNameText>
           <HouseLocationText>{houseDetail.address}</HouseLocationText>
           <TagContainer>
@@ -428,105 +471,92 @@ const Detail = ({ houseDetail, houseInfosArr }) => {
             <RequestInquireButton>견적 문의</RequestInquireButton>
             <RequestTourButton>투어 신청</RequestTourButton>
           </ButtonWrapper>
-        </Description>
+        </Desc>
       </HouseContainer>
-      <MainDescriptionWrapper>
-        <MainDescriptionTitle>📢창고 소개</MainDescriptionTitle>
-        <MainDescriptionText>
-          {convertNewLine(houseDetail.description)}
-        </MainDescriptionText>
-        <MainDescriptionTitle>📢영업 시간</MainDescriptionTitle>
-        <MainDescriptionTimeContainer>
-          <MainDescriptionWorkHourTitle>영업 시간</MainDescriptionWorkHourTitle>
-          <MainDescriptionWorkHourText>
+      <MainDescWrapper>
+        <MainDescTitle>📢창고 소개</MainDescTitle>
+        <MainDescText>{convertNewLine(houseDetail.description)}</MainDescText>
+        <MainDescTitle>📢영업 시간</MainDescTitle>
+        <MainDescTimeContainer>
+          <MainDescWorkHourTitle>영업 시간</MainDescWorkHourTitle>
+          <MainDescWorkHourText>
             {houseDetail.openAt} ~ {houseDetail.closeAt}
-          </MainDescriptionWorkHourText>
-        </MainDescriptionTimeContainer>
-        <MainDescriptionTimeContainer>
-          <MainDescriptionWorkHourTitle>영업 요일</MainDescriptionWorkHourTitle>
-          <MainDescriptionWorkHourText>
-            {convertDayBox(houseDetail.availableWeekdays)}
-          </MainDescriptionWorkHourText>
-        </MainDescriptionTimeContainer>
-        <MainDescriptionMinimumExports>
+          </MainDescWorkHourText>
+        </MainDescTimeContainer>
+        <MainDescTimeContainer>
+          <MainDescWorkHourTitle>영업 요일</MainDescWorkHourTitle>
+          {returnDayBox(houseDetail.availableWeekdays)}
+        </MainDescTimeContainer>
+        <MainDescMinimumExports>
           *창고 상황에 따라 달라집니다.
-        </MainDescriptionMinimumExports>
-        <MainDescriptionTitle>📢월 최소 출고량</MainDescriptionTitle>
-        <MainDescriptionMinReleaseText>
+        </MainDescMinimumExports>
+        <MainDescTitle>📢월 최소 출고량</MainDescTitle>
+        <MainDescMinReleaseText>
           - {houseDetail.agencyDetails.minReleasePerMonth}건
-        </MainDescriptionMinReleaseText>
-        <MainDescriptionMinimumExports>
+        </MainDescMinReleaseText>
+        <MainDescMinimumExports>
           * 월 최소 출고량은 창고측에서 희망하는 고객들의 월 출고량을
           나타냅니다.
-        </MainDescriptionMinimumExports>
-        <MainDescriptionTitle>📢시설 정보</MainDescriptionTitle>
-        <MainDescriptionInfoBox>
-          <MainDescriptionInfoFloor>
-            <MainDescriptionInfoCard>
-              {houseInfosArr[0]}
-            </MainDescriptionInfoCard>
-            <MainDescriptionInfoCard>
-              {houseInfosArr[1]}
-            </MainDescriptionInfoCard>
-            <MainDescriptionInfoCard>
-              {houseInfosArr[2]}
-            </MainDescriptionInfoCard>
-            <MainDescriptionInfoCard>
-              {houseInfosArr[3]}
-            </MainDescriptionInfoCard>
-            <MainDescriptionInfoCard>
-              {houseInfosArr[4]}
-            </MainDescriptionInfoCard>
-          </MainDescriptionInfoFloor>
-          <MainDescriptionInfoFloor>
-            <MainDescriptionInfoCard>
-              {houseInfosArr[5]}
-            </MainDescriptionInfoCard>
-            <MainDescriptionInfoCard>
-              {houseInfosArr[6]}
-            </MainDescriptionInfoCard>
-            <MainDescriptionInfoCard>
-              {houseInfosArr[7]}
-            </MainDescriptionInfoCard>
-            <MainDescriptionInfoCard>
-              {houseInfosArr[8]}
-            </MainDescriptionInfoCard>
-            <MainDescriptionInfoCard>
-              {houseInfosArr[9]}
-            </MainDescriptionInfoCard>
-          </MainDescriptionInfoFloor>
-        </MainDescriptionInfoBox>
-        {/* TODO: string array using map */}
+        </MainDescMinimumExports>
+        <MainDescTitle>📢시설 정보</MainDescTitle>
+        <MainDescInfoBox>
+          <MainDescInfoFloor>
+            <MainDescInfoCard>{houseInfosArr[0]}</MainDescInfoCard>
+            <MainDescInfoCard>{houseInfosArr[1]}</MainDescInfoCard>
+            <MainDescInfoCard>{houseInfosArr[2]}</MainDescInfoCard>
+            <MainDescInfoCard>{houseInfosArr[3]}</MainDescInfoCard>
+            <MainDescInfoCard>{houseInfosArr[4]}</MainDescInfoCard>
+          </MainDescInfoFloor>
+          <MainDescInfoFloor>
+            <MainDescInfoCard>{houseInfosArr[5]}</MainDescInfoCard>
+            <MainDescInfoCard>{houseInfosArr[6]}</MainDescInfoCard>
+            <MainDescInfoCard>{houseInfosArr[7]}</MainDescInfoCard>
+            <MainDescInfoCard>{houseInfosArr[8]}</MainDescInfoCard>
+            <MainDescInfoCard>{houseInfosArr[9]}</MainDescInfoCard>
+          </MainDescInfoFloor>
+        </MainDescInfoBox>
         {houseDetail.warehouseFacilityUsages.length !== 0 && (
           <>
-            <MainDescriptionTitle>📢시설 안내</MainDescriptionTitle>
-            <MainDescriptionText>
-              1. 물품을 바코딩 및 박싱 작업.
-            </MainDescriptionText>
+            <MainDescTitle>📢시설 안내</MainDescTitle>
+            <MainDescText>
+              {houseDetail.warehouseFacilityUsages.map((line, index) => {
+                return (
+                  <span key={index}>
+                    • {line}
+                    <br />
+                  </span>
+                );
+              })}
+            </MainDescText>
           </>
         )}
         {houseDetail.warehouseUsageCautions.length !== 0 && (
           <>
-            <MainDescriptionTitle>📢시설 이용 시 주의사항</MainDescriptionTitle>
-            <MainDescriptionText>
-              1. 물품을 바코딩 및 박싱 작업.
-            </MainDescriptionText>
+            <MainDescTitle>📢시설 이용 시 주의사항</MainDescTitle>
+            <MainDescText>
+              {houseDetail.warehouseUsageCautions.map((line, index) => {
+                return (
+                  <span key={index}>
+                    • {line}
+                    <br />
+                  </span>
+                );
+              })}
+            </MainDescText>
           </>
         )}
-      </MainDescriptionWrapper>
-      <ExtraDescriptionWrapper>
-        <ExtraDescriptionMapTitle>위치 정보</ExtraDescriptionMapTitle>
-        <ExtraDescriptionMap id="map"></ExtraDescriptionMap>
-      </ExtraDescriptionWrapper>
+      </MainDescWrapper>
+      <ExtraDescWrapper>
+        <ExtraDescMapTitle>위치 정보</ExtraDescMapTitle>
+        <ExtraDescMap id="mapDiv"></ExtraDescMap>
+      </ExtraDescWrapper>
     </Container>
   );
 };
 
 Detail.propTypes = {
-  // TODO: propTypes edit
-  handleInput: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  toSignupPage: PropTypes.func.isRequired,
+  houseDetail: PropTypes.object,
+  houseInfosArr: PropTypes.array,
 };
 
 export default Detail;

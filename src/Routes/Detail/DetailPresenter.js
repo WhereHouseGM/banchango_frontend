@@ -26,6 +26,9 @@ const DetailPresenter = ({ houseDetail, houseInfosArr, error, loading }) => (
 
 DetailPresenter.propTypes = {
   houseDetail: PropTypes.object,
+  houseInfosArr: PropTypes.array,
+  error: PropTypes.string,
+  loading: PropTypes.bool,
 };
 
 export default DetailPresenter;
