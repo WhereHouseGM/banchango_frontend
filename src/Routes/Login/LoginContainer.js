@@ -3,6 +3,7 @@ import LoginPresenter from './LoginPresenter';
 import sha256 from 'crypto';
 import { userApi } from '../../api';
 import 'react-toastify/dist/ReactToastify.css';
+import { message } from 'antd';
 
 const InputType = {
   EMAIL: 'email',
@@ -65,6 +66,14 @@ class LoginContainer extends React.Component {
     }
   };
 
+  alertWaitingMessage = () => {
+    message.loading('알림창이 뜰 때까지 잠시만 기다려 주세요...');
+  };
+
+  destroyWaitingMessage = () => {
+    message.destroy();
+  };
+
   handleEmailSend = async (e) => {
     e.preventDefault();
     const { email } = this.state;
@@ -76,7 +85,9 @@ class LoginContainer extends React.Component {
       email: email,
     };
     try {
+      this.alertWaitingMessage();
       await userApi.requestEmail(requestBody);
+      this.destroyWaitingMessage();
       alert('이메일이 정상적으로 발송되었습니다.');
     } catch {
       alert('반창고에 회원가입 되어 있지 않은 이일입니다.');
