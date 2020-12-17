@@ -1,120 +1,298 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Cosmetic from '../../assets/images/cosmetic.jpg';
+import { dayOfWeek } from '../../static/admin';
+import {
+  Container,
+  HouseContainer,
+  Image,
+  Desc,
+  HouseNameText,
+  HouseLocationText,
+  TagContainer,
+  TagBox,
+  AdditionInformationWrapper,
+  MonthlyMinimumExports,
+  MainDescMinReleaseText,
+  InfoTitle,
+  InfoValue,
+  MinReleaseValue,
+  AdditionalInfo,
+  DeliveryTypesWrapper,
+  DeliveryTypesTitle,
+  DeliveryTypesListText,
+  ButtonWrapper,
+  RequestInquireButton,
+  RequestTourButton,
+  MainDescWrapper,
+  MainDescTitle,
+  MainDescText,
+  MainDescTimeContainer,
+  MainDescWorkHourTitle,
+  MainDescWorkHourText,
+  MainDescWorkDayWrapper,
+  MainDescRestDayCard,
+  MainDescWorkDayCard,
+  MainDescMinimumExports,
+  MainDescInfoBox,
+  MainDescInfoFloor,
+  MainDescInfoCard,
+  ExtraDescWrapper,
+  ExtraDescMap,
+  ExtraDescMapTitle,
+} from './Detail_Styles';
 
-const Container = styled.div`
-  height: 100vh;
-  overflow: auto;
-`;
+const WarehouseConditions = {
+  ROOM_TEMPERATURE: 'ROOM_TEMPERATURE',
+  LOW_TEMPERATURE: 'LOW_TEMPERATURE',
+  BONDED: 'BONDED',
+  SAVAGE: 'SAVAGE',
+  HAZARDOUS: 'HAZARDOUS',
+  SELF_STORAGE: 'SELF_STORAGE',
+  CONTAINER: 'CONTAINER',
+};
 
-const Wrapper = styled.div`
-  height: 100%;
-  min-height: 100vh;
-  box-align: center;
-  align-items: start;
-  box-pack: center;
-  justify-content: center;
-  width: 100%;
-  display: flex;
-  align-content: center;
-  background-color: rgb(230, 235, 244);
-`;
-
-const HouseContainer = styled.div`
-  width: 60%;
-  height: 400px;
-  margin-top: 100px;
-  display: flex;
-  border: none;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: rgba(136, 136, 136, 0.3) 0px 0px 15px;
-  transition: all 0.2s ease;
-`;
-
-const Image = styled.img`
-  width: 65%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  border-radius: 10px 0 0 10px;
-`;
-
-const Description = styled.div`
-  width: 65%;
-  padding: 10px;
-  justify-self: center;
-`;
-
-const HouseNameText = styled.h1`
-  font-family: 'Nanum Gothic', sans-serif;
-  font-weight: bold;
-  font-size: 2.5em;
-  margin-top: 20px;
-  margin-left: 20px;
-  &:hover {
-    color: #30475e;
+const conditionDic = (warehouseCondition) => {
+  switch (warehouseCondition) {
+    case WarehouseConditions.ROOM_TEMPERATURE:
+      return '상온창고';
+    case WarehouseConditions.LOW_TEMPERATURE:
+      return '저온창고';
+    case WarehouseConditions.BONDED:
+      return '보세창고';
+    case WarehouseConditions.SAVAGE:
+      return '야외창고';
+    case WarehouseConditions.HAZARDOUS:
+      return '위험창고';
+    case WarehouseConditions.SELF_STORAGE:
+      return '셀프창고';
+    case WarehouseConditions.CONTAINER:
+      return '컨테이너';
+    default:
+      return '';
   }
-`;
+};
 
-const HouseLocationText = styled.h2`
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-bottom: 10px;
-  font-family: 'Nanum Gothic', sans-serif;
-  font-weight: bold;
-  font-size: 1em;
-  color: #aaa;
-`;
+const Categories = {
+  CLOTH: 'CLOTH',
+  COSMETIC: 'COSMETIC',
+  FURNITURE: 'FURNITURE',
+  GENERAL: 'GENERAL_MERCHANDISE',
+  FOOD: 'TEMPERATURE_SENSITIVE',
+  JEWELRY: 'ACCESSORY',
+};
 
-const TagContainer = styled.div`
-  align-items: flex-start;
-  display: flex;
-  margin-top: 20px;
-  margin-left: 20px;
-`;
+const categoryDic = (category) => {
+  switch (category.toString().toUpperCase()) {
+    case Categories.CLOTH:
+      return '의류 창고 ';
+    case Categories.COSMETIC:
+      return '화장품 창고 ';
+    case Categories.FURNITURE:
+      return '가구 창고 ';
+    case Categories.GENERAL:
+      return '잡화 창고 ';
+    case Categories.FOOD:
+      return '식품 창고 ';
+    case Categories.JEWELRY:
+      return '악세사리 창고 ';
+    default:
+      return '';
+  }
+};
 
-const TagBox = styled.div`
-  padding: 8px 8px 8px 8px;
-  margin-right: 10px;
-  background-color: rgb(180, 196, 223);
-  border-radius: 10px 10px 10px 10px;
-  font-family: 'Nanum Gothic', sans-serif;
-  font-weight: bold;
-  font-size: 0.8em;
-  text-align: center;
-`;
+const convertNewLine = (originalText) => {
+  return originalText.split('\r').map((line, index) => {
+    return (
+      <span key={index}>
+        • {line}
+        <br />
+      </span>
+    );
+  });
+};
 
-const DetailConditionContainer = styled.div`
-  align-items: flex-start;
-  border-bottom: 3px solid rgb(177, 183, 201);
-  margin-top: 10px;
-`;
+const returnDayBox = (originalDay) => {
+  let dayCharArray = [];
+  let arrOriginalDay = originalDay.toString().split('');
+  for (let i = 0; i < 7 - arrOriginalDay.length; i++) {
+    dayCharArray.push('0');
+  }
+  dayCharArray = [...dayCharArray, ...arrOriginalDay];
+  return dayCharArray.map((char, index) => {
+    if (char === '0') {
+      return (
+        <MainDescRestDayCard key={index}>
+          {dayOfWeek[index].value}
+        </MainDescRestDayCard>
+      );
+    } else if (char === '1') {
+      return (
+        <MainDescWorkDayCard key={index}>
+          {dayOfWeek[index].value}
+        </MainDescWorkDayCard>
+      );
+    }
+    return null;
+  });
+};
+const Detail = ({ houseDetail, houseInfosArr }) => {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src =
+      'https://dapi.kakao.com/v2/maps/sdk.js?appkey=27af2ff52796d884554beee394faa49e&autoload=false';
+    document.head.appendChild(script);
 
-const Detail = () => (
-  <Container>
-    <Wrapper>
+    script.onload = () => {
+      window.daum.maps.load(() => {
+        let mapElement = document.getElementById('mapDiv');
+        let position = new window.daum.maps.LatLng(37.496314, 126.9553); // DUMMY Pos
+        let map = new window.daum.maps.Map(mapElement, {
+          center: position,
+          level: 5,
+        });
+        let marker = new window.daum.maps.Marker({
+          position: position,
+        });
+        marker.setMap(map);
+      });
+    };
+  }, []);
+  return (
+    <Container>
       <HouseContainer>
-        <Image src={Cosmetic} alt="Cosmetic image" />
-        <Description>
-          <HouseNameText>세방 SPL 물류</HouseNameText>
-          <HouseLocationText>경기도 고양시 동구</HouseLocationText>
+        <Image src={houseDetail.mainImageUrl} alt="HouseImage image" />
+        <Desc>
+          <HouseNameText>{houseDetail.name}</HouseNameText>
+          <HouseLocationText>{houseDetail.address}</HouseLocationText>
           <TagContainer>
-            <TagBox>상온보관</TagBox>
-            <TagBox>냉동보관</TagBox>
+            {houseDetail.warehouseCondition.map((condition) => (
+              <TagBox key={condition}>
+                {conditionDic(WarehouseConditions[condition])}
+              </TagBox>
+            ))}
           </TagContainer>
-          <DetailConditionContainer></DetailConditionContainer>
-        </Description>
+          <AdditionInformationWrapper>
+            <MonthlyMinimumExports>
+              <InfoTitle>월 최소 출고량</InfoTitle>
+              <MinReleaseValue>
+                {houseDetail.agencyDetails.minReleasePerMonth}
+              </MinReleaseValue>
+            </MonthlyMinimumExports>
+            <AdditionalInfo>
+              <InfoTitle>평수</InfoTitle>
+              <InfoValue>{houseDetail.landArea}</InfoValue>
+            </AdditionalInfo>
+            <AdditionalInfo>
+              <InfoTitle>주력 제품</InfoTitle>
+              <InfoValue>
+                {categoryDic(
+                  Categories[houseDetail.agencyDetails.mainItemType],
+                )}
+              </InfoValue>
+            </AdditionalInfo>
+          </AdditionInformationWrapper>
+          <DeliveryTypesWrapper>
+            <DeliveryTypesTitle>사용 택배사</DeliveryTypesTitle>
+            <DeliveryTypesListText>
+              {houseDetail.agencyDetails.deliveryTypes.map((typeName) => {
+                return typeName + ', ';
+                // TODO: 겹치는 dic 빼고, 택배 마지막 , 빼고 스타일 빼고.
+              })}
+            </DeliveryTypesListText>
+          </DeliveryTypesWrapper>
+          <ButtonWrapper>
+            <RequestInquireButton>견적 문의</RequestInquireButton>
+            <RequestTourButton>투어 신청</RequestTourButton>
+          </ButtonWrapper>
+        </Desc>
       </HouseContainer>
-    </Wrapper>
-  </Container>
-);
+      <MainDescWrapper>
+        <MainDescTitle>📢창고 소개</MainDescTitle>
+        <MainDescText>{convertNewLine(houseDetail.description)}</MainDescText>
+        <MainDescTitle>📢영업 시간</MainDescTitle>
+        <MainDescTimeContainer>
+          <MainDescWorkHourTitle>영업 시간</MainDescWorkHourTitle>
+          <MainDescWorkHourText>
+            {houseDetail.openAt} ~ {houseDetail.closeAt}
+          </MainDescWorkHourText>
+        </MainDescTimeContainer>
+        <MainDescTimeContainer>
+          <MainDescWorkHourTitle>영업 요일</MainDescWorkHourTitle>
+          <MainDescWorkDayWrapper>
+            {returnDayBox(houseDetail.availableWeekdays)}
+          </MainDescWorkDayWrapper>
+        </MainDescTimeContainer>
+        <MainDescMinimumExports>
+          *창고 상황에 따라 달라집니다.
+        </MainDescMinimumExports>
+        <MainDescTitle>📢월 최소 출고량</MainDescTitle>
+        <MainDescMinReleaseText>
+          - {houseDetail.agencyDetails.minReleasePerMonth}건
+        </MainDescMinReleaseText>
+        <MainDescMinimumExports>
+          * 월 최소 출고량은 창고측에서 희망하는 고객들의 월 출고량을
+          나타냅니다.
+        </MainDescMinimumExports>
+        <MainDescTitle>📢시설 정보</MainDescTitle>
+        <MainDescInfoBox>
+          <MainDescInfoFloor>
+            <MainDescInfoCard>{houseInfosArr[0]}</MainDescInfoCard>
+            <MainDescInfoCard>{houseInfosArr[1]}</MainDescInfoCard>
+            <MainDescInfoCard>{houseInfosArr[2]}</MainDescInfoCard>
+            <MainDescInfoCard>{houseInfosArr[3]}</MainDescInfoCard>
+            <MainDescInfoCard>{houseInfosArr[4]}</MainDescInfoCard>
+          </MainDescInfoFloor>
+          <MainDescInfoFloor>
+            <MainDescInfoCard>{houseInfosArr[5]}</MainDescInfoCard>
+            <MainDescInfoCard>{houseInfosArr[6]}</MainDescInfoCard>
+            <MainDescInfoCard>{houseInfosArr[7]}</MainDescInfoCard>
+            <MainDescInfoCard>{houseInfosArr[8]}</MainDescInfoCard>
+            <MainDescInfoCard>{houseInfosArr[9]}</MainDescInfoCard>
+          </MainDescInfoFloor>
+        </MainDescInfoBox>
+        {houseDetail.warehouseFacilityUsages.length !== 0 && (
+          <>
+            <MainDescTitle>📢시설 안내</MainDescTitle>
+            <MainDescText>
+              {houseDetail.warehouseFacilityUsages.map((line, index) => {
+                return (
+                  <span key={index}>
+                    • {line}
+                    <br />
+                  </span>
+                );
+              })}
+            </MainDescText>
+          </>
+        )}
+        {houseDetail.warehouseUsageCautions.length !== 0 && (
+          <>
+            <MainDescTitle>📢시설 이용 시 주의사항</MainDescTitle>
+            <MainDescText>
+              {houseDetail.warehouseUsageCautions.map((line, index) => {
+                return (
+                  <span key={index}>
+                    • {line}
+                    <br />
+                  </span>
+                );
+              })}
+            </MainDescText>
+          </>
+        )}
+      </MainDescWrapper>
+      <ExtraDescWrapper>
+        <ExtraDescMapTitle>위치 정보</ExtraDescMapTitle>
+        <ExtraDescMap id="mapDiv"></ExtraDescMap>
+      </ExtraDescWrapper>
+    </Container>
+  );
+};
 
 Detail.propTypes = {
-  handleInput: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  toSignupPage: PropTypes.func.isRequired,
+  houseDetail: PropTypes.object,
+  houseInfosArr: PropTypes.array,
 };
 
 export default Detail;

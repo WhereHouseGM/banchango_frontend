@@ -17,6 +17,7 @@ export const warehouseApi = {
         Authorization: `Bearer ${token}`,
       },
     }),
+  houseDetail: (id) => api.get(`warehouses/${id}`),
 };
 
 export const imageApi = {
