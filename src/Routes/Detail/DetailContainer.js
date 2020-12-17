@@ -24,14 +24,14 @@ class DetailContainer extends React.Component {
       }
       const houseDetail = result.data;
       const houseInfos = {
-        airConditioningType: houseDetail.airConditioningType, //  ("HEATING", "COOLING", "NONE", "BOTH")
-        workerExist: houseDetail.workerExist, // 1, 0
-        category: houseDetail.agencyDetails.mainItemType, // 'CLOTH','TEMPERATURE_SENSITIVE','GENERAL_MERCHAND
-        houseType: houseDetail.agencyDetails.warehouseType, // "THREEPL = 도매 전문", "FULFILLMENT"
-        cctvExist: houseDetail.cctvExist, // 1, 0
-        insuranceName: houseDetail.insuranceName, // 보험사 명. 없으면 안옴.
-        canPark: houseDetail.canPark, // 1 (거의)
-        securityCompanyExist: houseDetail.securityCompanyExist, // 1, 0
+        airConditioningType: houseDetail.airConditioningType,
+        workerExist: houseDetail.workerExist,
+        category: houseDetail.agencyDetails.mainItemType, 
+        houseType: houseDetail.agencyDetails.warehouseType, 
+        cctvExist: houseDetail.cctvExist, 
+        insuranceName: houseDetail.insuranceName,
+        canPark: houseDetail.canPark,
+        securityCompanyExist: houseDetail.securityCompanyExist,
       };
       const houseInfosArr = [];
 
