@@ -86,10 +86,15 @@ class LoginContainer extends React.Component {
     };
     try {
       this.alertWaitingMessage();
-      await userApi.requestEmail(requestBody);
+      const result = await userApi.requestEmail(requestBody);
+      const { status } = result;
+      if (status !== 200) {
+        throw new Error();
+      }
       this.destroyWaitingMessage();
       alert('이메일이 정상적으로 발송되었습니다.');
     } catch {
+      this.destroyWaitingMessage();
       alert('반창고에 회원가입 되어 있지 않은 이일입니다.');
       document.getElementById('email').value = '';
       document.getElementById('email').focus();
