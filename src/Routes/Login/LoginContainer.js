@@ -65,6 +65,26 @@ class LoginContainer extends React.Component {
     }
   };
 
+  handleEmailSend = async (e) => {
+    e.preventDefault();
+    const { email } = this.state;
+    if (!this.checkEmail(email)) {
+      alert('이메일 형식이 올바르지 않습니다.');
+      return;
+    }
+    const requestBody = {
+      email: email,
+    };
+    try {
+      await userApi.requestEmail(requestBody);
+      alert('이메일이 정상적으로 발송되었습니다.');
+    } catch {
+      alert('반창고에 회원가입 되어 있지 않은 이일입니다.');
+      document.getElementById('email').value = '';
+      document.getElementById('email').focus();
+    }
+  };
+
   handleSubmit = async (e) => {
     e.preventDefault();
     const { email } = this.state;
@@ -120,6 +140,7 @@ class LoginContainer extends React.Component {
         handleInput={this.handleInput}
         handleSubmit={this.handleSubmit}
         toSignupPage={this.toSignupPage}
+        handleEmailSend={this.handleEmailSend}
       />
     );
   }

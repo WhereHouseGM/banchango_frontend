@@ -7,6 +7,7 @@ const api = axios.create({
 export const userApi = {
   signIn: (body) => api.post('users/sign-in', body),
   signUp: (body) => api.post('users/sign-up', body),
+  requestEmail: (body) => api.post('users/password-lost', body),
 };
 
 export const warehouseApi = {
