@@ -1,108 +1,147 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
+  UpperImage,
+  UpperImageTextContainer,
+  UpperImageTitleText,
   MainTitleContainer,
   MainTitle,
   Container,
   ItemContainer,
-  ItemWrapper,
-  Item,
   Image,
-  InformationWrapper,
-  LinkToDetailPage,
-  Address,
-  Name,
-  StickerContainer,
-  StickerWrapper,
-  Stickers,
-  Sticker,
   AdditionInformationWrapper,
   MonthlyMinimumExports,
   InfoTitle,
   InfoValue,
   MinReleaseValue,
   AdditionalInfo,
+  UpperImageContainer,
+  HouseContainer,
+  Desc,
+  HouseNameText,
+  HouseLocationText,
+  TagContainer,
+  TagBox,
+  DeliveryTypesWrapper,
+  DeliveryTypesTitle,
+  DeliveryTypesListText,
+  ButtonWrapper,
+  RequestInquireButton,
+  RequestTourButton,
+  UpperImageDescText,
+  UpperImageWarningText,
 } from './Category_Styles';
 import {
-  typesDict,
   conditionDict,
-  categoryNameDict,
+  categoryDict,
+  categoryTitleDict,
+  categorySubTitleDict,
+  categoryDescDict,
 } from './../../static/category';
+import { Categories } from './../../static/globalVariables';
 
-const convertDeliveryTypes = (deliveryTypes) => {
-  let size = deliveryTypes.length;
+import clothBack from './../../assets/images/background/CLOTH.png';
+import cosmeticBack from './../../assets/images/background/COSMETIC.png';
+import foodBack from './../../assets/images/background/FOOD.png';
+import furnitureBack from './../../assets/images/background/FURNITURE.png';
+import jewelryBack from './../../assets/images/background/JEWELRY.png';
+import generalBack from './../../assets/images/background/GENERAL.png';
 
-  if (size >= 2) {
-    return (
-      <span>
-        {deliveryTypes[0]}
-        <br />외 {size - 1} 곳
-      </span>
-    );
-  } else {
-    return deliveryTypes[0];
-  }
+const returnDeliveryTypes = (deliveryTypes) => {
+  return deliveryTypes.map((typeName, index) => {
+    if (deliveryTypes.length - 1 !== index) {
+      return typeName + ', ';
+    } else {
+      return typeName;
+    }
+  });
 };
+
+const returnBackImage = (category) => {
+  switch (category) {
+    case Categories.CLOTH:
+      return clothBack;
+    case Categories.COSMETIC:
+      return cosmeticBack;
+    case Categories.FURNITURE:
+      return furnitureBack;
+    case Categories.GENERAL:
+      return generalBack;
+    case Categories.FOOD:
+      return foodBack;
+    case Categories.JEWELRY:
+      return jewelryBack;
+    default:
+      return '';
+  }
+}; // TODO: 카테고리 버튼 클릭하면 디테일로 넘어가게.
+// 디테일 페이지에서 info에서 3PL 풀필먼트 띄우기 - 해보고 안되면 ㄴ
 
 const Category = ({ warehouses, category }) => {
   return (
     <>
-      <MainTitleContainer>
-        <MainTitle>{categoryNameDict(category)} 리스트</MainTitle>
-      </MainTitleContainer>
+      <UpperImageContainer>
+        <UpperImage src={returnBackImage(category)} />
+        <UpperImageTextContainer>
+          <UpperImageTitleText>
+            {categoryTitleDict(category)}
+          </UpperImageTitleText>
+          <UpperImageDescText>
+            {categorySubTitleDict(category)}
+            <br />
+            <br />
+            {categoryDescDict(category)}
+          </UpperImageDescText>
+          <UpperImageWarningText>
+            *주력 품목 이외에도, 각각의 창고들은 다양한 전문 분야가 있습니다.
+            창고를 클릭하여 상세정보를 확인해 보세요.
+          </UpperImageWarningText>
+        </UpperImageTextContainer>
+      </UpperImageContainer>
       <Container>
         <ItemContainer>
-          {warehouses.map((warehouse, index) => (
-            <ItemWrapper key={index}>
-              <Item
-                onClick={() =>
-                  (window.location.href = `/warehouses/detail/${warehouse.warehouseId}`)
-                }
-              >
-                <Image bgImage={warehouse.mainImageUrl}></Image>
-                <InformationWrapper>
-                  <LinkToDetailPage
-                    href={`/warehouses/detail${warehouse.warehouseId}`}
-                  >
-                    <Address>{warehouse.address}</Address>
-                    <Name>
-                      <div>{warehouse.name}</div>
-                    </Name>
-                  </LinkToDetailPage>
-                  <StickerContainer>
-                    <StickerWrapper>
-                      <Stickers>
-                        <Sticker>
-                          {conditionDict(warehouse.warehouseCondition[0])}
-                        </Sticker>
-                        <Sticker>{typesDict(warehouse.warehouseType)}</Sticker>
-                      </Stickers>
-                    </StickerWrapper>
-                  </StickerContainer>
-                  <AdditionInformationWrapper>
-                    <MonthlyMinimumExports>
-                      <InfoTitle>월 최소 출고량</InfoTitle>
-                      <br />
-                      <MinReleaseValue>
-                        {warehouse.minReleasePerMonth}
-                      </MinReleaseValue>
-                    </MonthlyMinimumExports>
-                    <AdditionalInfo>
-                      <InfoTitle>평수</InfoTitle>
-                      <br />
-                      <InfoValue>{warehouse.totalArea}</InfoValue>
-                    </AdditionalInfo>
-                    <AdditionalInfo>
-                      <InfoTitle>택배사</InfoTitle>
-                      <br />
-                      <InfoValue>
-                        {convertDeliveryTypes(warehouse.deliveryTypes)}
-                      </InfoValue>
-                    </AdditionalInfo>
-                  </AdditionInformationWrapper>
-                </InformationWrapper>
-              </Item>
-            </ItemWrapper>
+          {warehouses.map((houseDetail, index) => (
+            <HouseContainer key={index}>
+              <Image src={houseDetail.mainImageUrl} alt="HouseImage image" />
+              <Desc>
+                <HouseNameText>{houseDetail.name}</HouseNameText>
+                <HouseLocationText>{houseDetail.address}</HouseLocationText>
+                <TagContainer>
+                  {houseDetail.warehouseCondition.map((condition) => (
+                    <TagBox key={condition}>{conditionDict(condition)}</TagBox>
+                  ))}
+                </TagContainer>
+                <AdditionInformationWrapper>
+                  <MonthlyMinimumExports>
+                    <InfoTitle>월 최소 출고량</InfoTitle>
+                    <MinReleaseValue>
+                      {houseDetail.minReleasePerMonth}
+                    </MinReleaseValue>
+                  </MonthlyMinimumExports>
+                  <AdditionalInfo>
+                    <InfoTitle>평수</InfoTitle>
+                    <InfoValue>{houseDetail.landArea}</InfoValue>
+                  </AdditionalInfo>
+                  <AdditionalInfo>
+                    <InfoTitle>주력 제품</InfoTitle>
+                    {/* TODO: 주력 제품을 주 서비스 / 도매 물류 대행/소매물류 대행 변경 */}
+                    <InfoValue>
+                      {categoryDict(houseDetail.mainItemType)}
+                    </InfoValue>
+                  </AdditionalInfo>
+                </AdditionInformationWrapper>
+                <DeliveryTypesWrapper>
+                  <DeliveryTypesTitle>사용 택배사</DeliveryTypesTitle>
+                  <DeliveryTypesListText>
+                    {returnDeliveryTypes(houseDetail.deliveryTypes)}
+                  </DeliveryTypesListText>
+                </DeliveryTypesWrapper>
+                <ButtonWrapper>
+                  <RequestInquireButton>견적 문의</RequestInquireButton>
+                  <RequestTourButton>투어 신청</RequestTourButton>
+                </ButtonWrapper>
+              </Desc>
+            </HouseContainer>
           ))}
         </ItemContainer>
       </Container>

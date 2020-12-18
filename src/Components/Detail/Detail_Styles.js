@@ -73,7 +73,6 @@ export const TagContainer = styled.div`
   margin-top: 20px;
   margin-left: 20px;
 `;
-
 export const TagBox = styled.div`
   padding: 8px 8px 8px 8px;
   margin-right: 10px;
