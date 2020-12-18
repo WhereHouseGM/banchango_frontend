@@ -62,7 +62,7 @@ const Category = ({ warehouses, category }) => {
                 <Image bgImage={warehouse.mainImageUrl}></Image>
                 <InformationWrapper>
                   <LinkToDetailPage
-                    href={`/warehouses/${warehouse.warehouseId}`}
+                    href={`/warehouses/detail${warehouse.warehouseId}`}
                   >
                     <Address>{warehouse.address}</Address>
                     <Name>
