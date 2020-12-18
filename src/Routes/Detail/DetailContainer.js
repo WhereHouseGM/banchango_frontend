@@ -65,8 +65,7 @@ class DetailContainer extends React.Component {
     } = this.props;
     try {
       const result = await warehouseApi.houseDetail(id);
-      const houseDetail = result.data;
-      const { status } = result;
+      const { data: houseDetail, status } = result;
       if (status !== 200) {
         throw new Error();
       }
