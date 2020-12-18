@@ -23,81 +23,11 @@ import {
   MinReleaseValue,
   AdditionalInfo,
 } from './Category_Styles';
-
-const Categories = {
-  CLOTH: 'CLOTH',
-  COSMETIC: 'COSMETIC',
-  FURNITURE: 'FURNITURE',
-  GENERAL: 'GENERAL_MERCHANDISE',
-  FOOD: 'TEMPERATURE_SENSITIVE',
-  JEWELRY: 'ACCESSORY',
-};
-
-const WarehouseConditions = {
-  ROOM_TEMPERATURE: 'ROOM_TEMPERATURE',
-  LOW_TEMPERATURE: 'LOW_TEMPERATURE',
-  BONDED: 'BONDED',
-  SAVAGE: 'SAVAGE',
-  HAZARDOUS: 'HAZARDOUS',
-  SELF_STORAGE: 'SELF_STORAGE',
-  CONTAINER: 'CONTAINER',
-};
-
-const WarehouseTypes = {
-  THREEPL: 'THREEPL',
-  FULFILLMENT: 'FULFILLMENT',
-};
-
-const types = (warehouseType) => {
-  switch (warehouseType) {
-    case WarehouseTypes.THREEPL:
-      return '3PL';
-    case WarehouseTypes.FULFILLMENT:
-      return '풀필먼트';
-    default:
-      return '';
-  }
-};
-
-const condition = (warehouseCondition) => {
-  switch (warehouseCondition) {
-    case WarehouseConditions.ROOM_TEMPERATURE:
-      return '상온창고';
-    case WarehouseConditions.LOW_TEMPERATURE:
-      return '저온창고';
-    case WarehouseConditions.BONDED:
-      return '보세창고';
-    case WarehouseConditions.SAVAGE:
-      return '야외창고';
-    case WarehouseConditions.HAZARDOUS:
-      return '위험창고';
-    case WarehouseConditions.SELF_STORAGE:
-      return '셀프창고';
-    case WarehouseConditions.CONTAINER:
-      return '컨테이너';
-    default:
-      return '';
-  }
-};
-
-const categoryName = (category) => {
-  switch (category.toString().toUpperCase()) {
-    case Categories.CLOTH:
-      return '의류 창고 ';
-    case Categories.COSMETIC:
-      return '화장품 창고 ';
-    case Categories.FURNITURE:
-      return '가구 창고 ';
-    case Categories.GENERAL:
-      return '잡화 창고 ';
-    case Categories.FOOD:
-      return '식품 창고 ';
-    case Categories.JEWELRY:
-      return '악세사리 창고 ';
-    default:
-      return '';
-  }
-};
+import {
+  typesDict,
+  conditionDict,
+  categoryNameDict,
+} from './../../static/category';
 
 const convertDeliveryTypes = (deliveryTypes) => {
   let size = deliveryTypes.length;
@@ -118,7 +48,7 @@ const Category = ({ warehouses, category }) => {
   return (
     <>
       <MainTitleContainer>
-        <MainTitle>{categoryName(category)} 리스트</MainTitle>
+        <MainTitle>{categoryNameDict(category)} 리스트</MainTitle>
       </MainTitleContainer>
       <Container>
         <ItemContainer>
@@ -126,7 +56,7 @@ const Category = ({ warehouses, category }) => {
             <ItemWrapper key={index}>
               <Item
                 onClick={() =>
-                  (window.location.href = `/warehouses/${warehouse.warehouseId}`)
+                  (window.location.href = `/warehouses/detail/${warehouse.warehouseId}`)
                 }
               >
                 <Image bgImage={warehouse.mainImageUrl}></Image>
@@ -143,9 +73,9 @@ const Category = ({ warehouses, category }) => {
                     <StickerWrapper>
                       <Stickers>
                         <Sticker>
-                          {condition(warehouse.warehouseCondition[0])}
+                          {conditionDict(warehouse.warehouseCondition[0])}
                         </Sticker>
-                        <Sticker>{types(warehouse.warehouseType)}</Sticker>
+                        <Sticker>{typesDict(warehouse.warehouseType)}</Sticker>
                       </Stickers>
                     </StickerWrapper>
                   </StickerContainer>
