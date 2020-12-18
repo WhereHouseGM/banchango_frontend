@@ -13,6 +13,7 @@ import Category from '../Routes/Category';
 import Message from '../Components/Message';
 import Admin from '../Routes/Admin';
 import SiteRule from '../Routes/SiteRule';
+import PrivacyPolicy from '../Routes/PrivacyPolicy';
 
 const BadAccessText = '잘못된 접근입니다.';
 
@@ -44,6 +45,7 @@ const RouterComponent = () => {
           <Route path="/category/:type" sensitive={true} component={Category} />
           <Route path="/warehouses/detail/:id" component={Detail} />
           <Route path="/service-agreements" component={SiteRule} />
+          <Route path="/privacy-policy" component={PrivacyPolicy} />
           <Redirect path="*" to="/" />
         </Switch>
       </>

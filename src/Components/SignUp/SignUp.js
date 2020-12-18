@@ -103,8 +103,11 @@ const SignUp = ({ handleSubmit, handleInput, handlePasswordInput }) => {
 
             <RegisterButton onClick={handleSubmit}>회원 가입</RegisterButton>
             <TextBottomContainer>
-              <TextBottom>이용 약관 </TextBottom>|
-              <TextBottom> 개인 정보 처리 방침</TextBottom>
+              <TextBottom href="/service-agreements">이용 약관 </TextBottom>|
+              <TextBottom href="/privacy-policy">
+                {' '}
+                개인 정보 처리 방침
+              </TextBottom>
             </TextBottomContainer>
           </TextContainer>
         </SignUpContainer>

@@ -32,8 +32,12 @@ const UsageInformation = styled.a`
 const Footer = () => (
   <Container>
     <Header1>
-      <UsageInformation href="/">이용 약관 </UsageInformation>|
-      <UsageInformation href="/"> 개인정보취급방침</UsageInformation>
+      <UsageInformation href="/service-agreements">이용 약관 </UsageInformation>
+      |
+      <UsageInformation href="/privacy-policy">
+        {' '}
+        개인정보취급방침
+      </UsageInformation>
     </Header1>
     <Header2>(주) 반창고 | 대표 최윤석</Header2>
     <Header2>wherehousegm@gmail.com</Header2>
