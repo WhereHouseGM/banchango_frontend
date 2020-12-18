@@ -44,6 +44,7 @@ const RouterComponent = () => {
           <Route path="/category/:type" sensitive={true} component={Category} />
           <Route path="/warehouses/detail/:id" component={Detail} />
           <Route path="/service-agreements" component={SiteRule} />
+          <Route path="/privacy-policy" component={null} />
           <Redirect path="*" to="/" />
         </Switch>
       </>

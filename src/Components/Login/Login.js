@@ -62,8 +62,12 @@ const Login = ({
                   로그인 화면으로 돌아가기
                 </ToLoginText>
                 <TextBottomContainer>
-                  <TextBottom>이용 약관 </TextBottom>|
-                  <TextBottom> 개인 정보 처리 방침</TextBottom>
+                  <TextBottom href="/service-agreements">이용 약관 </TextBottom>
+                  |
+                  <TextBottom href="/privacy-policy">
+                    {' '}
+                    개인 정보 처리 방침
+                  </TextBottom>
                 </TextBottomContainer>
               </>
             ) : (
@@ -94,8 +98,12 @@ const Login = ({
                   회원 가입
                 </RegisterButton>
                 <TextBottomContainer>
-                  <TextBottom>이용 약관 </TextBottom>|
-                  <TextBottom> 개인 정보 처리 방침</TextBottom>
+                  <TextBottom href="/service-agreements">이용 약관 </TextBottom>
+                  |
+                  <TextBottom href="/privacy-policy">
+                    {' '}
+                    개인 정보 처리 방침
+                  </TextBottom>
                 </TextBottomContainer>
               </>
             )}
