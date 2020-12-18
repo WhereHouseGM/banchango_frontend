@@ -124,13 +124,3 @@ export const CheckBoxTypes = [
     children: ' 주차',
   },
 ];
-
-export const dayOfWeek = [
-  { id: '0', value: '월' },
-  { id: '1', value: '화' },
-  { id: '2', value: '수' },
-  { id: '3', value: '목' },
-  { id: '4', value: '금' },
-  { id: '5', value: '토' },
-  { id: '6', value: '일' },
-];

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { dayOfWeek } from '../../static/admin';
+import { dayOfWeek, conditionDict, categoryDict } from '../../static/detail';
 import {
   Container,
   HouseContainer,
@@ -41,65 +41,6 @@ import {
   ExtraDescMapTitle,
 } from './Detail_Styles';
 
-const WarehouseConditions = {
-  ROOM_TEMPERATURE: 'ROOM_TEMPERATURE',
-  LOW_TEMPERATURE: 'LOW_TEMPERATURE',
-  BONDED: 'BONDED',
-  SAVAGE: 'SAVAGE',
-  HAZARDOUS: 'HAZARDOUS',
-  SELF_STORAGE: 'SELF_STORAGE',
-  CONTAINER: 'CONTAINER',
-};
-
-const conditionDic = (warehouseCondition) => {
-  switch (warehouseCondition) {
-    case WarehouseConditions.ROOM_TEMPERATURE:
-      return '상온창고';
-    case WarehouseConditions.LOW_TEMPERATURE:
-      return '저온창고';
-    case WarehouseConditions.BONDED:
-      return '보세창고';
-    case WarehouseConditions.SAVAGE:
-      return '야외창고';
-    case WarehouseConditions.HAZARDOUS:
-      return '위험창고';
-    case WarehouseConditions.SELF_STORAGE:
-      return '셀프창고';
-    case WarehouseConditions.CONTAINER:
-      return '컨테이너';
-    default:
-      return '';
-  }
-};
-
-const Categories = {
-  CLOTH: 'CLOTH',
-  COSMETIC: 'COSMETIC',
-  FURNITURE: 'FURNITURE',
-  GENERAL: 'GENERAL_MERCHANDISE',
-  FOOD: 'TEMPERATURE_SENSITIVE',
-  JEWELRY: 'ACCESSORY',
-};
-
-const categoryDic = (category) => {
-  switch (category.toString().toUpperCase()) {
-    case Categories.CLOTH:
-      return '의류 창고 ';
-    case Categories.COSMETIC:
-      return '화장품 창고 ';
-    case Categories.FURNITURE:
-      return '가구 창고 ';
-    case Categories.GENERAL:
-      return '잡화 창고 ';
-    case Categories.FOOD:
-      return '식품 창고 ';
-    case Categories.JEWELRY:
-      return '악세사리 창고 ';
-    default:
-      return '';
-  }
-};
-
 const convertNewLine = (originalText) => {
   return originalText.split('\r').map((line, index) => {
     return (
@@ -135,6 +76,16 @@ const returnDayBox = (originalDay) => {
     return null;
   });
 };
+
+const returnDeliveryTypes = (deliveryTypes) => {
+  return deliveryTypes.map((typeName, index) => {
+    if (deliveryTypes.length - 1 !== index) {
+      return typeName + ', ';
+    } else {
+      return typeName;
+    }
+  });
+};
 const Detail = ({ houseDetail, houseInfosArr }) => {
   useEffect(() => {
     const script = document.createElement('script');
@@ -167,9 +118,7 @@ const Detail = ({ houseDetail, houseInfosArr }) => {
           <HouseLocationText>{houseDetail.address}</HouseLocationText>
           <TagContainer>
             {houseDetail.warehouseCondition.map((condition) => (
-              <TagBox key={condition}>
-                {conditionDic(WarehouseConditions[condition])}
-              </TagBox>
+              <TagBox key={condition}>{conditionDict(condition)}</TagBox>
             ))}
           </TagContainer>
           <AdditionInformationWrapper>
@@ -186,19 +135,14 @@ const Detail = ({ houseDetail, houseInfosArr }) => {
             <AdditionalInfo>
               <InfoTitle>주력 제품</InfoTitle>
               <InfoValue>
-                {categoryDic(
-                  Categories[houseDetail.agencyDetails.mainItemType],
-                )}
+                {categoryDict(houseDetail.agencyDetails.mainItemType)}
               </InfoValue>
             </AdditionalInfo>
           </AdditionInformationWrapper>
           <DeliveryTypesWrapper>
             <DeliveryTypesTitle>사용 택배사</DeliveryTypesTitle>
             <DeliveryTypesListText>
-              {houseDetail.agencyDetails.deliveryTypes.map((typeName) => {
-                return typeName + ', ';
-                // TODO: 겹치는 dic 빼고, 택배 마지막 , 빼고 스타일 빼고.
-              })}
+              {returnDeliveryTypes(houseDetail.agencyDetails.deliveryTypes)}
             </DeliveryTypesListText>
           </DeliveryTypesWrapper>
           <ButtonWrapper>
