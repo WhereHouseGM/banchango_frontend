@@ -38,12 +38,12 @@ import {
 } from './../../static/category';
 import { Categories } from './../../static/globalVariables';
 
-import clothBack from './../../assets/images/background/CLOTH.png';
-import cosmeticBack from './../../assets/images/background/COSMETIC.png';
-import foodBack from './../../assets/images/background/FOOD.png';
-import furnitureBack from './../../assets/images/background/FURNITURE.png';
-import jewelryBack from './../../assets/images/background/JEWELRY.png';
-import generalBack from './../../assets/images/background/GENERAL.png';
+import clothBgImage from './../../assets/images/background/CLOTH.png';
+import cosmeticBgImage from './../../assets/images/background/COSMETIC.png';
+import foodBgImage from './../../assets/images/background/FOOD.png';
+import furnitureBgImage from './../../assets/images/background/FURNITURE.png';
+import jewelryBgImage from './../../assets/images/background/JEWELRY.png';
+import generalBgImage from './../../assets/images/background/GENERAL.png';
 
 const returnDeliveryTypes = (deliveryTypes) => {
   return deliveryTypes.map((typeName, index) => {
@@ -55,20 +55,20 @@ const returnDeliveryTypes = (deliveryTypes) => {
   });
 };
 
-const returnBackImage = (category) => {
+const returnBgImage = (category) => {
   switch (category) {
     case Categories.CLOTH:
-      return clothBack;
+      return clothBgImage;
     case Categories.COSMETIC:
-      return cosmeticBack;
+      return cosmeticBgImage;
     case Categories.FURNITURE:
-      return furnitureBack;
+      return furnitureBgImage;
     case Categories.GENERAL:
-      return generalBack;
+      return generalBgImage;
     case Categories.FOOD:
-      return foodBack;
+      return foodBgImage;
     case Categories.JEWELRY:
-      return jewelryBack;
+      return jewelryBgImage;
     default:
       return '';
   }
@@ -78,7 +78,7 @@ const Category = ({ warehouses, category }) => {
   return (
     <>
       <UpperImageContainer>
-        <UpperImage src={returnBackImage(category)} />
+        <UpperImage src={returnBgImage(category)} />
         <UpperImageTextContainer>
           <UpperImageTitleText>
             {categoryTitleDict(category)}
