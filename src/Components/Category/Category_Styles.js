@@ -124,6 +124,11 @@ export const HouseContainer = styled.div`
   background-color: #fff;
   box-shadow: rgba(136, 136, 136, 0.3) 0px 0px 15px;
   transition: 0.2s ease;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  &:hover {
+    transform: translateZ(0) scale(0.98);
+  }
   @media screen and (max-width: 1000px) {
     height: auto;
     width: 330px;

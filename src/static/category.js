@@ -80,12 +80,12 @@ export const categoryDescDict = (category) => {
   }
 };
 
-export const typesDict = (warehouseType) => {
+export const typesDetailDict = (warehouseType) => {
   switch (warehouseType) {
     case WarehouseTypes.THREEPL:
-      return '3PL';
+      return '도매 물류 대행';
     case WarehouseTypes.FULFILLMENT:
-      return '풀필먼트';
+      return '소매 물류 대행';
     default:
       return '';
   }

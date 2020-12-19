@@ -4,8 +4,6 @@ import {
   UpperImage,
   UpperImageTextContainer,
   UpperImageTitleText,
-  MainTitleContainer,
-  MainTitle,
   Container,
   ItemContainer,
   Image,
@@ -33,10 +31,10 @@ import {
 } from './Category_Styles';
 import {
   conditionDict,
-  categoryDict,
   categoryTitleDict,
   categorySubTitleDict,
   categoryDescDict,
+  typesDetailDict,
 } from './../../static/category';
 import { Categories } from './../../static/globalVariables';
 
@@ -74,8 +72,7 @@ const returnBackImage = (category) => {
     default:
       return '';
   }
-}; // TODO: 카테고리 버튼 클릭하면 디테일로 넘어가게.
-// 디테일 페이지에서 info에서 3PL 풀필먼트 띄우기 - 해보고 안되면 ㄴ
+};
 
 const Category = ({ warehouses, category }) => {
   return (
@@ -101,7 +98,12 @@ const Category = ({ warehouses, category }) => {
       <Container>
         <ItemContainer>
           {warehouses.map((houseDetail, index) => (
-            <HouseContainer key={index}>
+            <HouseContainer
+              key={index}
+              onClick={() => {
+                window.location.href = `/warehouses/detail/${houseDetail.warehouseId}`;
+              }}
+            >
               <Image src={houseDetail.mainImageUrl} alt="HouseImage image" />
               <Desc>
                 <HouseNameText>{houseDetail.name}</HouseNameText>
@@ -120,13 +122,12 @@ const Category = ({ warehouses, category }) => {
                   </MonthlyMinimumExports>
                   <AdditionalInfo>
                     <InfoTitle>평수</InfoTitle>
-                    <InfoValue>{houseDetail.landArea}</InfoValue>
+                    <InfoValue>{houseDetail.totalArea}</InfoValue>
                   </AdditionalInfo>
                   <AdditionalInfo>
-                    <InfoTitle>주력 제품</InfoTitle>
-                    {/* TODO: 주력 제품을 주 서비스 / 도매 물류 대행/소매물류 대행 변경 */}
+                    <InfoTitle>주 서비스</InfoTitle>
                     <InfoValue>
-                      {categoryDict(houseDetail.mainItemType)}
+                      {typesDetailDict(houseDetail.warehouseType)}
                     </InfoValue>
                   </AdditionalInfo>
                 </AdditionInformationWrapper>
