@@ -16,7 +16,7 @@ export const ContainerHeader = styled.h1`
 `;
 
 export const ItemContainer = styled.div`
-  width: 31%;
+  width: 310px;
   height: 130px;
   margin: 5px 10px;
   display: flex;
