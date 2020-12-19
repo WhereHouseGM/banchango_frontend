@@ -5,8 +5,9 @@ const SiteRulePresenter = () => {
   return (
     <>
       <Navbar />
-      <embed
+      <iframe
         src="https://warehouse-documents-bucket.s3.ap-northeast-2.amazonaws.com/Service-Agreements.pdf"
+        title="Service Agreements"
         type="application/pdf"
         scrolling="auto"
         frameBorder="0"
