@@ -48,7 +48,7 @@ const MyPage = ({ userInfo, handleSubmit }) => {
         className={'checkPWModal'}
         onClose={closeCheckModal}
         visible={checkModalShow}
-        handleSubmit={handleSubmit} // TODO: Container로 다 빼기.
+        handleSubmit={handleSubmit}
         getUserInfo={getUserInfo}
       />
       <ChangePWModal
