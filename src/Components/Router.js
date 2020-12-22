@@ -43,10 +43,10 @@ const RouterComponent = () => {
               isAdminLogin ? Admin : () => <Message text={BadAccessText} />
             }
           />
-          <MyPage
+          <Route
             path="/mypage"
             component={
-              isLogin ? () => MyPage : <Message text={BadAccessText} />
+              isLogin ? MyPage : () => <Message text={BadAccessText} />
             }
           />
           <Route path="/category/:type" sensitive={true} component={Category} />

@@ -11,15 +11,14 @@ const DetailPresenter = ({ userInfo, handleSubmit, error, loading }) => (
       <title>반창고 | 마이페이지</title>
     </Helmet>
     <Navbar />
-    {loading ? null : (
-      <>
-        {error ? (
+    {loading ? null : 
+        error ? (
           <Message text={error} />
         ) : (
           <MyPage userInfo={userInfo} handleSubmit={handleSubmit} />
-        )}
-      </>
-    )}
+        )
+      
+    }
     <MainFooter />
   </>
 );
