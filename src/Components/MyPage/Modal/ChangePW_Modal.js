@@ -12,7 +12,6 @@ import { message } from 'antd';
 import sha256 from 'crypto';
 
 export const ChangePWModal = ({
-  className,
   onClose,
   visible,
   handleSubmit,
@@ -22,7 +21,7 @@ export const ChangePWModal = ({
   const [newPW, setNewPW] = useState('');
   const [checkNewPW, setCheckNewPW] = useState('');
 
-  const confirmClicked = async () => {
+  const confirmClicked = () => {
     if (checkNewPW !== newPW) {
       setCheckNewPW('');
       message.destroy();
@@ -49,12 +48,7 @@ export const ChangePWModal = ({
   return (
     <>
       <ModalOverlay visible={visible} />
-      <ModalWrapper
-        className={className}
-        onClick={onMaskClick}
-        tabIndex="-1"
-        visible={visible}
-      >
+      <ModalWrapper onClick={onMaskClick} tabIndex="-1" visible={visible}>
         <ModalInner tabIndex="0" className="modal-inner">
           <PWTitleText>비밀번호 확인</PWTitleText>
           <PWInputBox

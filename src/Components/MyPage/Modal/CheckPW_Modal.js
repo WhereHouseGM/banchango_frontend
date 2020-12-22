@@ -12,7 +12,6 @@ import { message } from 'antd';
 import sha256 from 'crypto';
 
 export const CheckPWModal = ({
-  className,
   onClose,
   visible,
   handleSubmit,
@@ -36,7 +35,6 @@ export const CheckPWModal = ({
     <>
       <ModalOverlay visible={visible} />
       <ModalWrapper
-        className={className}
         onClick={onMaskClick}
         tabIndex="-1"
         visible={visible}
