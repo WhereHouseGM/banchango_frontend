@@ -16,22 +16,22 @@ class MyPageContainer extends React.Component {
     };
     await userApi
       .signIn(reqBody)
-      .then(() => {
+      .then(async () => {
         closeModalFunc();
-      await userApi
-        .setUserInfo(
-          localStorage.getItem('userId'),
-          targetInfo,
-          localStorage.getItem('AccessToken'),
-        )
-        .then(() => {
-          message.destroy();
-          message.success('정보 변경에 성공했습니다.');
-        })
-        .catch(() => {
-          message.destroy();
-          message.error('수정 정보 형식이 잘못되었습니다.');
-        });
+        await userApi
+          .setUserInfo(
+            localStorage.getItem('userId'),
+            targetInfo,
+            localStorage.getItem('AccessToken'),
+          )
+          .then(() => {
+            message.destroy();
+            message.success('정보 변경에 성공했습니다.');
+          })
+          .catch(() => {
+            message.destroy();
+            message.error('수정 정보 형식이 잘못되었습니다.');
+          });
       })
       .catch(() => {
         message.destroy();

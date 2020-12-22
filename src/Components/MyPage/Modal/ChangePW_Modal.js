@@ -21,7 +21,7 @@ export const ChangePWModal = ({
   const [newPW, setNewPW] = useState('');
   const [checkNewPW, setCheckNewPW] = useState('');
 
-  const confirmClicked = async () => {
+  const confirmClicked = () => {
     if (checkNewPW !== newPW) {
       setCheckNewPW('');
       message.destroy();
