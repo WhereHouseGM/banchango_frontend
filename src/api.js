@@ -8,6 +8,19 @@ export const userApi = {
   signIn: (body) => api.post('users/sign-in', body),
   signUp: (body) => api.post('users/sign-up', body),
   requestEmail: (body) => api.post('users/password-lost', body),
+  getUserInfo: (userId, token) =>
+    api.get(`users/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
+  setUserInfo: (userId, body, token) =>
+    api.patch(`users/${userId}`, body, {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }),
 };
 
 export const warehouseApi = {
