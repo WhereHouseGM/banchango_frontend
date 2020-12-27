@@ -114,6 +114,11 @@ class SignUpContainer extends React.Component {
       }
     }
 
+    if (type === null) {
+      alert('업종을 선택해 주세요.');
+      return;
+    }
+
     if (!regEx.email.test(email)) {
       alert('이메일 형식이 올바르지 않습니다.');
       return;
