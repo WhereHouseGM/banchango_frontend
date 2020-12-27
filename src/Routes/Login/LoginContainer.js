@@ -30,13 +30,14 @@ class LoginContainer extends React.Component {
 
   saveToken = (
     tokenSet,
-    { telephoneNumber, phoneNumber, name, email, userId, type },
+    { telephoneNumber, phoneNumber, name, email, userId, type, role },
     isAdmin,
   ) => {
     localStorage.setItem('AccessToken', tokenSet.AccessToken);
     localStorage.setItem('RefreshToken', tokenSet.RefreshToken);
     localStorage.setItem('Login', true);
     localStorage.setItem('Name', name);
+    localStorage.setItem('Role', role);
     localStorage.setItem('PhoneNumber', phoneNumber);
     localStorage.setItem('TelephoneNumber', telephoneNumber);
     localStorage.setItem('Email', email);
@@ -125,7 +126,7 @@ class LoginContainer extends React.Component {
         data: { refreshToken },
       } = result;
       const {
-        data: { User },
+        data: { user },
       } = result;
       const tokenSet = {
         AccessToken: accessToken,
@@ -136,9 +137,9 @@ class LoginContainer extends React.Component {
         result.data.isAdmin !== null &&
         result.data.isAdmin === true
       ) {
-        this.saveToken(tokenSet, User, true);
+        this.saveToken(tokenSet, user, true);
       } else {
-        this.saveToken(tokenSet, User, false);
+        this.saveToken(tokenSet, user, false);
       }
       window.location.replace('/');
     } catch {
