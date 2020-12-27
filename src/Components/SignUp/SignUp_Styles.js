@@ -34,7 +34,7 @@ export const SignUpContainer = styled.div`
   width: 375px;
   border-radius: 15px;
   overflow: hidden;
-  margin-top: 200px;
+  margin-top: 150px;
 `;
 
 export const ImageContainer = styled.div`
@@ -109,6 +109,23 @@ export const Input = styled.input`
     background-color: lightgray;
     border-bottom: 3px solid #1d489b;
   }
+`;
+
+export const RadioButtonContainer = styled.span`
+  margin-top: 10px;
+  display: flex;
+  width: 73%;
+`;
+
+export const RadioButton = styled.input`
+  margin: 0 10px;
+  align-self: flex-start;
+`;
+
+export const RadioButtonLabel = styled.label`
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 16px;
+  color: black;
 `;
 
 export const RegisterButton = styled.button`

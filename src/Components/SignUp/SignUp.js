@@ -17,6 +17,9 @@ import {
   RegisterButton,
   TextBottomContainer,
   TextBottom,
+  RadioButton,
+  RadioButtonLabel,
+  RadioButtonContainer,
 } from './SignUp_Styles';
 
 const SignUp = ({ handleSubmit, handleInput, handlePasswordInput }) => {
@@ -45,10 +48,10 @@ const SignUp = ({ handleSubmit, handleInput, handlePasswordInput }) => {
             />
             <InputTitle>성함</InputTitle>
             <Input
-              id="realName"
-              type="realName"
+              id="name"
+              type="name"
               placeholder="홍길동"
-              name="realName"
+              name="name"
               onChange={handleInput}
               required
             />
@@ -73,34 +76,34 @@ const SignUp = ({ handleSubmit, handleInput, handlePasswordInput }) => {
             <RePasswordText id="rePasswordText">
               비밀번호가 다릅니다.
             </RePasswordText>
-            <InputTitle>유선전화 번호</InputTitle>
-            <Input
-              id="telephoneNumber"
-              type="telephoneNumber"
-              placeholder="02-123-4567"
-              name="telephoneNumber"
-              onChange={handleInput}
-              required
-            />
             <InputTitle>휴대전화 번호</InputTitle>
             <Input
               id="phoneNumber"
-              type="phoneNumber"
+              type="text"
               placeholder="010-1234-5678"
               name="phoneNumber"
               onChange={handleInput}
               required
             />
-            <InputTitle>회사명</InputTitle>
-            <Input
-              id="companyName"
-              type="companyName"
-              placeholder="회사명"
-              name="companyName"
-              onChange={handleInput}
-              required
-            />
-
+            <InputTitle>업종 선택</InputTitle>
+            <RadioButtonContainer>
+              <RadioButton
+                id="SHIPPER"
+                type="radio"
+                value="SHIPPER"
+                name="userType"
+                onChange={handleInput}
+              />
+              <RadioButtonLabel htmlFor="SHIPPER">화주</RadioButtonLabel>
+              <RadioButton
+                id="OWNER"
+                type="radio"
+                value="OWNER"
+                name="userType"
+                onChange={handleInput}
+              />
+              <RadioButtonLabel htmlFor="OWNER">창고주</RadioButtonLabel>
+            </RadioButtonContainer>
             <RegisterButton onClick={handleSubmit}>회원 가입</RegisterButton>
             <TextBottomContainer>
               <TextBottom href="/service-agreements">이용 약관 </TextBottom>|
