@@ -5,16 +5,14 @@ import { userApi } from '../../api';
 
 const InputType = {
   EMAIL: 'email',
-  REALNAME: 'realName',
+  NAME: 'name',
   PASSWORD: 'password',
-  TELEPHONENUMBER: 'telephoneNumber',
   PHONENUMBER: 'phoneNumber',
-  COMPANYNAME: 'companyName',
+  USERTYPE: 'userType',
 };
 
 const regEx = {
   email: /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9]+/,
-  telephoneNumber: /^\d{2,3}-\d{3,4}-\d{4}$/,
   phoneNumber: /^\d{2,3}-\d{3,4}-\d{4}$/,
 };
 
@@ -23,11 +21,9 @@ class SignUpContainer extends React.Component {
     super(props);
     this.state = {
       email: '',
-      realName: '',
+      name: '',
       password: '',
-      type: 'OWNER',
-      telephoneNumber: '',
-      companyName: '',
+      type: null,
       phoneNumber: '',
     };
   }
@@ -82,8 +78,8 @@ class SignUpContainer extends React.Component {
       case InputType.EMAIL:
         this.setState({ email: trimmedValue });
         return;
-      case InputType.REALNAME:
-        this.setState({ realName: trimmedValue });
+      case InputType.NAME:
+        this.setState({ name: trimmedValue });
         return;
       case InputType.PASSWORD:
         let rePasswordValue = document.getElementById('rePassword').value;
@@ -96,14 +92,11 @@ class SignUpContainer extends React.Component {
           this.setState({ password: trimmedValue });
           return;
         }
-      case InputType.TELEPHONENUMBER:
-        this.setState({ telephoneNumber: trimmedValue });
-        return;
       case InputType.PHONENUMBER:
         this.setState({ phoneNumber: trimmedValue });
         return;
-      case InputType.COMPANYNAME:
-        this.setState({ companyName: trimmedValue });
+      case InputType.USERTYPE:
+        this.setState({ type: trimmedValue });
         return;
       default:
         return;
@@ -112,13 +105,7 @@ class SignUpContainer extends React.Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { email } = this.state;
-    const { realName } = this.state;
-    const { password } = this.state;
-    const { type } = this.state;
-    const { telephoneNumber } = this.state;
-    const { phoneNumber } = this.state;
-    const { companyName } = this.state;
+    const { email, name, password, type, phoneNumber } = this.state;
 
     for (let item in this.state) {
       if (this.state[item] === '') {
@@ -132,11 +119,6 @@ class SignUpContainer extends React.Component {
       return;
     }
 
-    if (!regEx.telephoneNumber.test(telephoneNumber)) {
-      alert('전화번호 형식이 올바르지 않습니다.');
-      return;
-    }
-
     if (!regEx.phoneNumber.test(phoneNumber)) {
       alert('휴대폰 번호 형식이 올바르지 않습니다.');
       return;
@@ -146,11 +128,9 @@ class SignUpContainer extends React.Component {
 
     const requestBody = {
       email: email,
-      name: realName,
+      name: name,
       password: hashCode,
       type: type,
-      telephoneNumber: telephoneNumber,
-      companyName: companyName,
       phoneNumber: phoneNumber,
     };
 
@@ -166,7 +146,6 @@ class SignUpContainer extends React.Component {
       } else if (status === 409) {
         alert('이미 존재하는 이메일입니다. 다시 확인해주세요.');
       }
-
       window.location.reload();
     }
   };
