@@ -9,27 +9,37 @@ import {
   houseTypeDict,
   cctvExistDict,
   canParkDict,
-  securityCompanyExistDict,
+  securityCompanyNameDict,
+  insuranceDict,
 } from '../../static/detail';
 
 class DetailContainer extends React.Component {
   state = {
-    houseDetail: null,
-    houseInfosArr: null,
+    warehouse: null,
+    warehouseInfo: null,
     error: null,
     loading: true,
   };
 
-  returnHouseInfosArr = (houseDetail) => {
+  getWarehouseInfosObject = ({
+    airConditioningType,
+    workerExist,
+    mainItemType,
+    warehouseType,
+    cctvExist,
+    insurance,
+    canPark,
+    securityCompanyName,
+  }) => {
     const infos = {
-      airConditioningType: houseDetail.airConditioningType,
-      workerExist: houseDetail.workerExist,
-      category: houseDetail.agencyDetails.mainItemType,
-      houseType: houseDetail.agencyDetails.warehouseType,
-      cctvExist: houseDetail.cctvExist,
-      insuranceName: houseDetail.insuranceName,
-      canPark: houseDetail.canPark,
-      securityCompanyExist: houseDetail.securityCompanyExist,
+      airConditioningType: airConditioningType,
+      workerExist: workerExist,
+      category: mainItemType,
+      houseType: warehouseType,
+      cctvExist: cctvExist,
+      insuranceName: insurance,
+      canPark: canPark,
+      securityCompanyName: securityCompanyName,
     };
 
     const infosArr = [];
@@ -41,12 +51,10 @@ class DetailContainer extends React.Component {
       categoryStr: categoryInfosDict(infos.category),
       houseTypeStr: houseTypeDict(infos.category),
       cctvExistStr: cctvExistDict(infos.cctvExist),
-      houseInfosStr: houseDetail.hasOwnProperty('insuranceName')
-        ? '📝'.concat(houseDetail.insuranceName)
-        : '',
+      houseInfosStr: insuranceDict(infos.insuranceName),
       canParkStr: canParkDict(infos.canPark),
-      securityCompanyExistStr: securityCompanyExistDict(
-        infos.securityCompanyExist,
+      securityCompanyNameStr: securityCompanyNameDict(
+        infos.securityCompanyName,
       ),
     };
     for (let key in infoStrs) {
@@ -64,14 +72,14 @@ class DetailContainer extends React.Component {
       },
     } = this.props;
     try {
-      const result = await warehouseApi.houseDetail(id);
-      const { data: houseDetail, status } = result;
+      const result = await warehouseApi.getWarehouseInfo(id);
+      const { data: warehouse, status } = result;
       if (status !== 200) {
         throw new Error();
       }
       this.setState({
-        houseDetail: houseDetail,
-        houseInfosArr: this.returnHouseInfosArr(houseDetail),
+        warehouse: warehouse,
+        warehouseInfo: this.getWarehouseInfosObject(warehouse),
         loading: false,
       });
     } catch (Error) {
@@ -82,12 +90,12 @@ class DetailContainer extends React.Component {
     }
   };
   render() {
-    const { houseDetail, houseInfosArr, error, loading } = this.state;
+    const { warehouse, warehouseInfo, error, loading } = this.state;
     return (
       <>
         <DetailPresenter
-          houseDetail={houseDetail}
-          houseInfosArr={houseInfosArr}
+          warehouse={warehouse}
+          warehouseInfo={warehouseInfo}
           error={error}
           loading={loading}
         />

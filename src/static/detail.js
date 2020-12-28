@@ -57,14 +57,7 @@ export const airConditioningTypeDict = (type) => {
   }
 };
 
-export const workerExistDict = (exist) => {
-  switch (exist) {
-    case 1:
-      return '💁포장 인력';
-    default:
-      return '';
-  }
-};
+export const workerExistDict = (exist) => (exist ? '💁포장 인력' : '');
 
 export const categoryInfosDict = (category) => {
   switch (category.toString().toUpperCase()) {
@@ -96,32 +89,14 @@ export const houseTypeDict = (type) => {
   }
 };
 
-export const cctvExistDict = (exist) => {
-  switch (exist) {
-    case 1:
-      return '📹CCTV';
-    default:
-      return '';
-  }
-};
+export const cctvExistDict = (exist) => (exist ? '📹CCTV' : '');
 
-export const canParkDict = (canPark) => {
-  switch (canPark) {
-    case 1:
-      return '🚗주차';
-    default:
-      return '';
-  }
-};
+export const canParkDict = (canPark) => (canPark ? '🚗주차' : '');
 
-export const securityCompanyExistDict = (exist) => {
-  switch (exist) {
-    case 1:
-      return '👮보안업체';
-    default:
-      return '';
-  }
-};
+export const securityCompanyNameDict = (securityCompanyName) =>
+  `👮${securityCompanyName}`;
+
+export const insuranceDict = (insurance) => `📝${insurance}`;
 
 export const dayOfWeek = [
   { id: '0', value: '월' },
