@@ -25,7 +25,7 @@ const CategoryPresenter = ({ warehouses, error, category, loading }) => (
 CategoryPresenter.propTypes = {
   warehouses: PropTypes.array,
   error: PropTypes.string,
-  category: PropTypes.string,
+  category: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
 };
 

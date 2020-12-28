@@ -86,7 +86,8 @@ const returnDeliveryTypes = (deliveryTypes) => {
     }
   });
 };
-const Detail = ({ houseDetail, houseInfosArr }) => {
+
+const Detail = ({ warehouse, warehouseInfo }) => {
   useEffect(() => {
     const script = document.createElement('script');
     script.async = true;
@@ -109,40 +110,37 @@ const Detail = ({ houseDetail, houseInfosArr }) => {
       });
     };
   }, []);
+
   return (
     <Container>
       <HouseContainer>
-        <Image src={houseDetail.mainImageUrl} alt="HouseImage image" />
+        <Image src={warehouse.mainImageUrl} alt="HouseImage image" />
         <Desc>
-          <HouseNameText>{houseDetail.name}</HouseNameText>
-          <HouseLocationText>{houseDetail.address}</HouseLocationText>
+          <HouseNameText>{warehouse.name}</HouseNameText>
+          <HouseLocationText>{warehouse.address}</HouseLocationText>
           <TagContainer>
-            {houseDetail.warehouseCondition.map((condition) => (
+            {warehouse.warehouseCondition.map((condition) => (
               <TagBox key={condition}>{conditionDict(condition)}</TagBox>
             ))}
           </TagContainer>
           <AdditionInformationWrapper>
             <MonthlyMinimumExports>
               <InfoTitle>월 최소 출고량</InfoTitle>
-              <MinReleaseValue>
-                {houseDetail.agencyDetails.minReleasePerMonth}
-              </MinReleaseValue>
+              <MinReleaseValue>{warehouse.minReleasePerMonth}</MinReleaseValue>
             </MonthlyMinimumExports>
             <AdditionalInfo>
               <InfoTitle>평수</InfoTitle>
-              <InfoValue>{houseDetail.landArea}</InfoValue>
+              <InfoValue>{warehouse.space}</InfoValue>
             </AdditionalInfo>
             <AdditionalInfo>
               <InfoTitle>주력 제품</InfoTitle>
-              <InfoValue>
-                {categoryDict(houseDetail.agencyDetails.mainItemType)}
-              </InfoValue>
+              <InfoValue>{categoryDict(warehouse.mainItemType)}</InfoValue>
             </AdditionalInfo>
           </AdditionInformationWrapper>
           <DeliveryTypesWrapper>
             <DeliveryTypesTitle>사용 택배사</DeliveryTypesTitle>
             <DeliveryTypesListText>
-              {returnDeliveryTypes(houseDetail.agencyDetails.deliveryTypes)}
+              {returnDeliveryTypes(warehouse.deliveryTypes)}
             </DeliveryTypesListText>
           </DeliveryTypesWrapper>
           <ButtonWrapper>
@@ -153,18 +151,18 @@ const Detail = ({ houseDetail, houseInfosArr }) => {
       </HouseContainer>
       <MainDescWrapper>
         <MainDescTitle>📢창고 소개</MainDescTitle>
-        <MainDescText>{convertNewLine(houseDetail.description)}</MainDescText>
+        <MainDescText>{convertNewLine(warehouse.description)}</MainDescText>
         <MainDescTitle>📢영업 시간</MainDescTitle>
         <MainDescTimeContainer>
           <MainDescWorkHourTitle>영업 시간</MainDescWorkHourTitle>
           <MainDescWorkHourText>
-            {houseDetail.openAt} ~ {houseDetail.closeAt}
+            {warehouse.openAt} ~ {warehouse.closeAt}
           </MainDescWorkHourText>
         </MainDescTimeContainer>
         <MainDescTimeContainer>
           <MainDescWorkHourTitle>영업 요일</MainDescWorkHourTitle>
           <MainDescWorkDayWrapper>
-            {returnDayBox(houseDetail.availableWeekdays)}
+            {returnDayBox(warehouse.availableWeekdays)}
           </MainDescWorkDayWrapper>
         </MainDescTimeContainer>
         <MainDescMinimumExports>
@@ -172,7 +170,7 @@ const Detail = ({ houseDetail, houseInfosArr }) => {
         </MainDescMinimumExports>
         <MainDescTitle>📢월 최소 출고량</MainDescTitle>
         <MainDescMinReleaseText>
-          - {houseDetail.agencyDetails.minReleasePerMonth}건
+          - {warehouse.minReleasePerMonth}건
         </MainDescMinReleaseText>
         <MainDescMinimumExports>
           * 월 최소 출고량은 창고측에서 희망하는 고객들의 월 출고량을
@@ -181,28 +179,28 @@ const Detail = ({ houseDetail, houseInfosArr }) => {
         <MainDescTitle>📢시설 정보</MainDescTitle>
         <MainDescInfoBox>
           <MainDescInfoFloor>
-            <MainDescInfoCard>{houseInfosArr[0]}</MainDescInfoCard>
-            <MainDescInfoCard>{houseInfosArr[1]}</MainDescInfoCard>
-            <MainDescInfoCard>{houseInfosArr[2]}</MainDescInfoCard>
-            <MainDescInfoCard>{houseInfosArr[3]}</MainDescInfoCard>
-            <MainDescInfoCard>{houseInfosArr[4]}</MainDescInfoCard>
+            <MainDescInfoCard>{warehouseInfo[0]}</MainDescInfoCard>
+            <MainDescInfoCard>{warehouseInfo[1]}</MainDescInfoCard>
+            <MainDescInfoCard>{warehouseInfo[2]}</MainDescInfoCard>
+            <MainDescInfoCard>{warehouseInfo[3]}</MainDescInfoCard>
+            <MainDescInfoCard>{warehouseInfo[4]}</MainDescInfoCard>
           </MainDescInfoFloor>
           <MainDescInfoFloor>
-            <MainDescInfoCard>{houseInfosArr[5]}</MainDescInfoCard>
-            <MainDescInfoCard>{houseInfosArr[6]}</MainDescInfoCard>
-            <MainDescInfoCard>{houseInfosArr[7]}</MainDescInfoCard>
-            <MainDescInfoCard>{houseInfosArr[8]}</MainDescInfoCard>
-            <MainDescInfoCard>{houseInfosArr[9]}</MainDescInfoCard>
+            <MainDescInfoCard>{warehouseInfo[5]}</MainDescInfoCard>
+            <MainDescInfoCard>{warehouseInfo[6]}</MainDescInfoCard>
+            <MainDescInfoCard>{warehouseInfo[7]}</MainDescInfoCard>
+            <MainDescInfoCard>{warehouseInfo[8]}</MainDescInfoCard>
+            <MainDescInfoCard>{warehouseInfo[9]}</MainDescInfoCard>
           </MainDescInfoFloor>
         </MainDescInfoBox>
-        {houseDetail.warehouseFacilityUsages.length !== 0 && (
+        {warehouse.warehouseFacilityUsages.length !== 0 && (
           <>
             <MainDescTitle>📢시설 안내</MainDescTitle>
             <MainDescText>
-              {houseDetail.warehouseFacilityUsages.map((line, index) => {
+              {warehouse.warehouseFacilityUsages.map((content, index) => {
                 return (
                   <span key={index}>
-                    • {line}
+                    • {content}
                     <br />
                   </span>
                 );
@@ -210,14 +208,14 @@ const Detail = ({ houseDetail, houseInfosArr }) => {
             </MainDescText>
           </>
         )}
-        {houseDetail.warehouseUsageCautions.length !== 0 && (
+        {warehouse.warehouseUsageCautions.length !== 0 && (
           <>
             <MainDescTitle>📢시설 이용 시 주의사항</MainDescTitle>
             <MainDescText>
-              {houseDetail.warehouseUsageCautions.map((line, index) => {
+              {warehouse.warehouseUsageCautions.map((content, index) => {
                 return (
                   <span key={index}>
-                    • {line}
+                    • {content}
                     <br />
                   </span>
                 );
@@ -235,8 +233,8 @@ const Detail = ({ houseDetail, houseInfosArr }) => {
 };
 
 Detail.propTypes = {
-  houseDetail: PropTypes.object,
-  houseInfosArr: PropTypes.array,
+  warehouse: PropTypes.object,
+  warehouseInfo: PropTypes.array,
 };
 
 export default Detail;

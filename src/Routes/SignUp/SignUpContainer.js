@@ -9,6 +9,7 @@ const InputType = {
   PASSWORD: 'password',
   PHONENUMBER: 'phoneNumber',
   USERTYPE: 'userType',
+  COMPANYNAME: 'companyName',
 };
 
 const regEx = {
@@ -25,6 +26,7 @@ class SignUpContainer extends React.Component {
       password: '',
       type: null,
       phoneNumber: '',
+      companyName: '',
     };
   }
 
@@ -98,6 +100,9 @@ class SignUpContainer extends React.Component {
       case InputType.USERTYPE:
         this.setState({ type: trimmedValue });
         return;
+      case InputType.COMPANYNAME:
+        this.setState({ companyName: trimmedValue });
+        return;
       default:
         return;
     }
@@ -105,7 +110,14 @@ class SignUpContainer extends React.Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { email, name, password, type, phoneNumber } = this.state;
+    const {
+      email,
+      name,
+      password,
+      type,
+      phoneNumber,
+      companyName,
+    } = this.state;
 
     for (let item in this.state) {
       if (this.state[item] === '') {
@@ -137,6 +149,7 @@ class SignUpContainer extends React.Component {
       password: hashCode,
       type: type,
       phoneNumber: phoneNumber,
+      companyName: companyName,
     };
 
     try {

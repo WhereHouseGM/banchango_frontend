@@ -20,7 +20,6 @@ const BadAccessText = '잘못된 접근입니다.';
 
 const RouterComponent = () => {
   const isLogin = JSON.parse(localStorage.getItem('Login'));
-  const isAdminLogin = JSON.parse(localStorage.getItem('IsAdmin'));
 
   return (
     <Router>
@@ -40,7 +39,9 @@ const RouterComponent = () => {
           <Route
             path="/admin"
             component={
-              isAdminLogin ? Admin : () => <Message text={BadAccessText} />
+              localStorage.getItem('Role') === 'ADMIN'
+                ? Admin
+                : () => <Message text={BadAccessText} />
             }
           />
           <Route

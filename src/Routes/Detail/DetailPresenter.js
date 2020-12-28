@@ -5,7 +5,7 @@ import Message from '../../Components/Message';
 import MainFooter from '../../Components/Main/MainFooter';
 import PropTypes from 'prop-types';
 
-const DetailPresenter = ({ houseDetail, houseInfosArr, error, loading }) => (
+const DetailPresenter = ({ warehouse, warehouseInfo, error, loading }) => (
   <>
     <Helmet>
       <title>반창고 | 상세페이지</title>
@@ -16,7 +16,7 @@ const DetailPresenter = ({ houseDetail, houseInfosArr, error, loading }) => (
         {error ? (
           <Message text={error} />
         ) : (
-          <Detail houseDetail={houseDetail} houseInfosArr={houseInfosArr} />
+          <Detail warehouse={warehouse} warehouseInfo={warehouseInfo} />
         )}
       </>
     )}
@@ -25,10 +25,10 @@ const DetailPresenter = ({ houseDetail, houseInfosArr, error, loading }) => (
 );
 
 DetailPresenter.propTypes = {
-  houseDetail: PropTypes.object,
-  houseInfosArr: PropTypes.array,
+  warehouse: PropTypes.object,
+  warehouseInfo: PropTypes.array,
   error: PropTypes.string,
-  loading: PropTypes.bool,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default DetailPresenter;

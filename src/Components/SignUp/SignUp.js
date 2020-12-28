@@ -85,6 +85,15 @@ const SignUp = ({ handleSubmit, handleInput, handlePasswordInput }) => {
               onChange={handleInput}
               required
             />
+            <InputTitle>회사명</InputTitle>
+            <Input
+              id="companyName"
+              type="text"
+              placeholder="없을 시에는 없음 입력"
+              name="companyName"
+              onChange={handleInput}
+              required
+            />
             <InputTitle>업종 선택</InputTitle>
             <RadioButtonContainer>
               <RadioButton
