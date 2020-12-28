@@ -44,9 +44,6 @@ class LoginContainer extends React.Component {
     localStorage.setItem('userId', userId);
     localStorage.setItem('type', type);
     localStorage.setItem('LoginFirst', true);
-    if (isAdmin) {
-      localStorage.setItem('IsAdmin', true);
-    }
   };
 
   handleInput = (event) => {
