@@ -3,7 +3,7 @@ export const Categories = {
   COSMETIC: 'COSMETIC',
   FURNITURE: 'FURNITURE',
   GENERAL: 'GENERAL_MERCHANDISE',
-  FOOD: 'TEMPERATURE_SENSITIVE',
+  FOOD: 'FOOD',
   JEWELRY: 'ACCESSORY',
 };
 
@@ -26,4 +26,5 @@ export const AirConditioningTypes = {
   HEATING: 'HEATING',
   COOLING: 'COOLING',
   BOTH: 'BOTH',
+  NONE: 'NONE'
 };

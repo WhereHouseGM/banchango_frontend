@@ -24,9 +24,16 @@ export const userApi = {
 };
 
 export const warehouseApi = {
-  itemsByType: (type) => api.get(`warehouses/agency/${type}`),
+  getByMainItemType: (type, page, size) =>
+    api.get('warehouses', {
+      params: {
+        category: `${type}`,
+        page: `${page}`,
+        size: `${size}`,
+      },
+    }),
   register: (body, token) =>
-    api.post('warehouses/agency', body, {
+    api.post('warehouses/', body, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

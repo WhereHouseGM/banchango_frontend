@@ -16,7 +16,7 @@ class CategoryContainer extends React.Component {
       },
     } = this.props;
     try {
-      const result = await warehouseApi.itemsByType(type);
+      const result = await warehouseApi.getByMainItemType(type, 0, 10);
       const { status } = result;
       if (status !== 200) {
         throw new Error();

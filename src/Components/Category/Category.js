@@ -97,19 +97,19 @@ const Category = ({ warehouses, category }) => {
       </UpperImageContainer>
       <Container>
         <ItemContainer>
-          {warehouses.map((houseDetail, index) => (
+          {warehouses.map((warehouse, index) => (
             <HouseContainer
               key={index}
               onClick={() => {
-                window.location.href = `/warehouses/detail/${houseDetail.warehouseId}`;
+                window.location.href = `/warehouses/detail/${warehouse.warehouseId}`;
               }}
             >
-              <Image src={houseDetail.mainImageUrl} alt="HouseImage image" />
+              <Image src={warehouse.mainImageUrl} alt="HouseImage image" />
               <Desc>
-                <HouseNameText>{houseDetail.name}</HouseNameText>
-                <HouseLocationText>{houseDetail.address}</HouseLocationText>
+                <HouseNameText>{warehouse.name}</HouseNameText>
+                <HouseLocationText>{warehouse.address}</HouseLocationText>
                 <TagContainer>
-                  {houseDetail.warehouseCondition.map((condition) => (
+                  {warehouse.warehouseCondition.map((condition) => (
                     <TagBox key={condition}>{conditionDict(condition)}</TagBox>
                   ))}
                 </TagContainer>
@@ -117,24 +117,24 @@ const Category = ({ warehouses, category }) => {
                   <MonthlyMinimumExports>
                     <InfoTitle>월 최소 출고량</InfoTitle>
                     <MinReleaseValue>
-                      {houseDetail.minReleasePerMonth}
+                      {warehouse.minReleasePerMonth}
                     </MinReleaseValue>
                   </MonthlyMinimumExports>
                   <AdditionalInfo>
                     <InfoTitle>평수</InfoTitle>
-                    <InfoValue>{houseDetail.totalArea}</InfoValue>
+                    <InfoValue>{warehouse.space}</InfoValue>
                   </AdditionalInfo>
                   <AdditionalInfo>
                     <InfoTitle>주 서비스</InfoTitle>
                     <InfoValue>
-                      {typesDetailDict(houseDetail.warehouseType)}
+                      {typesDetailDict(warehouse.warehouseType)}
                     </InfoValue>
                   </AdditionalInfo>
                 </AdditionInformationWrapper>
                 <DeliveryTypesWrapper>
                   <DeliveryTypesTitle>사용 택배사</DeliveryTypesTitle>
                   <DeliveryTypesListText>
-                    {returnDeliveryTypes(houseDetail.deliveryTypes)}
+                    {returnDeliveryTypes(warehouse.deliveryTypes)}
                   </DeliveryTypesListText>
                 </DeliveryTypesWrapper>
                 <ButtonWrapper>
