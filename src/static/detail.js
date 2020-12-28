@@ -99,11 +99,11 @@ export const securityCompanyNameDict = (securityCompanyName) =>
 export const insuranceDict = (insurance) => `📝${insurance}`;
 
 export const dayOfWeek = [
-  { id: '0', value: '월' },
-  { id: '1', value: '화' },
-  { id: '2', value: '수' },
-  { id: '3', value: '목' },
-  { id: '4', value: '금' },
-  { id: '5', value: '토' },
-  { id: '6', value: '일' },
+  { id: '0', value: '일' },
+  { id: '1', value: '월' },
+  { id: '2', value: '화' },
+  { id: '3', value: '수' },
+  { id: '4', value: '목' },
+  { id: '5', value: '금' },
+  { id: '6', value: '토' },
 ];
