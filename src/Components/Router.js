@@ -15,6 +15,7 @@ import Message from '../Components/Message';
 import Admin from '../Routes/Admin';
 import SiteRule from '../Routes/SiteRule';
 import PrivacyPolicy from '../Routes/PrivacyPolicy';
+import Register from '../Routes/Register';
 
 const BadAccessText = '잘못된 접근입니다.';
 
@@ -48,6 +49,12 @@ const RouterComponent = () => {
             path="/mypage"
             component={
               isLogin ? MyPage : () => <Message text={BadAccessText} />
+            }
+          />
+          <Route
+            path="/register"
+            component={
+              isLogin ? Register : () => <Message text={BadAccessText} />
             }
           />
           <Route path="/category/:type" sensitive={true} component={Category} />
