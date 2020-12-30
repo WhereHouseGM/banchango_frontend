@@ -24,6 +24,7 @@ import {
   ButtonAndInputContainer,
   RemoveButton,
   SubmitButton,
+  ArrayInput,
 } from './Register_Styles';
 import RegisterBackground from '../../assets/images/login-background.jpg';
 import MainImage from '../../assets/images/banchango-main.png';
@@ -52,12 +53,12 @@ const Register = () => {
 
   const [warehouseFacilityUsages, setWarehouseFaciltiyUsages] = useState([
     <ButtonAndInputContainer key={0}>
-      <Input
+      <ArrayInput
         id="warehouseFacilityUsages0"
         className="warehouseFacilityUsages"
         name="warehouseFacilityUsages"
         type="text"
-        width="320px"
+        width="316px"
       />
       <AddButton onClick={() => addWarehouseFacilityUsages()}>추가</AddButton>
     </ButtonAndInputContainer>,
@@ -65,12 +66,12 @@ const Register = () => {
 
   const [warehouseUsageCautions, setWarehouseUsageCautions] = useState([
     <ButtonAndInputContainer key={0}>
-      <Input
+      <ArrayInput
         id="warehouseUsageCautions0"
         className="warehouseUsageCautions"
         name="warehouseUsageCautions"
         type="text"
-        width="320px"
+        width="316px"
       />
       <AddButton onClick={() => addWarehouseUsageCautions()}>추가</AddButton>
     </ButtonAndInputContainer>,
@@ -101,12 +102,12 @@ const Register = () => {
     let key = arrOfWarehouseFacilityUsages.length;
     arrOfWarehouseFacilityUsages.push(
       <ButtonAndInputContainer key={key}>
-        <Input
+        <ArrayInput
           id={`warehouseFacilityUsages${key}`}
           className="warehouseFacilityUsages"
           name="warehouseFacilityUsages"
           type="text"
-          width="320px"
+          width="316px"
         />
         {key === 1 ? (
           <RemoveButton onClick={removeWarehouseFacilityUsages}>
@@ -123,12 +124,12 @@ const Register = () => {
     let key = arrOfWarehouseUsageCautions.length;
     arrOfWarehouseUsageCautions.push(
       <ButtonAndInputContainer key={key}>
-        <Input
+        <ArrayInput
           id={`warehouseUsageCautions${key}`}
           className="warehouseUsageCautions"
           name="warehouseUsageCautions"
           type="text"
-          width="320px"
+          width="316px"
         />
         {key === 1 ? (
           <RemoveButton onClick={removeWarehouseUsageCautions}>
@@ -256,7 +257,7 @@ const Register = () => {
                 name="availableTimeDetail"
                 type="text"
                 placeholder="물류 센터 사정에 따라 변경될 수 있습니다."
-                width="320px"
+                width="316px"
               />
             </ItemContainer>
             <InputTitle>영업요일 선택</InputTitle>
@@ -282,7 +283,7 @@ const Register = () => {
                 name="minReleasePerMonth"
                 type="number"
                 placeholder="없으면 1 입력"
-                width="320px"
+                width="316px"
               />
             </ItemContainer>
             <TwoElementContainer>
@@ -399,7 +400,7 @@ const Register = () => {
               <InputTitle>창고 이용 시 주의사항</InputTitle>
               {warehouseUsageCautions}
             </ItemContainer>
-            <SubmitButton>전송하기</SubmitButton>
+            <SubmitButton>창고 등록 요청하기</SubmitButton>
           </TextContainer>
         </RegisterContainer>
       </Wrapper>

@@ -124,6 +124,23 @@ export const Input = styled.input`
   }
 `;
 
+export const ArrayInput = styled.input`
+  border: none;
+  border-bottom: 1px solid #1d489b;
+  width: ${(props) => props.width};
+  margin-top: 10px;
+  margin-left: 3px;
+  margin-right: 3px;
+  transition: all 0.2s ease;
+  &:focus {
+    background-color: lightgray;
+    border-bottom: 3px solid #1d489b;
+  }
+  @media screen and (max-width: 400px) {
+    width: 256px;
+  }
+`;
+
 export const DescriptionInput = styled.textarea`
   border: 1px solid #1d489b;
   width: ${(props) => props.width};
@@ -141,13 +158,17 @@ export const DescriptionInput = styled.textarea`
   }
 `;
 
-export const ButtonAndInputContainer = styled.div``;
+export const ButtonAndInputContainer = styled.div`
+  display: flex;
+`;
 
 export const AddButton = styled.span`
   background-color: #3090f0;
   padding: 2px;
-  color: black;
+  color: white;
+  margin: auto 0;
   border-radius: 4px;
+  font-family: 'Nanum Gothic', sans-serif;
   transition: all 0.2s ease;
   &:hover {
     cursor: pointer;
@@ -158,7 +179,9 @@ export const AddButton = styled.span`
 export const RemoveButton = styled.span`
   background-color: #ef4f4f;
   padding: 2px;
-  color: black;
+  color: white;
+  margin: auto 0;
+  font-family: 'Nanum Gothic', sans-serif;
   border-radius: 4px;
   transition: all 0.2s ease;
   &:hover {
@@ -207,10 +230,18 @@ export const CheckBoxLine = styled.div`
 `;
 
 export const SubmitButton = styled.div`
-/* margin-top: 100px; */
-  background-color: skyblue;
+  margin-top: 20px;
+  background-color: #3090f0;
   padding: 10px;
   border-radius: 15px;
   text-align: center;
-  margin: 0 auto;
+  transition: all 0.2s ease;
+  font-weight: bold;
+  color: white;
+  font-family: 'Nanum Gothic', sans-serif;
+  cursor: pointer;
+  &:hover {
+    color: white;
+    background-color: #202cab;
+  }
 `;
