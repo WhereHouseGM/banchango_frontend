@@ -96,3 +96,72 @@ export const facilityChecks = [
     children: '주차',
   },
 ];
+
+export const airConditioningTypes = [
+  {
+    id: 'COOLING',
+    value: 'COOLING',
+    children: '냉방',
+  },
+  {
+    id: 'HEATING',
+    value: 'HEATING',
+    children: '난방',
+  },
+  {
+    id: 'BOTH',
+    value: 'BOTH',
+    children: '모두 지원',
+  },
+  {
+    id: 'NONE',
+    value: 'NONE',
+    children: '없음',
+  },
+];
+
+export const availableWeekdays = [
+  {
+    id: '111110',
+    value: '111110',
+    children: '평일(월~금)',
+  },
+  {
+    id: '1111111',
+    value: '1111111',
+    children: '평일 및 주말',
+  },
+];
+
+export const warehouseConditions = [
+  {
+    id: 'ROOM_TEMPERATURE',
+    value: 'ROOM_TEMPERATURE',
+    children: '상온 창고',
+  },
+  {
+    id: 'LOW_TEMPERATURE',
+    value: 'LOW_TEMPERATURE',
+    children: '저온 창고',
+  },
+  {
+    id: 'BONDED',
+    value: 'BONDED',
+    children: '보세 창고',
+  },
+  {
+    id: 'SAVAGE',
+    value: 'SAVAGE',
+    children: '야적 창고',
+  },
+  {
+    id: 'HAZARDOUS',
+    value: 'HAZARDOUS',
+    children: '위험 창고',
+  },
+  {
+    id: 'CONTAINER',
+    value: 'CONTAINER',
+    children: '컨테이너',
+  },
+];

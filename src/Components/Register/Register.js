@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   Wrapper,
@@ -20,6 +20,9 @@ import {
   CheckboxContainer,
   CheckBoxLine,
   CheckBox,
+  AddButton,
+  ButtonAndInputContainer,
+  RemoveButton,
 } from './Register_Styles';
 import RegisterBackground from '../../assets/images/login-background.jpg';
 import MainImage from '../../assets/images/banchango-main.png';
@@ -27,9 +30,133 @@ import {
   warehouseTypes,
   mainItemTypes,
   facilityChecks,
+  airConditioningTypes,
+  availableWeekdays,
+  warehouseConditions,
 } from '../../static/register';
 
 const Register = () => {
+  const [deliveryTypes, setDeliveryTypes] = useState([
+    <ButtonAndInputContainer key={0}>
+      <Input
+        id="deliveryTypes0"
+        className="deliveryTypes"
+        name="deliveryTypes"
+        type="text"
+        width="256px"
+      />
+      <AddButton onClick={() => addDeliveryTypes()}>추가</AddButton>
+    </ButtonAndInputContainer>,
+  ]);
+
+  const [warehouseFacilityUsages, setWarehouseFaciltiyUsages] = useState([
+    <ButtonAndInputContainer key={0}>
+      <Input
+        id="warehouseFacilityUsages0"
+        className="warehouseFacilityUsages"
+        name="warehouseFacilityUsages"
+        type="text"
+        width="320px"
+      />
+      <AddButton onClick={() => addWarehouseFacilityUsages()}>추가</AddButton>
+    </ButtonAndInputContainer>,
+  ]);
+
+  const [warehouseUsageCautions, setWarehouseUsageCautions] = useState([
+    <ButtonAndInputContainer key={0}>
+      <Input
+        id="warehouseUsageCautions0"
+        className="warehouseUsageCautions"
+        name="warehouseUsageCautions"
+        type="text"
+        width="320px"
+      />
+      <AddButton onClick={() => addWarehouseUsageCautions()}>추가</AddButton>
+    </ButtonAndInputContainer>,
+  ]);
+
+  const addDeliveryTypes = () => {
+    const arrOfDeliveryTypes = deliveryTypes;
+    let key = arrOfDeliveryTypes.length;
+    arrOfDeliveryTypes.push(
+      <ButtonAndInputContainer key={key}>
+        <Input
+          id={`deliveryTypes${key}`}
+          className="deliveryTypes"
+          name="deliveryTypes"
+          type="text"
+          width="256px"
+        />
+        {key === 1 ? (
+          <RemoveButton onClick={removeDeliveryTypes}>삭제</RemoveButton>
+        ) : null}
+      </ButtonAndInputContainer>,
+    );
+    setDeliveryTypes([...arrOfDeliveryTypes]);
+  };
+
+  const addWarehouseFacilityUsages = () => {
+    const arrOfWarehouseFacilityUsages = warehouseFacilityUsages;
+    let key = arrOfWarehouseFacilityUsages.length;
+    arrOfWarehouseFacilityUsages.push(
+      <ButtonAndInputContainer key={key}>
+        <Input
+          id={`warehouseFacilityUsages${key}`}
+          className="warehouseFacilityUsages"
+          name="warehouseFacilityUsages"
+          type="text"
+          width="320px"
+        />
+        {key === 1 ? (
+          <RemoveButton onClick={removeWarehouseFacilityUsages}>
+            삭제
+          </RemoveButton>
+        ) : null}
+      </ButtonAndInputContainer>,
+    );
+    setWarehouseFaciltiyUsages([...arrOfWarehouseFacilityUsages]);
+  };
+
+  const addWarehouseUsageCautions = () => {
+    const arrOfWarehouseUsageCautions = warehouseUsageCautions;
+    let key = arrOfWarehouseUsageCautions.length;
+    arrOfWarehouseUsageCautions.push(
+      <ButtonAndInputContainer key={key}>
+        <Input
+          id={`warehouseUsageCautions${key}`}
+          className="warehouseUsageCautions"
+          name="warehouseUsageCautions"
+          type="text"
+          width="320px"
+        />
+        {key === 1 ? (
+          <RemoveButton onClick={removeWarehouseUsageCautions}>
+            삭제
+          </RemoveButton>
+        ) : null}
+      </ButtonAndInputContainer>,
+    );
+    setWarehouseUsageCautions([...arrOfWarehouseUsageCautions]);
+  };
+
+  const removeDeliveryTypes = () => {
+    let arrOfDeliveryTypes = deliveryTypes;
+    arrOfDeliveryTypes.pop();
+    setDeliveryTypes([...arrOfDeliveryTypes]);
+  };
+
+  const removeWarehouseFacilityUsages = () => {
+    let arrOfWarehouseFacilityUsages = warehouseFacilityUsages;
+    arrOfWarehouseFacilityUsages.pop();
+    setWarehouseFaciltiyUsages([...arrOfWarehouseFacilityUsages]);
+  };
+
+  const removeWarehouseUsageCautions = () => {
+    let arrOfWarehouseUsageCautions = warehouseUsageCautions;
+    arrOfWarehouseUsageCautions.pop();
+    setWarehouseUsageCautions([...arrOfWarehouseUsageCautions]);
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -131,6 +258,32 @@ const Register = () => {
                 width="320px"
               />
             </ItemContainer>
+            <InputTitle>영업요일 선택</InputTitle>
+            <RadioButtonContainer>
+              {availableWeekdays.map((day, index) => (
+                <React.Fragment key={index + `AWD_TYPE`}>
+                  <RadioButton
+                    id={day.id}
+                    type="radio"
+                    value={day.value}
+                    name="warehouseType"
+                  />
+                  <RadioButtonLabel htmlFor={day.id}>
+                    {day.children}
+                  </RadioButtonLabel>
+                </React.Fragment>
+              ))}
+            </RadioButtonContainer>
+            <ItemContainer>
+              <InputTitle>월 최소 출고량</InputTitle>
+              <Input
+                id="minReleasePerMonth"
+                name="minReleasePerMonth"
+                type="number"
+                placeholder="없으면 1 입력"
+                width="320px"
+              />
+            </ItemContainer>
             <TwoElementContainer>
               <ItemContainer>
                 <InputTitle>보험사(1개)</InputTitle>
@@ -169,25 +322,41 @@ const Register = () => {
                 </React.Fragment>
               ))}
             </RadioButtonContainer>
+            <InputTitle>냉난방 지원 방식 선택</InputTitle>
+            <RadioButtonContainer>
+              {airConditioningTypes.map((type, index) => (
+                <React.Fragment key={index + `AC_TYPE`}>
+                  <RadioButton
+                    id={type.id}
+                    type="radio"
+                    value={type.value}
+                    name="airConditioningType"
+                  />
+                  <RadioButtonLabel htmlFor={type.id}>
+                    {type.children}
+                  </RadioButtonLabel>
+                </React.Fragment>
+              ))}
+            </RadioButtonContainer>
             <InputTitle>대표 품목 선택(최대 3개)</InputTitle>
             <CheckboxContainer>
               {mainItemTypes.map((type, index) => (
-                <>
-                  <CheckBoxLine key={index + `MAIN_TYPE`}>
+                <React.Fragment key={index + 'MAIN_TYPE'}>
+                  <CheckBoxLine>
                     <CheckBox id={type.id} type="checkbox" value={type.value} />
                     <RadioButtonLabel htmlFor={type.id}>
                       {type.children}
                     </RadioButtonLabel>
                   </CheckBoxLine>
                   {(index + 1) % 4 === 0 ? <br /> : null}
-                </>
+                </React.Fragment>
               ))}
             </CheckboxContainer>
             <InputTitle>창고 시설 해당사항 선택</InputTitle>
             <CheckboxContainer>
               {facilityChecks.map((check, index) => (
-                <>
-                  <CheckBoxLine key={index + `CHECK`}>
+                <React.Fragment key={index + `CHECK`}>
+                  <CheckBoxLine>
                     <CheckBox
                       id={check.id}
                       type="checkbox"
@@ -197,9 +366,38 @@ const Register = () => {
                       {check.children}
                     </RadioButtonLabel>
                   </CheckBoxLine>
-                </>
+                </React.Fragment>
               ))}
             </CheckboxContainer>
+            <InputTitle>창고 유형 선택(다중 선택 가능)</InputTitle>
+            <CheckboxContainer>
+              {warehouseConditions.map((condition, index) => (
+                <React.Fragment key={index + `COND`}>
+                  <CheckBoxLine>
+                    <CheckBox
+                      id={condition.id}
+                      type="checkbox"
+                      value={condition.value}
+                    />
+                    <RadioButtonLabel htmlFor={condition.id}>
+                      {condition.children}
+                    </RadioButtonLabel>
+                  </CheckBoxLine>
+                </React.Fragment>
+              ))}
+            </CheckboxContainer>
+            <ItemContainer>
+              <InputTitle>제휴 택배사</InputTitle>
+              {deliveryTypes}
+            </ItemContainer>
+            <ItemContainer>
+              <InputTitle>창고 시설 이용 유의사항</InputTitle>
+              {warehouseFacilityUsages}
+            </ItemContainer>
+            <ItemContainer>
+              <InputTitle>창고 이용 시 주의사항</InputTitle>
+              {warehouseUsageCautions}
+            </ItemContainer>
           </TextContainer>
         </RegisterContainer>
       </Wrapper>

@@ -140,9 +140,31 @@ export const DescriptionInput = styled.textarea`
   }
 `;
 
-export const AddButton = styled.span``;
+export const ButtonAndInputContainer = styled.div``;
 
-export const RemoveButton = styled.span``;
+export const AddButton = styled.span`
+  background-color: #3090f0;
+  padding: 2px;
+  color: black;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  &:hover {
+    cursor: pointer;
+    background-color: #1d489b;
+  }
+`;
+
+export const RemoveButton = styled.span`
+  background-color: #ef4f4f;
+  padding: 2px;
+  color: black;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  &:hover {
+    cursor: pointer;
+    background-color: #ee9595;
+  }
+`;
 
 export const RadioButtonContainer = styled.span`
   margin-top: 10px;
