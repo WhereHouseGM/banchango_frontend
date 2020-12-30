@@ -85,6 +85,7 @@ export const TextContainer = styled.div`
   box-direction: normal;
   flex-direction: column;
   background-color: white;
+  padding-bottom: 30px;
 `;
 
 export const TwoElementContainer = styled.div`
@@ -203,4 +204,13 @@ export const CheckBoxLine = styled.div`
   @media screen and (max-width: 750px) {
     width: 50%;
   }
+`;
+
+export const SubmitButton = styled.div`
+/* margin-top: 100px; */
+  background-color: skyblue;
+  padding: 10px;
+  border-radius: 15px;
+  text-align: center;
+  margin: 0 auto;
 `;

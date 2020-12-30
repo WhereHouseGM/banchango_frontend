@@ -23,6 +23,7 @@ import {
   AddButton,
   ButtonAndInputContainer,
   RemoveButton,
+  SubmitButton,
 } from './Register_Styles';
 import RegisterBackground from '../../assets/images/login-background.jpg';
 import MainImage from '../../assets/images/banchango-main.png';
@@ -398,6 +399,7 @@ const Register = () => {
               <InputTitle>창고 이용 시 주의사항</InputTitle>
               {warehouseUsageCautions}
             </ItemContainer>
+            <SubmitButton>전송하기</SubmitButton>
           </TextContainer>
         </RegisterContainer>
       </Wrapper>
