@@ -21,6 +21,9 @@ const BadAccessText = '잘못된 접근입니다.';
 
 const RouterComponent = () => {
   const isLogin = JSON.parse(localStorage.getItem('Login'));
+  const isOwner =
+    JSON.parse(localStorage.getItem('Login')) &&
+    localStorage.getItem('type') === 'OWNER';
 
   return (
     <Router>
@@ -54,7 +57,7 @@ const RouterComponent = () => {
           <Route
             path="/register"
             component={
-              isLogin ? Register : () => <Message text={BadAccessText} />
+              isOwner ? Register : () => <Message text={BadAccessText} />
             }
           />
           <Route path="/category/:type" sensitive={true} component={Category} />
