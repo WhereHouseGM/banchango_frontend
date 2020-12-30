@@ -1,5 +1,6 @@
 import React from 'react';
 import RegisterPresenter from './RegisterPresenter';
+import { warehouseApi } from '../../api';
 
 const InputType = {
   NAME: 'name',
@@ -106,7 +107,6 @@ class RegisterContainer extends React.Component {
         return;
       default:
         return;
-      // TODO : DELIVERY_TYPES, WAREHOUSE_USAGE_CAUTIONS, WAREHOUSE_FACILITY_USAGES
     }
   };
 
@@ -306,12 +306,24 @@ class RegisterContainer extends React.Component {
       deliveryTypes: _deliveryTypes,
       warehouseUsageCautions: _warehouseUsageCautions,
       warehouseFacilityUsages: _warehouseFacilityUsages,
+      latitude: 88.888,
+      longitude: 99.999,
     };
 
     console.log(requestBody);
-
-    try {
-    } catch (Error) {}
+    // try {
+    //   const result = warehouseApi.register(
+    //     requestBody,
+    //     localStorage.getItem('AccessToken'),
+    //   );
+    //   const { status } = result;
+    //   if (status !== 200) {
+    //     throw new Error();
+    //   }
+    //   alert('창고 등록이 정상적으로 요청되었습니다.');
+    // } catch {
+    //   alert('ERROR!!!!!!!');
+    // }
   };
 
   render() {
