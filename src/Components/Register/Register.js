@@ -36,8 +36,9 @@ import {
   availableWeekdays,
   warehouseConditions,
 } from '../../static/register';
+import PropTypes from 'prop-types';
 
-const Register = () => {
+const Register = ({ handleSimpleTextInput, handleRegisterSubmit }) => {
   const [deliveryTypes, setDeliveryTypes] = useState([
     <ButtonAndInputContainer key={0}>
       <Input
@@ -187,6 +188,7 @@ const Register = () => {
                   type="text"
                   placeholder="창고명"
                   width="256px"
+                  onChange={handleSimpleTextInput}
                 />
               </ItemContainer>
               <ItemContainer>
@@ -199,6 +201,7 @@ const Register = () => {
                   name="space"
                   placeholder="창고 평수(평 단위 숫자만 입력)"
                   width="256px"
+                  onChange={handleSimpleTextInput}
                 />
               </ItemContainer>
             </TwoElementContainer>
@@ -213,6 +216,7 @@ const Register = () => {
                   name="address"
                   placeholder="인천광역시 서구"
                   width="256px"
+                  onChange={handleSimpleTextInput}
                 />
               </ItemContainer>
               <ItemContainer>
@@ -225,6 +229,7 @@ const Register = () => {
                   name="addressDetail"
                   placeholder="상세 주소"
                   width="256px"
+                  onChange={handleSimpleTextInput}
                 />
               </ItemContainer>
             </TwoElementContainer>
@@ -234,9 +239,11 @@ const Register = () => {
             <DescriptionInput
               id="description"
               type="text"
+              name="description"
               placeholder="창고"
               width="480px"
               height="240px"
+              onChange={handleSimpleTextInput}
             />
             <TwoElementContainer>
               <ItemContainer>
@@ -249,6 +256,7 @@ const Register = () => {
                   type="text"
                   placeholder="09:00"
                   width="256px"
+                  onChange={handleSimpleTextInput}
                 />
               </ItemContainer>
               <ItemContainer>
@@ -261,6 +269,7 @@ const Register = () => {
                   type="text"
                   placeholder="18:00"
                   width="256px"
+                  onChange={handleSimpleTextInput}
                 />
               </ItemContainer>
             </TwoElementContainer>
@@ -274,6 +283,7 @@ const Register = () => {
                 type="text"
                 placeholder="물류 센터 사정에 따라 변경될 수 있습니다."
                 width="316px"
+                onChange={handleSimpleTextInput}
               />
             </ItemContainer>
             <InputTitle>
@@ -286,7 +296,8 @@ const Register = () => {
                     id={day.id}
                     type="radio"
                     value={day.value}
-                    name="warehouseType"
+                    name="availableWeekdays"
+                    onChange={handleSimpleTextInput}
                   />
                   <RadioButtonLabel htmlFor={day.id}>
                     {day.children}
@@ -304,6 +315,7 @@ const Register = () => {
                 type="number"
                 placeholder="없으면 1 입력"
                 width="316px"
+                onChange={handleSimpleTextInput}
               />
             </ItemContainer>
             <TwoElementContainer>
@@ -317,6 +329,7 @@ const Register = () => {
                   name="insurance"
                   placeholder="화재 보험"
                   width="256px"
+                  onChange={handleSimpleTextInput}
                 />
               </ItemContainer>
               <ItemContainer>
@@ -329,6 +342,7 @@ const Register = () => {
                   name="securityCompanyName"
                   placeholder="ADT 캡스"
                   width="256px"
+                  onChange={handleSimpleTextInput}
                 />
               </ItemContainer>
             </TwoElementContainer>
@@ -343,6 +357,7 @@ const Register = () => {
                     type="radio"
                     value={type.value}
                     name="warehouseType"
+                    onChange={handleSimpleTextInput}
                   />
                   <RadioButtonLabel htmlFor={type.id}>
                     {type.children}
@@ -361,6 +376,7 @@ const Register = () => {
                     type="radio"
                     value={type.value}
                     name="airConditioningType"
+                    onChange={handleSimpleTextInput}
                   />
                   <RadioButtonLabel htmlFor={type.id}>
                     {type.children}
@@ -375,7 +391,12 @@ const Register = () => {
               {mainItemTypes.map((type, index) => (
                 <React.Fragment key={index + 'MAIN_TYPE'}>
                   <CheckBoxLine>
-                    <CheckBox id={type.id} type="checkbox" value={type.value} />
+                    <CheckBox
+                      id={type.id}
+                      type="checkbox"
+                      value={type.value}
+                      name="mainItemTypes"
+                    />
                     <RadioButtonLabel htmlFor={type.id}>
                       {type.children}
                     </RadioButtonLabel>
@@ -393,6 +414,7 @@ const Register = () => {
                       id={check.id}
                       type="checkbox"
                       value={check.value}
+                      name="facilityChecks"
                     />
                     <RadioButtonLabel htmlFor={check.id}>
                       {check.children}
@@ -413,6 +435,7 @@ const Register = () => {
                       id={condition.id}
                       type="checkbox"
                       value={condition.value}
+                      name="warehouseCondition"
                     />
                     <RadioButtonLabel htmlFor={condition.id}>
                       {condition.children}
@@ -435,12 +458,19 @@ const Register = () => {
               <InputTitle>창고 이용 시 주의사항</InputTitle>
               {warehouseUsageCautions}
             </ItemContainer>
-            <SubmitButton>창고 등록 요청하기</SubmitButton>
+            <SubmitButton onClick={handleRegisterSubmit}>
+              창고 등록 요청하기
+            </SubmitButton>
           </TextContainer>
         </RegisterContainer>
       </Wrapper>
     </Container>
   );
+};
+
+Register.propTypes = {
+  handleRegisterSubmit: PropTypes.func.isRequired,
+  handleSimpleTextInput: PropTypes.func.isRequired,
 };
 
 export default Register;
