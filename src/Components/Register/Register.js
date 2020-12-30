@@ -46,7 +46,7 @@ const Register = () => {
         name="deliveryTypes"
         type="text"
         width="256px"
-      />
+      />{' '}
       <AddButton onClick={() => addDeliveryTypes()}>추가</AddButton>
     </ButtonAndInputContainer>,
   ]);
@@ -178,7 +178,9 @@ const Register = () => {
             <HeaderTitleBottom>통합 물류 파트너</HeaderTitleBottom>
             <TwoElementContainer>
               <ItemContainer>
-                <InputTitle>창고명</InputTitle>
+                <InputTitle>
+                  창고명<span style={{ color: 'red' }}>*</span>
+                </InputTitle>
                 <Input
                   id="name"
                   name="name"
@@ -188,7 +190,9 @@ const Register = () => {
                 />
               </ItemContainer>
               <ItemContainer>
-                <InputTitle>창고 평수</InputTitle>
+                <InputTitle>
+                  창고 평수<span style={{ color: 'red' }}>*</span>
+                </InputTitle>
                 <Input
                   id="space"
                   type="number"
@@ -200,7 +204,9 @@ const Register = () => {
             </TwoElementContainer>
             <TwoElementContainer>
               <ItemContainer>
-                <InputTitle>주소(동 단위까지)</InputTitle>
+                <InputTitle>
+                  주소(동 단위까지)<span style={{ color: 'red' }}>*</span>
+                </InputTitle>
                 <Input
                   id="address"
                   type="text"
@@ -210,7 +216,9 @@ const Register = () => {
                 />
               </ItemContainer>
               <ItemContainer>
-                <InputTitle>상세 주소</InputTitle>
+                <InputTitle>
+                  상세 주소<span style={{ color: 'red' }}>*</span>
+                </InputTitle>
                 <Input
                   id="addressDetail"
                   type="text"
@@ -220,7 +228,9 @@ const Register = () => {
                 />
               </ItemContainer>
             </TwoElementContainer>
-            <InputTitle>창고 소개(최대 400자)</InputTitle>
+            <InputTitle>
+              창고 소개(최대 400자)<span style={{ color: 'red' }}>*</span>
+            </InputTitle>
             <DescriptionInput
               id="description"
               type="text"
@@ -230,7 +240,9 @@ const Register = () => {
             />
             <TwoElementContainer>
               <ItemContainer>
-                <InputTitle>영업 시작 시간</InputTitle>
+                <InputTitle>
+                  영업 시작 시간<span style={{ color: 'red' }}>*</span>
+                </InputTitle>
                 <Input
                   id="openAt"
                   name="openAt"
@@ -240,7 +252,9 @@ const Register = () => {
                 />
               </ItemContainer>
               <ItemContainer>
-                <InputTitle>영업 종료 시간</InputTitle>
+                <InputTitle>
+                  영업 종료 시간<span style={{ color: 'red' }}>*</span>
+                </InputTitle>
                 <Input
                   id="closeAt"
                   name="closeAt"
@@ -251,7 +265,9 @@ const Register = () => {
               </ItemContainer>
             </TwoElementContainer>
             <ItemContainer>
-              <InputTitle>영업 시간 유의사항</InputTitle>
+              <InputTitle>
+                영업 시간 유의사항<span style={{ color: 'red' }}>*</span>
+              </InputTitle>
               <Input
                 id="availableTimeDetail"
                 name="availableTimeDetail"
@@ -260,7 +276,9 @@ const Register = () => {
                 width="316px"
               />
             </ItemContainer>
-            <InputTitle>영업요일 선택</InputTitle>
+            <InputTitle>
+              영업요일 선택<span style={{ color: 'red' }}>*</span>
+            </InputTitle>
             <RadioButtonContainer>
               {availableWeekdays.map((day, index) => (
                 <React.Fragment key={index + `AWD_TYPE`}>
@@ -277,7 +295,9 @@ const Register = () => {
               ))}
             </RadioButtonContainer>
             <ItemContainer>
-              <InputTitle>월 최소 출고량</InputTitle>
+              <InputTitle>
+                월 최소 출고량<span style={{ color: 'red' }}>*</span>
+              </InputTitle>
               <Input
                 id="minReleasePerMonth"
                 name="minReleasePerMonth"
@@ -288,7 +308,9 @@ const Register = () => {
             </ItemContainer>
             <TwoElementContainer>
               <ItemContainer>
-                <InputTitle>보험사(1개)</InputTitle>
+                <InputTitle>
+                  보험사(1개)<span style={{ color: 'red' }}>*</span>
+                </InputTitle>
                 <Input
                   type="text"
                   id="insurance"
@@ -298,7 +320,9 @@ const Register = () => {
                 />
               </ItemContainer>
               <ItemContainer>
-                <InputTitle>경비 업체(1개)</InputTitle>
+                <InputTitle>
+                  경비 업체(1개)<span style={{ color: 'red' }}>*</span>
+                </InputTitle>
                 <Input
                   type="text"
                   id="securityCompanyName"
@@ -308,7 +332,9 @@ const Register = () => {
                 />
               </ItemContainer>
             </TwoElementContainer>
-            <InputTitle>업종 선택</InputTitle>
+            <InputTitle>
+              업종 선택<span style={{ color: 'red' }}>*</span>
+            </InputTitle>
             <RadioButtonContainer>
               {warehouseTypes.map((type, index) => (
                 <React.Fragment key={index + `WH_TYPE`}>
@@ -324,7 +350,9 @@ const Register = () => {
                 </React.Fragment>
               ))}
             </RadioButtonContainer>
-            <InputTitle>냉난방 지원 방식 선택</InputTitle>
+            <InputTitle>
+              냉난방 지원 방식 선택<span style={{ color: 'red' }}>*</span>
+            </InputTitle>
             <RadioButtonContainer>
               {airConditioningTypes.map((type, index) => (
                 <React.Fragment key={index + `AC_TYPE`}>
@@ -340,7 +368,9 @@ const Register = () => {
                 </React.Fragment>
               ))}
             </RadioButtonContainer>
-            <InputTitle>대표 품목 선택(최대 3개)</InputTitle>
+            <InputTitle>
+              대표 품목 선택(최대 3개)<span style={{ color: 'red' }}>*</span>
+            </InputTitle>
             <CheckboxContainer>
               {mainItemTypes.map((type, index) => (
                 <React.Fragment key={index + 'MAIN_TYPE'}>
@@ -371,7 +401,10 @@ const Register = () => {
                 </React.Fragment>
               ))}
             </CheckboxContainer>
-            <InputTitle>창고 유형 선택(다중 선택 가능)</InputTitle>
+            <InputTitle>
+              창고 유형 선택(다중 선택 가능)
+              <span style={{ color: 'red' }}>*</span>
+            </InputTitle>
             <CheckboxContainer>
               {warehouseConditions.map((condition, index) => (
                 <React.Fragment key={index + `COND`}>
@@ -389,7 +422,9 @@ const Register = () => {
               ))}
             </CheckboxContainer>
             <ItemContainer>
-              <InputTitle>제휴 택배사</InputTitle>
+              <InputTitle>
+                제휴 택배사<span style={{ color: 'red' }}>*</span>
+              </InputTitle>
               {deliveryTypes}
             </ItemContainer>
             <ItemContainer>
