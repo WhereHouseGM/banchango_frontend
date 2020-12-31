@@ -15,11 +15,15 @@ import Message from '../Components/Message';
 import Admin from '../Routes/Admin';
 import SiteRule from '../Routes/SiteRule';
 import PrivacyPolicy from '../Routes/PrivacyPolicy';
+import Register from '../Routes/Register';
 
 const BadAccessText = '잘못된 접근입니다.';
 
 const RouterComponent = () => {
   const isLogin = JSON.parse(localStorage.getItem('Login'));
+  const isOwner =
+    JSON.parse(localStorage.getItem('Login')) &&
+    localStorage.getItem('type') === 'OWNER';
 
   return (
     <Router>
@@ -48,6 +52,12 @@ const RouterComponent = () => {
             path="/mypage"
             component={
               isLogin ? MyPage : () => <Message text={BadAccessText} />
+            }
+          />
+          <Route
+            path="/register"
+            component={
+              isOwner ? Register : () => <Message text={BadAccessText} />
             }
           />
           <Route path="/category/:type" sensitive={true} component={Category} />

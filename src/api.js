@@ -33,7 +33,7 @@ export const warehouseApi = {
       },
     }),
   register: (body, token) =>
-    api.post('warehouses/', body, {
+    api.post('warehouses', body, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

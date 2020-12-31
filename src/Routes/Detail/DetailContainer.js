@@ -73,7 +73,7 @@ class DetailContainer extends React.Component {
     } = this.props;
     try {
       const result = await warehouseApi.getWarehouseInfo(id);
-      const { data: warehouse, status } = result;
+      const { status, data: warehouse } = result;
       if (status !== 200) {
         throw new Error();
       }
@@ -82,7 +82,7 @@ class DetailContainer extends React.Component {
         warehouseInfo: this.getWarehouseInfosObject(warehouse),
         loading: false,
       });
-    } catch (Error) {
+    } catch (err) {
       this.setState({
         error: '해당 창고의 정보가 존재하지 않습니다.',
         loading: false,

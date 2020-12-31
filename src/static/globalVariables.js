@@ -26,5 +26,5 @@ export const AirConditioningTypes = {
   HEATING: 'HEATING',
   COOLING: 'COOLING',
   BOTH: 'BOTH',
-  NONE: 'NONE'
+  NONE: 'NONE',
 };
