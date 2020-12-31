@@ -28,18 +28,12 @@ class LoginContainer extends React.Component {
     }
   };
 
-  saveToken = (
-    tokenSet,
-    { telephoneNumber, phoneNumber, name, email, userId, type, role },
-    isAdmin,
-  ) => {
+  saveToken = (tokenSet, { name, email, userId, type, role }) => {
     localStorage.setItem('AccessToken', tokenSet.AccessToken);
     localStorage.setItem('RefreshToken', tokenSet.RefreshToken);
     localStorage.setItem('Login', true);
     localStorage.setItem('Name', name);
     localStorage.setItem('Role', role);
-    localStorage.setItem('PhoneNumber', phoneNumber);
-    localStorage.setItem('TelephoneNumber', telephoneNumber);
     localStorage.setItem('Email', email);
     localStorage.setItem('userId', userId);
     localStorage.setItem('type', type);
@@ -129,15 +123,7 @@ class LoginContainer extends React.Component {
         AccessToken: accessToken,
         RefreshToken: refreshToken,
       };
-      if (
-        result.data.isAdmin !== undefined &&
-        result.data.isAdmin !== null &&
-        result.data.isAdmin === true
-      ) {
-        this.saveToken(tokenSet, user, true);
-      } else {
-        this.saveToken(tokenSet, user, false);
-      }
+      this.saveToken(tokenSet, user);
       window.location.replace('/');
     } catch {
       alert('이메일 또는 비밀번호가 일치하지 않습니다.');
