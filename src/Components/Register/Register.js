@@ -297,7 +297,6 @@ const Register = ({ handleSimpleTextInput, handleRegisterSubmit }) => {
                     type="radio"
                     value={day.value}
                     name="availableWeekdays"
-                    onChange={handleSimpleTextInput}
                   />
                   <RadioButtonLabel htmlFor={day.id}>
                     {day.children}
@@ -357,7 +356,6 @@ const Register = ({ handleSimpleTextInput, handleRegisterSubmit }) => {
                     type="radio"
                     value={type.value}
                     name="warehouseType"
-                    onChange={handleSimpleTextInput}
                   />
                   <RadioButtonLabel htmlFor={type.id}>
                     {type.children}
@@ -376,7 +374,6 @@ const Register = ({ handleSimpleTextInput, handleRegisterSubmit }) => {
                     type="radio"
                     value={type.value}
                     name="airConditioningType"
-                    onChange={handleSimpleTextInput}
                   />
                   <RadioButtonLabel htmlFor={type.id}>
                     {type.children}

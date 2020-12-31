@@ -22,13 +22,12 @@ const InputType = {
   MAIN_ITEM_TYPE: 'mainItemTypes',
   WAREHOUSE_TYPE: 'warehouseType',
   MIN_RELEASE_PER_MONTH: 'minReleasePerMonth',
-  LATITUDE: 'latitude',
-  LONGITUDE: 'longitude',
   DELIVERY_TYPES: 'deliveryTypes',
   WAREHOUSE_FACILITY_USAGES: 'warehouseFacilityUsages',
   WAREHOUSE_USAGE_CAUTIONS: 'warehouseUsageCautions',
   WAREHOUSE_CONDITION: 'warehouseCondition',
 };
+
 class RegisterContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -38,14 +37,11 @@ class RegisterContainer extends React.Component {
       address: null,
       addressDetail: null,
       description: '',
-      availableWeekdays: null,
       openAt: null,
       closeAt: null,
       availableTimeDetail: null,
       insurance: null,
       securityCompanyName: null,
-      airConditioningType: null,
-      warehouseType: null,
       minReleasePerMonth: 0,
       deliveryTypes: [],
       warehouseFacilityUsages: [],
@@ -84,9 +80,6 @@ class RegisterContainer extends React.Component {
       case InputType.AVAIL_TIME_DETAIL:
         this.setState({ availableTimeDetail: value });
         return;
-      case InputType.AVAIL_WEEK_DAYS:
-        this.setState({ availableWeekdays: parseInt(value) });
-        return;
       case InputType.INSURANCE:
         this.setState({ insurance: value });
         return;
@@ -95,12 +88,6 @@ class RegisterContainer extends React.Component {
         return;
       case InputType.MIN_RELEASE_PER_MONTH:
         this.setState({ minReleasePerMonth: parseInt(value) });
-        return;
-      case InputType.WAREHOUSE_TYPE:
-        this.setState({ warehouseType: value });
-        return;
-      case InputType.AIR_CONDITIONING_TYPE:
-        this.setState({ airConditioningType: value });
         return;
       case InputType.DESCRIPTION:
         this.setState({ description: value });
@@ -134,6 +121,24 @@ class RegisterContainer extends React.Component {
     return _mainItemTypes;
   };
 
+  getAvailableWeekdays = () => {
+    let radioList = document.getElementsByName(InputType.AVAIL_WEEK_DAYS);
+    for (let i = 0; i < radioList.length; i++) {
+      if (radioList[i].checked) {
+        return parseInt(radioList[i].value);
+      }
+    }
+  };
+
+  getAirConditioningType = () => {
+    let radioList = document.getElementsByName(InputType.AIR_CONDITIONING_TYPE);
+    for (let i = 0; i < radioList.length; i++) {
+      if (radioList[i].checked) {
+        return radioList[i].value;
+      }
+    }
+  };
+
   getDeliveryTypes = () => {
     let list = document.getElementsByName(InputType.DELIVERY_TYPES);
     let _deliveryTypes = [];
@@ -161,7 +166,16 @@ class RegisterContainer extends React.Component {
     return _warehouseUsageCautions;
   };
 
-  handleRegisterSubmit = (event) => {
+  getWarehouseType = () => {
+    let radioList = document.getElementsByName(InputType.WAREHOUSE_TYPE);
+    for (let i = 0; i < radioList.length; i++) {
+      if (radioList[i].checked) {
+        return radioList[i].value;
+      }
+    }
+  };
+
+  handleRegisterSubmit = async (event) => {
     event.preventDefault();
     let _mainItemTypes = this.getSelectedMainItemTypes();
     if (_mainItemTypes.length > 3) {
@@ -171,7 +185,12 @@ class RegisterContainer extends React.Component {
       alert('대표 품목을 1개 이상 선택해주세요.');
       return;
     }
-    let _warehouseCondition = this.getSelectedWarehouseCondition();
+
+    const _warehouseCondition = this.getSelectedWarehouseCondition();
+    const _warehouseType = this.getWarehouseType();
+    const _airConditioningType = this.getAirConditioningType();
+    const _availableWeekdays = this.getAvailableWeekdays();
+
     if (_warehouseCondition.length === 0) {
       alert('창고 유형을 1개 이상 선택해주세요.');
     }
@@ -184,13 +203,11 @@ class RegisterContainer extends React.Component {
       openAt,
       closeAt,
       availableTimeDetail,
-      availableWeekdays,
       minReleasePerMonth,
       insurance,
       securityCompanyName,
-      warehouseType,
-      airConditioningType,
     } = this.state;
+
     if (description.length >= 399) {
       alert('창고 소개는 최대 400자까지 가능합니다.');
       document.getElementById('description').focus();
@@ -236,7 +253,7 @@ class RegisterContainer extends React.Component {
       document.getElementById('availableTimeDetail').focus();
       return;
     }
-    if (availableWeekdays === null) {
+    if (_availableWeekdays === null) {
       alert('영업 요일을 선택해주세요.');
       return;
     }
@@ -255,16 +272,17 @@ class RegisterContainer extends React.Component {
       document.getElementById('securityCompanyName').focus();
       return;
     }
-    if (warehouseType === null) {
+    if (_warehouseType === null) {
       alert('업종을 선택해주세요.');
       return;
     }
-    if (airConditioningType === null) {
+    if (_airConditioningType === null) {
       alert('냉난방 지원 방식을 선택해주세요.');
       return;
     }
 
     const _deliveryTypes = this.getDeliveryTypes();
+
     if (_deliveryTypes.length === 0) {
       alert('제휴 택배사를 1개 이상 입력해주세요.');
       document.getElementById('deliveryTypes0').focus();
@@ -283,12 +301,12 @@ class RegisterContainer extends React.Component {
       openAt: openAt,
       closeAt: closeAt,
       availableTimeDetail: availableTimeDetail,
-      availableWeekdays: availableWeekdays,
+      availableWeekdays: _availableWeekdays,
       minReleasePerMonth: minReleasePerMonth,
       insurance: insurance,
       securityCompanyName: securityCompanyName,
-      warehouseType: warehouseType,
-      airConditioningType: airConditioningType,
+      warehouseType: _warehouseType,
+      airConditioningType: _airConditioningType,
       mainItemTypes: _mainItemTypes,
       cctvExist: document.getElementById(InputType.CCTV_EXIST).checked
         ? true
@@ -311,19 +329,20 @@ class RegisterContainer extends React.Component {
     };
 
     console.log(requestBody);
-    // try {
-    //   const result = warehouseApi.register(
-    //     requestBody,
-    //     localStorage.getItem('AccessToken'),
-    //   );
-    //   const { status } = result;
-    //   if (status !== 200) {
-    //     throw new Error();
-    //   }
-    //   alert('창고 등록이 정상적으로 요청되었습니다.');
-    // } catch {
-    //   alert('ERROR!!!!!!!');
-    // }
+    try {
+      const result = await warehouseApi.register(
+        requestBody,
+        localStorage.getItem('AccessToken'),
+      );
+      const { status } = result;
+      console.log(result);
+      if (status !== 200) {
+        throw new Error();
+      }
+      alert('창고 등록이 정상적으로 요청되었습니다.');
+    } catch {
+      alert('예상치 못한 에러가 발생했습니다.');
+    }
   };
 
   render() {
