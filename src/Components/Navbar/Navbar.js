@@ -26,7 +26,6 @@ const Navbar = () => {
   const logout = () => {
     setLogin(false);
     localStorage.clear();
-    alert('정상적으로 로그아웃 되었습니다.');
     window.location.replace('/');
   };
 
@@ -55,9 +54,12 @@ const Navbar = () => {
               <LogoLink to="/">BANCHANGO</LogoLink>
             </LogoContainer>
             <CenterItemContainer>
-              <Item to="/" onClick={toLoginOrRegisterForm}>
-                창고 등록하기
-              </Item>
+              {JSON.parse(localStorage.getItem('Login')) === true &&
+              localStorage.getItem('type') === 'OWNER' ? (
+                <Item to="/" onClick={toLoginOrRegisterForm}>
+                  창고 등록하기
+                </Item>
+              ) : null}
               <Item to="/" onClick={warningMessage}>
                 ABOUT US
               </Item>
@@ -94,9 +96,12 @@ const Navbar = () => {
             </MobileTopContainer>
           </MobileTopWrapper>
           <MobileBottomWrapper>
-            <Item to="/" onClick={toLoginOrRegisterForm}>
-              창고 등록하기
-            </Item>
+            {JSON.parse(localStorage.getItem('Login')) === true &&
+            localStorage.getItem('type') === 'OWNER' ? (
+              <Item to="/" onClick={toLoginOrRegisterForm}>
+                창고 등록하기
+              </Item>
+            ) : null}
             <Item to="/" onClick={warningMessage}>
               ABOUT US
             </Item>
