@@ -223,7 +223,7 @@ class RegisterContainer extends React.Component {
       document.getElementById('name').focus();
       return;
     }
-    if (space === null) {
+    if (space === null || space === 0) {
       alert('창고 평수를 입력해주세요.');
       document.getElementById('space').focus();
       return;
@@ -262,7 +262,7 @@ class RegisterContainer extends React.Component {
       document.getElementById('insurance').focus();
       return;
     }
-    if (minReleasePerMonth === null) {
+    if (minReleasePerMonth === null || minReleasePerMonth === 0) {
       alert('월 최소 출고량을 입력해주세요.\n 없을 경우 1을 입력해주세요.');
       document.getElementById('minReleasePerMonth').focus();
       return;
@@ -335,12 +335,16 @@ class RegisterContainer extends React.Component {
       );
       const { status } = result;
       if (status !== 200) {
-        throw new Error();
+        throw new Error(status.toString());
       }
       alert('창고 등록이 정상적으로 요청되었습니다.');
       window.location.href = '/';
-    } catch {
-      alert('예상치 못한 에러가 발생했습니다. 관리자에게 문의해주세요.');
+    } catch (error) {
+      if (error.message === '400') {
+        alert('예상치 못한 에러가 발생했습니다. 관리자에게 문의해주세요.');
+      } else if (error.message === '401') {
+        alert('로그인을 다시 해주세요.');
+      }
       window.location.href = '/';
     }
   };
