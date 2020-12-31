@@ -26,7 +26,6 @@ const Navbar = () => {
   const logout = () => {
     setLogin(false);
     localStorage.clear();
-    alert('정상적으로 로그아웃 되었습니다.');
     window.location.replace('/');
   };
 
