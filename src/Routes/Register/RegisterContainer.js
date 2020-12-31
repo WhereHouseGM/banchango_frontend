@@ -328,20 +328,20 @@ class RegisterContainer extends React.Component {
       longitude: 99.999,
     };
 
-    console.log(requestBody);
     try {
       const result = await warehouseApi.register(
         requestBody,
         localStorage.getItem('AccessToken'),
       );
       const { status } = result;
-      console.log(result);
       if (status !== 200) {
         throw new Error();
       }
       alert('창고 등록이 정상적으로 요청되었습니다.');
+      window.location.href = '/';
     } catch {
-      alert('예상치 못한 에러가 발생했습니다.');
+      alert('예상치 못한 에러가 발생했습니다. 관리자에게 문의해주세요.');
+      window.location.href = '/';
     }
   };
 
