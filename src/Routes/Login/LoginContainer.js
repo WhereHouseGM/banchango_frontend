@@ -19,6 +19,20 @@ class LoginContainer extends React.Component {
     };
   }
 
+  componentDidMount = () => {
+    let inputPassword = document.getElementById('password');
+    inputPassword.addEventListener('keyup', (event) => {
+      if (event.key !== undefined && event.key === 'Enter') {
+        event.preventDefault();
+        document.getElementById('btnLogin').click();
+      }
+    });
+  };
+
+  componentWillUnmount = () => {
+    document.getElementById('password').removeEventListener('keyup');
+  };
+
   checkEmail = (email) => {
     let form = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+.[A-Za-z0-9]+/;
     if (form.test(email)) {

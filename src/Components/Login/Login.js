@@ -93,7 +93,9 @@ const Login = ({
                 <PasswordFindText onClick={() => setPWLostClick(!pwLostClick)}>
                   비밀번호를 잃어버리셨나요?
                 </PasswordFindText>
-                <LoginButton onClick={handleSubmit}>로그인</LoginButton>
+                <LoginButton id="btnLogin" onClick={handleSubmit}>
+                  로그인
+                </LoginButton>
                 <RegisterButton onClick={toSignupPage}>
                   회원 가입
                 </RegisterButton>
