@@ -30,7 +30,10 @@ class LoginContainer extends React.Component {
   };
 
   componentWillUnmount = () => {
-    document.getElementById('password').removeEventListener('keyup');
+    let inputPassword = document.getElementById('password');
+    document
+      .getElementById('password')
+      .removeEventListener('keyup', inputPassword);
   };
 
   checkEmail = (email) => {
@@ -114,7 +117,8 @@ class LoginContainer extends React.Component {
     const { email } = this.state;
     const { password } = this.state;
     if (!this.checkEmail(email)) {
-      alert('이메일 형식이 올바르지 않습니다.');
+      message.warning('이메일 형식이 올바르지 않습니다.');
+      document.getElementById('email').focus();
       return;
     }
     const hashCode = sha256.createHash('sha256').update(password).digest('hex');
