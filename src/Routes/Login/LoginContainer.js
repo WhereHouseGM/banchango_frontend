@@ -19,6 +19,23 @@ class LoginContainer extends React.Component {
     };
   }
 
+  componentDidMount = () => {
+    let inputPassword = document.getElementById('password');
+    inputPassword.addEventListener('keyup', (event) => {
+      if (event.key !== undefined && event.key === 'Enter') {
+        event.preventDefault();
+        document.getElementById('btnLogin').click();
+      }
+    });
+  };
+
+  componentWillUnmount = () => {
+    let inputPassword = document.getElementById('password');
+    document
+      .getElementById('password')
+      .removeEventListener('keyup', inputPassword);
+  };
+
   checkEmail = (email) => {
     let form = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+.[A-Za-z0-9]+/;
     if (form.test(email)) {
@@ -100,7 +117,8 @@ class LoginContainer extends React.Component {
     const { email } = this.state;
     const { password } = this.state;
     if (!this.checkEmail(email)) {
-      alert('이메일 형식이 올바르지 않습니다.');
+      message.warning('이메일 형식이 올바르지 않습니다.');
+      document.getElementById('email').focus();
       return;
     }
     const hashCode = sha256.createHash('sha256').update(password).digest('hex');
