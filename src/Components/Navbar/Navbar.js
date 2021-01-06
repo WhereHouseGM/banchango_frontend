@@ -87,10 +87,6 @@ export const NavBtn = styled.nav`
   align-items: center;
   margin-right: 24px;
 
-  /* Third Nav */
-  /* justify-content: flex-end;
-  width: 100vw; */
-
   @media screen and (max-width: 1023px) {
     display: none;
   }
@@ -107,7 +103,6 @@ export const NavBtnLink = styled(Link)`
   transition: all 0.2s ease-in-out;
   text-decoration: none;
 
-  /* Second Nav */
   margin-left: 24px;
 
   &:hover {

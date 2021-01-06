@@ -22,6 +22,7 @@ const FirstLeftText = styled.div`
   font-size: 45px;
 `;
 const FirstRightText = styled.div`
+font-family: 'notosans-Regular', sans-serif;
   width: 50%;
   max-width: 615px;
   font-size: 14px;
@@ -44,6 +45,7 @@ const SecondLeftBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  line-height: 1.5;
   font-size: 28px;
   font-weight: bold;
   @media (max-width: 768px) {
@@ -63,10 +65,11 @@ const SecondLeftThird = styled.div`
   color: #1e56a0;
 `;
 const SecondRightBox = styled.div`
+font-family: 'notosans-Regular', sans-serif;
   width: 70%;
   height: 200px;
   padding: 50px 0px 20px 40px;
-  font-size: 20px;
+  font-size: 18px;
   @media (max-width: 768px) {
     height: auto;
     width: 100%;
@@ -167,7 +170,7 @@ const Team = () => {
           <br /> IT 성장이 주는 편리함은 잃지 않되, 그 모든 기반에 있는 사람의
           가치 또한 잊지 않고자 합니다
           <br /> 반창고가 화주와 창고주에게 각자의 영역에서 발돋움하기 위한
-          도움닫기가 되길 바랍니다.{' '}
+          도움닫기가 되길 바랍니다.
         </FirstRightText>
       </FirstCon>
       <SecondWrap>

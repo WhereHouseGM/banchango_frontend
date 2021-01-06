@@ -69,20 +69,22 @@ const ResultBox = styled.div`
   margin: 20px;
 `;
 const ResultBoxImage = styled.img`
-  background-color: grey;
+  /* background-color: grey; */
   height: 100%;
+  width: 100%;
   object-fit: cover;
   object-position: center center;
-  flex: 1;
-  /* margin-right: -400px; */
-  /* padding-right: 400px; */
+  /* flex: 1; */
+  margin-right: -400px;
+  padding-right: 400px;
+
   &:hover {
     cursor: pointer;
   }
 `;
 const ResultBoxDescWrap = styled.div`
-  width: 400px;
-  min-width:400px;
+  /* width: 400px; */
+  min-width: 400px;
   /* flex:1; */
   text-align: left;
   padding: 30px;

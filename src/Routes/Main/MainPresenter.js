@@ -1,6 +1,6 @@
 import Helmet from 'react-helmet';
 import Navbar from '../../Components/Navbar';
-import MainPage from '../../Components/MainPage/MainPage';
+import MainPage from '../../Components/MainPage';
 import Footer from '../../Components/Footer';
 
 const MainPresenter = () => {
