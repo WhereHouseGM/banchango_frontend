@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -97,10 +97,22 @@ const ThirdContainer = styled.div`
   width: 100%;
   padding: 50px 0;
 `;
+const SliderBox = styled.div`
+  width: 90%;
+  display: flex;
+  margin: -40px auto 0 auto;
+  justify-content: space-between;
+  align-items: center;
+`;
 const SliderWrapper = styled.div`
   width: 90%;
   max-width: 768px;
-  margin: -40px auto 0 auto;
+`;
+const SliderButton = styled.div`
+  font-size: 20px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const SliderSetting = {
   arrows: false,
@@ -138,10 +150,10 @@ const FourthContainer = styled.div`
   flex-wrap: wrap;
 `;
 const FourthCard = styled.div`
-  width: 47%;
+  width: 46%;
   margin: 15px;
   background-color: #1e56a0;
-  @media (max-width: 1023px) {
+  @media (max-width: 768px) {
     width: 90%;
   }
 `;
@@ -173,20 +185,20 @@ const FifthTitleTemp = styled.div`
 const FifthWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 40%;
+  width: 50%;
   align-items: center;
   justify-content: space-between;
   margin-top: -25px;
-  @media (max-width: 1023px) {
+  @media (max-width: 768px) {
     width: 100%;
     justify-content: center;
   }
 `;
 const FifthTempImg = styled.img`
   width: 45%;
-  @media (max-width: 1023px) {
+  @media (max-width: 768px) {
     margin-bottom: 20px;
-    width: 75%;
+    width: 60%;
   }
 `;
 const FifthTitle = styled.div`
@@ -205,7 +217,7 @@ const FifthTitle = styled.div`
   }
 `;
 const FifthImageBox = styled.img`
-  width: 95%;
+  width: 90%;
   max-width: 800px;
   margin: 10px 0;
 `;
@@ -247,6 +259,8 @@ const MainPage = () => {
     '대형물품',
   ];
   const [clicked, setClicked] = useState([]);
+  const SliderRef = React.createRef();
+
   return (
     <Container>
       <FirstContainer>
@@ -305,28 +319,44 @@ const MainPage = () => {
             간단한 품목입력으로, 빠르게 견적 요청이 가능합니다.
           </BannerTextSmall>
         </QuickSystemBanner>
-        <SliderWrapper>
-          <Slider {...SliderSetting}>
-            <img
-              src={
-                'https://user-images.githubusercontent.com/62606632/103521869-d936d680-4ebc-11eb-9da8-b9b0c770375b.png'
-              }
-              alt={'두번째'}
-            />
-            <img
-              src={
-                'https://user-images.githubusercontent.com/62606632/103522022-19965480-4ebd-11eb-9675-e6e72b5e3fcf.png'
-              }
-              alt={'두번째'}
-            />
-            <img
-              src={
-                'https://user-images.githubusercontent.com/62606632/103522042-2155f900-4ebd-11eb-9a4b-0cde1d3aef37.png'
-              }
-              alt={'두번째'}
-            />
-          </Slider>
-        </SliderWrapper>
+        <SliderBox>
+          <SliderButton
+            onClick={() => {
+              SliderRef.current.slickPrev();
+            }}
+          >
+            {'<'}
+          </SliderButton>
+          <SliderWrapper>
+            <Slider {...SliderSetting} ref={SliderRef}>
+              <img
+                src={
+                  'https://user-images.githubusercontent.com/62606632/103521869-d936d680-4ebc-11eb-9da8-b9b0c770375b.png'
+                }
+                alt={'첫번째 슬라이드 이미지'}
+              />
+              <img
+                src={
+                  'https://user-images.githubusercontent.com/62606632/103522022-19965480-4ebd-11eb-9675-e6e72b5e3fcf.png'
+                }
+                alt={'두번째 슬라이드 이미지'}
+              />
+              <img
+                src={
+                  'https://user-images.githubusercontent.com/62606632/103522042-2155f900-4ebd-11eb-9a4b-0cde1d3aef37.png'
+                }
+                alt={'세번째 슬라이드 이미지'}
+              />
+            </Slider>
+          </SliderWrapper>
+          <SliderButton
+            onClick={() => {
+              SliderRef.current.slickNext();
+            }}
+          >
+            {'>'}
+          </SliderButton>
+        </SliderBox>
       </ThirdContainer>
       <FourthContainer>
         <FourthCard>
@@ -334,6 +364,7 @@ const MainPage = () => {
             src={
               'https://user-images.githubusercontent.com/62606632/103523823-d4275680-4ebf-11eb-880b-a2ae741e1562.png'
             }
+            alt={'첫번째 카드 이미지'}
           />
         </FourthCard>
         <FourthCard>
@@ -341,6 +372,7 @@ const MainPage = () => {
             src={
               'https://user-images.githubusercontent.com/62606632/103523966-1ea8d300-4ec0-11eb-94e6-19dc856130cd.png'
             }
+            alt={'두번째 카드 이미지'}
           />
         </FourthCard>
         <FourthCard>
@@ -348,6 +380,7 @@ const MainPage = () => {
             src={
               'https://user-images.githubusercontent.com/62606632/103524113-57e14300-4ec0-11eb-833c-fe9f1c7dcc07.png'
             }
+            alt={'세번째 카드 이미지'}
           />
         </FourthCard>
         <FourthCard>
@@ -355,6 +388,7 @@ const MainPage = () => {
             src={
               'https://user-images.githubusercontent.com/62606632/103524149-63cd0500-4ec0-11eb-9e85-e5411fac1e8c.png'
             }
+            alt={'네번째 카드 이미지'}
           />
         </FourthCard>
       </FourthContainer>

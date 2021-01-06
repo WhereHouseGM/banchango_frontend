@@ -13,6 +13,12 @@ const SliderCon = styled.div`
   width: 90%;
   margin: 0 auto;
 `;
+const SliderButton = styled.div`
+  font-size: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 const settings = {
   dots: true,
   infinite: true,
@@ -21,7 +27,7 @@ const settings = {
   slidesToScroll: 1,
 };
 export const ShowImageModal = ({ onClose, visible }) => {
-  const confirmClicked = () => {};
+  const SliderRef = React.createRef();
   const onMaskClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -33,9 +39,15 @@ export const ShowImageModal = ({ onClose, visible }) => {
       <ModalWrapper onClick={onMaskClick} tabIndex="-1" visible={visible}>
         <ModalInner tabIndex="0" className="modal-inner">
           <Con>
-            <div> {'<'} </div>
+            <SliderButton
+              onClick={() => {
+                SliderRef.current.slickPrev();
+              }}
+            >
+              {'<'}
+            </SliderButton>
             <SliderCon>
-              <Slider {...settings}>
+              <Slider ref={SliderRef} {...settings}>
                 <img
                   src={
                     'https://user-images.githubusercontent.com/62606632/103613265-98e16200-4f69-11eb-871f-8221757daec4.png'
@@ -53,7 +65,13 @@ export const ShowImageModal = ({ onClose, visible }) => {
                 />
               </Slider>
             </SliderCon>
-            <div> {'>'} </div>
+            <SliderButton
+              onClick={() => {
+                SliderRef.current.slickNext();
+              }}
+            >
+              {'>'}
+            </SliderButton>
           </Con>
         </ModalInner>
       </ModalWrapper>

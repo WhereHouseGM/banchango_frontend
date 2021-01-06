@@ -46,6 +46,12 @@ const SecondLeftBox = styled.div`
   justify-content: center;
   font-size: 28px;
   font-weight: bold;
+  @media (max-width: 768px) {
+    width: 100%;
+    text-align: center;
+    height: auto;
+    padding: 20px 0;
+  }
 `;
 const SecondLeftFirst = styled.div`
   color: #1e56a0;
@@ -59,9 +65,13 @@ const SecondLeftThird = styled.div`
 const SecondRightBox = styled.div`
   width: 70%;
   height: 200px;
-  padding: 20px 0px 20px 40px;
+  padding: 50px 0px 20px 40px;
   font-size: 20px;
-  margin-bottom: 20px;
+  @media (max-width: 768px) {
+    height: auto;
+    width: 100%;
+    padding: 20px;
+  }
 `;
 const ThirdCon = styled.div`
   width: 100%;
@@ -72,6 +82,9 @@ const ThirdCon = styled.div`
 `;
 const ThirdBox = styled.div`
   width: 50%;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const ThirdBoxText = styled.div`
   color: #1e56a0;
@@ -81,6 +94,9 @@ const ThirdBoxText = styled.div`
 `;
 const ThirdBoxImg = styled.img`
   width: 100%;
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 `;
 const FourthCon = styled.div`
   width: 90%;
@@ -95,6 +111,11 @@ const FourthLeft = styled.div`
   width: 38%;
   height: 200px;
   color: #1e56a0;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    padding: 20px 0;
+  }
 `;
 const FourthLeftLine = styled.div`
   width: 25px;
@@ -109,10 +130,17 @@ const FourthLeftTitle = styled.div`
 `;
 const FourthRight = styled.div`
   width: 62%;
+  @media (max-width: 768px) {
+width: 100%;
+}
 `;
 const FourthRightFloor = styled.div`
+  width: 100%;
   display: flex;
   color: #1e56a0;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 const FourthRightCard = styled.div`
   width: 20%;
@@ -149,8 +177,6 @@ const Team = () => {
           <SecondLeftThird>'성장'</SecondLeftThird>
         </SecondLeftBox>
         <SecondRightBox>
-          <br />
-          <br />
           누구에게나 처음은 낯설고, 어렵습니다.
           <br /> 그러나 처음이기에 성장할 수 있는 무한한 가능성은 설렘으로
           다가옵니다. <br />
@@ -165,8 +191,6 @@ const Team = () => {
           <SecondLeftThird>'상생'</SecondLeftThird>
         </SecondLeftBox>
         <SecondRightBox>
-          <br />
-          <br />
           모든 기업의 최우선 가치는 '이윤추구', '생존'입니다.
           <br /> 반창고는 그러한 생존이 상생이길 바랍니다.
           <br /> 규모나 영역에 대한 걱정없이 화주분들의 열정적인 도전에 보탬이
