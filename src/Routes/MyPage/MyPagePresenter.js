@@ -1,8 +1,9 @@
 import Helmet from 'react-helmet';
 import MyPage from '../../Components/MyPage/MyPage';
-import Navbar from '../../Components/Navbar/Navbar';
+import Navbar from '../../Components/Navbar';
 import Message from '../../Components/Message';
-import MainFooter from '../../Components/Main/MainFooter';
+import Footer from '../../Components/Footer';
+
 import PropTypes from 'prop-types';
 
 const DetailPresenter = ({ userInfo, handleSubmit, error, loading }) => (
@@ -11,15 +12,12 @@ const DetailPresenter = ({ userInfo, handleSubmit, error, loading }) => (
       <title>반창고 | 마이페이지</title>
     </Helmet>
     <Navbar />
-    {loading ? null : 
-        error ? (
-          <Message text={error} />
-        ) : (
-          <MyPage userInfo={userInfo} handleSubmit={handleSubmit} />
-        )
-      
-    }
-    <MainFooter />
+    {loading ? null : error ? (
+      <Message text={error} />
+    ) : (
+      <MyPage userInfo={userInfo} handleSubmit={handleSubmit} />
+    )}
+    <Footer />
   </>
 );
 

@@ -1,11 +1,7 @@
-import MainTitle from '../../Components/Main/MainTitle';
-import MainSearch from '../../Components/Main/MainSearch';
-import MainCategory from '../../Components/Main/MainCategory';
 import Helmet from 'react-helmet';
-import MainDescription from '../../Components/Main/MainDescription';
-import MainFooter from '../../Components/Main/MainFooter';
-import WhiteLabel from '../../Components/Main/WhiteLabel';
-import Navbar from '../../Components/Navbar/Navbar';
+import Navbar from '../../Components/Navbar';
+import MainPage from '../../Components/MainPage/MainPage';
+import Footer from '../../Components/Footer';
 
 const MainPresenter = () => {
   return (
@@ -14,13 +10,8 @@ const MainPresenter = () => {
         <title>반창고 | 창고중개플랫폼</title>
       </Helmet>
       <Navbar />
-      <MainTitle />
-      <MainSearch />
-      <MainCategory />
-      <WhiteLabel />
-      <MainDescription />
-      <WhiteLabel />
-      <MainFooter />
+      <MainPage />
+      <Footer />
     </>
   );
 };
