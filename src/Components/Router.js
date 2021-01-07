@@ -35,12 +35,9 @@ const RouterComponent = () => {
             path="/login"
             component={isLogin ? () => <Message text={BadAccessText} /> : Login}
           />
-          <Route
-            path="/signup"
-            component={
-              isLogin ? () => <Message text={BadAccessText} /> : SignUp
-            }
-          />
+          <Route path="/signup">
+            <SignUp />
+          </Route>
           <Route
             path="/admin"
             component={
