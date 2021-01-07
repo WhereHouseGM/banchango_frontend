@@ -1,34 +1,17 @@
 import Helmet from 'react-helmet';
-import Detail from '../../Components/Detail/Detail';
-import Navbar from '../../Components/Navbar/Navbar';
-import Message from '../../Components/Message';
-import MainFooter from '../../Components/Main/MainFooter';
-import PropTypes from 'prop-types';
+import Detail from '../../Components/Detail';
+import Navbar from '../../Components/Navbar';
+import Footer from '../../Components/Footer';
 
-const DetailPresenter = ({ warehouse, warehouseInfo, error, loading }) => (
+const DetailPresenter = () => (
   <>
     <Helmet>
       <title>반창고 | 상세페이지</title>
     </Helmet>
     <Navbar />
-    {loading ? null : (
-      <>
-        {error ? (
-          <Message text={error} />
-        ) : (
-          <Detail warehouse={warehouse} warehouseInfo={warehouseInfo} />
-        )}
-      </>
-    )}
-    <MainFooter />
+    <Detail />
+    <Footer />
   </>
 );
-
-DetailPresenter.propTypes = {
-  warehouse: PropTypes.object,
-  warehouseInfo: PropTypes.array,
-  error: PropTypes.string,
-  loading: PropTypes.bool.isRequired,
-};
 
 export default DetailPresenter;

@@ -71,7 +71,7 @@ class MyPageContainer extends React.Component {
       <MyPagePresenter
         userInfo={userInfo}
         handleSubmit={handleSubmit}
-        error={error}
+        error={'마이페이지 공사중'}
         loading={loading}
       />
     );
