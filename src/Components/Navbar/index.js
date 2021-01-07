@@ -29,7 +29,6 @@ const Navbar = () => {
     alert('정상적으로 로그아웃 되었습니다.');
   };
   return (
-    // TODO:로그아웃 버튼 상황따라 다르게 ㅇㅇ
     <>
       <Nav>
         <NavLink to="/">
