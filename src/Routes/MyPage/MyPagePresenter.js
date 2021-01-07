@@ -1,5 +1,5 @@
 import Helmet from 'react-helmet';
-import MyPage from '../../Components/MyPage/MyPage';
+import MyPage from '../../Components/MyPage';
 import Navbar from '../../Components/Navbar';
 import Message from '../../Components/Message';
 import Footer from '../../Components/Footer';

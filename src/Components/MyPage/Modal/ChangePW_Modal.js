@@ -22,6 +22,11 @@ export const ChangePWModal = ({
   const [checkNewPW, setCheckNewPW] = useState('');
 
   const confirmClicked = () => {
+    if (newPW.length < 8) {
+      message.destroy();
+      message.error('비밀번호는 8자 이상으로 설정해 주세요.');
+      return null;
+    }
     if (checkNewPW !== newPW) {
       setCheckNewPW('');
       message.destroy();

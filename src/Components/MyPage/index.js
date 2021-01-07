@@ -14,15 +14,17 @@ import {
   ButtonContainer,
   ChangePWButton,
   ConfirmButton,
-} from './MyPage_Styles';
+} from './style';
 
 const MyPage = ({ userInfo, handleSubmit }) => {
   const [checkModalShow, setCheckModalShow] = useState(false);
   const [changeModalShow, setChangeModalShow] = useState(false);
 
   const [nameIn, setNameIn] = useState(userInfo.name);
-  const [phoneNumberIn, setPhoneNumberIn] = useState(userInfo.phoneNumber);
   const [telNumberIn, setTelNumberIn] = useState(userInfo.telephoneNumber);
+  const [phoneNumberIn, setPhoneNumberIn] = useState(
+    userInfo.phoneNumber || '',
+  );
   const [companyNameIn, setCompanyNameIn] = useState(userInfo.companyName);
 
   const closeCheckModal = () => {
@@ -61,7 +63,14 @@ const MyPage = ({ userInfo, handleSubmit }) => {
       <Container>
         <LeftBanner>
           <BannerTextEnabledBox>내 프로필</BannerTextEnabledBox>
-          <BannerTextDisabledBox>로그아웃</BannerTextDisabledBox>
+          <BannerTextDisabledBox
+            onClick={() => {
+              localStorage.clear();
+              window.location.href = '/';
+            }}
+          >
+            로그아웃
+          </BannerTextDisabledBox>
         </LeftBanner>
         <UserInfoContainer>
           <HelloTitleText>{userInfo.name}님 안녕하세요.</HelloTitleText>

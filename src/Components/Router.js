@@ -46,12 +46,9 @@ const RouterComponent = () => {
                 : () => <Message text={BadAccessText} />
             }
           />
-          <Route
-            path="/mypage"
-            component={
-              isLogin ? MyPage : () => <Message text={BadAccessText} />
-            }
-          />
+          <Route path="/mypage">
+            {isLogin ? <MyPage /> : <Message text={BadAccessText} />}
+          </Route>
           <Route
             path="/register"
             component={
