@@ -12,6 +12,8 @@ import {
 import Logo from '../../assets/icons/LOGO2.png';
 
 const Navbar = () => {
+  const [loginInfo, setLoginInfo] = useState({});
+  const [navClicked, setNavClicked] = useState(false);
   useEffect(() => {
     let info = {
       logined: JSON.parse(localStorage.getItem('Login')),
@@ -19,10 +21,13 @@ const Navbar = () => {
     };
     setLoginInfo(info);
   }, []);
-  const [loginInfo, setLoginInfo] = useState({});
-  const [navClicked, setNavClicked] = useState(false);
+  const logout = () => {
+    setLoginInfo({
+      logined: false,
+    });
+    localStorage.clear();
+  };
   return (
-    // TODO:로그아웃 버튼 상황따라 다르게 ㅇㅇ
     <>
       <Nav>
         <NavLink to="/">
@@ -38,17 +43,27 @@ const Navbar = () => {
           }
         >
           <NavLinkOpen to="/team">팀소개</NavLinkOpen>
-          <NavLinkOpen to="/ServiceOverview">
-            {loginInfo.logined ? '로그아웃' : '로그인'}
-          </NavLinkOpen>
           <NavLinkOpen to="/mypage">{loginInfo.name} 님</NavLinkOpen>
         </NavOpen>
         <NavMenu>
           <NavLink to="/team">팀소개</NavLink>
-          <NavLink to="/ServiceOverview">로그아웃</NavLink>
-          <NavLink style={{ color: 'black' }} to="/mypage">
-            {loginInfo.name} 님
-          </NavLink>
+          {loginInfo.logined ? (
+            <>
+              <NavLink to="/" style={{ color: 'black' }} onClick={logout}>
+                로그아웃
+              </NavLink>
+              <NavLink style={{ color: 'black' }} to="/mypage">
+                {loginInfo.name} 님
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink to="/signup">회원가입</NavLink>
+              <NavLink to="/login" style={{ color: 'black' }}>
+                로그인
+              </NavLink>
+            </>
+          )}
         </NavMenu>
       </Nav>
     </>
