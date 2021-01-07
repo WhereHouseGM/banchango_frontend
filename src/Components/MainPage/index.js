@@ -33,10 +33,10 @@ const FirstUpperTitle = styled.div`
   font-size: ${(props) => props.fontSize || '30px'};
 `;
 const FirstTitle = styled.div`
+  font-family: 'notosans-Regular', sans-serif;
   margin-top: 10px;
   width: 90%;
   font-size: 22px;
-  font-family: 'notosans-Regular', sans-serif;
   line-height: 1.8;
   white-space: pre-line;
   @media (max-width: 768px) {
@@ -433,8 +433,8 @@ const MainPage = () => {
       <FourthContainer>
         <FourthWrapper>
           {CardImgArr.map((item, idx) => (
-            <FourthCard>
-              <FourthCardImg key={idx} src={item.path} alt={item.alt} />
+            <FourthCard key={idx}>
+              <FourthCardImg src={item.path} alt={item.alt} />
             </FourthCard>
           ))}
         </FourthWrapper>

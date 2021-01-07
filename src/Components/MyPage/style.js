@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   background-color: white;
-  margin-top: 60px;
+
   height: auto;
   display: flex;
   @media screen and (max-width: 768px) {
@@ -11,8 +11,8 @@ export const Container = styled.div`
 `;
 
 export const LeftBanner = styled.div`
-  font-family: 'Nanum Gothic', sans-serif;
-  background-color: #5ea0ff;
+  font-family: 'notosans-Regular', sans-serif;
+  background-color: #1e56a0;
   width: 270px;
   color: white;
 `;
@@ -21,14 +21,22 @@ export const BannerTextEnabledBox = styled.div`
   font-weight: bold;
   text-align: center;
   margin: 30px auto;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 export const BannerTextDisabledBox = styled.div`
   font-size: 20px;
   text-align: center;
   margin: 30px auto;
+  text-decoration: none;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const UserInfoContainer = styled.div`
+  font-family: 'notosans-Regular', sans-serif;
   background-color: white;
   width: 710px;
   padding: 40px 20px;
@@ -38,7 +46,6 @@ export const UserInfoContainer = styled.div`
   margin-right: auto;
 `;
 export const HelloTitleText = styled.h1`
-  font-family: 'Nanum Gothic', sans-serif;
   color: #5ea0ff;
   text-align: center;
   font-weight: bold;
@@ -46,8 +53,7 @@ export const HelloTitleText = styled.h1`
 `;
 export const InfoTitleText = styled.h3`
   margin-top: 30px;
-  font-family: 'Nanum Gothic', sans-serif;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
 `;
 export const InfoBox = styled.input`
@@ -81,6 +87,9 @@ export const ChangePWButton = styled.div`
   padding: 20px;
   text-align: center;
   font-size: 20px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const ConfirmButton = styled.div`
@@ -93,4 +102,7 @@ export const ConfirmButton = styled.div`
   padding: 20px;
   text-align: center;
   font-size: 20px;
+  &:hover {
+    cursor: pointer;
+  }
 `;

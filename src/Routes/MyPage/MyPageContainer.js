@@ -24,7 +24,7 @@ class MyPageContainer extends React.Component {
             targetInfo,
             localStorage.getItem('AccessToken'),
           )
-          .then(() => {
+          .then((res) => {
             message.destroy();
             message.success('정보 변경에 성공했습니다.');
           })
@@ -49,11 +49,8 @@ class MyPageContainer extends React.Component {
       if (status !== 200) {
         throw new Error();
       }
-      const {
-        data: { User: userInfo },
-      } = result;
       this.setState({
-        userInfo: userInfo,
+        userInfo: result.data,
         handleSubmit: this.handleSubmit,
         loading: false,
       });
@@ -71,7 +68,7 @@ class MyPageContainer extends React.Component {
       <MyPagePresenter
         userInfo={userInfo}
         handleSubmit={handleSubmit}
-        error={'마이페이지 공사중'}
+        error={error}
         loading={loading}
       />
     );
