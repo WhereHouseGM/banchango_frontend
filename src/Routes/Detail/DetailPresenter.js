@@ -2,8 +2,6 @@ import Helmet from 'react-helmet';
 import Detail from '../../Components/Detail';
 import Navbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
-// import Message from '../../Components/Message';
-// import PropTypes from 'prop-types';
 
 const DetailPresenter = () => (
   <>

@@ -10,7 +10,7 @@ import {
   SliderImgArr,
   CardImgArr,
   CompareImgArr,
-  ButtonsName,
+  BtnContainer,
 } from './MainPage';
 
 const Container = styled.div`

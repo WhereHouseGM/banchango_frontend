@@ -65,6 +65,10 @@ const ResultBox = styled.div`
   display: flex;
   box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.5);
   margin: 20px;
+  transition: all 0.2s ease;
+  &:hover {
+    transform: translateZ(0) scale(0.995);
+  }
 `;
 const ResultBoxImage = styled.img`
   /* background-color: grey; */
