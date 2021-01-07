@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Nav,
   NavLink,
@@ -12,8 +12,17 @@ import {
 import Logo from '../../assets/icons/LOGO2.png';
 
 const Navbar = () => {
+  useEffect(() => {
+    let info = {
+      logined: JSON.parse(localStorage.getItem('Login')),
+      name: localStorage.getItem('Name'),
+    };
+    setLoginInfo(info);
+  }, []);
+  const [loginInfo, setLoginInfo] = useState({});
   const [navClicked, setNavClicked] = useState(false);
   return (
+    // TODO:로그아웃 버튼 상황따라 다르게 ㅇㅇ
     <>
       <Nav>
         <NavLink to="/">
@@ -29,14 +38,16 @@ const Navbar = () => {
           }
         >
           <NavLinkOpen to="/team">팀소개</NavLinkOpen>
-          <NavLinkOpen to="/ServiceOverview">로그아웃</NavLinkOpen>
-          <NavLinkOpen to="/mypage">전정표 님</NavLinkOpen>
+          <NavLinkOpen to="/ServiceOverview">
+            {loginInfo.logined ? '로그아웃' : '로그인'}
+          </NavLinkOpen>
+          <NavLinkOpen to="/mypage">{loginInfo.name} 님</NavLinkOpen>
         </NavOpen>
         <NavMenu>
           <NavLink to="/team">팀소개</NavLink>
           <NavLink to="/ServiceOverview">로그아웃</NavLink>
           <NavLink style={{ color: 'black' }} to="/mypage">
-            전정표 님
+            {loginInfo.name} 님
           </NavLink>
         </NavMenu>
       </Nav>

@@ -11,7 +11,6 @@ export const Nav = styled.nav`
   padding: 0 calc((100vw - 1000px) / 2);
   z-index: 10;
 `;
-
 export const NavLink = styled(Link)`
   color: #0079c0;
   display: flex;
@@ -102,7 +101,6 @@ export const NavBtnLink = styled(Link)`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-
   margin-left: 24px;
 
   &:hover {

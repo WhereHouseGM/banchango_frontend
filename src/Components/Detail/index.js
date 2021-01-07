@@ -179,7 +179,6 @@ const Detail = () => {
   };
 
   const scrollFunc = (ref) => {
-    console.log(ref);
     window.scrollTo({
       top: ref.current.offsetTop - 90,
       behavior: 'smooth',

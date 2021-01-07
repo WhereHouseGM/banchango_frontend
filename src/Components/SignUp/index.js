@@ -26,17 +26,13 @@ const SignUp = ({ handleSubmit, handleInput, handlePasswordInput }) => {
   return (
     <Container>
       <Wrapper>
-        <BackgroundImage
-          bgImage={Background}
-          alt="Background Image."
-        ></BackgroundImage>
+        <BackgroundImage bgImage={Background} alt="Background Image." />
         <SignUpContainer>
           <ImageContainer>
-            <Image bgImage={MainImage} alt="Main image."></Image>
+            <Image bgImage={MainImage} alt="Main image." />
           </ImageContainer>
           <TextContainer>
             <HeaderTitleTop>간단한 정보를 입력해주세요.</HeaderTitleTop>
-
             <InputTitle>이메일</InputTitle>
             <Input
               id="email"
@@ -76,6 +72,15 @@ const SignUp = ({ handleSubmit, handleInput, handlePasswordInput }) => {
             <RePasswordText id="rePasswordText">
               비밀번호가 다릅니다.
             </RePasswordText>
+            <InputTitle>유선전화 번호</InputTitle>
+            <Input
+              id="telNumber"
+              type="text"
+              placeholder="032-123-1234"
+              name="telNumber"
+              onChange={handleInput}
+              required
+            />
             <InputTitle>휴대전화 번호</InputTitle>
             <Input
               id="phoneNumber"

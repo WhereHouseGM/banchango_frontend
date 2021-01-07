@@ -7,6 +7,7 @@ const InputType = {
   EMAIL: 'email',
   NAME: 'name',
   PASSWORD: 'password',
+  TELNUMBER: 'telNumber',
   PHONENUMBER: 'phoneNumber',
   USERTYPE: 'userType',
   COMPANYNAME: 'companyName',
@@ -25,6 +26,7 @@ class SignUpContainer extends React.Component {
       name: '',
       password: '',
       type: null,
+      telNumber: '',
       phoneNumber: '',
       companyName: '',
     };
@@ -66,16 +68,13 @@ class SignUpContainer extends React.Component {
 
   handleInput = (event) => {
     event.preventDefault();
-
     const {
       target: { name },
     } = event;
     const {
       target: { value },
     } = event;
-
     let trimmedValue = value.trim();
-
     switch (name) {
       case InputType.EMAIL:
         this.setState({ email: trimmedValue });
@@ -94,6 +93,9 @@ class SignUpContainer extends React.Component {
           this.setState({ password: trimmedValue });
           return;
         }
+      case InputType.TELNUMBER:
+        this.setState({ telNumber: trimmedValue });
+        return;
       case InputType.PHONENUMBER:
         this.setState({ phoneNumber: trimmedValue });
         return;
@@ -115,6 +117,7 @@ class SignUpContainer extends React.Component {
       name,
       password,
       type,
+      telNumber,
       phoneNumber,
       companyName,
     } = this.state;
@@ -148,15 +151,14 @@ class SignUpContainer extends React.Component {
       name: name,
       password: hashCode,
       type: type,
+      telephoneNumber: telNumber,
       phoneNumber: phoneNumber,
       companyName: companyName,
     };
 
     try {
       await userApi.signUp(requestBody);
-
       alert(`회원가입이 완료되었습니다! 로그인 페이지로 이동합니다.`);
-
       window.location.replace('/login');
     } catch ({ response: { status } }) {
       if (status === 400) {
