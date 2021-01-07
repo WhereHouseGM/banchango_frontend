@@ -64,53 +64,53 @@ export const CompareImgArr = [
   { path: Compare2, alt: '반창고 파트너스 이용 시 사진' },
 ];
 
-export const BtnContainer = {
-  CLOTHES: {
+export const BtnArr = [
+  {
     name: '의류',
     icon: { normal: DressA, clicked: DressB },
   },
-  COSMETIC: {
+  {
     name: '화장품',
     icon: { normal: SkincareA, clicked: SkincareB },
   },
-  JEWELRY: {
+  {
     name: '악세서리',
     icon: { normal: BagA, clicked: BagB },
   },
-  GENERAL_MERCHANDISE: {
+  {
     name: '잡화',
     icon: { normal: ToothbrushA, clicked: ToothbrushB },
   },
-  FOOD: {
+  {
     name: '식품',
     icon: { normal: HealthyFoodA, clicked: HealthyFoodB },
   },
-  BOOK: {
+  {
     name: '서적',
     icon: { normal: BookshelfA, clicked: BookshelfB },
   },
-  INTERIOR: {
+  {
     name: '인테리어',
     icon: { normal: LightBulbA, clicked: LightBulbB },
   },
-  ELECTRONICS: {
+  {
     name: '전자기기',
     icon: { normal: SmartphoneA, clicked: SmartphoneB },
   },
-  SPORTS: {
+  {
     name: '스포츠',
     icon: { normal: SportsA, clicked: SportsB },
   },
-  FREEZE_STORAGE: {
+  {
     name: '냉동',
     icon: { normal: RefrigeratorA, clicked: RefrigeratorB },
   },
-  COLD_STORAGE: {
+  {
     name: '냉장',
     icon: { normal: IcecreamA, clicked: IcecreamB },
   },
-  FURNITURE: {
+  {
     name: '대형물품',
     icon: { normal: FurnitureA, clicked: FurnitureB },
   },
-};
+];

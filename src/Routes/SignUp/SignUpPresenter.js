@@ -1,5 +1,5 @@
 import Helmet from 'react-helmet';
-import SignUp from '../../Components/SignUp/SignUp';
+import SignUp from '../../Components/SignUp';
 import PropTypes from 'prop-types';
 
 const SignUpPresenter = ({

@@ -1,7 +1,7 @@
 import Helmet from 'react-helmet';
 import Footer from '../../Components/Footer';
 import Navbar from '../../Components/Navbar';
-import Team from '../../Components/Team/Team';
+import Team from '../../Components/Team';
 
 const TeamPresenter = () => {
   return (

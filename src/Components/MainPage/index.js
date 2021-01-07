@@ -6,12 +6,7 @@ import BackgroundImg from '../../assets/images/MainPage/Background.png';
 import CircleImg from '../../assets/images/MainPage/Circle.png';
 import LastImg from '../../assets/images/MainPage/Last.png';
 
-import {
-  SliderImgArr,
-  CardImgArr,
-  CompareImgArr,
-  BtnContainer,
-} from './MainPage';
+import { SliderImgArr, CardImgArr, CompareImgArr, BtnArr } from './MainPage';
 
 const Container = styled.div`
   font-family: 'paybooc-Medium', sans-serif;
@@ -65,19 +60,52 @@ const FirstButton = styled.div`
 const SecondContainer = styled.div`
   padding: 60px 0;
   display: flex;
+  align-items: flex-start;
+  justify-content: center;
+`;
+const SecondSideWrapper = styled.div`
+  flex: 1;
+  margin-top: 35px;
+  border-top: 30px solid #1e56a0;
+`;
+const SecondSideTextWrapper = styled.div`
+  margin-top: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const SecondSideText = styled.div`
+  font-weight: bold;
+  color: #1e56a0;
+  font-size: 20px;
+`;
+const SecondSideArrow = styled.div`
+  color: grey;
+  margin-left: 20px;
+  font-size: 25px;
+`;
+const SecondMiddleWrapper = styled.div`
+  flex: 2.5;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
 const SecondTitle = styled.div`
-  width: 90%;
+  color: #15c7ab;
+  font-weight: bold;
+  font-size: 40px;
+`;
+const SecondSubTitle = styled.div`
+  margin-top: 10px;
+  /* width: 90%; */
   font-size: 20px;
   @media (max-width: 1023px) {
     white-space: pre-wrap;
   }
 `;
 const SecondWrapper = styled.div`
-  width: 60%;
+  /* width: 100%; */
   max-width: 864px;
   margin: 30px 0;
   display: flex;
@@ -88,26 +116,45 @@ const SecondWrapper = styled.div`
     width: 90%;
   }
 `;
-const SecondWrapperButton = styled.div`
-  width: 11%;
+const SecondCategoryBox = styled.div`
+  width: 14%;
   min-width: 105px;
-  margin: 10px;
-  padding: 10px 20px;
+  border: 3px solid #1e56a0;
   border-radius: 20px;
-  border: 1px solid black;
+  padding: 12px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 0.1);
   &:hover {
+    margin-top: -10px;
     cursor: pointer;
   }
-  @media (max-width: 1023px) {
-    width: 31%;
-  }
+`;
+const SecondCategoryIcon = styled.img`
+  width: 65%;
+`;
+const SecondCategoryText = styled.div`
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
 `;
 const SecondButton = styled.div`
+  border-radius: 38px;
+  box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 0.16);
+  border: solid 1px #1e56a0;
+  background-color: #ffffff;
+  font-weight: bold;
   margin-top: 10px;
   padding: 15px 20px;
-  color: white;
-  background-color: #1e56a0;
+  color: #1e56a0;
+  transition: all 0.2s ease;
   &:hover {
+    background-color: #1e56a0;
+    color: white;
     cursor: pointer;
   }
 `;
@@ -308,35 +355,48 @@ const MainPage = () => {
         </FirstButton>
       </FirstContainer>
       <SecondContainer>
-        <SecondTitle>
-          내 상품에 최적화된 창고 추천을 위해{'\n'}상품유형들을 선택해주세요.
-        </SecondTitle>
-        <SecondWrapper>
-          {ButtonsName.map((name, idx) => (
-            <SecondWrapperButton
-              key={idx}
-              onClick={() => {
-                let temp = buttonClicked;
-                temp[idx] = !temp[idx];
-                setButtonClicked([...temp]);
-              }}
-              style={
-                buttonClicked[idx]
-                  ? { backgroundColor: '#1e56a0', color: 'white' }
-                  : { backgroundColor: 'white', color: 'black' }
-              }
-            >
-              {name}
-            </SecondWrapperButton>
-          ))}
-        </SecondWrapper>
-        <SecondButton
-          onClick={() => {
-            window.location.href = '/category';
-          }}
-        >
-          창고 찾기
-        </SecondButton>
+        <SecondSideWrapper>
+          <SecondSideTextWrapper>
+            <SecondSideText>
+              내 상품 종류를 선택하고
+              <br />
+              검색해보세요!
+            </SecondSideText>
+            <SecondSideArrow>{'>>'}</SecondSideArrow>
+          </SecondSideTextWrapper>
+        </SecondSideWrapper>
+        <SecondMiddleWrapper>
+          <SecondTitle>내 품목에 맞는 창고 검색</SecondTitle>
+          <SecondSubTitle>
+            내 상품에 최적화된 창고 추천을 위해{'\n'}상품유형들을 선택해주세요.
+          </SecondSubTitle>
+          <SecondWrapper>
+            {BtnArr.map((item, idx) => (
+              <SecondCategoryBox
+                key={idx}
+                onClick={() => {
+                  let temp = buttonClicked;
+                  temp[idx] = !temp[idx];
+                  setButtonClicked([...temp]);
+                }}
+                style={
+                  buttonClicked[idx]
+                    ? { border: '3px solid #1e56a0' }
+                    : { border: '1.5px solid #1e56a0', boxShadow: 'none' }
+                }
+              >
+                <SecondCategoryIcon
+                  src={
+                    buttonClicked[idx] ? item.icon.clicked : item.icon.normal
+                  }
+                />
+                <SecondCategoryText>{item.name}</SecondCategoryText>
+              </SecondCategoryBox>
+            ))}
+          </SecondWrapper>
+          <SecondButton href="/category">창고 찾기</SecondButton>
+        </SecondMiddleWrapper>
+        <SecondSideWrapper></SecondSideWrapper>
       </SecondContainer>
       <ThirdContainer>
         <QuickSystemBanner>

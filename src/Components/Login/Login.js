@@ -101,7 +101,6 @@ const Login = ({
                   <TextBottom href="/service-agreements">이용 약관 </TextBottom>
                   |
                   <TextBottom href="/privacy-policy">
-                    {' '}
                     개인 정보 처리 방침
                   </TextBottom>
                 </TextBottomContainer>

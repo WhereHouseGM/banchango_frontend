@@ -203,11 +203,7 @@ const Category = () => {
         <CategoryFindButton>창고 찾기</CategoryFindButton>
       </CategoryPickCon>
       <ResultWrap>
-        <ResultBox
-          onClick={() => {
-            window.location.href = '/warehouses/detail';
-          }}
-        >
+        <ResultBox href={'/warehouses/detail'}>
           <ResultBoxImage
             src={
               'https://user-images.githubusercontent.com/62606632/103597537-d0d5ae80-4f43-11eb-971e-cecfe088eada.png'
