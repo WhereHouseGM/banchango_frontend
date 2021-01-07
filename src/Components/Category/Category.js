@@ -6,12 +6,10 @@ const Con = styled.div`
   font-family: 'paybooc-Medium', sans-serif;
 `;
 const CategoryPickCon = styled.div`
-  /* border-top: 1px solid black; */
   width: 100%;
   padding: 20px 0;
   display: flex;
   justify-content: center;
-  /* border-bottom: 1px solid black; */
 `;
 const CategoryPickTitle = styled.div`
   margin-top: -8px;

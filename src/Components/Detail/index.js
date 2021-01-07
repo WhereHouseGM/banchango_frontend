@@ -170,11 +170,21 @@ const Detail = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [isTop, setIsTop] = useState(false);
 
-  const CenterDescRef = React.createRef();
-  const CenterInfoRef = React.createRef();
-  const CenterAnnounceRef = React.createRef();
-  const CenterCautionRef = React.createRef();
-  const CenterPositionRef = React.createRef();
+  const centerRef = {
+    desc: React.createRef(),
+    info: React.createRef(),
+    announce: React.createRef(),
+    caution: React.createRef(),
+    position: React.createRef(),
+  };
+
+  const scrollFunc = (ref) => {
+    console.log(ref);
+    window.scrollTo({
+      top: ref.current.offsetTop - 90,
+      behavior: 'smooth',
+    });
+  };
 
   const onScroll = () => {
     const refBottom = document
@@ -217,50 +227,35 @@ const Detail = () => {
           <FirstRefsWrap>
             <FirstRef
               onClick={() => {
-                window.scrollTo({
-                  top: CenterDescRef.current.offsetTop - 90,
-                  behavior: 'smooth',
-                });
+                scrollFunc(centerRef.desc);
               }}
             >
               센터 소개
             </FirstRef>
             <FirstRef
               onClick={() => {
-                window.scrollTo({
-                  top: CenterInfoRef.current.offsetTop - 90,
-                  behavior: 'smooth',
-                });
+                scrollFunc(centerRef.info);
               }}
             >
               시설 정보
             </FirstRef>
             <FirstRef
               onClick={() => {
-                window.scrollTo({
-                  top: CenterAnnounceRef.current.offsetTop - 90,
-                  behavior: 'smooth',
-                });
+                scrollFunc(centerRef.announce);
               }}
             >
               시설 안내사항
             </FirstRef>
             <FirstRef
               onClick={() => {
-                window.scrollTo({
-                  top: CenterCautionRef.current.offsetTop - 90,
-                  behavior: 'smooth',
-                });
+                scrollFunc(centerRef.caution);
               }}
             >
               주의사항
             </FirstRef>
             <FirstRef
               onClick={() => {
-                window.scrollTo({
-                  top: CenterPositionRef.current.offsetTop - 90,
-                  behavior: 'smooth',
-                });
+                scrollFunc(centerRef.position);
               }}
             >
               위치정보
@@ -270,7 +265,7 @@ const Detail = () => {
 
         <MainCon>
           <MainWrap>
-            <MainSubTitle ref={CenterDescRef}>
+            <MainSubTitle ref={centerRef.desc}>
               인천서구 북항로 31길 B센터 스토리지원
             </MainSubTitle>
             <MainTitle>스토리지원</MainTitle>
@@ -297,7 +292,7 @@ const Detail = () => {
             <MainDesc>* 창고 사정에 따라 변동 될 수 있습니다.</MainDesc>
             <MainSmallTitle>월 최소 출고량</MainSmallTitle>
             <MainDesc>월 최소 1건 출고 필요</MainDesc>
-            <MainSmallTitle ref={CenterInfoRef}>시설 정보</MainSmallTitle>
+            <MainSmallTitle ref={centerRef.info}>시설 정보</MainSmallTitle>
             <MainSmallTitle>보험 가입 내역</MainSmallTitle>
             <MainDesc>
               삼성화재 영업배상보험
@@ -306,7 +301,7 @@ const Detail = () => {
               <br />
               KB보험 화재보험
             </MainDesc>
-            <MainSmallTitle ref={CenterAnnounceRef}>
+            <MainSmallTitle ref={centerRef.announce}>
               시설 안내 사항
             </MainSmallTitle>
             <MainDesc>
@@ -320,7 +315,7 @@ const Detail = () => {
               <br />
               7. 포장 시간이 기록되어 배송 CS가 용이합니다.
             </MainDesc>
-            <MainSmallTitle ref={CenterCautionRef}>
+            <MainSmallTitle ref={centerRef.caution}>
               시설 이용 시 주의사항
             </MainSmallTitle>
             <MainDesc>
@@ -339,7 +334,7 @@ const Detail = () => {
               <br />
               7. 포장 시간이 기록되어 배송 CS가 용이합니다.
             </MainDesc>
-            <MainSmallTitle ref={CenterPositionRef} textAlign={'center'}>
+            <MainSmallTitle ref={centerRef.position} textAlign={'center'}>
               위치 정보
             </MainSmallTitle>
             <div style={{ margin: '0px auto', width: '50%' }}>
