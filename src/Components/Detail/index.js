@@ -165,6 +165,9 @@ const ResultBoxDescInquiryButton = styled.div`
   color: #1e56a0;
   font-weight: bold;
   box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.5);
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const Detail = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -374,7 +377,13 @@ const Detail = () => {
             <ResultBoxDescDeliveryListText>
               CJ 대한통운 로젠택배
             </ResultBoxDescDeliveryListText>
-            <ResultBoxDescInquiryButton>견적 문의</ResultBoxDescInquiryButton>
+            <ResultBoxDescInquiryButton
+              onClick={() => {
+                window.location.href = '/warehouses/quotecontact';
+              }}
+            >
+              견적 문의
+            </ResultBoxDescInquiryButton>
           </RightDesc>
         </MainCon>
       </Con>
