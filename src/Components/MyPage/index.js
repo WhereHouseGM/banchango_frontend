@@ -65,8 +65,15 @@ const MyPage = ({ userInfo, handleSubmit }) => {
           <BannerTextEnabledBox>내 프로필</BannerTextEnabledBox>
           <BannerTextDisabledBox
             onClick={() => {
+              window.location.href = '/mypage/quotation';
+            }}
+          >
+            견적 요청 목록
+          </BannerTextDisabledBox>
+          <BannerTextDisabledBox
+            onClick={() => {
               localStorage.clear();
-              window.location.href = '/';
+              window.location.reload();
             }}
           >
             로그아웃

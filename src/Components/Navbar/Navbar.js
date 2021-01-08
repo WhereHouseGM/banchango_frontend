@@ -3,7 +3,6 @@ import { NavLink as Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Nav = styled.nav`
-  font-family: 'Nanum Gothic', sans-serif;
   background: white;
   height: 55px;
   display: flex;
@@ -44,7 +43,6 @@ export const NavOpen = styled.div`
 `;
 export const NavLinkOpen = styled(Link)`
   color: white;
-  /* font-weight: bold; */
   font-size: 25px;
   text-align: center;
   padding: 2.2rem;
@@ -60,10 +58,6 @@ export const Bars = styled(FaBars)`
   @media screen and (max-width: 1023px) {
     color: black;
     display: block;
-    /* position: absolute; */
-    /* top: 0; */
-    /* right: 0; */
-    /* transform: translate(-100%, 70%); */
     margin: auto 13.1px auto 0;
     font-size: 1.8rem;
     cursor: pointer;

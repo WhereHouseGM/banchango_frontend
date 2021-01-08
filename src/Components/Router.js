@@ -9,6 +9,7 @@ import Main from '../Routes/Main';
 import Login from '../Routes/Login';
 import SignUp from '../Routes/SignUp';
 import MyPage from '../Routes/MyPage';
+import QuotationList from '../Routes/MyPage/QuotationList';
 import Detail from '../Routes/Detail';
 import Category from '../Routes/Category';
 import Message from '../Components/Message';
@@ -46,8 +47,11 @@ const RouterComponent = () => {
                 : () => <Message text={BadAccessText} />
             }
           />
-          <Route path="/mypage">
+          <Route path="/mypage" exact>
             {isLogin ? <MyPage /> : <Message text={BadAccessText} />}
+          </Route>
+          <Route path="/mypage/quotation">
+            {isLogin ? <QuotationList /> : <Message text={BadAccessText} />}
           </Route>
           <Route
             path="/register"

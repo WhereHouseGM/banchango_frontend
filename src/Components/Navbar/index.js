@@ -26,6 +26,7 @@ const Navbar = () => {
       logined: false,
     });
     localStorage.clear();
+    window.location.href = '/';
   };
   return (
     <>
