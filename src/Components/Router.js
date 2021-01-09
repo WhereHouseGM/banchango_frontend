@@ -18,6 +18,7 @@ import SiteRule from '../Routes/SiteRule';
 import PrivacyPolicy from '../Routes/PrivacyPolicy';
 import Register from '../Routes/Register';
 import Team from '../Routes/Team';
+import QuoteContact from '../Routes/Detail/QuoteContact';
 
 const BadAccessText = '잘못된 접근입니다.';
 
@@ -64,6 +65,9 @@ const RouterComponent = () => {
           </Route>
           <Route path="/category" component={Category} />
           <Route path="/warehouses/detail" component={Detail} />
+          <Route path="/warehouses/quotecontact">
+            <QuoteContact />
+          </Route>
           <Route path="/service-agreements" component={SiteRule} />
           <Route path="/privacy-policy" component={PrivacyPolicy} />
           <Redirect path="*" to="/" />
