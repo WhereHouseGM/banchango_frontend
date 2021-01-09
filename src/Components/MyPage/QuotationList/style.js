@@ -4,6 +4,7 @@ export const Container = styled.div`
   background-color: white;
   height: auto;
   position: relative;
+  min-height: 85vh;
   @media screen and (max-width: 768px) {
     margin-top: 105px;
   }

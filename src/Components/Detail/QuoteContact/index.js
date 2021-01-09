@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   width: 100%;
   min-width: 1024px;
+  
 `;
 const Wrapper = styled.div`
   width: 90%;
