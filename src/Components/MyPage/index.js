@@ -73,7 +73,7 @@ const MyPage = ({ userInfo, handleSubmit }) => {
           <BannerTextDisabledBox
             onClick={() => {
               localStorage.clear();
-              window.location.reload();
+              window.location.href = '/';
             }}
           >
             로그아웃
