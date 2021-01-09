@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100%;
+  min-width: 1024px;
 `;
 const Wrapper = styled.div`
   width: 90%;
@@ -17,15 +18,17 @@ const Title = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 `;
 const ProductTitleWrapper = styled.div`
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 20px 0;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  padding: 15px 0;
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 `;
 const ProductTitle = styled.div`
   font-weight: bold;
   font-size: 30px;
+  padding-left: 25px;
 `;
 const RestoreButton = styled.div`
   border: 1px solid #1e56a0;
@@ -43,13 +46,16 @@ const ProductWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+`;
+const ProductBlankWrapper = styled.div`
+  flex: 1;
 `;
 const ProductLeftWrapper = styled.div`
-  width: 48%;
+  width: 45%;
 `;
 const ProductRightWrapper = styled.div`
-  width: 48%;
+  width: 45%;
 `;
 const InputTitle = styled.div`
   display: flex;
@@ -144,8 +150,12 @@ const HistoryChild = styled.div`
 const HistoryChildText = styled.div`
   width: ${(props) => props.width};
 `;
-const TotalCountWrapper = styled.div`
+const TotalCountContainer = styled.div`
   margin: 25px 0;
+  display: flex;
+  flex-direction: row-reverse;
+`;
+const TotalCountWrapper = styled.div`
   display: flex;
   align-items: center;
   color: #1e56a0;
@@ -163,8 +173,35 @@ const TotalCountInput = styled.input`
 const TotalCountSubText = styled.div`
   margin-left: 10px;
 `;
+const AnnounceTitle = styled.div`
+  margin-top: 80px;
+  font-weight: bold;
+  width: 100%;
+  font-size: 30px;
+  padding: 25px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+`;
+const TextareaWrapper = styled.div`
+  width: 80%;
+  height: 300px;
+  margin: 30px auto;
+`;
 const AnnounceTextarea = styled.textarea`
-  width: 90%;
+  height: 100%;
+  width: 100%;
+`;
+const InquiryButton = styled.div`
+  background-color: #1e56a0;
+  color: white;
+  border-radius: 40px;
+  padding: 20px 60px;
+  text-align: center;
+  font-size: 20px;
+  width: 300px;
+  margin: 40px auto;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const DUMMY_HISTORY = [
@@ -215,6 +252,7 @@ const QuoteContact = () => {
           <RestoreButton>불러오기</RestoreButton>
         </ProductTitleWrapper>
         <ProductWrapper>
+          <ProductBlankWrapper />
           <ProductLeftWrapper>
             <BlueText text={'상품 종류'} />
             <InputBox />
@@ -282,14 +320,20 @@ const QuoteContact = () => {
             <HistoryChildText width={'12%'}>클릭</HistoryChildText>
           </HistoryChild>
         ))}
-        <TotalCountWrapper>
-          <TotalCountTitle>월간 총 출고량</TotalCountTitle>
-          <div style={{ color: 'red' }}>*</div>
-          <TotalCountInput />
-          <TotalCountSubText>건</TotalCountSubText>
-        </TotalCountWrapper>
+        <TotalCountContainer>
+          <TotalCountWrapper>
+            <TotalCountTitle>월간 총 출고량</TotalCountTitle>
+            <div style={{ color: 'red' }}>*</div>
+            <TotalCountInput />
+            <TotalCountSubText>건</TotalCountSubText>
+          </TotalCountWrapper>
+        </TotalCountContainer>
         <ProductListWrapper>
-          <ProductListTitle>요청 및 유의 사항</ProductListTitle>
+          <AnnounceTitle>요청 및 유의 사항</AnnounceTitle>
+          <TextareaWrapper>
+            <AnnounceTextarea placeholder={'내용 입력'} />
+          </TextareaWrapper>
+          <InquiryButton>견적 문의하기</InquiryButton>
         </ProductListWrapper>
       </Wrapper>
     </Container>
