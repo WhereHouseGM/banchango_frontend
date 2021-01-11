@@ -54,10 +54,12 @@ import {
   FifthDescRed,
   LastGreyContainer,
 } from './MainPage';
+import { useHistory } from 'react-router-dom';
 
 const MainPage = () => {
   const [buttonClicked, setButtonClicked] = useState([]);
   const SliderRef = React.createRef();
+  const history = useHistory();
 
   const getClickedMainItemTypes = () => {
     let clickedMainItemTypes = [];
@@ -137,7 +139,7 @@ const MainPage = () => {
                 return;
               } else {
                 sessionStorage.setItem('MainItemTypes', clickedMainItemTypes);
-                window.location.href = '/category';
+                history.push('/category');
               }
             }}
           >

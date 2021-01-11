@@ -24,10 +24,10 @@ export const userApi = {
 };
 
 export const warehouseApi = {
-  getByMainItemType: (type, page, size) =>
+  getByMainItemTypes: (type, page, size) =>
     api.get('warehouses', {
       params: {
-        category: `${type}`,
+        mainItemType: `${type}`,
         page: `${page}`,
         size: `${size}`,
       },
@@ -54,17 +54,6 @@ export const imageApi = {
       headers: {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
-      },
-    }),
-};
-
-export const mainPageApi = {
-  search: (mainItemTypes, page, size) =>
-    api.get(`warehouses`, {
-      params: {
-        mainItemTypes: `${mainItemTypes}`,
-        page: `${page}`,
-        size: `${size}`,
       },
     }),
 };

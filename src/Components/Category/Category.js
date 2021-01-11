@@ -177,3 +177,54 @@ export const ResultBoxDescInquiryButton = styled.div`
     cursor: pointer;
   }
 `;
+
+export const BtnArr = [
+  {
+    id: 'CLOTH',
+    name: '의류',
+  },
+  {
+    id: 'COSMETIC',
+    name: '화장품',
+  },
+  {
+    id: 'ACCESSORY',
+    name: '악세서리',
+  },
+  {
+    id: 'GENERAL_MERCHANDISE',
+    name: '잡화',
+  },
+  {
+    id: 'FOOD',
+    name: '식품',
+  },
+  {
+    id: 'BOOK',
+    name: '서적',
+  },
+  {
+    id: 'INTERIOR',
+    name: '인테리어',
+  },
+  {
+    id: 'ELECTRONICS',
+    name: '전자기기',
+  },
+  {
+    id: 'SPORTS',
+    name: '스포츠',
+  },
+  {
+    id: 'FREEZE_STORAGE',
+    name: '냉동',
+  },
+  {
+    id: 'COLD_STORAGE',
+    name: '냉장',
+  },
+  {
+    id: 'LARGE_SIZE',
+    name: '대형물품',
+  },
+];
