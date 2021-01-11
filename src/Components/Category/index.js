@@ -31,7 +31,6 @@ import {
 const Category = ({ warehouses, error, loading }) => {
   const [clicked, setClicked] = useState([]);
   const history = useHistory();
-  console.log(warehouses);
   return (
     <Container>
       <CategoryPickContainer>
@@ -63,46 +62,60 @@ const Category = ({ warehouses, error, loading }) => {
         </CategoryPickButtonWrap>
         <CategoryFindButton>창고 찾기</CategoryFindButton>
       </CategoryPickContainer>
-      <ResultWrap>
-        <ResultBox
-          onClick={() => {
-            history.push('/warehouses/detail');
-          }}
-        >
-          <ResultBoxImage
-            src={
-              'https://user-images.githubusercontent.com/62606632/103597537-d0d5ae80-4f43-11eb-971e-cecfe088eada.png'
-            }
-          />
-          <ResultBoxDescWrap>
-            <ResultBoxDescTitle>세방 3PL 물류</ResultBoxDescTitle>
-            <ResultBoxDescSub>경기도 고양시 중구</ResultBoxDescSub>
-            <ResultBoxDescBoxWrap>
-              <ResultBoxDescBoxLeft>
-                <ResultBoxDescBoxTitle>월 최소 출고량</ResultBoxDescBoxTitle>
-                <ResultBoxDescBoxText>100건</ResultBoxDescBoxText>
-              </ResultBoxDescBoxLeft>
-              <ResultBoxDescBoxRight>
-                <ResultBoxDescBoxTitle>평수</ResultBoxDescBoxTitle>
-                <ResultBoxDescBoxText>2,500평</ResultBoxDescBoxText>
-              </ResultBoxDescBoxRight>
-            </ResultBoxDescBoxWrap>
-            <ResultBoxDescButtonWrap>
-              <ResultBoxDescButton>악세사리</ResultBoxDescButton>
-              <ResultBoxDescButton>서적</ResultBoxDescButton>
-            </ResultBoxDescButtonWrap>
-            <ResultBoxDescDeliveryListTitle>
-              택배사
-            </ResultBoxDescDeliveryListTitle>
-            <ResultBoxDescDeliveryListText>
-              CJ 대한통운 로젠택배
-            </ResultBoxDescDeliveryListText>
-            <ResultBoxDescInquiryButton>견적 문의</ResultBoxDescInquiryButton>
-          </ResultBoxDescWrap>
-        </ResultBox>
-        <ResultBox></ResultBox>
-      </ResultWrap>
+      {warehouses.map((warehouse, index) => (
+        <React.Fragment key={index}>
+          <ResultWrap>
+            <ResultBox
+              onClick={() => {
+                history.push(`/warehouses/detail/${warehouse.warehouseId}`);
+              }}
+            >
+              <ResultBoxImage src={warehouse.mainImageUrl} />
+              <ResultBoxDescWrap>
+                <ResultBoxDescTitle>{warehouse.name}</ResultBoxDescTitle>
+                <ResultBoxDescSub>{warehouse.address}</ResultBoxDescSub>
+                <ResultBoxDescBoxWrap>
+                  <ResultBoxDescBoxLeft>
+                    <ResultBoxDescBoxTitle>
+                      월 최소 출고량
+                    </ResultBoxDescBoxTitle>
+                    <ResultBoxDescBoxText>
+                      {warehouse.minReleasePerMonth}
+                    </ResultBoxDescBoxText>
+                  </ResultBoxDescBoxLeft>
+                  <ResultBoxDescBoxRight>
+                    <ResultBoxDescBoxTitle>평수</ResultBoxDescBoxTitle>
+                    <ResultBoxDescBoxText>
+                      {warehouse.space}
+                    </ResultBoxDescBoxText>
+                  </ResultBoxDescBoxRight>
+                </ResultBoxDescBoxWrap>
+                <ResultBoxDescButtonWrap>
+                  {warehouse.mainItemTypes.map((type, idx) => (
+                    <ResultBoxDescButton match={type.match}>
+                      {type.name}
+                    </ResultBoxDescButton>
+                  ))}
+                </ResultBoxDescButtonWrap>
+                <ResultBoxDescDeliveryListTitle>
+                  택배사
+                </ResultBoxDescDeliveryListTitle>
+                <ResultBoxDescDeliveryListText>
+                  {warehouse.deliveryTypes.join(' ')}
+                </ResultBoxDescDeliveryListText>
+                <ResultBoxDescInquiryButton>
+                  견적 문의
+                </ResultBoxDescInquiryButton>
+              </ResultBoxDescWrap>
+            </ResultBox>
+          </ResultWrap>
+        </React.Fragment>
+      ))}
     </Container>
   );
+};
+
+Category.propTypes = {
+  warehouses: PropTypes.arrayOf(Object),
 };
 export default Category;
