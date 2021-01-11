@@ -68,7 +68,9 @@ const RouterComponent = () => {
           <Route path="/team">
             <Team />
           </Route>
-          <Route path="/category" component={Category} />
+          <Route path="/category">
+            <Category />
+          </Route>
           <Route path="/warehouses/detail" component={Detail} />
           <Route path="/warehouses/quotecontact">
             <QuoteContact />
