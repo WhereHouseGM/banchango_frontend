@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Modal from './Modal/ShowImageModal';
@@ -32,6 +32,9 @@ const FirstRefsWrapWrap = styled.div`
   background-color: white;
   width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  /* left: 0; */
 `;
 const FirstRefsWrap = styled.div`
   width: 80%;
@@ -99,6 +102,8 @@ const RightDesc = styled.div`
   padding: 20px;
   height: 420px;
   background-color: white;
+  position: sticky;
+  top: 110px;
   /* border: 1px solid black; */
   border-radius: 20px;
   box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.5);
@@ -172,7 +177,6 @@ const ResultBoxDescInquiryButton = styled.div`
 `;
 const Detail = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [isTop, setIsTop] = useState(false);
 
   const history = useHistory();
 
@@ -185,24 +189,9 @@ const Detail = () => {
   };
 
   const scrollFunc = (ref) => {
-    window.scrollTo({
-      top: ref.current.offsetTop - 90,
-      behavior: 'smooth',
-    });
+    window.scrollTo({ top: ref.current.offsetTop - 90, behavior: 'smooth' });
   };
 
-  const onScroll = () => {
-    const refBottom = document
-      .getElementById('RefsWrap')
-      .getBoundingClientRect().bottom;
-    if (refBottom < 0) {
-      setIsTop(true);
-    }
-  };
-  useEffect(() => {
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
   return (
     <>
       <Modal
@@ -213,7 +202,7 @@ const Detail = () => {
         visible={modalVisible}
       />
       <Con>
-        <FirstBigImgCon id={'RefsWrap'}>
+        <FirstBigImgCon>
           <FirstBigImgButton
             onClick={() => {
               setModalVisible(true);
@@ -222,13 +211,7 @@ const Detail = () => {
             시설보기
           </FirstBigImgButton>
         </FirstBigImgCon>
-        <FirstRefsWrapWrap
-          style={
-            isTop
-              ? { position: 'sticky', top: '0', left: '0' }
-              : { position: 'static' }
-          }
-        >
+        <FirstRefsWrapWrap>
           <FirstRefsWrap>
             <FirstRef
               onClick={() => {
@@ -351,13 +334,7 @@ const Detail = () => {
             </div>
             <MainMapDesc>인천서구 동작구</MainMapDesc>
           </MainWrap>
-          <RightDesc
-            style={
-              isTop
-                ? { position: 'sticky', top: '110px', left: '0' }
-                : { position: 'static' }
-            }
-          >
+          <RightDesc>
             <ResultBoxDescTitle>세방 3PL 물류</ResultBoxDescTitle>
             <ResultBoxDescSub>경기도 고양시 중구</ResultBoxDescSub>
             <ResultBoxDescBoxWrap>
