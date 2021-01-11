@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://api.banchangohub.com/v3/',
+  baseURL: 'https://dev-api.banchangohub.com/v3/',
 });
 
 export const userApi = {
@@ -54,6 +54,17 @@ export const imageApi = {
       headers: {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
+      },
+    }),
+};
+
+export const mainPageApi = {
+  search: (mainItemTypes, page, size) =>
+    api.get(`warehouses`, {
+      params: {
+        mainItemTypes: `${mainItemTypes}`,
+        page: `${page}`,
+        size: `${size}`,
       },
     }),
 };
