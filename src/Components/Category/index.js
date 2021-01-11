@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { categoryTitleDict } from '../../static/category';
 
 import {
   Container,
@@ -28,7 +29,7 @@ import {
   BtnArr,
 } from './Category';
 
-const Category = ({ warehouses, error, loading }) => {
+const Category = ({ warehouses }) => {
   const [clicked, setClicked] = useState([]);
   const history = useHistory();
   return (
@@ -92,8 +93,8 @@ const Category = ({ warehouses, error, loading }) => {
                 </ResultBoxDescBoxWrap>
                 <ResultBoxDescButtonWrap>
                   {warehouse.mainItemTypes.map((type, idx) => (
-                    <ResultBoxDescButton match={type.match}>
-                      {type.name}
+                    <ResultBoxDescButton key={idx} match={type.match}>
+                      {categoryTitleDict(type.name)}
                     </ResultBoxDescButton>
                   ))}
                 </ResultBoxDescButtonWrap>

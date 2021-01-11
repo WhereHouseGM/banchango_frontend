@@ -151,6 +151,7 @@ export const ResultBoxDescButton = styled.div`
   border: 1px solid black;
   border-radius: 20px;
   background-color: ${(props) => (props.match === true ? '#1e56a0' : 'white')};
+  color: ${(props) => (props.match === true ? 'white' : 'black')};
 `;
 
 export const ResultBoxDescDeliveryListTitle = styled.div`
