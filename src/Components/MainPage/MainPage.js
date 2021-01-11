@@ -69,50 +69,62 @@ export const CompareImgArr = [
 
 export const BtnArr = [
   {
+    id: 'CLOTH',
     name: '의류',
     icon: { normal: DressA, clicked: DressB },
   },
   {
+    id: 'COSMETIC',
     name: '화장품',
     icon: { normal: SkincareA, clicked: SkincareB },
   },
   {
+    id: 'ACCESSORY',
     name: '악세서리',
     icon: { normal: BagA, clicked: BagB },
   },
   {
+    id: 'GENERAL_MERCHANDISE',
     name: '잡화',
     icon: { normal: ToothbrushA, clicked: ToothbrushB },
   },
   {
+    id: 'FOOD',
     name: '식품',
     icon: { normal: HealthyFoodA, clicked: HealthyFoodB },
   },
   {
+    id: 'BOOK',
     name: '서적',
     icon: { normal: BookshelfA, clicked: BookshelfB },
   },
   {
+    id: 'INTERIOR',
     name: '인테리어',
     icon: { normal: LightBulbA, clicked: LightBulbB },
   },
   {
+    id: 'ELECTRONICS',
     name: '전자기기',
     icon: { normal: SmartphoneA, clicked: SmartphoneB },
   },
   {
+    id: 'SPORTS',
     name: '스포츠',
     icon: { normal: SportsA, clicked: SportsB },
   },
   {
+    id: 'FREEZE_STORAGE',
     name: '냉동',
     icon: { normal: RefrigeratorA, clicked: RefrigeratorB },
   },
   {
+    id: 'COLD_STORAGE',
     name: '냉장',
     icon: { normal: IcecreamA, clicked: IcecreamB },
   },
   {
+    id: 'LARGE_SIZE',
     name: '대형물품',
     icon: { normal: FurnitureA, clicked: FurnitureB },
   },

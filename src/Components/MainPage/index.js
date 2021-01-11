@@ -58,6 +58,7 @@ const MainPage = () => {
   const [buttonClicked, setButtonClicked] = useState([]);
   const SliderRef = React.createRef();
 
+  const logClickedButtons = () => {};
   return (
     <Container>
       <FirstContainer>
@@ -85,7 +86,7 @@ const MainPage = () => {
               <br />
               검색해보세요!
             </SecondSideText>
-            <SecondSideArrow>{'>>'}</SecondSideArrow>
+            <SecondSideArrow>&gt;&gt;</SecondSideArrow>
           </SecondSideTextWrapper>
         </SecondSideWrapper>
         <SecondMiddleWrapper>
@@ -97,6 +98,7 @@ const MainPage = () => {
             {BtnArr.map((item, idx) => (
               <SecondCategoryBox
                 key={idx}
+                id={item.id}
                 onClick={() => {
                   let temp = buttonClicked;
                   temp[idx] = !temp[idx];
@@ -117,7 +119,14 @@ const MainPage = () => {
               </SecondCategoryBox>
             ))}
           </SecondWrapper>
-          <SecondButton href="/category">창고 찾기</SecondButton>
+          <SecondButton
+            // onClick={() => {
+            //   window.location.href = '/category';
+            // }}
+            onClick={() => logClickedButtons()}
+          >
+            창고 찾기
+          </SecondButton>
         </SecondMiddleWrapper>
         <SecondSideWrapper></SecondSideWrapper>
       </SecondContainer>
@@ -135,7 +144,7 @@ const MainPage = () => {
               SliderRef.current.slickPrev();
             }}
           >
-            {'<'}
+            &lt;
           </SliderButton>
           <SliderWrapper>
             <Slider {...SliderSetting} ref={SliderRef}>
@@ -149,7 +158,7 @@ const MainPage = () => {
               SliderRef.current.slickNext();
             }}
           >
-            {'>'}
+            &gt;
           </SliderButton>
         </SliderBox>
       </ThirdContainer>
