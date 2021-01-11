@@ -138,7 +138,10 @@ const MainPage = () => {
                 message.warning('상품 종류를 1개 이상 선택해 주세요!');
                 return;
               } else {
-                sessionStorage.setItem('MainItemTypes', clickedMainItemTypes);
+                sessionStorage.setItem(
+                  'MainItemTypes',
+                  JSON.stringify(clickedMainItemTypes.join(',').toString()),
+                );
                 history.push('/category');
               }
             }}

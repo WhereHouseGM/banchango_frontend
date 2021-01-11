@@ -27,7 +27,7 @@ export const warehouseApi = {
   getByMainItemTypes: (type, page, size) =>
     api.get('warehouses', {
       params: {
-        mainItemType: `${type}`,
+        mainItemTypes: `${type}`,
         page: `${page}`,
         size: `${size}`,
       },

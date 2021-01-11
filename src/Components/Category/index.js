@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import {
   Container,
   CategoryPickContainer,
@@ -26,9 +28,10 @@ import {
   BtnArr,
 } from './Category';
 
-const Category = ({ results }) => {
+const Category = ({ warehouses, error, loading }) => {
   const [clicked, setClicked] = useState([]);
   const history = useHistory();
+  console.log(warehouses);
   return (
     <Container>
       <CategoryPickContainer>
@@ -41,6 +44,7 @@ const Category = ({ results }) => {
             return (
               <CategoryPickButton
                 id={button.id}
+                key={idx}
                 onClick={() => {
                   let temp = clicked;
                   temp[idx] = !temp[idx];

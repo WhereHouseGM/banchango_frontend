@@ -3,14 +3,16 @@ import CategoryPresenter from './CategoryPresenter';
 import { warehouseApi } from '../../api';
 
 const CategoryContainer = () => {
-  const [results, setResults] = useState({});
+  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  console.log(typeof JSON.parse(sessionStorage.getItem('MainItemTypes')));
+  console.log(JSON.parse(sessionStorage.getItem('MainItemTypes')));
   useEffect(() => {
     const getApi = async () => {
       try {
         let _results = await warehouseApi.getByMainItemTypes(
-          sessionStorage.getItem('MainItemType'),
+          sessionStorage.getItem('MainItemTypes'),
           0,
           10,
         );
