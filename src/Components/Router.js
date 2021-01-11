@@ -24,62 +24,46 @@ import QuoteContact from '../Routes/Detail/QuoteContact';
 
 const BadAccessText = '잘못된 접근입니다.';
 
-const RouterComponent = () => {
-  const isLogin = JSON.parse(localStorage.getItem('Login'));
-  const isOwner =
-    JSON.parse(localStorage.getItem('Login')) &&
-    localStorage.getItem('type') === 'OWNER';
-
-  return (
-    <Router>
-      <>
-        <Switch>
-          <Route path="/" exact component={Main} />
-          <Route
-            path="/login"
-            component={isLogin ? () => <Message text={BadAccessText} /> : Login}
-          />
-          <Route path="/signup">
-            <SignUp />
-          </Route>
-          <Route
-            path="/admin"
-            component={
-              localStorage.getItem('Role') === 'ADMIN'
-                ? Admin
-                : () => <Message text={BadAccessText} />
-            }
-          />
-          <Route path="/mypage" exact>
-            {isLogin ? <MyPage /> : <Message text={BadAccessText} />}
-          </Route>
-          <Route path="/mypage/quotation">
-            {isLogin ? <QuotationList /> : <Message text={BadAccessText} />}
-          </Route>
-          <Route path="/mypage/houselist">
-            <HouseList />
-          </Route>
-          <Route
-            path="/register"
-            component={
-              isOwner ? Register : () => <Message text={BadAccessText} />
-            }
-          />
-          <Route path="/team">
-            <Team />
-          </Route>
-          <Route path="/category" component={Category} />
-          <Route path="/warehouses/detail" component={Detail} />
-          <Route path="/warehouses/quotecontact">
-            <QuoteContact />
-          </Route>
-          <Route path="/service-agreements" component={SiteRule} />
-          <Route path="/privacy-policy" component={PrivacyPolicy} />
-          <Redirect path="*" to="/" />
-        </Switch>
-      </>
-    </Router>
-  );
-};
+const RouterComponent = () => (
+  <Router>
+    <Switch>
+      <Route path="/" exact component={Main} />
+      <Route path="/login">
+        <Login />
+      </Route>
+      <Route path="/signup">
+        <SignUp />
+      </Route>
+      <Route path="/admin">
+        <Message text={BadAccessText} />
+      </Route>
+      <Route path="/mypage" exact>
+        <MyPage />
+      </Route>
+      <Route path="/mypage/quotation">
+        <QuotationList />
+      </Route>
+      <Route path="/mypage/houselist">
+        <HouseList />
+      </Route>
+      <Route path="/register">
+        <Register />
+      </Route>
+      <Route path="/team">
+        <Team />
+      </Route>
+      <Route path="/category">
+        <Category />
+      </Route>
+      <Route path="/warehouses/detail" component={Detail} />
+      <Route path="/warehouses/quotecontact">
+        <QuoteContact />
+      </Route>
+      <Route path="/service-agreements" component={SiteRule} />
+      <Route path="/privacy-policy" component={PrivacyPolicy} />
+      <Redirect path="*" to="/" />
+    </Switch>
+  </Router>
+);
 
 export default RouterComponent;

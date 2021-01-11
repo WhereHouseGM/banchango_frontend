@@ -1,2 +1,2 @@
-import CategoryPresenter from './CategoryPresenter';
-export default CategoryPresenter;
+import CategoryContainer from './CategoryContainer';
+export default CategoryContainer;

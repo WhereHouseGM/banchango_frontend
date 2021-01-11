@@ -16,8 +16,20 @@ export const categoryDict = (category) => {
       return '잡화 창고 ';
     case Categories.FOOD:
       return '식품 창고 ';
-    case Categories.JEWELRY:
-      return '악세사리 창고 ';
+    case Categories.BOOK:
+      return '서적 창고';
+    case Categories.INTERIOR:
+      return '인테리어 창고';
+    case Categories.ELECTRONICS:
+      return '전자제품 창고';
+    case Categories.SPORTS:
+      return '스포츠용품 창고';
+    case Categories.COLD_STORAGE:
+      return '냉장 창고';
+    case Categories.FREEZE_STORAGE:
+      return '냉동 창고';
+    case Categories.LARGE_SIZE:
+      return '대형 물품 창고';
     default:
       return '';
   }
@@ -35,7 +47,21 @@ export const categoryTitleDict = (category) => {
       return '잡화';
     case Categories.FOOD:
       return '식품';
-    case Categories.JEWELRY:
+    case Categories.BOOK:
+      return '서적';
+    case Categories.INTERIOR:
+      return '인테리어';
+    case Categories.ELECTRONICS:
+      return '전자제품';
+    case Categories.SPORTS:
+      return '스포츠용품';
+    case Categories.COLD_STORAGE:
+      return '냉장 물품';
+    case Categories.FREEZE_STORAGE:
+      return '냉동 물품';
+    case Categories.LARGE_SIZE:
+      return '대형 물품';
+    case Categories.ACCESSORY:
       return '악세사리';
     default:
       return '';

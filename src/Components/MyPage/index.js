@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import CheckPWModal from './Modal/CheckPW_Modal';
 import ChangePWModal from './Modal/ChangePW_Modal';
 import {
@@ -17,6 +18,7 @@ import {
 } from './style';
 
 const MyPage = ({ userInfo, handleSubmit }) => {
+  const history = useHistory();
   const [checkModalShow, setCheckModalShow] = useState(false);
   const [changeModalShow, setChangeModalShow] = useState(false);
 
@@ -65,14 +67,14 @@ const MyPage = ({ userInfo, handleSubmit }) => {
           <BannerTextEnabledBox>내 프로필</BannerTextEnabledBox>
           <BannerTextDisabledBox
             onClick={() => {
-              window.location.href = '/mypage/quotation';
+              history.push('/mypage/quotation');
             }}
           >
             견적 요청 목록
           </BannerTextDisabledBox>
           <BannerTextDisabledBox
             onClick={() => {
-              window.location.href = '/mypage/houselist';
+              history.push('/mypage/houselist');
             }}
           >
             내 창고
@@ -80,7 +82,7 @@ const MyPage = ({ userInfo, handleSubmit }) => {
           <BannerTextDisabledBox
             onClick={() => {
               localStorage.clear();
-              window.location.href = '/';
+              history.push('/');
             }}
           >
             로그아웃

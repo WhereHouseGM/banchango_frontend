@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://api.banchangohub.com/v3/',
+  baseURL: 'https://dev-api.banchangohub.com/v3/',
 });
 
 export const userApi = {
@@ -24,10 +24,10 @@ export const userApi = {
 };
 
 export const warehouseApi = {
-  getByMainItemType: (type, page, size) =>
+  getByMainItemTypes: (type, page, size) =>
     api.get('warehouses', {
       params: {
-        category: `${type}`,
+        mainItemTypes: `${type === null ? 'CLOTH' : `${type}`}`,
         page: `${page}`,
         size: `${size}`,
       },

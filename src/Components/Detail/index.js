@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Modal from './Modal/ShowImageModal';
 
@@ -172,6 +173,8 @@ const ResultBoxDescInquiryButton = styled.div`
 const Detail = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [isTop, setIsTop] = useState(false);
+
+  const history = useHistory();
 
   const centerRef = {
     desc: React.createRef(),
@@ -379,7 +382,7 @@ const Detail = () => {
             </ResultBoxDescDeliveryListText>
             <ResultBoxDescInquiryButton
               onClick={() => {
-                window.location.href = '/warehouses/quotecontact';
+                history.push('/warehouses/quotecontact');
               }}
             >
               견적 문의

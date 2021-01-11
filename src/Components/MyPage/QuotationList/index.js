@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import {
   BannerTextDisabledBox,
@@ -23,6 +24,7 @@ import {
 } from './style';
 
 const QuotationList = () => {
+  const history = useHistory();
   const DUMMY_list = [
     {
       name: '스토리지원',
@@ -83,7 +85,7 @@ const QuotationList = () => {
       <LeftBanner>
         <BannerTextDisabledBox
           onClick={() => {
-            window.location.href = '/mypage';
+            history.push('/mypage');
           }}
         >
           내 프로필
@@ -92,7 +94,7 @@ const QuotationList = () => {
         <BannerTextDisabledBox
           onClick={() => {
             localStorage.clear();
-            window.location.reload();
+            history.push('/');
           }}
         >
           로그아웃
