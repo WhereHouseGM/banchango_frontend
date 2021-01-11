@@ -8,10 +8,13 @@ import {
   NavOpen,
   NavLinkOpen,
 } from './Navbar';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import Logo from '../../assets/icons/LOGO2.png';
 
 const Navbar = () => {
+  const history = useHistory();
+  const location = useLocation();
   const [loginInfo, setLoginInfo] = useState({});
   const [navClicked, setNavClicked] = useState(false);
   useEffect(() => {
@@ -19,6 +22,9 @@ const Navbar = () => {
       logined: JSON.parse(localStorage.getItem('Login')),
       name: localStorage.getItem('Name'),
     };
+    if (location.pathname === '/warehouses/detail') {
+      // 스크롤 관련 행동 넣어야함.
+    }
     setLoginInfo(info);
   }, []);
   const logout = () => {
@@ -26,7 +32,7 @@ const Navbar = () => {
       logined: false,
     });
     localStorage.clear();
-    window.location.href = '/';
+    history.push('/');
   };
   return (
     <>

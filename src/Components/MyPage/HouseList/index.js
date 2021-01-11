@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -83,7 +84,6 @@ const ItemImg = styled.img`
 `;
 const ItemDescWrapper = styled.div`
   flex: 1;
-  /* height: 100%; */
   display: flex;
   align-self: flex-start;
   position: relative;
@@ -110,20 +110,21 @@ const ConfirmedBox = styled.div`
 `;
 
 const HouseList = () => {
+  const history = useHistory();
   return (
     <Container>
       <LeftBanner>
         <BannerTextDisabledBox>내 프로필</BannerTextDisabledBox>
         <BannerTextDisabledBox
           onClick={() => {
-            window.location.href = '/mypage/quotation';
+            history.push('/mypage/quotation');
           }}
         >
           견적 요청 목록
         </BannerTextDisabledBox>
         <BannerTextEnabledBox
           onClick={() => {
-            window.location.href = '/mypage/houselist';
+            history.push('/mypage/houselist');
           }}
         >
           내 창고

@@ -84,7 +84,7 @@ const MainPage = () => {
         </FirstTitle>
         <FirstButton
           onClick={() => {
-            window.location.href = '/category';
+            history.push('/category');
           }}
         >
           바로 시작하기
