@@ -72,6 +72,13 @@ const MyPage = ({ userInfo, handleSubmit }) => {
           </BannerTextDisabledBox>
           <BannerTextDisabledBox
             onClick={() => {
+              window.location.href = '/mypage/houselist';
+            }}
+          >
+            내 창고
+          </BannerTextDisabledBox>
+          <BannerTextDisabledBox
+            onClick={() => {
               localStorage.clear();
               window.location.reload();
             }}
