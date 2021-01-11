@@ -140,7 +140,7 @@ const MainPage = () => {
               } else {
                 sessionStorage.setItem(
                   'MainItemTypes',
-                  JSON.stringify(clickedMainItemTypes.join(',').toString()),
+                  clickedMainItemTypes.join(',').toString(),
                 );
                 history.push('/category');
               }

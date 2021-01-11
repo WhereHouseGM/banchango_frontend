@@ -6,8 +6,6 @@ const CategoryContainer = () => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  console.log(typeof JSON.parse(sessionStorage.getItem('MainItemTypes')));
-  console.log(JSON.parse(sessionStorage.getItem('MainItemTypes')));
   useEffect(() => {
     const getApi = async () => {
       try {
