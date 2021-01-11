@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 
 import CircleImg from '../../assets/images/MainPage/Circle.png';
 import LastImg from '../../assets/images/MainPage/Last.png';
+import { message } from 'antd';
 
 import {
   SliderImgArr,
@@ -58,7 +59,16 @@ const MainPage = () => {
   const [buttonClicked, setButtonClicked] = useState([]);
   const SliderRef = React.createRef();
 
-  const logClickedButtons = () => {};
+  const getClickedMainItemTypes = () => {
+    let clickedMainItemTypes = [];
+    for (let i = 0; i < buttonClicked.length; i++) {
+      if (buttonClicked[i] === true) {
+        clickedMainItemTypes.push(BtnArr[i].id);
+      }
+    }
+    return clickedMainItemTypes;
+  };
+
   return (
     <Container>
       <FirstContainer>
@@ -120,10 +130,16 @@ const MainPage = () => {
             ))}
           </SecondWrapper>
           <SecondButton
-            // onClick={() => {
-            //   window.location.href = '/category';
-            // }}
-            onClick={() => logClickedButtons()}
+            onClick={() => {
+              let clickedMainItemTypes = getClickedMainItemTypes();
+              if (clickedMainItemTypes.length === 0) {
+                message.warning('상품 종류를 1개 이상 선택해 주세요!');
+                return;
+              } else {
+                sessionStorage.setItem('MainItemTypes', clickedMainItemTypes);
+                window.location.href = '/category';
+              }
+            }}
           >
             창고 찾기
           </SecondButton>
