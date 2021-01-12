@@ -52,6 +52,9 @@ export const CategoryFindButton = styled.div`
   color: white;
   border-radius: 20px;
   align-self: center;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const ResultWrap = styled.div`
