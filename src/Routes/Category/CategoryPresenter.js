@@ -4,14 +4,14 @@ import Navbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
 import PropTypes from 'prop-types';
 
-const CategoryPresenter = ({ warehouses, error, loading }) => {
+const CategoryPresenter = ({ warehouses }) => {
   return (
     <>
       <Helmet>
         <title>반창고 | 창고 목록 보기</title>
       </Helmet>
       <Navbar />
-      <Category warehouses={warehouses} error={error} loading={loading} />
+      <Category warehouses={warehouses} />
       <Footer />
     </>
   );
@@ -19,8 +19,6 @@ const CategoryPresenter = ({ warehouses, error, loading }) => {
 
 CategoryPresenter.propTypes = {
   warehouses: PropTypes.arrayOf(Object),
-  error: PropTypes.string,
-  loading: PropTypes.bool.isRequired,
 };
 
 export default CategoryPresenter;

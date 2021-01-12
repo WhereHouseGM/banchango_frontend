@@ -11,11 +11,9 @@ import SignUp from '../Routes/SignUp';
 import MyPage from '../Routes/MyPage';
 import QuotationList from '../Routes/MyPage/QuotationList';
 import HouseList from '../Routes/MyPage/HouseList';
-
 import Detail from '../Routes/Detail';
 import Category from '../Routes/Category';
 import Message from '../Components/Message';
-import Admin from '../Routes/Admin';
 import SiteRule from '../Routes/SiteRule';
 import PrivacyPolicy from '../Routes/PrivacyPolicy';
 import Register from '../Routes/Register';

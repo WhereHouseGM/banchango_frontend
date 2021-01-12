@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { categoryTitleDict } from '../../static/category';
+import { message } from 'antd';
 
 import {
   Container,
@@ -28,10 +29,46 @@ import {
   ResultBoxDescInquiryButton,
   BtnArr,
 } from './Category';
+import { warehouseApi } from '../../api';
 
 const Category = ({ warehouses }) => {
+  const [results, setResults] = useState(warehouses === null ? [] : warehouses);
   const [clicked, setClicked] = useState([]);
+  const selectedMainItemTypes = sessionStorage.getItem('MainItemTypes');
+  const [clickedItems, setClickedItems] = useState(
+    selectedMainItemTypes === null || selectedMainItemTypes === undefined
+      ? 'CLOTH'
+      : selectedMainItemTypes,
+  );
   const history = useHistory();
+  const getApi = useCallback(async () => {
+    try {
+      let _results = await warehouseApi.getByMainItemTypes(clickedItems, 0, 10);
+      let { status } = _results;
+      if (status !== 200) throw new Error();
+      const {
+        data: { warehouses },
+      } = _results;
+      setResults(warehouses);
+    } catch (Error) {
+      message.warning('검색 결과가 존재하지 않습니다.');
+    }
+  }, [clickedItems]);
+
+  useEffect(() => {
+    getApi();
+  }, [getApi]);
+
+  const getClickedMainItemTypes = () => {
+    let clickedMainItemTypes = [];
+    for (let i = 0; i < clicked.length; i++) {
+      if (clicked[i] === true) {
+        clickedMainItemTypes.push(BtnArr[i].id);
+      }
+    }
+    return clickedMainItemTypes;
+  };
+
   return (
     <Container>
       <CategoryPickContainer>
@@ -61,9 +98,20 @@ const Category = ({ warehouses }) => {
             );
           })}
         </CategoryPickButtonWrap>
-        <CategoryFindButton>창고 찾기</CategoryFindButton>
+        <CategoryFindButton
+          onClick={() => {
+            if (getClickedMainItemTypes().length === 0) {
+              message.warning('상품 종류를 1개 이상 선택해 주세요!');
+              return;
+            } else {
+              setClickedItems(getClickedMainItemTypes().join(',').toString());
+            }
+          }}
+        >
+          창고 찾기
+        </CategoryFindButton>
       </CategoryPickContainer>
-      {warehouses.map((warehouse, index) => (
+      {results.map((warehouse, index) => (
         <React.Fragment key={index}>
           <ResultWrap>
             <ResultBox
