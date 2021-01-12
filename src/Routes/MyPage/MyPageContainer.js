@@ -49,6 +49,7 @@ class MyPageContainer extends React.Component {
       if (status !== 200) {
         throw new Error();
       }
+      console.log(result.data);
       this.setState({
         userInfo: result.data,
         handleSubmit: this.handleSubmit,

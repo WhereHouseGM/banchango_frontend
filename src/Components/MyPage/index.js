@@ -23,7 +23,9 @@ const MyPage = ({ userInfo, handleSubmit }) => {
   const [changeModalShow, setChangeModalShow] = useState(false);
 
   const [nameIn, setNameIn] = useState(userInfo.name);
-  const [telNumberIn, setTelNumberIn] = useState(userInfo.telephoneNumber);
+  const [telNumberIn, setTelNumberIn] = useState(
+    userInfo.telephoneNumber || '',
+  );
   const [phoneNumberIn, setPhoneNumberIn] = useState(
     userInfo.phoneNumber || '',
   );
@@ -96,12 +98,12 @@ const MyPage = ({ userInfo, handleSubmit }) => {
           <InfoBox value={nameIn} onChange={(e) => setNameIn(e.target.value)} />
           <InfoTitleText>유선전화 번호</InfoTitleText>
           <InfoBox
-            value={phoneNumberIn}
+            value={telNumberIn}
             onChange={(e) => setPhoneNumberIn(e.target.value)}
           />
           <InfoTitleText>휴대전화 번호</InfoTitleText>
           <InfoBox
-            value={telNumberIn}
+            value={phoneNumberIn}
             onChange={(e) => setTelNumberIn(e.target.value)}
           />
           <InfoTitleText>회사명</InfoTitleText>
