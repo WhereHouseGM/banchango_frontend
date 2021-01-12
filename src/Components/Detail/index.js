@@ -34,6 +34,7 @@ import {
 import { categoryTitleDict } from '../../static/category';
 
 const Detail = ({ warehouse }) => {
+  console.log(warehouse);
   const [modalVisible, setModalVisible] = useState(false);
 
   const history = useHistory();
@@ -62,6 +63,7 @@ const Detail = ({ warehouse }) => {
       <Container>
         <MainImageContainer>
           <ImageButton
+            bgImage={warehouse.mainImageUrl}
             onClick={() => {
               setModalVisible(true);
             }}

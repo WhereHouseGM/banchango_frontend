@@ -19,21 +19,20 @@ const DetailContainer = () => {
   const [error, setError] = useState(null);
   const params = useParams();
   const warehouseId = params.warehouseId;
-  useEffect(async () => {
-    const getApi = async () => {
-      try {
-        let result = await warehouseApi.getWarehouseInfo(warehouseId);
-        let { status } = result;
-        if (status !== 200) throw new Error();
-        const { data: warehouse } = result;
-        setLoading(false);
-        setWarehouse(warehouse);
-      } catch (Error) {
-        setError('창고 정보를 불러오는 도중 오류가 발생했습니다.');
-        setLoading(false);
-      }
-    };
-    await getApi();
+  useEffect(() => {
+    let response = (async () => {
+      warehouseApi
+        .getWarehouseInfo(warehouseId)
+        .then(({ data }) => {
+          setWarehouse(data);
+          setLoading(false);
+        })
+        .catch(() => {
+          setLoading(false);
+          setError('창고 정보를 불러오는 도중 오류가 발생했습니다.');
+        });
+    })();
+    setWarehouse(response);
   }, [warehouseId]);
 
   return (
