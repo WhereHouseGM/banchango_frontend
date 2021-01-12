@@ -23,8 +23,8 @@ const MyPage = ({ userInfo, handleSubmit }) => {
   const [changeModalShow, setChangeModalShow] = useState(false);
 
   const [nameIn, setNameIn] = useState(userInfo.name);
-  const [telNumberIn, setTelNumberIn] = useState(
-    userInfo.telephoneNumber || '',
+  const [telephoneNumberIn, setTelephoneNumberIn] = useState(
+    userInfo.telephoneNumber,
   );
   const [phoneNumberIn, setPhoneNumberIn] = useState(
     userInfo.phoneNumber || '',
@@ -40,7 +40,7 @@ const MyPage = ({ userInfo, handleSubmit }) => {
   const getUserInfo = () => {
     const userInfoSet = {
       email: userInfo.email,
-      telephoneNumber: telNumberIn,
+      telephoneNumber: telephoneNumberIn,
       phoneNumber: phoneNumberIn,
       companyName: companyNameIn,
       name: nameIn,
@@ -67,24 +67,20 @@ const MyPage = ({ userInfo, handleSubmit }) => {
       <Container>
         <LeftBanner>
           <BannerTextEnabledBox>내 프로필</BannerTextEnabledBox>
-          {userInfo.type === 'SHIPPER' && (
-            <BannerTextDisabledBox
-              onClick={() => {
-                history.push('/mypage/quotation');
-              }}
-            >
-              견적 요청 목록
-            </BannerTextDisabledBox>
-          )}
-          {userInfo.type === 'OWNER' && (
-            <BannerTextDisabledBox
-              onClick={() => {
-                history.push('/mypage/houselist');
-              }}
-            >
-              내 창고
-            </BannerTextDisabledBox>
-          )}
+          <BannerTextDisabledBox
+            onClick={() => {
+              history.push('/mypage/quotation');
+            }}
+          >
+            견적 요청 목록
+          </BannerTextDisabledBox>
+          <BannerTextDisabledBox
+            onClick={() => {
+              history.push('/mypage/houselist');
+            }}
+          >
+            내 창고
+          </BannerTextDisabledBox>
           <BannerTextDisabledBox
             onClick={() => {
               localStorage.clear();
@@ -97,18 +93,18 @@ const MyPage = ({ userInfo, handleSubmit }) => {
         <UserInfoContainer>
           <HelloTitleText>{userInfo.name}님 안녕하세요.</HelloTitleText>
           <InfoTitleText>이메일</InfoTitleText>
-          <InfoBox value={userInfo.email} disabled />
+          <InfoBox defaultValue={userInfo.email} disabled />
           <InfoTitleText>성함</InfoTitleText>
           <InfoBox value={nameIn} onChange={(e) => setNameIn(e.target.value)} />
           <InfoTitleText>유선전화 번호</InfoTitleText>
           <InfoBox
-            value={telNumberIn}
-            onChange={(e) => setTelNumberIn(e.target.value)}
+            value={phoneNumberIn}
+            onChange={(e) => setPhoneNumberIn(e.target.value)}
           />
           <InfoTitleText>휴대전화 번호</InfoTitleText>
           <InfoBox
-            value={phoneNumberIn}
-            onChange={(e) => setPhoneNumberIn(e.target.value)}
+            value={telephoneNumberIn}
+            onChange={(e) => setTelephoneNumberIn(e.target.value)}
           />
           <InfoTitleText>회사명</InfoTitleText>
           <InfoBox
@@ -138,5 +134,6 @@ const MyPage = ({ userInfo, handleSubmit }) => {
 };
 MyPage.propTypes = {
   userInfo: PropTypes.object,
+  handleSubmit: PropTypes.func,
 };
 export default MyPage;

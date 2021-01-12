@@ -42,10 +42,7 @@ export const ChangePWModal = ({ onClose, visible }) => {
     };
     userApi
       .changePw(hashedPWSet, localStorage.getItem('AccessToken'))
-      .then(({ status }) => {
-        if (status !== 200) {
-          throw new Error();
-        }
+      .then(() => {
         message.destroy();
         message.success('비밀번호 변경에 성공했습니다.');
         onClose();
