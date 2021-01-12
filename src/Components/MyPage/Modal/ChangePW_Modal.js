@@ -10,13 +10,9 @@ import {
 } from './Modal_Styles';
 import { message } from 'antd';
 import sha256 from 'crypto';
+import { userApi } from '../../../api';
 
-export const ChangePWModal = ({
-  onClose,
-  visible,
-  handleSubmit,
-  getUserInfo,
-}) => {
+export const ChangePWModal = ({ onClose, visible }) => {
   const [previousPW, setPreviousPW] = useState('');
   const [newPW, setNewPW] = useState('');
   const [checkNewPW, setCheckNewPW] = useState('');
@@ -38,11 +34,23 @@ export const ChangePWModal = ({
     setNewPW('');
     setCheckNewPW('');
     const hashedPWSet = {
-      previous: sha256.createHash('sha256').update(previousPW).digest('hex'),
-      new: sha256.createHash('sha256').update(newPW).digest('hex'),
+      originalPassword: sha256
+        .createHash('sha256')
+        .update(previousPW)
+        .digest('hex'),
+      newPassword: sha256.createHash('sha256').update(newPW).digest('hex'),
     };
-    const targetInfo = { ...getUserInfo(), password: hashedPWSet.new };
-    handleSubmit(targetInfo, hashedPWSet.previous, onClose);
+    userApi
+      .changePw(hashedPWSet, localStorage.getItem('AccessToken'))
+      .then(() => {
+        message.destroy();
+        message.success('비밀번호 변경에 성공했습니다.');
+        onClose();
+      })
+      .catch(() => {
+        message.destroy();
+        message.error('올바르지 않은 비밀번호 입니다.');
+      });
   };
 
   const onMaskClick = (e) => {

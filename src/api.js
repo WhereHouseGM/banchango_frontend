@@ -7,6 +7,12 @@ const api = axios.create({
 export const userApi = {
   signIn: (body) => api.post('users/sign-in', body),
   signUp: (body) => api.post('users/sign-up', body),
+  changePw: (body, token) =>
+    api.patch('users/change-password', body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
   requestEmail: (body) => api.patch('users/password-lost', body),
   getUserInfo: (userId, token) =>
     api.get(`users/${userId}`, {

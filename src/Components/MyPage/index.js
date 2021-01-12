@@ -23,7 +23,9 @@ const MyPage = ({ userInfo, handleSubmit }) => {
   const [changeModalShow, setChangeModalShow] = useState(false);
 
   const [nameIn, setNameIn] = useState(userInfo.name);
-  const [telNumberIn, setTelNumberIn] = useState(userInfo.telephoneNumber);
+  const [telephoneNumberIn, setTelephoneNumberIn] = useState(
+    userInfo.telephoneNumber,
+  );
   const [phoneNumberIn, setPhoneNumberIn] = useState(
     userInfo.phoneNumber || '',
   );
@@ -38,7 +40,7 @@ const MyPage = ({ userInfo, handleSubmit }) => {
   const getUserInfo = () => {
     const userInfoSet = {
       email: userInfo.email,
-      telephoneNumber: telNumberIn,
+      telephoneNumber: telephoneNumberIn,
       phoneNumber: phoneNumberIn,
       companyName: companyNameIn,
       name: nameIn,
@@ -101,8 +103,8 @@ const MyPage = ({ userInfo, handleSubmit }) => {
           />
           <InfoTitleText>휴대전화 번호</InfoTitleText>
           <InfoBox
-            value={telNumberIn}
-            onChange={(e) => setTelNumberIn(e.target.value)}
+            value={telephoneNumberIn}
+            onChange={(e) => setTelephoneNumberIn(e.target.value)}
           />
           <InfoTitleText>회사명</InfoTitleText>
           <InfoBox
@@ -132,5 +134,6 @@ const MyPage = ({ userInfo, handleSubmit }) => {
 };
 MyPage.propTypes = {
   userInfo: PropTypes.object,
+  handleSubmit: PropTypes.func,
 };
 export default MyPage;

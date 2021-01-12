@@ -16,15 +16,15 @@ class MyPageContainer extends React.Component {
     };
     await userApi
       .signIn(reqBody)
-      .then(async () => {
+      .then(() => {
         closeModalFunc();
-        await userApi
+        userApi
           .setUserInfo(
             localStorage.getItem('userId'),
             targetInfo,
             localStorage.getItem('AccessToken'),
           )
-          .then((res) => {
+          .then(() => {
             message.destroy();
             message.success('정보 변경에 성공했습니다.');
           })
