@@ -54,6 +54,10 @@ const Category = ({ warehouses }) => {
       message.warning('검색 결과가 존재하지 않습니다.');
     }
   }, [clickedItems]);
+  useEffect(() => {
+    let clickedArr = JSON.parse(sessionStorage.getItem('ClickedButton'));
+    !!clickedArr && setClicked(clickedArr);
+  }, []);
 
   useEffect(() => {
     getApi();
