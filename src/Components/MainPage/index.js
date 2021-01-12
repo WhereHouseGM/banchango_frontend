@@ -74,13 +74,13 @@ const MainPage = () => {
   return (
     <Container>
       <FirstContainer>
-        <FirstUpperTitle>온라인 셀러를 위한</FirstUpperTitle>
+        <FirstUpperTitle>온라인 셀러 전용</FirstUpperTitle>
         <FirstUpperTitle fontWeight={'bold'}>
-          인천 · 김포 물류 솔루션
+          3PL 창고 집합소
         </FirstUpperTitle>
         <FirstTitle>
-          온라인 셀러 특화, 보관부터 출고까지 전문가에게 맡겨보세요.{'\n'}인천
-          물류대행 센터를 반창고에서 찾을 수 있습니다.
+        온라인 셀러 특화, 보관부터 출고까지 전문가에게 맡겨보세요.{'\n'}
+인천, 경기 물류대행(3PL) 센터를 반창고에서 찾을 수 있습니다.
         </FirstTitle>
         <FirstButton
           onClick={() => {
@@ -102,7 +102,7 @@ const MainPage = () => {
           </SecondSideTextWrapper>
         </SecondSideWrapper>
         <SecondMiddleWrapper>
-          <SecondTitle>내 품목에 맞는 창고 검색</SecondTitle>
+          <SecondTitle>내 품목에 맞는{'\n'}창고 검색</SecondTitle>
           <SecondSubTitle>
             내 상품에 최적화된 창고 추천을 위해{'\n'}상품유형들을 선택해주세요.
           </SecondSubTitle>
@@ -153,7 +153,7 @@ const MainPage = () => {
       </SecondContainer>
       <ThirdContainer>
         <QuickSystemBanner>
-          <BannerTitle>오직 반창고에서만</BannerTitle>
+          <BannerTitle>전화하기 부담스러우셨죠?</BannerTitle>
           <BannerTextBig>빠른 견적 요청 시스템</BannerTextBig>
           <BannerTextSmall>
             간단한 품목입력으로, 빠르게 견적 요청이 가능합니다.
@@ -200,7 +200,7 @@ const MainPage = () => {
           <FifthTitleFirst>안쓸 이유가 없습니다.</FifthTitleFirst>
           <FifthTitleSecond>반창고 파트너 도입 효과</FifthTitleSecond>
           <FifthTitleThird>
-            *경기지역 200평 규모 기준 반창고 파트너 자료 일부 발췌
+            *경기지역 200평 규모 기준{'\n'}반창고 파트너 자료 일부 발췌
           </FifthTitleThird>
         </FifthTitleWrapper>
         <FifthWrapper>

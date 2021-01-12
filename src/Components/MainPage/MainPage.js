@@ -166,7 +166,7 @@ export const FirstTitle = styled.div`
   white-space: pre-line;
   @media (max-width: 768px) {
     margin-top: 10px;
-    font-size: 20px;
+    font-size: 16px;
     white-space: normal;
   }
 `;
@@ -195,6 +195,9 @@ export const SecondSideWrapper = styled.div`
   flex: 1;
   margin-top: 35px;
   border-top: 30px solid #1e56a0;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const SecondSideTextWrapper = styled.div`
@@ -228,19 +231,22 @@ export const SecondTitle = styled.div`
   color: #15c7ab;
   font-weight: bold;
   font-size: 40px;
+  @media (max-width: 768px) {
+    white-space: pre-wrap;
+    font-size: 35px;
+  }
 `;
 
 export const SecondSubTitle = styled.div`
   margin-top: 10px;
-  /* width: 90%; */
   font-size: 20px;
   @media (max-width: 1023px) {
     white-space: pre-wrap;
+    font-size: 15px;
   }
 `;
 
 export const SecondWrapper = styled.div`
-  /* width: 100%; */
   max-width: 864px;
   margin: 30px 0;
   display: flex;
@@ -254,7 +260,7 @@ export const SecondWrapper = styled.div`
 
 export const SecondCategoryBox = styled.div`
   width: 14%;
-  min-width: 105px;
+  min-width: 110px;
   border: 3px solid #1e56a0;
   border-radius: 20px;
   padding: 12px;
@@ -269,6 +275,9 @@ export const SecondCategoryBox = styled.div`
     margin-top: -10px;
     cursor: pointer;
   }
+  @media (max-width: 768px) {
+    min-width: 90px;
+  }
 `;
 
 export const SecondCategoryIcon = styled.img`
@@ -279,6 +288,9 @@ export const SecondCategoryText = styled.div`
   margin-top: 10px;
   font-size: 20px;
   font-weight: bold;
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 export const SecondButton = styled.div`
@@ -349,6 +361,9 @@ export const BannerTitle = styled.div`
 export const BannerTextBig = styled.div`
   font-weight: bold;
   font-size: 35px;
+  @media (max-width: 768px) {
+    font-size: 30px;
+  }
 `;
 
 export const BannerTextSmall = styled.div`
@@ -389,6 +404,9 @@ export const FifthContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media (max-width: 768px) {
+    padding: 30px 0;
+  }
 `;
 
 export const FifthTitleWrapper = styled.div`
@@ -418,6 +436,9 @@ export const FifthTitleThird = styled.div`
   font-size: 18px;
   font-weight: normal;
   color: #15c7ab;
+  @media (max-width: 768px) {
+    white-space: pre-wrap;
+  }
 `;
 
 export const FifthWrapper = styled.div`
@@ -454,6 +475,9 @@ export const FifthTitle = styled.div`
     width: 80%;
     font-size: 30px;
     white-space: pre-wrap;
+  }
+  @media (max-width: 768px) {
+    font-size: 25px;
   }
 `;
 
