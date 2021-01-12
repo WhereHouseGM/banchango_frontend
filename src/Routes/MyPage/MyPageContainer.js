@@ -18,13 +18,13 @@ class MyPageContainer extends React.Component {
       .signIn(reqBody)
       .then(async () => {
         closeModalFunc();
-        await userApi
+        userApi
           .setUserInfo(
             localStorage.getItem('userId'),
             targetInfo,
             localStorage.getItem('AccessToken'),
           )
-          .then((res) => {
+          .then(() => {
             message.destroy();
             message.success('정보 변경에 성공했습니다.');
           })
@@ -49,7 +49,6 @@ class MyPageContainer extends React.Component {
       if (status !== 200) {
         throw new Error();
       }
-      console.log(result.data);
       this.setState({
         userInfo: result.data,
         handleSubmit: this.handleSubmit,
