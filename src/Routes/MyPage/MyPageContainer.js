@@ -16,7 +16,7 @@ class MyPageContainer extends React.Component {
     };
     await userApi
       .signIn(reqBody)
-      .then(async () => {
+      .then(() => {
         closeModalFunc();
         userApi
           .setUserInfo(
