@@ -57,6 +57,7 @@ const Category = ({ warehouses }) => {
 
   useEffect(() => {
     getApi();
+    setClicked(JSON.parse(sessionStorage.getItem('ClickedButton')));
   }, [getApi]);
 
   const getClickedMainItemTypes = () => {
