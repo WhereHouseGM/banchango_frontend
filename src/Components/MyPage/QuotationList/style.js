@@ -39,7 +39,6 @@ export const BannerTextDisabledBox = styled.div`
 export const UserInfoContainer = styled.div`
   font-family: 'notosans-Regular', sans-serif;
   width: 900px;
-  /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
   padding: 40px 20px;
   margin: 0px auto;
 `;

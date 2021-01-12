@@ -1,11 +1,10 @@
 import Helmet from 'react-helmet';
 import MyPage from '../../Components/MyPage';
 import Navbar from '../../Components/Navbar';
-import Message from '../../Components/Message';
 import Footer from '../../Components/Footer';
-
 import PropTypes from 'prop-types';
 import Loading from '../../Components/Loading';
+import ErrorPage from '../../Components/ErrorPage';
 
 const DetailPresenter = ({ userInfo, handleSubmit, error, loading }) => (
   <>
@@ -16,7 +15,7 @@ const DetailPresenter = ({ userInfo, handleSubmit, error, loading }) => (
     {loading ? (
       <Loading />
     ) : error ? (
-      <Message text={error} />
+      <ErrorPage error={error} />
     ) : (
       <MyPage userInfo={userInfo} handleSubmit={handleSubmit} />
     )}
