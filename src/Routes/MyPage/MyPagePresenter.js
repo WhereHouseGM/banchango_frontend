@@ -5,6 +5,7 @@ import Message from '../../Components/Message';
 import Footer from '../../Components/Footer';
 
 import PropTypes from 'prop-types';
+import Loading from '../../Components/Loading';
 
 const DetailPresenter = ({ userInfo, handleSubmit, error, loading }) => (
   <>
@@ -12,7 +13,9 @@ const DetailPresenter = ({ userInfo, handleSubmit, error, loading }) => (
       <title>반창고 | 마이페이지</title>
     </Helmet>
     <Navbar />
-    {loading ? null : error ? (
+    {loading ? (
+      <Loading />
+    ) : error ? (
       <Message text={error} />
     ) : (
       <MyPage userInfo={userInfo} handleSubmit={handleSubmit} />
