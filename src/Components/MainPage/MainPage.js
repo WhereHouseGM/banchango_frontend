@@ -105,7 +105,7 @@ export const BtnArr = [
   },
   {
     id: 'ELECTRONICS',
-    name: '전자기기',
+    name: '전자제품',
     icon: { normal: SmartphoneA, clicked: SmartphoneB },
   },
   {
