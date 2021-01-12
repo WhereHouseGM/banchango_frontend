@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const DetailPresenter = ({ warehouse, loading }) =>
   loading ? (
-    <h1>LOADING</h1>
+    <h1>LOADING {/* TODO : Fix loading page. */}</h1>
   ) : (
     <>
       <Helmet>
