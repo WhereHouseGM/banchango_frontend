@@ -44,59 +44,59 @@ export const categoryDict = (category) => {
   }
 };
 
-export const airConditioningTypeDict = (type) => {
-  switch (type.toString().toUpperCase()) {
-    case AirConditioningTypes.HEATING:
-      return '♨난방';
-    case AirConditioningTypes.COOLING:
-      return '❄냉방';
-    case AirConditioningTypes.BOTH:
-      return '🌡냉난방';
-    default:
-      return '';
-  }
-};
+// export const airConditioningTypeDict = (type) => {
+//   switch (type.toString().toUpperCase()) {
+//     case AirConditioningTypes.HEATING:
+//       return '♨난방';
+//     case AirConditioningTypes.COOLING:
+//       return '❄냉방';
+//     case AirConditioningTypes.BOTH:
+//       return '🌡냉난방';
+//     default:
+//       return '';
+//   }
+// };
 
-export const workerExistDict = (exist) => (exist ? '💁포장 인력' : '');
+// export const workerExistDict = (exist) => (exist ? '💁포장 인력' : '');
 
-export const categoryInfosDict = (category) => {
-  switch (category.toString().toUpperCase()) {
-    case Categories.CLOTH:
-      return '👕의류';
-    case Categories.COSMETIC:
-      return '💄화장품';
-    case Categories.FURNITURE:
-      return '🛌가구';
-    case Categories.GENERAL:
-      return '👜잡화';
-    case Categories.FOOD:
-      return '🍔식품';
-    case Categories.JEWELRY:
-      return '💍악세서리';
-    default:
-      return '';
-  }
-};
+// export const categoryInfosDict = (category) => {
+//   switch (category.toString().toUpperCase()) {
+//     case Categories.CLOTH:
+//       return '👕의류';
+//     case Categories.COSMETIC:
+//       return '💄화장품';
+//     case Categories.FURNITURE:
+//       return '🛌가구';
+//     case Categories.GENERAL:
+//       return '👜잡화';
+//     case Categories.FOOD:
+//       return '🍔식품';
+//     case Categories.JEWELRY:
+//       return '💍악세서리';
+//     default:
+//       return '';
+//   }
+// };
 
-export const houseTypeDict = (type) => {
-  switch (type) {
-    case WarehouseTypes.THREEPL:
-      return '🚚도매 전문';
-    case WarehouseTypes.FULFILLMENT:
-      return '🛒소매 전문';
-    default:
-      return '';
-  }
-};
+// export const houseTypeDict = (type) => {
+//   switch (type) {
+//     case WarehouseTypes.THREEPL:
+//       return '🚚도매 전문';
+//     case WarehouseTypes.FULFILLMENT:
+//       return '🛒소매 전문';
+//     default:
+//       return '';
+//   }
+// };
 
-export const cctvExistDict = (exist) => (exist ? '📹CCTV' : '');
+// export const cctvExistDict = (exist) => (exist ? '📹CCTV' : '');
 
-export const canParkDict = (canPark) => (canPark ? '🚗주차' : '');
+// export const canParkDict = (canPark) => (canPark ? '🚗주차' : '');
 
-export const securityCompanyNameDict = (securityCompanyName) =>
-  `👮${securityCompanyName}`;
+// export const securityCompanyNameDict = (securityCompanyName) =>
+//   `👮${securityCompanyName}`;
 
-export const insuranceDict = (insurance) => `📝${insurance}`;
+// export const insuranceDict = (insurance) => `📝${insurance}`;
 
 export const dayOfWeek = [
   { id: '0', value: '일' },
