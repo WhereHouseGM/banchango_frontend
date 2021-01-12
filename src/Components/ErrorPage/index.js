@@ -27,8 +27,7 @@ const GoToMainPage = styled.div`
     cursor: pointer;
   }
 `;
-
-export default ({ error }) => {
+const ErrorPage = ({ error }) => {
   const history = useHistory();
   return (
     <Container>
@@ -44,3 +43,5 @@ export default ({ error }) => {
     </Container>
   );
 };
+
+export default ErrorPage;

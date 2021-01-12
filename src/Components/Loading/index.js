@@ -9,8 +9,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
-export default () => {
+const Loading = () => {
   return (
     <Container>
       <div class="loadingio-spinner-spinner-s41q7c5w8">
@@ -31,3 +30,5 @@ export default () => {
     </Container>
   );
 };
+
+export default Loading;
