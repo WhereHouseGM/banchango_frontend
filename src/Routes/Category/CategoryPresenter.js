@@ -2,16 +2,25 @@ import Helmet from 'react-helmet';
 import Category from '../../Components/Category';
 import Navbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
-import PropTypes from 'prop-types';
+import Loading from '../../Components/Loading';
 
-const CategoryPresenter = ({ warehouses }) => {
+import PropTypes from 'prop-types';
+import ErrorPage from '../../Components/ErrorPage';
+
+const CategoryPresenter = ({ warehouses, error, loading }) => {
   return (
     <>
       <Helmet>
         <title>반창고 | 창고 목록 보기</title>
       </Helmet>
       <Navbar />
-      <Category warehouses={warehouses} />
+      {loading ? (
+        <Loading />
+      ) : error ? (
+        <ErrorPage error={error} />
+      ) : (
+        <Category warehouses={warehouses} />
+      )}
       <Footer />
     </>
   );
@@ -19,6 +28,8 @@ const CategoryPresenter = ({ warehouses }) => {
 
 CategoryPresenter.propTypes = {
   warehouses: PropTypes.arrayOf(Object),
+  error: PropTypes.any,
+  loading: PropTypes.bool,
 };
 
 export default CategoryPresenter;
