@@ -61,9 +61,8 @@ const Detail = ({ warehouse }) => {
         visible={modalVisible}
       />
       <Container>
-        <MainImageContainer>
+        <MainImageContainer bgImage={warehouse.mainImageUrl}>
           <ImageButton
-            bgImage={warehouse.mainImageUrl}
             onClick={() => {
               setModalVisible(true);
             }}
