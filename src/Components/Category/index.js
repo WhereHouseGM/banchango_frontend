@@ -56,7 +56,7 @@ const Category = ({ warehouses }) => {
   }, [clickedItems]);
   useEffect(() => {
     let clickedArr = JSON.parse(sessionStorage.getItem('ClickedButton'));
-    !!clickedArr && setClicked(clickedArr);
+    !!clickedArr ? setClicked(clickedArr) : setClicked([true]);
   }, []);
 
   useEffect(() => {

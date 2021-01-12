@@ -82,6 +82,7 @@ const MainPage = () => {
         </FirstTitle>
         <FirstButton
           onClick={() => {
+            sessionStorage.clear();
             history.push('/category');
           }}
         >
