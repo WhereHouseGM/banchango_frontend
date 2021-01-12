@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import DetailPresenter from './DetailPresenter';
 import { warehouseApi } from '../../api';
 import { useParams } from 'react-router-dom';
@@ -9,21 +9,25 @@ const DetailContainer = () => {
   const [error, setError] = useState(null);
   const params = useParams();
   const warehouseId = params.warehouseId;
-  useEffect(() => {
-    let response = (async () => {
-      warehouseApi
-        .getWarehouseInfo(warehouseId)
-        .then(({ data }) => {
-          setWarehouse(data);
-          setLoading(false);
-        })
-        .catch(() => {
-          setLoading(false);
-          setError('창고 정보를 불러오는 도중 오류가 발생했습니다.');
-        });
-    })();
-    setWarehouse(response);
+
+  const getWarehouseInfo = useCallback(() => {
+    warehouseApi
+      .getWarehouseInfo(warehouseId)
+      .then(({ data }) => {
+        setWarehouse(data);
+        setLoading(false);
+      })
+      .catch(({ response: { status } }) => {
+        setLoading(false);
+        if (status === 404) {
+          setError('창고 정보가 존재하지 않습니다.');
+        }
+      });
   }, [warehouseId]);
+
+  useEffect(() => {
+    getWarehouseInfo();
+  }, [getWarehouseInfo]);
 
   return (
     <DetailPresenter warehouse={warehouse} error={error} loading={loading} />
