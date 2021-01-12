@@ -53,7 +53,7 @@ const RouterComponent = () => (
       <Route path="/category">
         <Category />
       </Route>
-      <Route path="/warehouses/detail" component={Detail} />
+      <Route path="/warehouses/detail/:warehouseId" component={Detail} />
       <Route path="/warehouses/quotecontact">
         <QuoteContact />
       </Route>
