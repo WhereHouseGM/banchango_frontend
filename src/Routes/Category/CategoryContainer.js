@@ -28,6 +28,7 @@ const CategoryContainer = () => {
     };
     getApi();
   }, []);
+
   return (
     <CategoryPresenter warehouses={results} error={error} loading={loading} />
   );
