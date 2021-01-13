@@ -65,7 +65,6 @@ const Register = () => {
     mainItemTypes: [],
     warehouseType: null,
     minReleasePerMonth: null,
-    deliveryTypes: [],
     warehouseFacilityUsages: [],
     warehouseUsageCautions: [],
     warehouseCondition: [],
@@ -80,14 +79,12 @@ const Register = () => {
   };
 
   const [deliveryTypes, setDeliveryTypes] = useState([
-    <ButtonAndInputContainer key={0}>
+    <ButtonAndInputContainer>
       <Input
-        id="deliveryTypes0"
         className="deliveryTypes"
         name="deliveryTypes"
         type="text"
         width="256px"
-        ref={InputRefs.deliveryTypes}
       />
       &nbsp;
       <AddButton onClick={() => addDeliveryTypes()}>추가</AddButton>
@@ -142,7 +139,7 @@ const Register = () => {
     arrOfInsurances.push(
       <ButtonAndInputContainer key={`INSURANCES${key}`}>
         <Input type="text" width="256px" ref={InputRefs.insurances} />
-        {key === 1 ? <RemoveButton>삭제</RemoveButton> : null}
+        <RemoveButton>삭제</RemoveButton>
       </ButtonAndInputContainer>,
     );
     setInsurances([...arrOfInsurances]);
@@ -161,24 +158,62 @@ const Register = () => {
   };
 
   const addDeliveryTypes = () => {
-    const arrOfDeliveryTypes = deliveryTypes;
-    let key = arrOfDeliveryTypes.length;
-    arrOfDeliveryTypes.push(
-      <ButtonAndInputContainer key={key}>
+    let tempDeliveryTypes = deliveryTypes;
+    tempDeliveryTypes.push(
+      <ButtonAndInputContainer>
         <Input
-          id={`deliveryTypes${key}`}
           className="deliveryTypes"
           name="deliveryTypes"
           type="text"
           width="256px"
-          ref={InputRefs.deliveryTypes}
         />
-        {key === 1 ? (
-          <RemoveButton onClick={removeDeliveryTypes}>삭제</RemoveButton>
+        {tempDeliveryTypes.length === 1 ? (
+          <RemoveButton
+            onClick={() => removeDeliveryTypes(deliveryTypes.length + 1)}
+          >
+            삭제
+          </RemoveButton>
         ) : null}
       </ButtonAndInputContainer>,
     );
-    setDeliveryTypes([...arrOfDeliveryTypes]);
+    setDeliveryTypes([...tempDeliveryTypes]);
+    // console.log(tempDeliveryTypes);
+    // setDeliveryTypes([...tempDeliveryTypes]);
+    // console.log(tempDeliveryTypes);
+    // console.log(deliveryTypes);
+    // );
+    // setDeliveryTypes([
+    //   ...deliveryTypes,
+    //   <ButtonAndInputContainer>
+    //     <Input
+    //       className="deliveryTypes"
+    //       name="deliveryTypes"
+    //       type="text"
+    //       width="256px"
+    //     />
+    //     <RemoveButton onclick={() => removeDeliveryTypes(key)}>
+    //       삭제
+    //     </RemoveButton>
+    //   </ButtonAndInputContainer>,
+    // ]);
+    // const arrOfDeliveryTypes = deliveryTypes;
+    // let key = arrOfDeliveryTypes.length;
+    // arrOfDeliveryTypes.push(
+    //   <ButtonAndInputContainer key={key}>
+    //     <Input
+    //       id={`deliveryTypes${key}`}
+    //       className="deliveryTypes"
+    //       name="deliveryTypes"
+    //       type="text"
+    //       width="256px"
+    //       ref={InputRefs.deliveryTypes}
+    //     />
+    //     <RemoveButton onClick={() => removeDeliveryTypes(key)}>
+    //       삭제
+    //     </RemoveButton>
+    //   </ButtonAndInputContainer>,
+    // );
+    // setDeliveryTypes([...arrOfDeliveryTypes]);
   };
 
   const addWarehouseFacilityUsages = () => {
@@ -227,10 +262,23 @@ const Register = () => {
     setWarehouseUsageCautions([...arrOfWarehouseUsageCautions]);
   };
 
-  const removeDeliveryTypes = () => {
-    let arrOfDeliveryTypes = deliveryTypes;
-    arrOfDeliveryTypes.pop();
-    setDeliveryTypes([...arrOfDeliveryTypes]);
+  const removeDeliveryTypes = (index) => {
+    let beforeDeliveryTypes = deliveryTypes;
+    beforeDeliveryTypes.pop();
+    setDeliveryTypes([...beforeDeliveryTypes]);
+    // console.log('BEFORE DELETION');
+    // console.log(`BEFORE LENGTH : ${deliveryTypes.length}`);
+    // let arrOfDeliveryTypes = deliveryTypes;
+    // console.log(arrOfDeliveryTypes);
+    // arrOfDeliveryTypes.splice(index, 1);
+    // console.log(arrOfDeliveryTypes);
+    // for (let i = 0; i < arrOfDeliveryTypes.length; i++) {
+    //   arrOfDeliveryTypes[i].key = i;
+    // }
+    // setDeliveryTypes([...arrOfDeliveryTypes]);
+    // console.log('AFTER DELETION');
+    // console.log(`AFTER LENGTH : ${deliveryTypes.length}`);
+    // console.log(deliveryTypes);
   };
 
   const removeWarehouseFacilityUsages = () => {
@@ -245,10 +293,26 @@ const Register = () => {
     setWarehouseUsageCautions([...arrOfWarehouseUsageCautions]);
   };
 
-  const sout = () => console.log(inputs);
+  const setDeliveryTypesToState = () => {
+    let list = document.getElementsByName(InputType.DELIVERY_TYPES);
+    let _deliveryTypes = [];
+    for (let i = 0; i < list.length; i++) {
+      _deliveryTypes.push(list[i].value);
+    }
+    let tempInputs = inputs;
+    tempInputs.deliveryTypes = _deliveryTypes;
+    setInputs(tempInputs);
+  };
+
+  const sout = () => {
+    setDeliveryTypesToState();
+    console.log(inputs);
+  };
 
   return (
     <Container>
+      {console.log('RE RENDERED.')}
+      {console.log(deliveryTypes)}
       <Wrapper>
         <BackgroundImage
           bgImage={RegisterBackground}
