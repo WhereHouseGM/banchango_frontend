@@ -179,7 +179,7 @@ const BottomMapDescPhoneNumber = styled.div`
 const MapContainer = styled.div`
   width: 700px;
   height: 370px;
-  margin: 10px auto;
+  margin: 10px auto 100px auto;
   background-color: black;
 `;
 const Team = () => {
