@@ -7,6 +7,7 @@ import {
   MainImageContainer,
   ImageButton,
   DetailPageNavbarContainer,
+  DetailPageNavbarItemsWrapper,
   DetailPageNavbarWrapper,
   DetailGotoButton,
   MainContainer,
@@ -27,11 +28,15 @@ import {
   ContentValue,
   MainItemTypeWrapper,
   MainItemTypeValue,
+  DetailPageNavbarMargin,
   BottomContentTitle,
   BottomContentValue,
   QuoteContactButton,
+  WorkDaysWrapper,
+  WorkDayBox,
 } from './Detail';
 import { categoryTitleDict } from '../../static/category';
+import { dayOfWeek } from '../../static/detail';
 
 const Detail = ({ warehouse }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -44,6 +49,14 @@ const Detail = ({ warehouse }) => {
     announce: React.createRef(),
     caution: React.createRef(),
     position: React.createRef(),
+  };
+  const getWorkingWeekDayArr = () => {
+    let resultArr = [...warehouse.availableWeekdays.toString()];
+    while (true) {
+      resultArr = ['0', ...resultArr];
+      if (resultArr.length === 7) break;
+    }
+    return resultArr;
   };
 
   const scrollFunc = (ref) => {
@@ -71,44 +84,46 @@ const Detail = ({ warehouse }) => {
         </MainImageContainer>
         <DetailPageNavbarContainer>
           <DetailPageNavbarWrapper>
-            <DetailGotoButton
-              onClick={() => {
-                scrollFunc(centerRef.desc);
-              }}
-            >
-              센터 소개
-            </DetailGotoButton>
-            <DetailGotoButton
-              onClick={() => {
-                scrollFunc(centerRef.info);
-              }}
-            >
-              시설 정보
-            </DetailGotoButton>
-            <DetailGotoButton
-              onClick={() => {
-                scrollFunc(centerRef.announce);
-              }}
-            >
-              시설 안내사항
-            </DetailGotoButton>
-            <DetailGotoButton
-              onClick={() => {
-                scrollFunc(centerRef.caution);
-              }}
-            >
-              주의사항
-            </DetailGotoButton>
-            <DetailGotoButton
-              onClick={() => {
-                scrollFunc(centerRef.position);
-              }}
-            >
-              위치정보
-            </DetailGotoButton>
+            <DetailPageNavbarItemsWrapper>
+              <DetailGotoButton
+                onClick={() => {
+                  scrollFunc(centerRef.desc);
+                }}
+              >
+                센터 소개
+              </DetailGotoButton>
+              <DetailGotoButton
+                onClick={() => {
+                  scrollFunc(centerRef.info);
+                }}
+              >
+                시설 정보
+              </DetailGotoButton>
+              <DetailGotoButton
+                onClick={() => {
+                  scrollFunc(centerRef.announce);
+                }}
+              >
+                시설 안내사항
+              </DetailGotoButton>
+              <DetailGotoButton
+                onClick={() => {
+                  scrollFunc(centerRef.caution);
+                }}
+              >
+                주의사항
+              </DetailGotoButton>
+              <DetailGotoButton
+                onClick={() => {
+                  scrollFunc(centerRef.position);
+                }}
+              >
+                위치정보
+              </DetailGotoButton>
+            </DetailPageNavbarItemsWrapper>
+            <DetailPageNavbarMargin />
           </DetailPageNavbarWrapper>
         </DetailPageNavbarContainer>
-
         <MainContainer>
           <MainWrapper>
             <MainSubTitle ref={centerRef.desc}>
@@ -123,6 +138,13 @@ const Detail = ({ warehouse }) => {
               {warehouse.openAt}&nbsp;~&nbsp;{warehouse.closeAt}
             </Content>
             <Content>{warehouse.availableTimeDetail}</Content>
+            <WorkDaysWrapper>
+              {getWorkingWeekDayArr().map((item, idx) => (
+                <WorkDayBox key={idx} workOn={item === '1'}>
+                  {dayOfWeek[idx].value}
+                </WorkDayBox>
+              ))}
+            </WorkDaysWrapper>
             <SectionTitle>월 최소 출고량</SectionTitle>
             <Content>
               월 최소 {warehouse.minReleasePerMonth}건 출고 필요
@@ -178,6 +200,15 @@ const Detail = ({ warehouse }) => {
           <QuoteContactContainer>
             <ContactTitle>{warehouse.name}</ContactTitle>
             <ContactSubTitle>{warehouse.address}</ContactSubTitle>
+            <MainItemTypeWrapper>
+              {warehouse.mainItemTypes.map((type, idx) => {
+                return (
+                  <MainItemTypeValue key={idx}>
+                    {categoryTitleDict(type)}
+                  </MainItemTypeValue>
+                );
+              })}
+            </MainItemTypeWrapper>
             <ContactContentWrapper>
               <LeftContent>
                 <ContentTitle>월 최소 출고량</ContentTitle>
@@ -188,15 +219,7 @@ const Detail = ({ warehouse }) => {
                 <ContentValue>{warehouse.space}평</ContentValue>
               </RightContent>
             </ContactContentWrapper>
-            <MainItemTypeWrapper>
-              {warehouse.mainItemTypes.map((type, idx) => {
-                return (
-                  <MainItemTypeValue key={idx}>
-                    {categoryTitleDict(type)}
-                  </MainItemTypeValue>
-                );
-              })}
-            </MainItemTypeWrapper>
+
             <BottomContentTitle>택배사</BottomContentTitle>
             <BottomContentValue>
               {warehouse.deliveryTypes.map((type) => type + ' ')}
@@ -208,7 +231,7 @@ const Detail = ({ warehouse }) => {
                 );
               }}
             >
-              견적 문의
+              견적 요청하기
             </QuoteContactButton>
           </QuoteContactContainer>
         </MainContainer>
