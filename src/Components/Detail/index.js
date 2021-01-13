@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import Slider from 'react-slick';
 import Modal from './Modal/ShowImageModal';
 import {
   Container,
@@ -33,12 +34,18 @@ import {
   BottomContentValue,
   QuoteContactButton,
   WorkDaysWrapper,
+  sliderSettings,
   WorkDayBox,
+  MainImageSliderWrapper,
+  SliderChildWrapper,
+  SliderChildImg,
+  SliderChildArrow,
 } from './Detail';
 import { categoryTitleDict } from '../../static/category';
 import { dayOfWeek } from '../../static/detail';
 
 const Detail = ({ warehouse }) => {
+  const SliderRef = React.createRef();
   useEffect(() => {
     const script = document.createElement('script');
     script.async = true;
@@ -100,13 +107,45 @@ const Detail = ({ warehouse }) => {
       />
       <Container>
         <MainImageContainer bgImage={warehouse.mainImageUrl}>
-          <ImageButton
+          <SliderChildArrow
             onClick={() => {
-              setModalVisible(true);
+              SliderRef.current.slickPrev();
             }}
           >
-            시설보기
-          </ImageButton>
+            {'<'}
+          </SliderChildArrow>
+          <MainImageSliderWrapper>
+            <Slider {...sliderSettings} ref={SliderRef}>
+              <SliderChildWrapper>
+                <SliderChildImg
+                  src={
+                    'https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png'
+                  }
+                />
+              </SliderChildWrapper>
+              <SliderChildWrapper>
+                <SliderChildImg
+                  src={
+                    'https://www.gettyimages.pt/gi-resources/images/Homepage/Hero/PT/PT_hero_42_153645159.jpg'
+                  }
+                />
+              </SliderChildWrapper>
+              <SliderChildWrapper>
+                <SliderChildImg
+                  src={
+                    'https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg'
+                  }
+                />
+              </SliderChildWrapper>
+            </Slider>
+          </MainImageSliderWrapper>
+          <SliderChildArrow
+            onClick={() => {
+              SliderRef.current.slickNext();
+            }}
+          >
+            {'>'}
+          </SliderChildArrow>
         </MainImageContainer>
         <DetailPageNavbarContainer>
           <DetailPageNavbarWrapper>

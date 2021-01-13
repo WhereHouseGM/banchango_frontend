@@ -9,23 +9,38 @@ export const Container = styled.div`
 export const MainImageContainer = styled.div`
   width: 100%;
   height: 400px;
-  background-image: url(${(props) => props.bgImage});
-  background-position: center;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-evenly;
 `;
-
-export const ImageButton = styled.div`
-  background-color: white;
-  color: black;
-  font-weight: bold;
-  border-radius: 20px;
-  padding: 10px 25px;
-  margin: 20px;
+export const MainImageSliderWrapper = styled.div`
+  width: 80%;
+  height: 100%;
+  overflow: hidden;
+`;
+export const sliderSettings = {
+  className: 'slider variable-width',
+  dots: true,
+  infinite: true,
+  centerMode: true,
+  centerPadding: '50px',
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  variableWidth: true,
+  arrows: false,
+};
+export const SliderChildArrow = styled.div`
+  font-size: 20px;
   &:hover {
     cursor: pointer;
   }
+`;
+export const SliderChildWrapper = styled.div`
+  height: 370px;
+  margin: 0 20px;
+`;
+export const SliderChildImg = styled.img`
+  height: 100%;
 `;
 
 export const DetailPageNavbarContainer = styled.div`
@@ -153,7 +168,7 @@ export const ContactSubTitle = styled.div`
   font-size: 15px;
   color: #4a6777;
   margin-bottom: 10px;
-  line-height:1.45;
+  line-height: 1.45;
 `;
 export const MainItemTypeWrapper = styled.div`
   width: 90%;
