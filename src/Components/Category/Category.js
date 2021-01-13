@@ -101,7 +101,9 @@ export const ResultBoxDescTitle = styled.div`
 `;
 
 export const ResultBoxDescSub = styled.div`
+  font-family: 'notosans-Regular', sans-serif;
   font-size: 20px;
+  color: grey;
 `;
 
 export const ResultBoxDescBoxWrap = styled.div`
