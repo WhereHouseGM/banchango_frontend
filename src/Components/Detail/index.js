@@ -53,8 +53,8 @@ const Detail = ({ warehouse }) => {
   const getWorkingWeekDayArr = () => {
     let resultArr = [...warehouse.availableWeekdays.toString()];
     while (true) {
-      resultArr = ['0', ...resultArr];
       if (resultArr.length === 7) break;
+      resultArr = ['0', ...resultArr];
     }
     return resultArr;
   };
