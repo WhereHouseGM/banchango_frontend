@@ -117,9 +117,10 @@ export const WorkDayBox = styled.div`
   background-color: ${(props) => (props.workOn ? '#15c7ab' : '#557b75')};
 `;
 
-export const MainMapImg = styled.img`
+export const MainMapImg = styled.div`
   margin: 20px auto;
   width: 100%;
+  height: 350px;
 `;
 
 export const MainMapDesc = styled.div`
@@ -152,6 +153,7 @@ export const ContactSubTitle = styled.div`
   font-size: 15px;
   color: #4a6777;
   margin-bottom: 10px;
+  line-height:1.45;
 `;
 export const MainItemTypeWrapper = styled.div`
   width: 90%;

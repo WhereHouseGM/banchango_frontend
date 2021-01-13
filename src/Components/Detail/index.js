@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Modal from './Modal/ShowImageModal';
@@ -39,6 +39,32 @@ import { categoryTitleDict } from '../../static/category';
 import { dayOfWeek } from '../../static/detail';
 
 const Detail = ({ warehouse }) => {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src =
+      'https://dapi.kakao.com/v2/maps/sdk.js?appkey=27af2ff52796d884554beee394faa49e&autoload=false';
+    document.head.appendChild(script);
+    script.onload = () => {
+      window.kakao.maps.load(() => {
+        let targetPos = new window.kakao.maps.LatLng(
+          warehouse.latitude,
+          warehouse.longitude,
+        );
+        let container = document.getElementById('kakaoMap');
+        let options = {
+          center: targetPos,
+          level: 4,
+        };
+        const map = new window.kakao.maps.Map(container, options);
+        let markerPosition = targetPos;
+        let marker = new window.kakao.maps.Marker({
+          position: markerPosition,
+        });
+        marker.setMap(map);
+      });
+    };
+  }, []);
   const [modalVisible, setModalVisible] = useState(false);
 
   const history = useHistory();
@@ -189,17 +215,17 @@ const Detail = ({ warehouse }) => {
               위치 정보
             </SectionTitle>
             <div style={{ margin: '0px auto', width: '50%' }}>
-              <MainMapImg
-                src={
-                  'https://user-images.githubusercontent.com/62606632/103610746-3043b680-4f64-11eb-92bd-d30b57349f4a.png'
-                }
-              />
+              <MainMapImg id="kakaoMap" />
             </div>
-            <MainMapDesc>{warehouse.address}</MainMapDesc>
+            <MainMapDesc>
+              {warehouse.address}&nbsp;{warehouse.addressDetail}
+            </MainMapDesc>
           </MainWrapper>
           <QuoteContactContainer>
             <ContactTitle>{warehouse.name}</ContactTitle>
-            <ContactSubTitle>{warehouse.address}</ContactSubTitle>
+            <ContactSubTitle>
+              {warehouse.address}&nbsp;{warehouse.addressDetail}
+            </ContactSubTitle>
             <MainItemTypeWrapper>
               {warehouse.mainItemTypes.map((type, idx) => {
                 return (
@@ -219,7 +245,6 @@ const Detail = ({ warehouse }) => {
                 <ContentValue>{warehouse.space}평</ContentValue>
               </RightContent>
             </ContactContentWrapper>
-
             <BottomContentTitle>택배사</BottomContentTitle>
             <BottomContentValue>
               {warehouse.deliveryTypes.map((type) => type + ' ')}

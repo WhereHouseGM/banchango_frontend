@@ -67,20 +67,24 @@ const MyPage = ({ userInfo, handleSubmit }) => {
       <Container>
         <LeftBanner>
           <BannerTextEnabledBox>내 프로필</BannerTextEnabledBox>
-          <BannerTextDisabledBox
-            onClick={() => {
-              history.push('/mypage/quotation');
-            }}
-          >
-            견적 요청 목록
-          </BannerTextDisabledBox>
-          <BannerTextDisabledBox
-            onClick={() => {
-              history.push('/mypage/houselist');
-            }}
-          >
-            내 창고
-          </BannerTextDisabledBox>
+          {userInfo.type === 'SHIPPER' ? (
+            <BannerTextDisabledBox
+              onClick={() => {
+                history.push('/mypage/quotation');
+              }}
+            >
+              견적 요청 목록
+            </BannerTextDisabledBox>
+          ) : (
+            <BannerTextDisabledBox
+              onClick={() => {
+                history.push('/mypage/houselist');
+              }}
+            >
+              내 창고
+            </BannerTextDisabledBox>
+          )}
+
           <BannerTextDisabledBox
             onClick={() => {
               localStorage.clear();
