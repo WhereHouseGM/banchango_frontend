@@ -42,6 +42,7 @@ import {
 } from '../../static/register';
 
 import { warehouseApi } from '../../api';
+import { message } from 'antd';
 
 const Register = () => {
   const [inputs, setInputs] = useState({
@@ -68,6 +69,8 @@ const Register = () => {
     warehouseFacilityUsages: [],
     warehouseUsageCautions: [],
     warehouseCondition: [],
+    latitude: 88.88,
+    longitude: 99.99,
   });
 
   const [deliveryTypes, setDeliveryTypes] = useState([
@@ -92,6 +95,7 @@ const Register = () => {
         type="text"
         width="316px"
       />
+      &nbsp;
       <AddButton onClick={() => addWarehouseFacilityUsages()}>추가</AddButton>
     </ButtonAndInputContainer>,
   ]);
@@ -121,6 +125,7 @@ const Register = () => {
   const [securityCompanies, setSecurityCompanies] = useState([
     <ButtonAndInputContainer key="SECCOMPS0">
       <Input type="text" width="256px" name="securityCompanies" />
+      &nbsp;
       <AddButton onClick={() => addSecurityCompanies()}>추가</AddButton>
     </ButtonAndInputContainer>,
   ]);
@@ -131,6 +136,7 @@ const Register = () => {
     arrOfInsurances.push(
       <ButtonAndInputContainer key={`INSURANCES${key}`}>
         <Input type="text" width="256px" name="insurances" />
+        &nbsp;
         {key === 1 ? (
           <RemoveButton onClick={() => removeInsurances()}>삭제</RemoveButton>
         ) : null}
@@ -145,6 +151,7 @@ const Register = () => {
     arrOfSecurityCompanies.push(
       <ButtonAndInputContainer key={`SECCOMPS${key}`}>
         <Input type="text" width="256px" name="securityCompanies" />
+        &nbsp;
         {key === 1 ? (
           <RemoveButton onClick={() => removeSecurityCompanies()}>
             삭제
@@ -166,6 +173,7 @@ const Register = () => {
           type="text"
           width="256px"
         />
+        &nbsp;
         {key === 1 ? (
           <RemoveButton onClick={removeDeliveryTypes}>삭제</RemoveButton>
         ) : null}
@@ -186,6 +194,7 @@ const Register = () => {
           type="text"
           width="316px"
         />
+        &nbsp;
         {key === 1 ? (
           <RemoveButton onClick={removeWarehouseFacilityUsages}>
             삭제
@@ -208,6 +217,7 @@ const Register = () => {
           type="text"
           width="316px"
         />
+        &nbsp;
         {key === 1 ? (
           <RemoveButton onClick={removeWarehouseUsageCautions}>
             삭제
@@ -313,13 +323,92 @@ const Register = () => {
     setInputs(tempInputs);
   };
 
-  const sout = () => {
+  const register = () => {
     setDeliveryTypesToState();
     setWarehouseFacilityUsagesToState();
     setWarehouseUsageCautionsToState();
     setInsurancesToState();
     setSecurityCompaniesToState();
-    console.log(inputs);
+    let requestBody = inputs;
+    if (inputs.name === null || inputs.name.trim() === '') {
+      message.warning('창고명을 입력해주세요.');
+      return;
+    } else if (inputs.space === null) {
+      message.warning('창고 평수를 입력해주세요.');
+      return;
+    } else if (inputs.address === null || inputs.address.trim() === '') {
+      message.warning('주소를 입력해주세요.');
+      return;
+    } else if (
+      inputs.addressDetail === null ||
+      inputs.addressDetail.trim() === ''
+    ) {
+      message.warning('상세 주소를 입력해주세요.');
+      return;
+    } else if (
+      inputs.description === null ||
+      inputs.description.trim() === ''
+    ) {
+      message.warning('창고 소개를 입력해주세요.');
+      return;
+    } else if (inputs.openAt === null || inputs.openAt.trim() === '') {
+      message.warning('영업 시작 시간을 입력해주세요.');
+      return;
+    } else if (inputs.closeAt === null || inputs.closeAt.trim() === '') {
+      message.warning('영업 종료 시간을 입력해주세요.');
+      return;
+    } else if (
+      inputs.availableTimeDetail === null ||
+      inputs.availableTimeDetail.trim() === ''
+    ) {
+      message.warning('영업 시간 유의사항을 입력해주세요');
+      return;
+    } else if (inputs.availableWeekdays === null) {
+      message.warning('영업요일을 선택해주세요.');
+      return;
+    } else if (inputs.minReleasePerMonth === null) {
+      message.warning('월 최소 출고량을 입력해 주세요.');
+      return;
+    } else if (inputs.insurances.length === 0) {
+      message.warning('보험사를 1개 이상 입력해주세요.');
+      return;
+    } else if (inputs.securityCompanies.length === 0) {
+      message.warning('경비 업체를 1개 이상 입력해주세요.');
+      return;
+    } else if (inputs.warehouseType === null) {
+      message.warning('업종을 선택해주세요.');
+      return;
+    } else if (inputs.airConditioningType === null) {
+      message.warning('냉난방 지원 방식을 선택해주세요.');
+      return;
+    } else if (inputs.mainItemTypes.length === 0) {
+      message.warning('대표 품목을 1개 이상 선택해주세요.');
+      return;
+    } else if (inputs.warehouseCondition.length === 0) {
+      message.warning('창고 유형을 1개 이상 선택해주세요.');
+      return;
+    } else if (inputs.deliveryTypes.length === 0) {
+      message.warning('제휴 택배사를 1개 이상 입력해주세요.');
+      return;
+    }
+    warehouseApi
+      .register(requestBody, localStorage.getItem('AccessToken'))
+      .then(() => {
+        // TODO : Location Fix
+        alert('창고 등록 요청이 정상적으로 처리되었습니다.');
+        window.location.href = '/';
+      })
+      .catch(({ response: { status } }) => {
+        if (status === 400) {
+          alert('[400]요청 형식이 잘못되었습니다.');
+        } else if (status === 401) {
+          alert('[401] 로그인을 다시 해주세요.');
+        } else if (status === 403) {
+          alert('[403] 해당 요청을 수행할 수 있는 권한이 없습니다.');
+        } else if (status === 500) {
+          alert('[500]서버 오류가 발생했습니다.');
+        }
+      });
   };
 
   return (
@@ -418,7 +507,9 @@ const Register = () => {
               height="240px"
               onChange={(event) => {
                 if (event.target.value.length >= 399) {
-                  alert('창고 소개는 최대 400자 까지 입력 가능합니다.');
+                  message.warning(
+                    '창고 소개는 최대 400자 까지 입력 가능합니다.',
+                  );
                   event.target.value = event.target.value.slice(0, 399);
                   return;
                 }
@@ -687,7 +778,7 @@ const Register = () => {
               <InputTitle>창고 이용 시 주의사항</InputTitle>
               {warehouseUsageCautions}
             </ItemContainer>
-            <SubmitButton onClick={() => sout()}>
+            <SubmitButton onClick={() => register()}>
               창고 등록 요청하기
             </SubmitButton>
           </TextContainer>
