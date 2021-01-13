@@ -2,31 +2,31 @@ import React, { useState } from 'react';
 import RegisterPresenter from './RegisterPresenter';
 import { warehouseApi } from '../../api';
 
-const InputType = {
-  NAME: 'name',
-  SPACE: 'space',
-  ADDRESS: 'address',
-  ADDRESS_DETAIL: 'addressDetail',
-  DESCRIPTION: 'description',
-  AVAIL_WEEK_DAYS: 'availableWeekdays',
-  OPEN_AT: 'openAt',
-  CLOSE_AT: 'closeAt',
-  AVAIL_TIME_DETAIL: 'availableTimeDetail',
-  INSURANCES: 'insurances',
-  CCTV_EXIST: 'cctvExist',
-  SECURITY_COMPANIES: 'securityCompanies',
-  DOOR_LOCK_EXIST: 'doorLockExist',
-  AIR_CONDITIONING_TYPE: 'airConditioningType',
-  WORKER_EXIST: 'workerExist',
-  CAN_PARK: 'canPark',
-  MAIN_ITEM_TYPE: 'mainItemTypes',
-  WAREHOUSE_TYPE: 'warehouseType',
-  MIN_RELEASE_PER_MONTH: 'minReleasePerMonth',
-  DELIVERY_TYPES: 'deliveryTypes',
-  WAREHOUSE_FACILITY_USAGES: 'warehouseFacilityUsages',
-  WAREHOUSE_USAGE_CAUTIONS: 'warehouseUsageCautions',
-  WAREHOUSE_CONDITION: 'warehouseCondition',
-};
+// const InputType = {
+//   NAME: 'name',
+//   SPACE: 'space',
+//   ADDRESS: 'address',
+//   ADDRESS_DETAIL: 'addressDetail',
+//   DESCRIPTION: 'description',
+//   AVAIL_WEEK_DAYS: 'availableWeekdays',
+//   OPEN_AT: 'openAt',
+//   CLOSE_AT: 'closeAt',
+//   AVAIL_TIME_DETAIL: 'availableTimeDetail',
+//   INSURANCES: 'insurances',
+//   CCTV_EXIST: 'cctvExist',
+//   SECURITY_COMPANIES: 'securityCompanies',
+//   DOOR_LOCK_EXIST: 'doorLockExist',
+//   AIR_CONDITIONING_TYPE: 'airConditioningType',
+//   WORKER_EXIST: 'workerExist',
+//   CAN_PARK: 'canPark',
+//   MAIN_ITEM_TYPE: 'mainItemTypes',
+//   WAREHOUSE_TYPE: 'warehouseType',
+//   MIN_RELEASE_PER_MONTH: 'minReleasePerMonth',
+//   DELIVERY_TYPES: 'deliveryTypes',
+//   WAREHOUSE_FACILITY_USAGES: 'warehouseFacilityUsages',
+//   WAREHOUSE_USAGE_CAUTIONS: 'warehouseUsageCautions',
+//   WAREHOUSE_CONDITION: 'warehouseCondition',
+// };
 
 const RegisterContainer = () => {
   const [inputs, setInputs] = useState({

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Container,
   Wrapper,
@@ -25,6 +25,7 @@ import {
   RemoveButton,
   SubmitButton,
   ArrayInput,
+  InputType,
 } from './Register';
 
 import RegisterBackground from '../../assets/images/login-background.jpg';
@@ -40,7 +41,63 @@ import {
   warehouseConditions,
 } from '../../static/register';
 
+import { warehouseApi } from '../../api';
+
 const Register = () => {
+  const ref = useRef();
+  const [inputs, setInputs] = useState({
+    name: null,
+    space: null,
+    address: null,
+    addressDetail: null,
+    description: null,
+    availableWeekdays: null,
+    openAt: null,
+    closeAt: null,
+    availableTimeDetail: null,
+    insurances: [],
+    cctvExist: false,
+    securityCompanies: [],
+    doorLockExist: false,
+    airConditioningType: null,
+    workerExist: false,
+    canPark: false,
+    mainItemTypes: [],
+    warehouseType: null,
+    minReleasePerMonth: null,
+    deliveryTypes: [],
+    warehouseFacilityUsages: [],
+    warehouseUsageCautions: [],
+    warehouseCondition: [],
+  });
+
+  const InputRefs = {
+    name: useRef(InputType.NAME),
+    space: useRef(InputType.SPACE),
+    address: useRef(InputType.ADDRESS),
+    addressDetail: useRef(InputType.ADDRESS_DETAIL),
+    description: useRef(InputType.DESCRIPTION),
+    availableWeekdays: useRef(InputType.AVAIL_WEEK_DAYS),
+    openAt: useRef(InputType.OPEN_AT),
+    closeAt: useRef(InputType.CLOSE_AT),
+    availableTimeDetail: useRef(InputType.AVAIL_TIME_DETAIL),
+    insurances: useRef(InputType.INSURANCES),
+    cctvExist: useRef(InputType.CCTV_EXIST),
+    securityCompanies: useRef(InputType.SECURITY_COMPANIES),
+    doorLockExist: useRef(InputType.DOOR_LOCK_EXIST),
+    airConditioningType: useRef(InputType.AIR_CONDITIONING_TYPE),
+    workerExist: useRef(InputType.WORKER_EXIST),
+    minReleasePerMonth: useRef(InputType.MIN_RELEASE_PER_MONTH),
+    deliveryTypes: useRef(InputType.DELIVERY_TYPES),
+    warehouseFacilityUsages: useRef(InputType.WAREHOUSE_FACILITY_USAGES),
+    warehouseUsageCau: useRef(InputType.WAREHOUSE_USAGE_CAUTIONS),
+    warehouseCondition: useRef(InputType.WAREHOUSE_CONDITION),
+  };
+
+  const sout = (requestBody) => {
+    console.log(requestBody);
+  };
+
   const [deliveryTypes, setDeliveryTypes] = useState([
     <ButtonAndInputContainer key={0}>
       <Input
@@ -49,7 +106,9 @@ const Register = () => {
         name="deliveryTypes"
         type="text"
         width="256px"
-      />{' '}
+        ref={InputRefs.deliveryTypes}
+      />
+      &nbsp;
       <AddButton onClick={() => addDeliveryTypes()}>추가</AddButton>
     </ButtonAndInputContainer>,
   ]);
@@ -62,6 +121,7 @@ const Register = () => {
         name="warehouseFacilityUsages"
         type="text"
         width="316px"
+        ref={InputRefs.warehouseFacilityUsages}
       />
       <AddButton onClick={() => addWarehouseFacilityUsages()}>추가</AddButton>
     </ButtonAndInputContainer>,
@@ -75,6 +135,7 @@ const Register = () => {
         name="warehouseUsageCautions"
         type="text"
         width="316px"
+        ref={InputRefs.warehouseUsageCautions}
       />
       <AddButton onClick={() => addWarehouseUsageCautions()}>추가</AddButton>
     </ButtonAndInputContainer>,
@@ -91,6 +152,7 @@ const Register = () => {
           name="deliveryTypes"
           type="text"
           width="256px"
+          ref={InputRefs.deliveryTypes}
         />
         {key === 1 ? (
           <RemoveButton onClick={removeDeliveryTypes}>삭제</RemoveButton>
@@ -111,6 +173,7 @@ const Register = () => {
           name="warehouseFacilityUsages"
           type="text"
           width="316px"
+          ref={InputRefs.warehouseFacilityUsages}
         />
         {key === 1 ? (
           <RemoveButton onClick={removeWarehouseFacilityUsages}>
@@ -133,6 +196,7 @@ const Register = () => {
           name="warehouseUsageCautions"
           type="text"
           width="316px"
+          ref={InputRefs.warehouseUsageCautions}
         />
         {key === 1 ? (
           <RemoveButton onClick={removeWarehouseUsageCautions}>
@@ -190,6 +254,7 @@ const Register = () => {
                   type="text"
                   placeholder="창고명"
                   width="256px"
+                  ref={InputRefs.name}
                 />
               </ItemContainer>
               <ItemContainer>
@@ -202,6 +267,7 @@ const Register = () => {
                   name="space"
                   placeholder="창고 평수(평 단위 숫자만 입력)"
                   width="256px"
+                  ref={InputRefs.space}
                 />
               </ItemContainer>
             </TwoElementContainer>
@@ -216,6 +282,7 @@ const Register = () => {
                   name="address"
                   placeholder="인천광역시 서구"
                   width="256px"
+                  ref={InputRefs.address}
                 />
               </ItemContainer>
               <ItemContainer>
@@ -228,6 +295,7 @@ const Register = () => {
                   name="addressDetail"
                   placeholder="상세 주소"
                   width="256px"
+                  ref={InputRefs.addressDetail}
                 />
               </ItemContainer>
             </TwoElementContainer>
@@ -241,6 +309,7 @@ const Register = () => {
               placeholder="창고"
               width="480px"
               height="240px"
+              ref={InputRefs.description}
             />
             <TwoElementContainer>
               <ItemContainer>
@@ -253,6 +322,7 @@ const Register = () => {
                   type="text"
                   placeholder="09:00"
                   width="256px"
+                  ref={InputRefs.openAt}
                 />
               </ItemContainer>
               <ItemContainer>
@@ -265,6 +335,7 @@ const Register = () => {
                   type="text"
                   placeholder="18:00"
                   width="256px"
+                  ref={InputRefs.closeAt}
                 />
               </ItemContainer>
             </TwoElementContainer>
@@ -278,6 +349,7 @@ const Register = () => {
                 type="text"
                 placeholder="물류 센터 사정에 따라 변경될 수 있습니다."
                 width="316px"
+                ref={InputRefs.availableTimeDetail}
               />
             </ItemContainer>
             <InputTitle>
@@ -291,6 +363,7 @@ const Register = () => {
                     type="radio"
                     value={day.value}
                     name="availableWeekdays"
+                    ref={InputRefs.availableWeekdays}
                   />
                   <RadioButtonLabel htmlFor={day.id}>
                     {day.children}
@@ -308,6 +381,7 @@ const Register = () => {
                 type="number"
                 placeholder="없으면 1 입력"
                 width="316px"
+                ref={InputRefs.minReleasePerMonth}
               />
             </ItemContainer>
             <TwoElementContainer>
@@ -321,6 +395,7 @@ const Register = () => {
                   name="insurance"
                   placeholder="화재 보험"
                   width="256px"
+                  ref={InputRefs.insurances}
                 />
               </ItemContainer>
               <ItemContainer>
@@ -333,6 +408,7 @@ const Register = () => {
                   name="securityCompanyName"
                   placeholder="ADT 캡스"
                   width="256px"
+                  ref={InputRefs.securityCompanies}
                 />
               </ItemContainer>
             </TwoElementContainer>
@@ -347,6 +423,7 @@ const Register = () => {
                     type="radio"
                     value={type.value}
                     name="warehouseType"
+                    ref={InputRefs.warehouseType}
                   />
                   <RadioButtonLabel htmlFor={type.id}>
                     {type.children}
@@ -365,6 +442,7 @@ const Register = () => {
                     type="radio"
                     value={type.value}
                     name="airConditioningType"
+                    ref={InputRefs.airConditioningType}
                   />
                   <RadioButtonLabel htmlFor={type.id}>
                     {type.children}
@@ -384,6 +462,7 @@ const Register = () => {
                       type="checkbox"
                       value={type.value}
                       name="mainItemTypes"
+                      ref={InputRefs.mainItemTypes}
                     />
                     <RadioButtonLabel htmlFor={type.id}>
                       {type.children}
@@ -403,6 +482,7 @@ const Register = () => {
                       type="checkbox"
                       value={check.value}
                       name="facilityChecks"
+                      // ref={InputRefs.warehouseCondition}
                     />
                     <RadioButtonLabel htmlFor={check.id}>
                       {check.children}
@@ -424,6 +504,7 @@ const Register = () => {
                       type="checkbox"
                       value={condition.value}
                       name="warehouseCondition"
+                      ref={InputRefs.warehouseCondition}
                     />
                     <RadioButtonLabel htmlFor={condition.id}>
                       {condition.children}
