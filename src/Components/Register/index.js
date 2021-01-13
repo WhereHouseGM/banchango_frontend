@@ -72,30 +72,11 @@ const Register = () => {
   });
 
   const InputRefs = {
-    name: useRef(InputType.NAME),
-    space: useRef(InputType.SPACE),
-    address: useRef(InputType.ADDRESS),
-    addressDetail: useRef(InputType.ADDRESS_DETAIL),
-    description: useRef(InputType.DESCRIPTION),
-    availableWeekdays: useRef(InputType.AVAIL_WEEK_DAYS),
-    openAt: useRef(InputType.OPEN_AT),
-    closeAt: useRef(InputType.CLOSE_AT),
-    availableTimeDetail: useRef(InputType.AVAIL_TIME_DETAIL),
     insurances: useRef(InputType.INSURANCES),
-    cctvExist: useRef(InputType.CCTV_EXIST),
     securityCompanies: useRef(InputType.SECURITY_COMPANIES),
-    doorLockExist: useRef(InputType.DOOR_LOCK_EXIST),
-    airConditioningType: useRef(InputType.AIR_CONDITIONING_TYPE),
-    workerExist: useRef(InputType.WORKER_EXIST),
-    minReleasePerMonth: useRef(InputType.MIN_RELEASE_PER_MONTH),
     deliveryTypes: useRef(InputType.DELIVERY_TYPES),
     warehouseFacilityUsages: useRef(InputType.WAREHOUSE_FACILITY_USAGES),
-    warehouseUsageCau: useRef(InputType.WAREHOUSE_USAGE_CAUTIONS),
-    warehouseCondition: useRef(InputType.WAREHOUSE_CONDITION),
-  };
-
-  const sout = (requestBody) => {
-    console.log(requestBody);
+    warehouseUsageCautions: useRef(InputType.WAREHOUSE_USAGE_CAUTIONS),
   };
 
   const [deliveryTypes, setDeliveryTypes] = useState([
@@ -140,6 +121,44 @@ const Register = () => {
       <AddButton onClick={() => addWarehouseUsageCautions()}>추가</AddButton>
     </ButtonAndInputContainer>,
   ]);
+
+  const [insurances, setInsurances] = useState([
+    <ButtonAndInputContainer>
+      <Input type="text" width="256px" ref={InputRefs.insurances} />
+      <AddButton onClick={() => addInsurances()}>추가</AddButton>
+    </ButtonAndInputContainer>,
+  ]);
+
+  const [securityCompanies, setSecurityCompanies] = useState([
+    <ButtonAndInputContainer>
+      <Input type="text" width="256px" ref={InputRefs.securityCompanies} />
+      <AddButton onClick={() => addSecurityCompanies()}>추가</AddButton>
+    </ButtonAndInputContainer>,
+  ]);
+
+  const addInsurances = () => {
+    const arrOfInsurances = insurances;
+    let key = arrOfInsurances.length;
+    arrOfInsurances.push(
+      <ButtonAndInputContainer key={`INSURANCES${key}`}>
+        <Input type="text" width="256px" ref={InputRefs.insurances} />
+        {key === 1 ? <RemoveButton>삭제</RemoveButton> : null}
+      </ButtonAndInputContainer>,
+    );
+    setInsurances([...arrOfInsurances]);
+  };
+
+  const addSecurityCompanies = () => {
+    const arrOfSecurityCompanies = securityCompanies;
+    let key = arrOfSecurityCompanies.length;
+    arrOfSecurityCompanies.push(
+      <ButtonAndInputContainer key={`SEC_COMP${key}`}>
+        <Input type="text" width="256px" ref={InputRefs.securityCompanies} />
+        {key === 1 ? <RemoveButton>삭제</RemoveButton> : null}
+      </ButtonAndInputContainer>,
+    );
+    setSecurityCompanies([...arrOfSecurityCompanies]);
+  };
 
   const addDeliveryTypes = () => {
     const arrOfDeliveryTypes = deliveryTypes;
@@ -226,6 +245,8 @@ const Register = () => {
     setWarehouseUsageCautions([...arrOfWarehouseUsageCautions]);
   };
 
+  const sout = () => console.log(inputs);
+
   return (
     <Container>
       <Wrapper>
@@ -254,7 +275,9 @@ const Register = () => {
                   type="text"
                   placeholder="창고명"
                   width="256px"
-                  ref={InputRefs.name}
+                  onChange={(event) => {
+                    setInputs({ ...inputs, name: event.target.value });
+                  }}
                 />
               </ItemContainer>
               <ItemContainer>
@@ -267,7 +290,12 @@ const Register = () => {
                   name="space"
                   placeholder="창고 평수(평 단위 숫자만 입력)"
                   width="256px"
-                  ref={InputRefs.space}
+                  onChange={(event) => {
+                    setInputs({
+                      ...inputs,
+                      space: parseInt(event.target.value),
+                    });
+                  }}
                 />
               </ItemContainer>
             </TwoElementContainer>
@@ -282,7 +310,9 @@ const Register = () => {
                   name="address"
                   placeholder="인천광역시 서구"
                   width="256px"
-                  ref={InputRefs.address}
+                  onChange={(event) => {
+                    setInputs({ ...inputs, address: event.target.value });
+                  }}
                 />
               </ItemContainer>
               <ItemContainer>
@@ -295,7 +325,9 @@ const Register = () => {
                   name="addressDetail"
                   placeholder="상세 주소"
                   width="256px"
-                  ref={InputRefs.addressDetail}
+                  onChange={(event) => {
+                    setInputs({ ...inputs, addressDetail: event.target.value });
+                  }}
                 />
               </ItemContainer>
             </TwoElementContainer>
@@ -309,7 +341,14 @@ const Register = () => {
               placeholder="창고"
               width="480px"
               height="240px"
-              ref={InputRefs.description}
+              onChange={(event) => {
+                if (event.target.value.length >= 399) {
+                  alert('창고 소개는 최대 400자 까지 입력 가능합니다.');
+                  event.target.value = event.target.value.slice(0, 399);
+                  return;
+                }
+                setInputs({ ...inputs, description: event.target.value });
+              }}
             />
             <TwoElementContainer>
               <ItemContainer>
@@ -322,7 +361,9 @@ const Register = () => {
                   type="text"
                   placeholder="09:00"
                   width="256px"
-                  ref={InputRefs.openAt}
+                  onChange={(event) => {
+                    setInputs({ ...inputs, openAt: event.target.value });
+                  }}
                 />
               </ItemContainer>
               <ItemContainer>
@@ -335,7 +376,9 @@ const Register = () => {
                   type="text"
                   placeholder="18:00"
                   width="256px"
-                  ref={InputRefs.closeAt}
+                  onChange={(event) => {
+                    setInputs({ ...inputs, closeAt: event.target.value });
+                  }}
                 />
               </ItemContainer>
             </TwoElementContainer>
@@ -349,7 +392,12 @@ const Register = () => {
                 type="text"
                 placeholder="물류 센터 사정에 따라 변경될 수 있습니다."
                 width="316px"
-                ref={InputRefs.availableTimeDetail}
+                onChange={(event) => {
+                  setInputs({
+                    ...inputs,
+                    availableTimeDetail: event.target.value,
+                  });
+                }}
               />
             </ItemContainer>
             <InputTitle>
@@ -363,7 +411,12 @@ const Register = () => {
                     type="radio"
                     value={day.value}
                     name="availableWeekdays"
-                    ref={InputRefs.availableWeekdays}
+                    onChange={(event) => {
+                      setInputs({
+                        ...inputs,
+                        availableWeekdays: parseInt(event.target.value),
+                      });
+                    }}
                   />
                   <RadioButtonLabel htmlFor={day.id}>
                     {day.children}
@@ -381,7 +434,12 @@ const Register = () => {
                 type="number"
                 placeholder="없으면 1 입력"
                 width="316px"
-                ref={InputRefs.minReleasePerMonth}
+                onChange={(event) => {
+                  setInputs({
+                    ...inputs,
+                    minReleasePerMonth: parseInt(event.target.value),
+                  });
+                }}
               />
             </ItemContainer>
             <TwoElementContainer>
@@ -389,27 +447,13 @@ const Register = () => {
                 <InputTitle>
                   보험사(1개)<span style={{ color: 'red' }}>*</span>
                 </InputTitle>
-                <Input
-                  type="text"
-                  id="insurance"
-                  name="insurance"
-                  placeholder="화재 보험"
-                  width="256px"
-                  ref={InputRefs.insurances}
-                />
+                {insurances}
               </ItemContainer>
               <ItemContainer>
                 <InputTitle>
                   경비 업체(1개)<span style={{ color: 'red' }}>*</span>
                 </InputTitle>
-                <Input
-                  type="text"
-                  id="securityCompanyName"
-                  name="securityCompanyName"
-                  placeholder="ADT 캡스"
-                  width="256px"
-                  ref={InputRefs.securityCompanies}
-                />
+                {securityCompanies}
               </ItemContainer>
             </TwoElementContainer>
             <InputTitle>
@@ -423,7 +467,12 @@ const Register = () => {
                     type="radio"
                     value={type.value}
                     name="warehouseType"
-                    ref={InputRefs.warehouseType}
+                    onChange={(event) => {
+                      setInputs({
+                        ...inputs,
+                        warehouseType: event.target.value,
+                      });
+                    }}
                   />
                   <RadioButtonLabel htmlFor={type.id}>
                     {type.children}
@@ -442,7 +491,12 @@ const Register = () => {
                     type="radio"
                     value={type.value}
                     name="airConditioningType"
-                    ref={InputRefs.airConditioningType}
+                    onChange={(event) => {
+                      setInputs({
+                        ...inputs,
+                        airConditioningType: event.target.value,
+                      });
+                    }}
                   />
                   <RadioButtonLabel htmlFor={type.id}>
                     {type.children}
@@ -462,7 +516,21 @@ const Register = () => {
                       type="checkbox"
                       value={type.value}
                       name="mainItemTypes"
-                      ref={InputRefs.mainItemTypes}
+                      onChange={(event) => {
+                        let tempInputs = inputs;
+                        if (event.target.checked) {
+                          if (tempInputs.mainItemTypes.length >= 3) {
+                            alert('대표 품목은 최대 3개까지 선택 가능합니다.');
+                          }
+                          tempInputs.mainItemTypes.push(event.target.value);
+                        } else {
+                          let index = tempInputs.mainItemTypes.indexOf(
+                            event.target.value,
+                          );
+                          tempInputs.mainItemTypes.splice(index, 1);
+                        }
+                        setInputs(tempInputs);
+                      }}
                     />
                     <RadioButtonLabel htmlFor={type.id}>
                       {type.children}
@@ -482,7 +550,11 @@ const Register = () => {
                       type="checkbox"
                       value={check.value}
                       name="facilityChecks"
-                      // ref={InputRefs.warehouseCondition}
+                      onChange={(event) => {
+                        let tempInputs = inputs;
+                        tempInputs[event.target.value] = true;
+                        setInputs(tempInputs);
+                      }}
                     />
                     <RadioButtonLabel htmlFor={check.id}>
                       {check.children}
@@ -504,7 +576,20 @@ const Register = () => {
                       type="checkbox"
                       value={condition.value}
                       name="warehouseCondition"
-                      ref={InputRefs.warehouseCondition}
+                      onChange={(event) => {
+                        let tempInputs = inputs;
+                        if (event.target.checked) {
+                          tempInputs.warehouseCondition.push(
+                            event.target.value,
+                          );
+                        } else {
+                          let index = tempInputs.warehouseCondition.indexOf(
+                            event.target.value,
+                          );
+                          tempInputs.warehouseCondition.splice(index, 1);
+                        }
+                        setInputs(tempInputs);
+                      }}
                     />
                     <RadioButtonLabel htmlFor={condition.id}>
                       {condition.children}
@@ -527,7 +612,9 @@ const Register = () => {
               <InputTitle>창고 이용 시 주의사항</InputTitle>
               {warehouseUsageCautions}
             </ItemContainer>
-            <SubmitButton>창고 등록 요청하기</SubmitButton>
+            <SubmitButton onClick={() => sout()}>
+              창고 등록 요청하기
+            </SubmitButton>
           </TextContainer>
         </RegisterContainer>
       </Wrapper>
