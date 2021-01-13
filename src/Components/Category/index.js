@@ -118,12 +118,14 @@ const Category = ({ warehouses }) => {
       {results.map((warehouse, index) => (
         <React.Fragment key={index}>
           <ResultWrap>
-            <ResultBox
-              onClick={() => {
-                history.push(`/warehouses/detail/${warehouse.warehouseId}`);
-              }}
-            >
-              <ResultBoxImage src={warehouse.mainImageUrl} />
+            <ResultBox>
+              <ResultBoxImage
+                src={warehouse.mainImageUrl}
+                alt={'창고 사진'}
+                onClick={() => {
+                  history.push(`/warehouses/detail/${warehouse.warehouseId}`);
+                }}
+              />
               <ResultBoxDescWrap>
                 <ResultBoxDescTitle>{warehouse.name}</ResultBoxDescTitle>
                 <ResultBoxDescSub>{warehouse.address}</ResultBoxDescSub>
@@ -156,8 +158,12 @@ const Category = ({ warehouses }) => {
                 <ResultBoxDescDeliveryListText>
                   {warehouse.deliveryTypes.join(' ')}
                 </ResultBoxDescDeliveryListText>
-                <ResultBoxDescInquiryButton>
-                  견적 문의
+                <ResultBoxDescInquiryButton
+                  onClick={() => {
+                    history.push(`/warehouses/detail/${warehouse.warehouseId}`);
+                  }}
+                >
+                  창고 상세보기
                 </ResultBoxDescInquiryButton>
               </ResultBoxDescWrap>
             </ResultBox>

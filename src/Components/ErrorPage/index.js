@@ -9,7 +9,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  line-height: 1.8;
+  line-height: 2.2;
 `;
 const Title = styled.div`
   font-size: 30px;
@@ -31,7 +31,7 @@ const ErrorPage = ({ error }) => {
   const history = useHistory();
   return (
     <Container>
-      <Title>에러 코드 밑</Title>
+      <Title>오류!</Title>
       <Body>{error}</Body>
       <GoToMainPage
         onClick={() => {
