@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RegisterPresenter from './RegisterPresenter';
 import { warehouseApi } from '../../api';
 
@@ -12,9 +12,9 @@ const InputType = {
   OPEN_AT: 'openAt',
   CLOSE_AT: 'closeAt',
   AVAIL_TIME_DETAIL: 'availableTimeDetail',
-  INSURANCE: 'insurance',
+  INSURANCES: 'insurances',
   CCTV_EXIST: 'cctvExist',
-  SECURITY_COMP_NAME: 'securityCompanyName',
+  SECURITY_COMPANIES: 'securityCompanies',
   DOOR_LOCK_EXIST: 'doorLockExist',
   AIR_CONDITIONING_TYPE: 'airConditioningType',
   WORKER_EXIST: 'workerExist',
@@ -29,6 +29,32 @@ const InputType = {
 };
 
 const RegisterContainer = () => {
+  const [inputs, setInputs] = useState({
+    name: null,
+    space: null,
+    address: null,
+    addressDetail: null,
+    description: null,
+    availableWeekdays: null,
+    openAt: null,
+    closeAt: null,
+    availableTimeDetail: null,
+    insurances: [],
+    cctvExist: false,
+    securityCompanies: [],
+    doorLockExist: false,
+    airConditioningType: null,
+    workerExist: false,
+    canPark: false,
+    mainItemTypes: [],
+    warehouseType: null,
+    minReleasePerMonth: null,
+    deliveryTypes: [],
+    warehouseFacilityUsages: [],
+    warehouseUsageCautions: [],
+    warehouseCondition: [],
+  });
+
   return <RegisterPresenter />;
 };
 
