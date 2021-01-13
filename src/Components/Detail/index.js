@@ -132,13 +132,15 @@ const Detail = ({ warehouse }) => {
               >
                 시설 안내사항
               </DetailGotoButton>
-              <DetailGotoButton
-                onClick={() => {
-                  scrollFunc(centerRef.caution);
-                }}
-              >
-                주의사항
-              </DetailGotoButton>
+              {warehouse.warehouseUsageCautions.length !== 0 && (
+                <DetailGotoButton
+                  onClick={() => {
+                    scrollFunc(centerRef.caution);
+                  }}
+                >
+                  주의사항
+                </DetailGotoButton>
+              )}
               <DetailGotoButton
                 onClick={() => {
                   scrollFunc(centerRef.position);
@@ -198,9 +200,11 @@ const Detail = ({ warehouse }) => {
                 </React.Fragment>
               );
             })}
-            <SectionTitle ref={centerRef.caution}>
-              시설 이용 시 주의사항
-            </SectionTitle>
+            {warehouse.warehouseUsageCautions.length !== 0 && (
+              <SectionTitle ref={centerRef.caution}>
+                시설 이용 시 주의사항
+              </SectionTitle>
+            )}
             {warehouse.warehouseUsageCautions.map((caution, idx) => {
               return (
                 <React.Fragment key={`WUC${idx}`}>
