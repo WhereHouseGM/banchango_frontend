@@ -10,6 +10,9 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   line-height: 1.66;
+  @media (max-width: 768px) {
+    font-size: 9px;
+  }
 `;
 const BoxWrapper = styled.div`
   width: 100%;
@@ -18,7 +21,7 @@ const BoxWrapper = styled.div`
   justify-content: center;
 `;
 const MarginBox = styled.div`
-  width: 12%;
+  width: 13%;
 `;
 const Wrapper = styled.div`
   width: 800px;
@@ -38,6 +41,9 @@ const BoxBody = styled.div``;
 const BottomText = styled.div`
   font-weight: bold;
   margin-top: 20px;
+  @media (max-width: 768px) {
+    font-size: 7px;
+  }
 `;
 
 const Footer = () => {
