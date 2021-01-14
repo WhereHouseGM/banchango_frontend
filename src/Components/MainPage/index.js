@@ -53,6 +53,7 @@ import {
   FifthDesc,
   FifthDescRed,
   LastGreyContainer,
+  FirstImageContainer,
 } from './MainPage';
 import { useHistory } from 'react-router-dom';
 
@@ -74,6 +75,7 @@ const MainPage = () => {
   return (
     <Container>
       <FirstContainer>
+        <FirstImageContainer />
         <FirstUpperTitle fontSize={'30px'}>온라인 셀러 전용</FirstUpperTitle>
         <FirstUpperTitle fontWeight={'bold'}>3PL 창고 집합소</FirstUpperTitle>
         <FirstTitle>

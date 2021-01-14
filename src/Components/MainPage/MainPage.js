@@ -140,9 +140,8 @@ export const Container = styled.div`
 export const FirstContainer = styled.div`
   width: 100%;
   height: 500px;
-  background-image: url(${BackgroundImg});
-  background-repeat: no-repeat;
-  background-position: center;
+  position: relative;
+
   display: flex;
   line-height: 1.7;
   flex-direction: column;
@@ -150,6 +149,19 @@ export const FirstContainer = styled.div`
   justify-content: center;
   background-color: rgb(56, 128, 146);
   color: white;
+  z-index: 0;
+  overflow: hidden;
+`;
+export const FirstImageContainer = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: url(${BackgroundImg});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  z-index: -1;
+  transform: translate(1.02);
 `;
 
 export const FirstUpperTitle = styled.div`
