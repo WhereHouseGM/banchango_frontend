@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   background-color: white;
-  height: auto;
+  min-height: 90vh;
+  position: relative;
   display: flex;
   @media screen and (max-width: 768px) {
     margin-top: 105px;
@@ -12,6 +13,8 @@ export const LeftBanner = styled.div`
   font-family: 'notosans-Regular', sans-serif;
   background-color: #1e56a0;
   width: 270px;
+  position: absolute;
+  height: 100%;
   color: white;
 `;
 export const BannerTextEnabledBox = styled.div`

@@ -95,7 +95,6 @@ const Detail = ({ warehouse }) => {
   const scrollFunc = (ref) => {
     window.scrollTo({ top: ref.current.offsetTop - 90, behavior: 'smooth' });
   };
-
   return (
     <>
       <Modal
@@ -197,14 +196,14 @@ const Detail = ({ warehouse }) => {
               {warehouse.address}&nbsp;{warehouse.addressDetail}
             </MainSubTitle>
             <MainTitle>{warehouse.name}</MainTitle>
-            <Content lineHeight="1.8" fontSize="19px">
+            <Content lineHeight="1.5" fontSize="19px">
               {warehouse.description}
             </Content>
             <SectionTitle>영업시간</SectionTitle>
-            <Content fontSize="30px">
+            <Content fontSize="20px">
               {warehouse.openAt}&nbsp;~&nbsp;{warehouse.closeAt}
             </Content>
-            <Content>{warehouse.availableTimeDetail}</Content>
+            <Content fontSize="16px">{warehouse.availableTimeDetail}</Content>
             <WorkDaysWrapper>
               {getWorkingWeekDayArr().map((item, idx) => (
                 <WorkDayBox key={idx} workOn={item === '1'}>
@@ -224,7 +223,6 @@ const Detail = ({ warehouse }) => {
                   <Content>
                     {idx + 1}. {insurance}
                   </Content>
-                  <br />
                 </React.Fragment>
               );
             })}
@@ -235,7 +233,7 @@ const Detail = ({ warehouse }) => {
                   <Content>
                     {idx + 1}. {usage}
                   </Content>
-                  <br />
+                  {/* <br /> */}
                 </React.Fragment>
               );
             })}
@@ -250,7 +248,6 @@ const Detail = ({ warehouse }) => {
                   <Content>
                     {idx + 1}. {caution}
                   </Content>
-                  <br />
                 </React.Fragment>
               );
             })}
@@ -266,9 +263,6 @@ const Detail = ({ warehouse }) => {
           </MainWrapper>
           <QuoteContactContainer>
             <ContactTitle>{warehouse.name}</ContactTitle>
-            <ContactSubTitle>
-              {warehouse.address}&nbsp;{warehouse.addressDetail}
-            </ContactSubTitle>
             <MainItemTypeWrapper>
               {warehouse.mainItemTypes.map((type, idx) => {
                 return (
@@ -280,11 +274,16 @@ const Detail = ({ warehouse }) => {
             </MainItemTypeWrapper>
             <ContactContentWrapper>
               <LeftContent>
-                <ContentTitle>월 최소 출고량</ContentTitle>
+                <ContentTitle>
+                  월 최소 출고량
+                  <br /> <br />
+                </ContentTitle>
                 <ContentValue>{warehouse.minReleasePerMonth}건</ContentValue>
               </LeftContent>
               <RightContent>
-                <ContentTitle>평수</ContentTitle>
+                <ContentTitle>
+                  평수 <br /> <br />
+                </ContentTitle>
                 <ContentValue>{warehouse.space}평</ContentValue>
               </RightContent>
             </ContactContentWrapper>

@@ -47,6 +47,7 @@ export const DetailPageNavbarContainer = styled.div`
   background-color: white;
   width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.03);
   position: sticky;
   top: 0;
 `;
@@ -58,7 +59,6 @@ export const DetailPageNavbarWrapper = styled.div`
 `;
 
 export const DetailPageNavbarItemsWrapper = styled.div`
-  /* width: 80%; */
   flex: 1;
   display: flex;
   align-items: center;
@@ -106,6 +106,7 @@ export const MainTitle = styled.div`
 `;
 
 export const Content = styled.div`
+  font-family: 'notosans-Regular', sans-serif;
   margin: 30px 0;
   font-size: ${(props) => props.fontSize || '20px'};
   line-height: ${(props) => props.lineHeight || '1.6'};
@@ -114,7 +115,8 @@ export const Content = styled.div`
 
 export const SectionTitle = styled.div`
   margin-top: 100px;
-  font-size: 25px;
+  font-size: 23px;
+  font-family: 'notosans-Regular', sans-serif;
   color: #0079c0;
   font-weight: bold;
   text-align: ${(props) => props.textAlign || 'left'};
@@ -139,6 +141,7 @@ export const MainMapImg = styled.div`
 `;
 
 export const MainMapDesc = styled.div`
+  font-family: 'notosans-Regular', sans-serif;
   text-align: center;
   font-size: 16px;
   color: #8c9ca6;
@@ -151,6 +154,7 @@ export const QuoteContactContainer = styled.div`
   padding: 17px;
   align-self: flex-start;
   background-color: white;
+  border: 1px solid #1e56a0;
   position: sticky;
   top: 90px;
   border-radius: 20px;
@@ -176,34 +180,37 @@ export const MainItemTypeWrapper = styled.div`
   flex-wrap: wrap;
   align-items: center;
   font-size: 13px;
+  margin-top: 22px;
 `;
 
 export const MainItemTypeValue = styled.div`
-  margin: 5px;
-  padding: 8px 10px;
-  border: 1px solid black;
+  margin-right: 9px;
+  padding: 8px 8px;
+  border: 1px solid #1e56a0;
+  color: #1e56a0;
   border-radius: 20px;
 `;
 
 export const ContactContentWrapper = styled.div`
-  margin: 20px auto;
+  margin: 16px auto;
   width: 100%;
   display: flex;
   justify-content: center;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   text-align: center;
   font-size: 14px;
+  line-height: 1;
 `;
 
 export const LeftContent = styled.div`
   width: 48%;
-  padding: 20px 0;
-  border-right: 1px solid black;
+  padding: 14px 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
 `;
 
 export const RightContent = styled.div`
   width: 48%;
-  padding: 20px 0;
+  padding: 14px 0;
 `;
 
 export const ContentTitle = styled.div`
@@ -223,6 +230,7 @@ export const BottomContentTitle = styled.div`
 export const BottomContentValue = styled.div`
   margin: 10px 0;
   line-height: 1.6;
+
   font-size: 14px;
 `;
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 const Container = styled.div`
+font-family: 'notosans-Regular', sans-serif;
   padding: 35px 0;
   width: 100%;
   background-color: #1e56a0;
@@ -71,7 +72,7 @@ const Footer = () => {
           </RightBox>
         </Wrapper>
       </BoxWrapper>
-      <BottomText>@ WHEREHOUSE INT Co.Ltd.</BottomText>
+      <BottomText>@ BANCHANGOHUB INT Co.Ltd.</BottomText>
     </Container>
   );
 };
