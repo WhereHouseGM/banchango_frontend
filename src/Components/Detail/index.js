@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import Slider from 'react-slick';
 import Modal from './Modal/ShowImageModal';
 import {
   Container,
@@ -33,12 +34,18 @@ import {
   BottomContentValue,
   QuoteContactButton,
   WorkDaysWrapper,
+  sliderSettings,
   WorkDayBox,
+  MainImageSliderWrapper,
+  SliderChildWrapper,
+  SliderChildImg,
+  SliderChildArrow,
 } from './Detail';
 import { categoryTitleDict } from '../../static/category';
 import { dayOfWeek } from '../../static/detail';
 
 const Detail = ({ warehouse }) => {
+  const SliderRef = React.createRef();
   useEffect(() => {
     const script = document.createElement('script');
     script.async = true;
@@ -66,6 +73,7 @@ const Detail = ({ warehouse }) => {
     };
   }, []);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalImgUrl, setModalImgUrl] = useState('');
 
   const history = useHistory();
 
@@ -96,16 +104,48 @@ const Detail = ({ warehouse }) => {
           setModalVisible(false);
         }}
         visible={modalVisible}
+        modalImgUrl={modalImgUrl}
       />
       <Container>
-        <MainImageContainer bgImage={warehouse.mainImageUrl}>
-          <ImageButton
+        <MainImageContainer>
+          <SliderChildArrow
             onClick={() => {
-              setModalVisible(true);
+              SliderRef.current.slickPrev();
             }}
           >
-            시설보기
-          </ImageButton>
+            {'<'}
+          </SliderChildArrow>
+          <MainImageSliderWrapper>
+            <Slider {...sliderSettings} ref={SliderRef}>
+              <SliderChildWrapper>
+                <SliderChildImg
+                  src={warehouse.mainImageUrl}
+                  onClick={() => {
+                    setModalImgUrl(warehouse.mainImageUrl);
+                    setModalVisible(true);
+                  }}
+                />{' '}
+              </SliderChildWrapper>
+              {warehouse.images.map((item, idx) => (
+                <SliderChildWrapper key={idx}>
+                  <SliderChildImg
+                    src={item}
+                    onClick={() => {
+                      setModalImgUrl(item);
+                      setModalVisible(true);
+                    }}
+                  />
+                </SliderChildWrapper>
+              ))}
+            </Slider>
+          </MainImageSliderWrapper>
+          <SliderChildArrow
+            onClick={() => {
+              SliderRef.current.slickNext();
+            }}
+          >
+            {'>'}
+          </SliderChildArrow>
         </MainImageContainer>
         <DetailPageNavbarContainer>
           <DetailPageNavbarWrapper>

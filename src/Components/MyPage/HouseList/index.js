@@ -131,7 +131,7 @@ const HouseList = () => {
         <BannerTextDisabledBox
           onClick={() => {
             localStorage.clear();
-            window.location.reload();
+            history.push('/');
           }}
         >
           로그아웃
