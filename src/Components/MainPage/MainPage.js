@@ -141,7 +141,6 @@ export const FirstContainer = styled.div`
   width: 100%;
   height: 500px;
   position: relative;
-
   display: flex;
   line-height: 1.7;
   flex-direction: column;
@@ -170,9 +169,11 @@ export const FirstUpperTitle = styled.div`
 `;
 
 export const FirstTitle = styled.div`
-  font-family: 'notosans-Regular', sans-serif;
   margin-top: 10px;
   width: 90%;
+`;
+export const FirstTitleText = styled.div`
+  font-family: 'notosans-Regular', sans-serif;
   font-size: 22px;
   line-height: 1.8;
   white-space: pre-line;
