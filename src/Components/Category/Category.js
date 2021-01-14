@@ -1,323 +1,228 @@
-import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
-const Categories = {
-  CLOTH: 'cloth',
-  COSMETIC: 'cosmetic',
-  FURNITURE: 'furniture',
-  GENERAL: 'general_merchandise',
-  FOOD: 'temperature_sensitive',
-  JEWELRY: 'accessory',
-};
+export const Container = styled.div`
+  width: 100%;
+  text-align: center;
+  font-family: 'paybooc-Medium', sans-serif;
+`;
 
-const WarehouseConditions = {
-  ROOM_TEMPERATURE: 'ROOM_TEMPERATURE',
-  LOW_TEMPERATURE: 'LOW_TEMPERATURE',
-  BONDED: 'BONDED',
-  SAVAGE: 'SAVAGE',
-  HAZARDOUS: 'HAZARDOUS',
-  SELF_STORAGE: 'SELF_STORAGE',
-  CONTAINER: 'CONTAINER',
-};
+export const CategoryPickContainer = styled.div`
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+`;
 
-const WarehouseTypes = {
-  THREEPL: 'THREEPL',
-  FULFILLMENT: 'FULFILLMENT',
-};
+export const CategoryPickTitle = styled.div`
+  margin-top: -8px;
+  font-weight: bold;
+  width: 16%;
+  font-size: 25px;
+`;
 
-const types = (warehouseType) => {
-  switch (warehouseType) {
-    case WarehouseTypes.THREEPL:
-      return '3PL';
-    case WarehouseTypes.FULFILLMENT:
-      return '풀필먼트';
-    default:
-      return '';
+export const CategoryPickButtonWrap = styled.div`
+  width: 63%;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+`;
+
+export const CategoryPickButton = styled.div`
+  width: 8%;
+  min-width: 120px;
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1px solid black;
+  &:hover {
+    cursor: pointer;
   }
-};
-
-const condition = (warehouseCondition) => {
-  switch (warehouseCondition) {
-    case WarehouseConditions.ROOM_TEMPERATURE:
-      return '상온창고';
-    case WarehouseConditions.LOW_TEMPERATURE:
-      return '저온창고';
-    case WarehouseConditions.BONDED:
-      return '보세창고';
-    case WarehouseConditions.SAVAGE:
-      return '야외창고';
-    case WarehouseConditions.HAZARDOUS:
-      return '위험창고';
-    case WarehouseConditions.SELF_STORAGE:
-      return '셀프창고';
-    case WarehouseConditions.CONTAINER:
-      return '컨테이너';
-    default:
-      return '';
+  @media (max-width: 1023px) {
+    width: 31%;
   }
-};
-
-const categoryName = (category) => {
-  switch (category) {
-    case Categories.CLOTH:
-      return '의류 창고 ';
-    case Categories.COSMETIC:
-      return '화장품 창고 ';
-    case Categories.FURNITURE:
-      return '가구 창고 ';
-    case Categories.GENERAL:
-      return '잡화 창고 ';
-    case Categories.FOOD:
-      return '식품 창고 ';
-    case Categories.JEWELRY:
-      return '악세사리 창고 ';
-    default:
-      return '';
-  }
-};
-
-const convertDeliveryTypes = (deliveryTypes) => {
-  let size = deliveryTypes.length;
-
-  if (size >= 2) {
-    return (
-      <span>
-        {deliveryTypes[0]}
-        <br />외 {size - 1} 곳
-      </span>
-    );
-  } else {
-    return deliveryTypes[0];
-  }
-};
-
-const Container = styled.div`
-  margin-top: 80px;
-  max-width: 1024px;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-  box-sizing: border-box;
-  @media (min-width: 992px) {
-    width: 970px;
-  }
-
-  @media (min-width: 768px) {
-    width: 750px;
+`;
+export const CategoryFindButton = styled.div`
+  padding: 15px 20px;
+  background-color: #1e56a0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  color: white;
+  border-radius: 20px;
+  align-self: center;
+  &:hover {
+    cursor: pointer;
   }
 `;
 
-const MainTitleContainer = styled.div`
+export const ResultWrap = styled.div`
+  width: 100%;
+  padding: 40px 0;
   display: flex;
-  align-items: baseline;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 `;
 
-const MainTitle = styled.div`
+export const ResultBox = styled.div`
+  border-radius: 10px;
+  overflow: hidden;
+  width: 90%;
+  height: 500px;
   display: flex;
-  align-items: baseline;
-  margin-top: 80px;
-  margin-left: 15px;
-  margin-right: -15px;
-  font-family: 'Nanum Gothic', sans-serif;
+  box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.5);
+  margin: 20px;
+`;
+
+export const ResultBoxImage = styled.img`
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center center;
+  margin-right: -400px;
+  padding-right: 400px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const ResultBoxDescWrap = styled.div`
+  min-width: 400px;
+  text-align: left;
+  padding: 30px;
+`;
+
+export const ResultBoxDescTitle = styled.div`
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 18px;
+`;
+
+export const ResultBoxDescSub = styled.div`
+  font-family: 'notosans-Regular', sans-serif;
+  font-size: 20px;
+  color: grey;
+`;
+
+export const ResultBoxDescBoxWrap = styled.div`
+  margin: 23px auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid black;
+  text-align: center;
+`;
+
+export const ResultBoxDescBoxLeft = styled.div`
+  width: 48%;
+  height: 100px;
+  border-right: 1px solid black;
+`;
+
+export const ResultBoxDescBoxRight = styled.div`
+  width: 48%;
+  height: 100px;
+`;
+
+export const ResultBoxDescBoxTitle = styled.div`
+  margin-top: 30px;
   font-weight: bold;
 `;
 
-const ItemContainer = styled.div`
-  margin-left: -15px;
-  margin-right: -15px;
-  justify-content: center;
+export const ResultBoxDescBoxText = styled.div`
+  margin-top: 5px;
 `;
 
-const ItemWrapper = styled.div`
-  float: left;
-  @media (min-width: 768px) {
-    width: 50%;
-  }
-  margin-right: 15px;
-  margin-left: 15px;
-  padding: 0;
-  margin-bottom: 10px;
-`;
-
-const Item = styled.div`
-  position: relative;
-  background-color: rgb(255, 255, 255);
-  padding: 0px;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: rgba(136, 136, 136, 0.3) 0px 0px 15px;
-  transition: transform 0.2s ease 02;
-`;
-
-const Image = styled.div`
-  width: 100%;
-  height: 150px;
-  background-size: cover;
-  background-position: center center;
-  position: relative;
-  background-image: url(${(props) => props.bgImage});
-`;
-
-const InformationWrapper = styled.div`
-  position: relative;
-  padding: 15px;
-  color: #333333;
-`;
-
-const LinkToDetailPage = styled.a`
-  color: #000;
-  text-decoration: none;
-  &:hover {
-    text-decoration: none;
-  }
-`;
-
-const Address = styled.span`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 12px;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  word-break: keep-all;
-  overflow-wrap: break-word;
-  line-height: 1.4em;
-  min-height: 20px;
-`;
-
-const Name = styled.div`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  word-break: keep-all;
-  overflow-wrap: break-word;
-  line-height: 1.4em;
-  height: 56px;
-`;
-
-const StickerContainer = styled.div`
+export const ResultBoxDescButtonWrap = styled.div`
+  width: 90%;
   display: flex;
-`;
-
-const StickerWrapper = styled.div`
-  flex: 1 1 0%;
-  white-space: nowrap;
-  display: flex;
-  flex-wrap: nowrap;
-  border-bottom: 1px solid lightgray;
-`;
-
-const Stickers = styled.div`
-  display: inline-block;
-  min-height: 30px;
-`;
-
-const Sticker = styled.span`
-  font-size: 8px;
-  display: inline-block;
-  background-color: rgb(238, 240, 246);
-  padding: 5px 10px;
-  border-radius: 20px;
-  margin-right: 5px;
-`;
-
-const AdditionInformationWrapper = styled.div`
-  display: flex;
-  margin-top: 10px;
-  min-height: 40px;
-  -webkit-box-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
   align-items: center;
 `;
 
-const MonthlyMinimumExports = styled.div`
-  border-left: none;
-  flex: 1 1 0%;
+export const ResultBoxDescButton = styled.div`
+  margin: 5px;
+  padding: 10px 15px;
+  border: 1px solid black;
+  border-radius: 20px;
+  background-color: ${(props) => (props.match === true ? '#1e56a0' : 'white')};
+  color: ${(props) => (props.match === true ? 'white' : 'black')};
+`;
+
+export const ResultBoxDescDeliveryListTitle = styled.div`
+  margin-top: 25px;
+  font-weight: bold;
+  font-size: 23px;
+`;
+
+export const ResultBoxDescDeliveryListText = styled.div`
+  margin: 10px 0;
+  font-size: 17px;
+`;
+
+export const ResultBoxDescInquiryButton = styled.div`
+  margin: 30px auto 0 auto;
+  padding: 10px 20px;
+  border: 1px solid #1e56a0;
+  border-radius: 20px;
+  font-size: 20px;
   text-align: center;
+  color: #1e56a0;
+  font-weight: bold;
+  box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.5);
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
-const InfoTitle = styled.span`
-  font-size: 10px;
-`;
-
-const InfoValue = styled.span`
-  font-size: 12px;
-`;
-
-const AdditionalInfo = styled.div`
-  flex: 1 1 0%;
-  text-align: center;
-  border-left: 1px solid rgb(229, 232, 240);
-`;
-
-const Category = ({ warehouses, category }) => {
-  return (
-    <Container>
-      <MainTitleContainer className="row">
-        <MainTitle>{categoryName(category)} 리스트</MainTitle>
-      </MainTitleContainer>
-      <ItemContainer className="row">
-        {warehouses.map((warehouse) => (
-          <ItemWrapper className="col-md-4 col-sm-6 col-xs-12">
-            <Item
-              onClick={() =>
-                (window.location.href = `/warehouses/${warehouse.warehouseId}`)
-              }
-            >
-              <Image bgImage={warehouse.mainImageUrl}></Image>
-              <InformationWrapper>
-                <LinkToDetailPage href={`/warehouses/${warehouse.warehouseId}`}>
-                  <Address>{warehouse.address}</Address>
-                  <Name>
-                    <div>{warehouse.name}</div>
-                  </Name>
-                </LinkToDetailPage>
-                <StickerContainer>
-                  <StickerWrapper>
-                    <Stickers>
-                      <Sticker>
-                        {condition(warehouse.warehouseCondition[0])}
-                      </Sticker>
-                      <Sticker>{types(warehouse.warehouseType)}</Sticker>
-                    </Stickers>
-                  </StickerWrapper>
-                </StickerContainer>
-                <AdditionInformationWrapper>
-                  <MonthlyMinimumExports>
-                    <InfoTitle>월 최소 출고량</InfoTitle>
-                    <br />
-                    <InfoValue>{warehouse.minReleasePerMonth}</InfoValue>
-                  </MonthlyMinimumExports>
-                  <AdditionalInfo>
-                    <InfoTitle>평수</InfoTitle>
-                    <br />
-                    <InfoValue>{warehouse.totalArea}</InfoValue>
-                  </AdditionalInfo>
-                  <AdditionalInfo>
-                    <InfoTitle>택배사</InfoTitle>
-                    <br />
-                    <InfoValue>
-                      {convertDeliveryTypes(warehouse.deliveryTypes)}
-                    </InfoValue>
-                  </AdditionalInfo>
-                </AdditionInformationWrapper>
-              </InformationWrapper>
-            </Item>
-          </ItemWrapper>
-        ))}
-      </ItemContainer>
-    </Container>
-  );
-};
-
-Category.propTypes = {
-  warehouses: PropTypes.array.isRequired,
-  category: PropTypes.string.isRequired,
-};
-
-export default Category;
+export const BtnArr = [
+  {
+    id: 'CLOTH',
+    name: '의류',
+  },
+  {
+    id: 'COSMETIC',
+    name: '화장품',
+  },
+  {
+    id: 'ACCESSORY',
+    name: '악세서리',
+  },
+  {
+    id: 'GENERAL_MERCHANDISE',
+    name: '잡화',
+  },
+  {
+    id: 'FOOD',
+    name: '식품',
+  },
+  {
+    id: 'BOOK',
+    name: '서적',
+  },
+  {
+    id: 'INTERIOR',
+    name: '인테리어',
+  },
+  {
+    id: 'ELECTRONICS',
+    name: '전자제품',
+  },
+  {
+    id: 'SPORTS',
+    name: '스포츠',
+  },
+  {
+    id: 'FREEZE_STORAGE',
+    name: '냉동',
+  },
+  {
+    id: 'COLD_STORAGE',
+    name: '냉장',
+  },
+  {
+    id: 'LARGE_SIZE',
+    name: '대형물품',
+  },
+];

@@ -1,28 +1,13 @@
 import Helmet from 'react-helmet';
-import SignUp from '../../Components/SignUp/SignUp';
-import PropTypes from 'prop-types';
+import SignUp from '../../Components/SignUp';
 
-const SignUpPresenter = ({
-  handleInput,
-  handleSubmit,
-  handlePasswordInput,
-}) => (
+const SignUpPresenter = () => (
   <>
     <Helmet>
       <title>반창고 | 회원가입</title>
     </Helmet>
-    <SignUp
-      handleInput={handleInput}
-      handleSubmit={handleSubmit}
-      handlePasswordInput={handlePasswordInput}
-    />
+    <SignUp />
   </>
 );
-
-SignUpPresenter.propTypes = {
-  handleInput: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  handlePasswordInput: PropTypes.func.isRequired,
-};
 
 export default SignUpPresenter;

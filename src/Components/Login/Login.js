@@ -1,15 +1,11 @@
-import React from 'react';
 import styled from 'styled-components';
-import LoginBackground from '../../assets/images/login-background.jpg';
-import MainImage from '../../assets/images/banchango-main.png';
-import PropTypes from 'prop-types';
 
-const Container = styled.div`
+export const Container = styled.div`
   height: 100vh;
   overflow: auto;
 `;
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   height: 100%;
   min-height: 100vh;
   box-align: center;
@@ -21,7 +17,7 @@ const Wrapper = styled.div`
   align-content: center;
 `;
 
-const BackgroundImage = styled.div`
+export const BackgroundImage = styled.div`
   position: fixed;
   left: 0;
   right: 0;
@@ -33,14 +29,14 @@ const BackgroundImage = styled.div`
   z-index: -1;
 `;
 
-const LoginContainer = styled.div`
+export const LoginContainer = styled.div`
   background-color: #1d489b;
   width: 375px;
   border-radius: 15px;
   overflow: hidden;
 `;
 
-const ImageContainer = styled.div`
+export const ImageContainer = styled.div`
   background-color: #1d489b;
   height: 112px;
   display: flex;
@@ -52,7 +48,7 @@ const ImageContainer = styled.div`
   flex-direction: column;
 `;
 
-const LoginImage = styled.div`
+export const LoginImage = styled.div`
   width: 270px;
   height: 90px;
   background-image: url(${(props) => props.bgImage});
@@ -61,7 +57,7 @@ const LoginImage = styled.div`
   background-repeat: no-repeat;
 `;
 
-const TextContainer = styled.div`
+export const TextContainer = styled.div`
   display: flex;
   box-pack: center;
   justify-content: center;
@@ -73,7 +69,7 @@ const TextContainer = styled.div`
   background-color: white;
 `;
 
-const HeaderTitleTop = styled.div`
+export const HeaderTitleTop = styled.div`
   color: black;
   font-family: 'Nanum Gothic', sans-serif;
   font-size: 20px;
@@ -83,7 +79,7 @@ const HeaderTitleTop = styled.div`
   text-align: center;
 `;
 
-const HeaderTitleBottom = styled.div`
+export const HeaderTitleBottom = styled.div`
   color: #1d489b;
   font-family: 'Nanum Gothic', sans-serif;
   font-size: 20px;
@@ -91,7 +87,7 @@ const HeaderTitleBottom = styled.div`
   text-align: center;
 `;
 
-const InputTitle = styled.div`
+export const InputTitle = styled.div`
   color: black;
   font-family: 'Nanum Gothic', sans-serif;
   font-weight: bold;
@@ -101,7 +97,7 @@ const InputTitle = styled.div`
   margin-left: 60px;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
   border: none;
   border-bottom: 1px solid #1d489b;
   width: 256px;
@@ -113,7 +109,7 @@ const Input = styled.input`
   }
 `;
 
-const PasswordFindText = styled.a`
+export const PasswordFindText = styled.a`
   align-self: flex-end;
   color: #1d489b;
   font-size: 12px;
@@ -121,7 +117,7 @@ const PasswordFindText = styled.a`
   margin-right: 60px;
 `;
 
-const LoginButton = styled.button`
+export const LoginButton = styled.button`
   border-radius: 18px;
   border: 2px solid #1d489b;
   padding: 10px 88px 10px 88px;
@@ -136,7 +132,7 @@ const LoginButton = styled.button`
   }
 `;
 
-const RegisterButton = styled.button`
+export const RegisterButton = styled.button`
   border-radius: 18px;
   border: 2px solid #1d489b;
   background-color: #1d489b;
@@ -153,66 +149,12 @@ const RegisterButton = styled.button`
   }
 `;
 
-const TextBottomContainer = styled.span`
+export const TextBottomContainer = styled.span`
   margin-top: 30px;
   margin-bottom: 5px;
 `;
-const TextBottom = styled.a`
+export const TextBottom = styled.a`
   font-family: 'Nanum Gothic', sans-serif;
   font-size: 12px;
   color: gray;
 `;
-
-const Login = ({ handleSubmit, handleInput, toSignupPage }) => (
-  <Container>
-    <Wrapper>
-      <BackgroundImage
-        bgImage={LoginBackground}
-        alt="Background Image."
-      ></BackgroundImage>
-      <LoginContainer>
-        <ImageContainer>
-          <LoginImage bgImage={MainImage} alt="Main image."></LoginImage>
-        </ImageContainer>
-        <TextContainer>
-          <HeaderTitleTop>온라인 셀러를 위한</HeaderTitleTop>
-          <HeaderTitleBottom>통합 물류 파트너</HeaderTitleBottom>
-          <InputTitle>이메일</InputTitle>
-          <Input
-            id="email"
-            type="email"
-            placeholder="example@example.com"
-            name="email"
-            onChange={handleInput}
-            required
-          />
-          <InputTitle>패스워드</InputTitle>
-          <Input
-            id="password"
-            type="password"
-            placeholder="password"
-            name="password"
-            onChange={handleInput}
-            required
-          />
-
-          <PasswordFindText>비밀번호를 잃어버리셨나요?</PasswordFindText>
-          <LoginButton onClick={handleSubmit}>로그인</LoginButton>
-          <RegisterButton onClick={toSignupPage}>회원 가입</RegisterButton>
-          <TextBottomContainer>
-            <TextBottom>이용 약관 </TextBottom>|
-            <TextBottom> 개인 정보 처리 방침</TextBottom>
-          </TextBottomContainer>
-        </TextContainer>
-      </LoginContainer>
-    </Wrapper>
-  </Container>
-);
-
-Login.propTypes = {
-  handleInput: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  toSignupPage: PropTypes.func.isRequired,
-};
-
-export default Login;

@@ -1,0 +1,33 @@
+import Helmet from 'react-helmet';
+import MyPage from '../../Components/MyPage';
+import Navbar from '../../Components/Navbar';
+import Footer from '../../Components/Footer';
+import PropTypes from 'prop-types';
+import Loading from '../../Components/Loading';
+import ErrorPage from '../../Components/ErrorPage';
+
+const DetailPresenter = ({ userInfo, handleSubmit, error, loading }) => (
+  <>
+    <Helmet>
+      <title>반창고 | 마이페이지</title>
+    </Helmet>
+    <Navbar />
+    {loading ? (
+      <Loading />
+    ) : error ? (
+      <ErrorPage error={error} />
+    ) : (
+      <MyPage userInfo={userInfo} handleSubmit={handleSubmit} />
+    )}
+    <Footer />
+  </>
+);
+
+DetailPresenter.propTypes = {
+  userInfo: PropTypes.object,
+  handleSubmit: PropTypes.func,
+  error: PropTypes.string,
+  loading: PropTypes.bool,
+};
+
+export default DetailPresenter;
