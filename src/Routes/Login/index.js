@@ -1,3 +1,3 @@
-import LoginPresenter from './LoginPresenter';
+import LoginContainer from './LoginContainer';
 
-export default LoginPresenter;
+export default LoginContainer;
