@@ -8,7 +8,7 @@ export const Container = styled.div`
 
 export const MainImageContainer = styled.div`
   width: 100%;
-  height: 400px;
+  height: 420px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -17,6 +17,7 @@ export const MainImageSliderWrapper = styled.div`
   width: 80%;
   height: 100%;
   overflow: hidden;
+  padding: 15px;
 `;
 export const sliderSettings = {
   className: 'slider variable-width',
@@ -30,7 +31,7 @@ export const sliderSettings = {
   arrows: false,
 };
 export const SliderChildArrow = styled.div`
-  font-size: 20px;
+  font-size: 25px;
   &:hover {
     cursor: pointer;
   }
@@ -46,10 +47,12 @@ export const SliderChildImg = styled.img`
 export const DetailPageNavbarContainer = styled.div`
   background-color: white;
   width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.03);
   position: sticky;
-  top: 0;
+  top: 45px;
+  z-index: 50;
 `;
 export const DetailPageNavbarWrapper = styled.div`
   max-width: 1000px;
@@ -156,7 +159,7 @@ export const QuoteContactContainer = styled.div`
   background-color: white;
   border: 1px solid #1e56a0;
   position: sticky;
-  top: 90px;
+  top: 120px;
   border-radius: 20px;
   box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.3);
 `;
@@ -171,7 +174,6 @@ export const ContactTitle = styled.div`
 export const ContactSubTitle = styled.div`
   font-size: 15px;
   color: #4a6777;
-  margin-bottom: 10px;
   line-height: 1.45;
 `;
 export const MainItemTypeWrapper = styled.div`
@@ -180,11 +182,12 @@ export const MainItemTypeWrapper = styled.div`
   flex-wrap: wrap;
   align-items: center;
   font-size: 13px;
-  margin-top: 22px;
+  margin-top: 14px;
 `;
 
 export const MainItemTypeValue = styled.div`
   margin-right: 9px;
+  margin-top: 5px;
   padding: 8px 8px;
   border: 1px solid #1e56a0;
   color: #1e56a0;

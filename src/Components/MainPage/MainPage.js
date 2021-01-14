@@ -154,7 +154,7 @@ export const FirstContainer = styled.div`
 
 export const FirstUpperTitle = styled.div`
   font-weight: ${(props) => props.fontWeight || 'normal'};
-  font-size: ${(props) => props.fontSize || '30px'};
+  font-size: ${(props) => props.fontSize || '40px'};
 `;
 
 export const FirstTitle = styled.div`
