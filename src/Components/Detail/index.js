@@ -73,6 +73,7 @@ const Detail = ({ warehouse }) => {
     };
   }, []);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalImgUrl, setModalImgUrl] = useState('');
 
   const history = useHistory();
 
@@ -103,9 +104,10 @@ const Detail = ({ warehouse }) => {
           setModalVisible(false);
         }}
         visible={modalVisible}
+        modalImgUrl={modalImgUrl}
       />
       <Container>
-        <MainImageContainer bgImage={warehouse.mainImageUrl}>
+        <MainImageContainer>
           <SliderChildArrow
             onClick={() => {
               SliderRef.current.slickPrev();
@@ -117,25 +119,24 @@ const Detail = ({ warehouse }) => {
             <Slider {...sliderSettings} ref={SliderRef}>
               <SliderChildWrapper>
                 <SliderChildImg
-                  src={
-                    'https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png'
-                  }
-                />
+                  src={warehouse.mainImageUrl}
+                  onClick={() => {
+                    setModalImgUrl(warehouse.mainImageUrl);
+                    setModalVisible(true);
+                  }}
+                />{' '}
               </SliderChildWrapper>
-              <SliderChildWrapper>
-                <SliderChildImg
-                  src={
-                    'https://www.gettyimages.pt/gi-resources/images/Homepage/Hero/PT/PT_hero_42_153645159.jpg'
-                  }
-                />
-              </SliderChildWrapper>
-              <SliderChildWrapper>
-                <SliderChildImg
-                  src={
-                    'https://miro.medium.com/max/11344/1*32h8ts3A-7XNr6A4Js87ng.jpeg'
-                  }
-                />
-              </SliderChildWrapper>
+              {warehouse.images.map((item, idx) => (
+                <SliderChildWrapper key={idx}>
+                  <SliderChildImg
+                    src={item}
+                    onClick={() => {
+                      setModalImgUrl(item);
+                      setModalVisible(true);
+                    }}
+                  />
+                </SliderChildWrapper>
+              ))}
             </Slider>
           </MainImageSliderWrapper>
           <SliderChildArrow
