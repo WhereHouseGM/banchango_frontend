@@ -40,6 +40,10 @@ import {
   SliderChildWrapper,
   SliderChildImg,
   SliderChildArrow,
+  HouseInfoCardWrapper,
+  HouseInfoCardImage,
+  HouseInfoCard,
+  HouseInfoCardText,
 } from './Detail';
 import { categoryTitleDict } from '../../static/category';
 import { dayOfWeek } from '../../static/detail';
@@ -217,6 +221,16 @@ const Detail = ({ warehouse }) => {
               월 최소 {warehouse.minReleasePerMonth}건 출고 필요
             </Content>
             <SectionTitle ref={centerRef.info}>시설 정보</SectionTitle>
+            <HouseInfoCardWrapper>
+              <HouseInfoCard>
+                <HouseInfoCardImage />
+                <HouseInfoCardText></HouseInfoCardText>
+              </HouseInfoCard>
+              <HouseInfoCard>
+                <HouseInfoCardImage />
+                <HouseInfoCardText>dd</HouseInfoCardText>
+              </HouseInfoCard>
+            </HouseInfoCardWrapper>
             <SectionTitle>보험 가입 내역</SectionTitle>
             {warehouse.insurances.map((insurance, idx) => {
               return (
@@ -234,7 +248,6 @@ const Detail = ({ warehouse }) => {
                   <Content>
                     {idx + 1}. {usage}
                   </Content>
-                  {/* <br /> */}
                 </React.Fragment>
               );
             })}

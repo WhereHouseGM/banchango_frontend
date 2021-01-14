@@ -117,12 +117,36 @@ export const Content = styled.div`
 `;
 
 export const SectionTitle = styled.div`
+  font-family: 'notosans-Regular', sans-serif;
   margin-top: 100px;
   font-size: 23px;
-  font-family: 'notosans-Regular', sans-serif;
   color: #0079c0;
   font-weight: bold;
   text-align: ${(props) => props.textAlign || 'left'};
+`;
+export const HouseInfoCardWrapper = styled.div`
+  width: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: pink;
+  padding: 10px;
+`;
+export const HouseInfoCard = styled.div`
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+export const HouseInfoCardImage = styled.img``;
+export const HouseInfoCardText = styled.div`
+  font-weight: bold;
 `;
 
 export const WorkDaysWrapper = styled.div`
