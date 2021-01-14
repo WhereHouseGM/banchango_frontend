@@ -28,9 +28,6 @@ export const NavLink = styled(Link)`
   font-weight: bold;
   padding: 0 1rem;
   cursor: pointer;
-  &.active {
-    color: #15cdfc;
-  }
 `;
 export const NavLogoText = styled.div`
   color: #0079c0;
