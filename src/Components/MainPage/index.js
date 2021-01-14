@@ -54,6 +54,7 @@ import {
   FifthDescRed,
   LastGreyContainer,
   FirstImageContainer,
+  FirstTitleText,
 } from './MainPage';
 import { useHistory } from 'react-router-dom';
 
@@ -80,8 +81,10 @@ const MainPage = () => {
         <FirstUpperTitle fontWeight={'bold'}>3PL 창고 집합소</FirstUpperTitle>
         <FirstTitle>
           <Fade bottom>
-            온라인 셀러 특화, 보관부터 출고까지 전문가에게 맡겨보세요.{'\n'}
-            인천, 경기 물류대행(3PL) 센터를 반창고에서 찾을 수 있습니다.
+            <FirstTitleText>
+              온라인 셀러 특화, 보관부터 출고까지 전문가에게 맡겨보세요.{'\n'}
+              인천, 경기 물류대행(3PL) 센터를 반창고에서 찾을 수 있습니다.
+            </FirstTitleText>
           </Fade>
         </FirstTitle>
         <FirstButton
