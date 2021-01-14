@@ -1,5 +1,5 @@
 import Helmet from 'react-helmet';
-import Login from '../../Components/Login/Login';
+import Login from '../../Components/Login';
 import PropTypes from 'prop-types';
 
 const LoginPresenter = ({
