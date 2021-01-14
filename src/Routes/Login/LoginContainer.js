@@ -92,24 +92,26 @@ class LoginContainer extends React.Component {
       alert('이메일 형식이 올바르지 않습니다.');
       return;
     }
+    this.alertWaitingMessage();
     const requestBody = {
       email: email,
     };
-    try {
-      this.alertWaitingMessage();
-      const result = await userApi.requestEmail(requestBody);
-      const { status } = result;
-      if (status !== 200) {
-        throw new Error();
-      }
-      this.destroyWaitingMessage();
-      alert('이메일이 정상적으로 발송되었습니다.');
-    } catch {
-      this.destroyWaitingMessage();
-      alert('반창고에 회원가입 되어 있지 않은 이메일입니다.');
-      document.getElementById('email').value = '';
-      document.getElementById('email').focus();
-    }
+    userApi
+      .requestEmail(requestBody)
+      .then(() => {
+        alert('이메일이 정상적으로 발송되었습니다.');
+        this.destroyWaitingMessage();
+      })
+      .catch(({ response: { status } }) => {
+        this.destroyWaitingMessage();
+        if (status === 400) {
+          alert('[400] : 요청 형식이 잘못되었습니다.');
+        } else if (status === 404) {
+          alert('반창고에 회원가입 되어 있지 않은 이메일입니다.');
+          document.getElementById('email').value = '';
+          document.getElementById('email').focus();
+        }
+      });
   };
 
   handleSubmit = async (e) => {
@@ -126,28 +128,25 @@ class LoginContainer extends React.Component {
       email: email,
       password: hashCode,
     };
-    try {
-      const result = await userApi.signIn(requestBody);
-      const {
-        data: { accessToken },
-      } = result;
-      const {
-        data: { refreshToken },
-      } = result;
-      const {
-        data: { user },
-      } = result;
-      const tokenSet = {
-        AccessToken: accessToken,
-        RefreshToken: refreshToken,
-      };
-      this.saveToken(tokenSet, user);
-      window.location.replace('/');
-    } catch {
-      alert('이메일 또는 비밀번호가 일치하지 않습니다.');
-      document.getElementById('password').value = '';
-      document.getElementById('email').focus();
-    }
+    userApi
+      .signIn(requestBody)
+      .then(({ data: { accessToken, refreshToken, user } }) => {
+        let tokenSet = {
+          AccessToken: accessToken,
+          RefreshToken: refreshToken,
+        };
+        this.saveToken(tokenSet, user);
+        window.location.href = '/';
+      })
+      .catch(({ response: { status } }) => {
+        if (status === 400) {
+          alert('[400] : 요청 형식이 잘못되었습니다.');
+        } else if (status === 404) {
+          alert('이메일 또는 비밀번호가 일치하지 않습니다.');
+          document.getElementById('password').value = '';
+          document.getElementById('email').focus();
+        }
+      });
   };
 
   toSignupPage = () => {
