@@ -71,7 +71,7 @@ const Detail = ({ warehouse }) => {
         marker.setMap(map);
       });
     };
-  }, []);
+  }, [warehouse.latitude, warehouse.longitude]);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalImgUrl, setModalImgUrl] = useState('');
 
