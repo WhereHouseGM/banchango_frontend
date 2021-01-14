@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Slider from 'react-slick';
-
+import Fade from 'react-reveal/Fade';
 import CircleImg from '../../assets/images/MainPage/Circle.png';
 import LastImg from '../../assets/images/MainPage/Last.png';
 import { message } from 'antd';
@@ -54,6 +54,7 @@ import {
   FifthDescRed,
   LastGreyContainer,
   FirstImageContainer,
+  FirstTitleText,
 } from './MainPage';
 import { useHistory } from 'react-router-dom';
 
@@ -79,8 +80,12 @@ const MainPage = () => {
         <FirstUpperTitle fontSize={'30px'}>온라인 셀러 전용</FirstUpperTitle>
         <FirstUpperTitle fontWeight={'bold'}>3PL 창고 집합소</FirstUpperTitle>
         <FirstTitle>
-          온라인 셀러 특화, 보관부터 출고까지 전문가에게 맡겨보세요.{'\n'}
-          인천, 경기 물류대행(3PL) 센터를 반창고에서 찾을 수 있습니다.
+          <Fade bottom>
+            <FirstTitleText>
+              온라인 셀러 특화, 보관부터 출고까지 전문가에게 맡겨보세요.{'\n'}
+              인천, 경기 물류대행(3PL) 센터를 반창고에서 찾을 수 있습니다.
+            </FirstTitleText>
+          </Fade>
         </FirstTitle>
         <FirstButton
           onClick={() => {
