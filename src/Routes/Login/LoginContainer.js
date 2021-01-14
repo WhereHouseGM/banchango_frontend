@@ -128,28 +128,25 @@ class LoginContainer extends React.Component {
       email: email,
       password: hashCode,
     };
-    try {
-      const result = await userApi.signIn(requestBody);
-      const {
-        data: { accessToken },
-      } = result;
-      const {
-        data: { refreshToken },
-      } = result;
-      const {
-        data: { user },
-      } = result;
-      const tokenSet = {
-        AccessToken: accessToken,
-        RefreshToken: refreshToken,
-      };
-      this.saveToken(tokenSet, user);
-      window.location.replace('/');
-    } catch {
-      alert('이메일 또는 비밀번호가 일치하지 않습니다.');
-      document.getElementById('password').value = '';
-      document.getElementById('email').focus();
-    }
+    userApi
+      .signIn(requestBody)
+      .then(({ data: { accessToken, refreshToken, user } }) => {
+        let tokenSet = {
+          AccessToken: accessToken,
+          RefreshToken: refreshToken,
+        };
+        this.saveToken(tokenSet, user);
+        window.location.href = '/';
+      })
+      .catch(({ response: { status } }) => {
+        if (status === 400) {
+          alert('[400] : 요청 형식이 잘못되었습니다.');
+        } else if (status === 404) {
+          alert('이메일 또는 비밀번호가 일치하지 않습니다.');
+          document.getElementById('password').value = '';
+          document.getElementById('email').focus();
+        }
+      });
   };
 
   toSignupPage = () => {
