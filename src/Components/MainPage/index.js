@@ -74,7 +74,7 @@ const MainPage = () => {
   return (
     <Container>
       <FirstContainer>
-        <FirstUpperTitle>온라인 셀러 전용</FirstUpperTitle>
+        <FirstUpperTitle fontSize={'30px'}>온라인 셀러 전용</FirstUpperTitle>
         <FirstUpperTitle fontWeight={'bold'}>3PL 창고 집합소</FirstUpperTitle>
         <FirstTitle>
           온라인 셀러 특화, 보관부터 출고까지 전문가에게 맡겨보세요.{'\n'}
