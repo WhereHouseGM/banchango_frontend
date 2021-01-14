@@ -7,14 +7,14 @@ import {
   NavMenu,
   NavOpen,
   NavLinkOpen,
+  NavMarginTop,
 } from './Navbar';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Logo from '../../assets/icons/LOGO2.png';
 
 const Navbar = () => {
   const history = useHistory();
-  const location = useLocation();
   const [loginInfo, setLoginInfo] = useState({});
   const [navClicked, setNavClicked] = useState(false);
   useEffect(() => {
@@ -22,9 +22,6 @@ const Navbar = () => {
       logined: JSON.parse(localStorage.getItem('Login')),
       name: localStorage.getItem('Name'),
     };
-    if (location.pathname === '/warehouses/detail') {
-      // 스크롤 관련 행동 넣어야함.
-    }
     setLoginInfo(info);
   }, []);
   const logout = () => {
@@ -38,7 +35,7 @@ const Navbar = () => {
     <>
       <Nav>
         <NavLink to="/">
-          <img src={Logo} alt="반창고 로고" style={{ height: '33px' }} />
+          <img src={Logo} alt="반창고 로고" style={{ height: '30px' }} />
           <NavLogoText>반창고</NavLogoText>
         </NavLink>
         <Bars onClick={() => setNavClicked(!navClicked)} />
@@ -50,7 +47,23 @@ const Navbar = () => {
           }
         >
           <NavLinkOpen to="/team">팀소개</NavLinkOpen>
-          <NavLinkOpen to="/mypage">{loginInfo.name} 님</NavLinkOpen>
+          {loginInfo.logined ? (
+            <>
+              <NavLinkOpen to="/" style={{ color: 'black' }} onClick={logout}>
+                로그아웃
+              </NavLinkOpen>
+              <NavLinkOpen style={{ color: 'black' }} to="/mypage">
+                {loginInfo.name} 님
+              </NavLinkOpen>
+            </>
+          ) : (
+            <>
+              <NavLinkOpen to="/signup">회원가입</NavLinkOpen>
+              <NavLinkOpen to="/login" style={{ color: 'white' }}>
+                로그인
+              </NavLinkOpen>
+            </>
+          )}
         </NavOpen>
         <NavMenu>
           <NavLink to="/team">팀소개</NavLink>
@@ -73,6 +86,7 @@ const Navbar = () => {
           )}
         </NavMenu>
       </Nav>
+      <NavMarginTop />
     </>
   );
 };
