@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import CategoryPresenter from './CategoryPresenter';
 import { warehouseApi } from '../../api';
 
@@ -6,28 +6,25 @@ const CategoryContainer = () => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  useEffect(() => {
-    const getApi = async () => {
-      try {
-        let _results = await warehouseApi.getByMainItemTypes(
-          sessionStorage.getItem('MainItemTypes'),
-          0,
-          10,
-        );
-        let { status } = _results;
-        if (status !== 200) throw new Error();
-        const {
-          data: { warehouses },
-        } = _results;
+
+  const getSearchResults = useCallback(() => {
+    warehouseApi
+      .getByMainItemTypes(sessionStorage.getItem('MainItemTypes'), 0, 10)
+      .then(({ data: { warehouses } }) => {
         setResults(warehouses);
         setLoading(false);
-      } catch (Error) {
-        setError('검색 결과가 존재하지 않습니다.');
+      })
+      .catch(({ response: { status } }) => {
         setLoading(false);
-      }
-    };
-    getApi();
+        if (status === 404) {
+          setError('검색 결과가 존재하지 않습니다.');
+        }
+      });
   }, []);
+
+  useEffect(() => {
+    getSearchResults();
+  }, [getSearchResults]);
 
   return (
     <CategoryPresenter warehouses={results} error={error} loading={loading} />
