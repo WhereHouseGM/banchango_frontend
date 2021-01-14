@@ -2,7 +2,7 @@ name: CD
 
 on:
   push:
-    branches: [master]
+    branches: [dev]
 
 jobs:
   deploy:
@@ -27,4 +27,4 @@ jobs:
         run: CI=false yarn build
 
       - name: Upload Build Directory to Amazon S3
-        run: aws s3 cp build s3://${{secrets.AWS_S3_BUCKET}} --recursive --acl public-read
+        run: aws s3 cp build s3://${{secrets.AWS_S3_DEV_BUCKET}} --recursive --acl public-read
