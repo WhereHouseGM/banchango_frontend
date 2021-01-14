@@ -12,8 +12,8 @@ const Container = styled.div`
 const Loading = () => {
   return (
     <Container>
-      <div class="loadingio-spinner-spinner-s41q7c5w8">
-        <div class="ldio-runt50jlz9c">
+      <div className="loadingio-spinner-spinner-s41q7c5w8">
+        <div className="ldio-runt50jlz9c">
           <div></div>
           <div></div>
           <div></div>

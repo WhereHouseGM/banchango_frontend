@@ -19,7 +19,6 @@ const globalStyles = createGlobalStyle`
   @font-face {
       font-family: 'notosans-Regular';
       src: url(${notoFont_otf}); 
-      
   }
     ${reset};
     body {

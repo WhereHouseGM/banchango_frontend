@@ -114,13 +114,12 @@ const HouseList = () => {
   return (
     <Container>
       <LeftBanner>
-        <BannerTextDisabledBox>내 프로필</BannerTextDisabledBox>
         <BannerTextDisabledBox
           onClick={() => {
-            history.push('/mypage/quotation');
+            history.push('/mypage');
           }}
         >
-          견적 요청 목록
+          내 프로필
         </BannerTextDisabledBox>
         <BannerTextEnabledBox
           onClick={() => {

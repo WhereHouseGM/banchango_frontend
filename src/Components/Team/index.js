@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { descImgs, profileImgs } from './Team';
 const Container = styled.div`
@@ -153,13 +153,61 @@ const FourthRightImg = styled.img`
   width: 100%;
 `;
 const FourthRightText = styled.div``;
-
-const FifthImg = styled.img`
+const BottomMapContainer = styled.div`
   width: 95%;
-  max-width: 1024px;
-  padding-bottom: 50px;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+`;
+const BottomMapDescWrapper = styled.div`
+  width: 300px;
+  align-self: flex-start;
+  text-align: left;
+  font-size: 20px;
+`;
+const BottomMapDescTitle = styled.div`
+  font-weight: bold;
+`;
+const BottomMapDescText = styled.div``;
+const BottomMapDescPhoneNumber = styled.div`
+  margin: 15px;
+`;
+
+const MapContainer = styled.div`
+  width: 700px;
+  height: 370px;
+  margin: 10px auto 100px auto;
+  background-color: black;
 `;
 const Team = () => {
+  const mapRef = useRef();
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src =
+      'https://dapi.kakao.com/v2/maps/sdk.js?appkey=27af2ff52796d884554beee394faa49e&autoload=false';
+    document.head.appendChild(script);
+    script.onload = () => {
+      window.kakao.maps.load(() => {
+        let targetPos = new window.kakao.maps.LatLng(37.4964976608857, 126.95746664800929);
+        let container = document.getElementById('kakaoMap');
+        let options = {
+          center: targetPos,
+          level: 4,
+        };
+        const map = new window.kakao.maps.Map(container, options);
+        let markerPosition = targetPos;
+        let marker = new window.kakao.maps.Marker({
+          position: markerPosition,
+        });
+        marker.setMap(map);
+      });
+    };
+  }, []);
   return (
     <Container>
       <FirstContainer>
@@ -291,11 +339,20 @@ const Team = () => {
           </FourthRightFloor>
         </FourthRight>
       </FourthContainer>
-      <FifthImg
-        src={
-          'https://user-images.githubusercontent.com/62606632/103519228-865b2000-4eb8-11eb-95bc-ffe59d44feed.png'
-        }
-      />
+      <BottomMapContainer>
+        <BottomMapDescWrapper>
+          <BottomMapDescTitle>찾아오시는 길</BottomMapDescTitle>
+          <BottomMapDescText>
+            서울특별시 동작구 상도로 369
+            <br />
+            창신관 3F
+          </BottomMapDescText>
+          <BottomMapDescPhoneNumber>
+            T. 010 - 4161 - 4711
+          </BottomMapDescPhoneNumber>
+        </BottomMapDescWrapper>
+        <MapContainer ref={mapRef} id="kakaoMap" />
+      </BottomMapContainer>
     </Container>
   );
 };

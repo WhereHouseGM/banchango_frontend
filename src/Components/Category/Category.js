@@ -74,31 +74,22 @@ export const ResultBox = styled.div`
   display: flex;
   box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.5);
   margin: 20px;
-  transition: all 0.2s ease;
-  &:hover {
-    transform: translateZ(0) scale(0.995);
-  }
 `;
 
 export const ResultBoxImage = styled.img`
-  /* background-color: grey; */
   height: 100%;
   width: 100%;
   object-fit: cover;
   object-position: center center;
-  /* flex: 1; */
   margin-right: -400px;
   padding-right: 400px;
-
   &:hover {
     cursor: pointer;
   }
 `;
 
 export const ResultBoxDescWrap = styled.div`
-  /* width: 400px; */
   min-width: 400px;
-  /* flex:1; */
   text-align: left;
   padding: 30px;
 `;
@@ -110,7 +101,9 @@ export const ResultBoxDescTitle = styled.div`
 `;
 
 export const ResultBoxDescSub = styled.div`
+  font-family: 'notosans-Regular', sans-serif;
   font-size: 20px;
+  color: grey;
 `;
 
 export const ResultBoxDescBoxWrap = styled.div`

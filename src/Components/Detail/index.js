@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Modal from './Modal/ShowImageModal';
@@ -7,6 +7,7 @@ import {
   MainImageContainer,
   ImageButton,
   DetailPageNavbarContainer,
+  DetailPageNavbarItemsWrapper,
   DetailPageNavbarWrapper,
   DetailGotoButton,
   MainContainer,
@@ -27,13 +28,43 @@ import {
   ContentValue,
   MainItemTypeWrapper,
   MainItemTypeValue,
+  DetailPageNavbarMargin,
   BottomContentTitle,
   BottomContentValue,
   QuoteContactButton,
+  WorkDaysWrapper,
+  WorkDayBox,
 } from './Detail';
 import { categoryTitleDict } from '../../static/category';
+import { dayOfWeek } from '../../static/detail';
 
 const Detail = ({ warehouse }) => {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src =
+      'https://dapi.kakao.com/v2/maps/sdk.js?appkey=27af2ff52796d884554beee394faa49e&autoload=false';
+    document.head.appendChild(script);
+    script.onload = () => {
+      window.kakao.maps.load(() => {
+        let targetPos = new window.kakao.maps.LatLng(
+          warehouse.latitude,
+          warehouse.longitude,
+        );
+        let container = document.getElementById('kakaoMap');
+        let options = {
+          center: targetPos,
+          level: 4,
+        };
+        const map = new window.kakao.maps.Map(container, options);
+        let markerPosition = targetPos;
+        let marker = new window.kakao.maps.Marker({
+          position: markerPosition,
+        });
+        marker.setMap(map);
+      });
+    };
+  }, []);
   const [modalVisible, setModalVisible] = useState(false);
 
   const history = useHistory();
@@ -45,11 +76,18 @@ const Detail = ({ warehouse }) => {
     caution: React.createRef(),
     position: React.createRef(),
   };
+  const getWorkingWeekDayArr = () => {
+    let resultArr = [...warehouse.availableWeekdays.toString()];
+    while (true) {
+      if (resultArr.length === 7) break;
+      resultArr = ['0', ...resultArr];
+    }
+    return resultArr;
+  };
 
   const scrollFunc = (ref) => {
     window.scrollTo({ top: ref.current.offsetTop - 90, behavior: 'smooth' });
   };
-
   return (
     <>
       <Modal
@@ -71,58 +109,69 @@ const Detail = ({ warehouse }) => {
         </MainImageContainer>
         <DetailPageNavbarContainer>
           <DetailPageNavbarWrapper>
-            <DetailGotoButton
-              onClick={() => {
-                scrollFunc(centerRef.desc);
-              }}
-            >
-              센터 소개
-            </DetailGotoButton>
-            <DetailGotoButton
-              onClick={() => {
-                scrollFunc(centerRef.info);
-              }}
-            >
-              시설 정보
-            </DetailGotoButton>
-            <DetailGotoButton
-              onClick={() => {
-                scrollFunc(centerRef.announce);
-              }}
-            >
-              시설 안내사항
-            </DetailGotoButton>
-            <DetailGotoButton
-              onClick={() => {
-                scrollFunc(centerRef.caution);
-              }}
-            >
-              주의사항
-            </DetailGotoButton>
-            <DetailGotoButton
-              onClick={() => {
-                scrollFunc(centerRef.position);
-              }}
-            >
-              위치정보
-            </DetailGotoButton>
+            <DetailPageNavbarItemsWrapper>
+              <DetailGotoButton
+                onClick={() => {
+                  scrollFunc(centerRef.desc);
+                }}
+              >
+                센터 소개
+              </DetailGotoButton>
+              <DetailGotoButton
+                onClick={() => {
+                  scrollFunc(centerRef.info);
+                }}
+              >
+                시설 정보
+              </DetailGotoButton>
+              <DetailGotoButton
+                onClick={() => {
+                  scrollFunc(centerRef.announce);
+                }}
+              >
+                시설 안내사항
+              </DetailGotoButton>
+              {warehouse.warehouseUsageCautions.length !== 0 && (
+                <DetailGotoButton
+                  onClick={() => {
+                    scrollFunc(centerRef.caution);
+                  }}
+                >
+                  주의사항
+                </DetailGotoButton>
+              )}
+              <DetailGotoButton
+                onClick={() => {
+                  scrollFunc(centerRef.position);
+                }}
+              >
+                위치정보
+              </DetailGotoButton>
+            </DetailPageNavbarItemsWrapper>
+            <DetailPageNavbarMargin />
           </DetailPageNavbarWrapper>
         </DetailPageNavbarContainer>
-
         <MainContainer>
           <MainWrapper>
             <MainSubTitle ref={centerRef.desc}>
               {warehouse.address}&nbsp;{warehouse.addressDetail}
             </MainSubTitle>
             <MainTitle>{warehouse.name}</MainTitle>
-            <Content lineHeight="1.8" fontSize="19px">
+            <Content lineHeight="1.5" fontSize="19px">
               {warehouse.description}
             </Content>
             <SectionTitle>영업시간</SectionTitle>
-            <Content fontSize="30px">
+            <Content fontSize="20px">
               {warehouse.openAt}&nbsp;~&nbsp;{warehouse.closeAt}
             </Content>
-            <Content>{warehouse.availableTimeDetail}</Content>
+            <Content fontSize="16px">{warehouse.availableTimeDetail}</Content>
+            <WorkDaysWrapper>
+              {getWorkingWeekDayArr().map((item, idx) => (
+                <WorkDayBox key={idx} workOn={item === '1'}>
+                  {dayOfWeek[idx].value}
+                </WorkDayBox>
+              ))}
+            </WorkDaysWrapper>
             <SectionTitle>월 최소 출고량</SectionTitle>
             <Content>
               월 최소 {warehouse.minReleasePerMonth}건 출고 필요
@@ -135,7 +184,6 @@ const Detail = ({ warehouse }) => {
                   <Content>
                     {idx + 1}. {insurance}
                   </Content>
-                  <br />
                 </React.Fragment>
               );
             })}
@@ -146,20 +194,21 @@ const Detail = ({ warehouse }) => {
                   <Content>
                     {idx + 1}. {usage}
                   </Content>
-                  <br />
+                  {/* <br /> */}
                 </React.Fragment>
               );
             })}
-            <SectionTitle ref={centerRef.caution}>
-              시설 이용 시 주의사항
-            </SectionTitle>
+            {warehouse.warehouseUsageCautions.length !== 0 && (
+              <SectionTitle ref={centerRef.caution}>
+                시설 이용 시 주의사항
+              </SectionTitle>
+            )}
             {warehouse.warehouseUsageCautions.map((caution, idx) => {
               return (
                 <React.Fragment key={`WUC${idx}`}>
                   <Content>
                     {idx + 1}. {caution}
                   </Content>
-                  <br />
                 </React.Fragment>
               );
             })}
@@ -167,27 +216,14 @@ const Detail = ({ warehouse }) => {
               위치 정보
             </SectionTitle>
             <div style={{ margin: '0px auto', width: '50%' }}>
-              <MainMapImg
-                src={
-                  'https://user-images.githubusercontent.com/62606632/103610746-3043b680-4f64-11eb-92bd-d30b57349f4a.png'
-                }
-              />
+              <MainMapImg id="kakaoMap" />
             </div>
-            <MainMapDesc>{warehouse.address}</MainMapDesc>
+            <MainMapDesc>
+              {warehouse.address}&nbsp;{warehouse.addressDetail}
+            </MainMapDesc>
           </MainWrapper>
           <QuoteContactContainer>
             <ContactTitle>{warehouse.name}</ContactTitle>
-            <ContactSubTitle>{warehouse.address}</ContactSubTitle>
-            <ContactContentWrapper>
-              <LeftContent>
-                <ContentTitle>월 최소 출고량</ContentTitle>
-                <ContentValue>{warehouse.minReleasePerMonth}건</ContentValue>
-              </LeftContent>
-              <RightContent>
-                <ContentTitle>평수</ContentTitle>
-                <ContentValue>{warehouse.space}평</ContentValue>
-              </RightContent>
-            </ContactContentWrapper>
             <MainItemTypeWrapper>
               {warehouse.mainItemTypes.map((type, idx) => {
                 return (
@@ -197,6 +233,21 @@ const Detail = ({ warehouse }) => {
                 );
               })}
             </MainItemTypeWrapper>
+            <ContactContentWrapper>
+              <LeftContent>
+                <ContentTitle>
+                  월 최소 출고량
+                  <br /> <br />
+                </ContentTitle>
+                <ContentValue>{warehouse.minReleasePerMonth}건</ContentValue>
+              </LeftContent>
+              <RightContent>
+                <ContentTitle>
+                  평수 <br /> <br />
+                </ContentTitle>
+                <ContentValue>{warehouse.space}평</ContentValue>
+              </RightContent>
+            </ContactContentWrapper>
             <BottomContentTitle>택배사</BottomContentTitle>
             <BottomContentValue>
               {warehouse.deliveryTypes.map((type) => type + ' ')}
@@ -208,7 +259,7 @@ const Detail = ({ warehouse }) => {
                 );
               }}
             >
-              견적 문의
+              견적 요청하기
             </QuoteContactButton>
           </QuoteContactContainer>
         </MainContainer>
