@@ -569,25 +569,27 @@ const Register = () => {
             <InputTitle>
               영업요일 선택<span style={{ color: 'red' }}>*</span>
             </InputTitle>
-            <RadioButtonContainer>
+            <RadioButtonContainer style={{ flexWrap: 'wrap' }}>
               {availableWeekdays.map((day, index) => (
-                <React.Fragment key={index + `AWD_TYPE`}>
-                  <RadioButton
-                    id={day.id}
-                    type="radio"
-                    value={day.value}
-                    name="availableWeekdays"
-                    onChange={(event) => {
-                      setInputs({
-                        ...inputs,
-                        availableWeekdays: parseInt(event.target.value),
-                      });
-                    }}
-                  />
-                  <RadioButtonLabel htmlFor={day.id}>
-                    {day.children}
-                  </RadioButtonLabel>
-                </React.Fragment>
+                <div key={index + `AWD_TYPE`} style={{ lineHeight: '1.5' }}>
+                  <React.Fragment>
+                    <RadioButton
+                      id={day.id}
+                      type="radio"
+                      value={day.value}
+                      name="availableWeekdays"
+                      onChange={(event) => {
+                        setInputs({
+                          ...inputs,
+                          availableWeekdays: parseInt(event.target.value),
+                        });
+                      }}
+                    />
+                    <RadioButtonLabel htmlFor={day.id}>
+                      {day.children}
+                    </RadioButtonLabel>
+                  </React.Fragment>
+                </div>
               ))}
             </RadioButtonContainer>
             <ItemContainer>

@@ -127,6 +127,11 @@ export const availableWeekdays = [
     children: '평일(월~금)',
   },
   {
+    id: '111111',
+    value: '111111',
+    children: '평일 및 토요일',
+  },
+  {
     id: '1111111',
     value: '1111111',
     children: '평일 및 주말',
