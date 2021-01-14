@@ -611,13 +611,13 @@ const Register = () => {
             <TwoElementContainer>
               <ItemContainer>
                 <InputTitle>
-                  보험사(1개)<span style={{ color: 'red' }}>*</span>
+                  보험사 / 보험명<span style={{ color: 'red' }}>*</span>
                 </InputTitle>
                 {insurances}
               </ItemContainer>
               <ItemContainer>
                 <InputTitle>
-                  경비 업체(1개)<span style={{ color: 'red' }}>*</span>
+                  경비 업체<span style={{ color: 'red' }}>*</span>
                 </InputTitle>
                 {securityCompanies}
               </ItemContainer>
@@ -771,11 +771,11 @@ const Register = () => {
               {deliveryTypes}
             </ItemContainer>
             <ItemContainer>
-              <InputTitle>창고 시설 이용 유의사항</InputTitle>
+              <InputTitle>창고 시설 안내사항</InputTitle>
               {warehouseFacilityUsages}
             </ItemContainer>
             <ItemContainer>
-              <InputTitle>창고 이용 시 주의사항</InputTitle>
+              <InputTitle>창고 이용 주의사항</InputTitle>
               {warehouseUsageCautions}
             </ItemContainer>
             <SubmitButton onClick={() => register()}>
