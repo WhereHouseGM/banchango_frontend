@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+export const Images = {};
 export const Container = styled.div`
   width: 100%;
   font-family: 'paybooc-Medium', sans-serif;
@@ -125,10 +126,11 @@ export const SectionTitle = styled.div`
   text-align: ${(props) => props.textAlign || 'left'};
 `;
 export const HouseInfoCardWrapper = styled.div`
-  width: 95%;
+  width: 90%;
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  background-color: pink;
+  justify-content: center;
   padding: 10px;
 `;
 export const HouseInfoCard = styled.div`
@@ -138,7 +140,6 @@ export const HouseInfoCard = styled.div`
   padding: 40px;
   border-radius: 20px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
-  background-color: blue;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -261,6 +262,20 @@ export const BottomContentValue = styled.div`
   font-size: 14px;
 `;
 
+export const BlogVisitButton = styled.div`
+  margin: 15px 0;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 17px;
+  text-align: center;
+  color: white;
+  background-color: #15c7ab;
+  font-weight: bold;
+  box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.5);
+  &:hover {
+    cursor: pointer;
+  }
+`;
 export const QuoteContactButton = styled.div`
   margin: 10px 0;
   padding: 10px 20px;

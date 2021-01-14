@@ -44,6 +44,7 @@ import {
   HouseInfoCardImage,
   HouseInfoCard,
   HouseInfoCardText,
+  BlogVisitButton,
 } from './Detail';
 import { categoryTitleDict } from '../../static/category';
 import { dayOfWeek } from '../../static/detail';
@@ -228,7 +229,23 @@ const Detail = ({ warehouse }) => {
               </HouseInfoCard>
               <HouseInfoCard>
                 <HouseInfoCardImage />
-                <HouseInfoCardText>dd</HouseInfoCardText>
+                <HouseInfoCardText></HouseInfoCardText>
+              </HouseInfoCard>
+              <HouseInfoCard>
+                <HouseInfoCardImage />
+                <HouseInfoCardText></HouseInfoCardText>
+              </HouseInfoCard>
+              <HouseInfoCard>
+                <HouseInfoCardImage />
+                <HouseInfoCardText></HouseInfoCardText>
+              </HouseInfoCard>
+              <HouseInfoCard>
+                <HouseInfoCardImage />
+                <HouseInfoCardText></HouseInfoCardText>
+              </HouseInfoCard>
+              <HouseInfoCard>
+                <HouseInfoCardImage />
+                <HouseInfoCardText></HouseInfoCardText>
               </HouseInfoCard>
             </HouseInfoCardWrapper>
             <SectionTitle>보험 가입 내역</SectionTitle>
@@ -305,6 +322,7 @@ const Detail = ({ warehouse }) => {
             <BottomContentValue>
               {warehouse.deliveryTypes.map((type) => type + ' ')}
             </BottomContentValue>
+            <BlogVisitButton>방문 인터뷰 블로그</BlogVisitButton>
             <QuoteContactButton
               onClick={() => {
                 history.push(
