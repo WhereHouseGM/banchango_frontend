@@ -90,7 +90,7 @@ export const InputTitle = styled.div`
   margin-left: 60px;
 `;
 
-export const RePasswordText = styled.div`
+export const SmallInformationText = styled.div`
   color: black;
   font-family: 'Nanum Gothic', sans-serif;
   font-size: 10px;
@@ -155,3 +155,18 @@ export const TextBottom = styled.a`
   font-size: 12px;
   color: gray;
 `;
+
+export const userTypes = [
+  {
+    id: 'SHIPPER',
+    type: 'radio',
+    value: 'SHIPPER',
+    children: '화주',
+  },
+  {
+    id: 'OWNER',
+    type: 'radio',
+    value: 'OWNER',
+    children: '창고주',
+  },
+];
