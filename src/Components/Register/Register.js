@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  font-family: 'notosans-Regular', sans-serif;
+`;
 
 export const Wrapper = styled.div`
   box-align: center;
@@ -59,7 +61,7 @@ export const RegisterImage = styled.div`
 
 export const HeaderTitleTop = styled.div`
   color: black;
-  font-family: 'Nanum Gothic', sans-serif;
+
   font-size: 20px;
   line-height: 1.8;
   margin-top: 10px;
@@ -69,7 +71,7 @@ export const HeaderTitleTop = styled.div`
 
 export const HeaderTitleBottom = styled.div`
   color: #1d489b;
-  font-family: 'Nanum Gothic', sans-serif;
+
   font-size: 20px;
   font-weight: bold;
   text-align: center;
@@ -103,7 +105,7 @@ export const ItemContainer = styled.div`
 
 export const InputTitle = styled.div`
   color: black;
-  font-family: 'Nanum Gothic', sans-serif;
+
   font-weight: bold;
   font-size: 16px;
   margin-top: 30px;
@@ -168,7 +170,7 @@ export const AddButton = styled.span`
   color: white;
   margin: auto 0;
   border-radius: 4px;
-  font-family: 'Nanum Gothic', sans-serif;
+
   transition: all 0.2s ease;
   &:hover {
     cursor: pointer;
@@ -181,7 +183,7 @@ export const RemoveButton = styled.span`
   padding: 2px;
   color: white;
   margin: auto 0;
-  font-family: 'Nanum Gothic', sans-serif;
+
   border-radius: 4px;
   transition: all 0.2s ease;
   &:hover {
@@ -208,7 +210,7 @@ export const CheckBox = styled.input`
 
 export const RadioButtonLabel = styled.label`
   margin-left: 3px;
-  font-family: 'Nanum Gothic', sans-serif;
+
   font-size: 16px;
   color: black;
 `;
@@ -238,7 +240,7 @@ export const SubmitButton = styled.div`
   transition: all 0.2s ease;
   font-weight: bold;
   color: white;
-  font-family: 'Nanum Gothic', sans-serif;
+
   cursor: pointer;
   &:hover {
     color: white;
