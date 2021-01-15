@@ -19,6 +19,7 @@ import PrivacyPolicy from '../Routes/PrivacyPolicy';
 import Register from '../Routes/Register';
 import Team from '../Routes/Team';
 import QuoteContact from '../Routes/Detail/QuoteContact';
+import IconSource from '../Routes/IconSource';
 import ErrorPage from '../Components/ErrorPage';
 import TokenAndTypeValidator from './Common/TokenAndTypeValidator';
 
@@ -85,6 +86,9 @@ const RouterComponent = () => (
       </Route>
       <Route path="/error">
         <ErrorPage error={'잘못된 접근 입니다.'} />
+      </Route>
+      <Route path="/icon-source">
+        <IconSource />
       </Route>
       <Redirect path="*" to="/" />
     </Switch>
