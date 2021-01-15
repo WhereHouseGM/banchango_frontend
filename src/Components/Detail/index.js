@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Slider from 'react-slick';
 import Modal from './Modal/ShowImageModal';
+import { warehouseInfoCardTextDict } from '../../static/detail';
 import {
   Container,
   MainImageContainer,
-  ImageButton,
   DetailPageNavbarContainer,
   DetailPageNavbarItemsWrapper,
   DetailPageNavbarWrapper,
@@ -21,7 +21,6 @@ import {
   MainMapDesc,
   QuoteContactContainer,
   ContactTitle,
-  ContactSubTitle,
   ContactContentWrapper,
   LeftContent,
   RightContent,
@@ -40,6 +39,12 @@ import {
   SliderChildWrapper,
   SliderChildImg,
   SliderChildArrow,
+  HouseInfoCardWrapper,
+  HouseInfoCardImage,
+  HouseInfoCard,
+  HouseInfoCardText,
+  BlogVisitButton,
+  Images,
 } from './Detail';
 import { categoryTitleDict } from '../../static/category';
 import { dayOfWeek } from '../../static/detail';
@@ -92,7 +97,6 @@ const Detail = ({ warehouse }) => {
     }
     return resultArr;
   };
-
   const scrollFunc = (ref) => {
     window.scrollTo({ top: ref.current.offsetTop - 90, behavior: 'smooth' });
   };
@@ -124,7 +128,7 @@ const Detail = ({ warehouse }) => {
                     setModalImgUrl(warehouse.mainImageUrl);
                     setModalVisible(true);
                   }}
-                />{' '}
+                />
               </SliderChildWrapper>
               {warehouse.images.map((item, idx) => (
                 <SliderChildWrapper key={idx}>
@@ -217,6 +221,16 @@ const Detail = ({ warehouse }) => {
               월 최소 {warehouse.minReleasePerMonth}건 출고 필요
             </Content>
             <SectionTitle ref={centerRef.info}>시설 정보</SectionTitle>
+            <HouseInfoCardWrapper>
+              {warehouse.houseInfo.map((item, idx) => (
+                <HouseInfoCard key={idx}>
+                  <HouseInfoCardImage src={Images[item + 'Img']} />
+                  <HouseInfoCardText>
+                    {warehouseInfoCardTextDict(item)}
+                  </HouseInfoCardText>
+                </HouseInfoCard>
+              ))}
+            </HouseInfoCardWrapper>
             <SectionTitle>보험 가입 내역</SectionTitle>
             {warehouse.insurances.map((insurance, idx) => {
               return (
@@ -234,7 +248,6 @@ const Detail = ({ warehouse }) => {
                   <Content>
                     {idx + 1}. {usage}
                   </Content>
-                  {/* <br /> */}
                 </React.Fragment>
               );
             })}
@@ -292,6 +305,7 @@ const Detail = ({ warehouse }) => {
             <BottomContentValue>
               {warehouse.deliveryTypes.map((type) => type + ' ')}
             </BottomContentValue>
+            <BlogVisitButton>방문 인터뷰 블로그</BlogVisitButton>
             <QuoteContactButton
               onClick={() => {
                 history.push(

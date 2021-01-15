@@ -332,19 +332,23 @@ export const SliderBox = styled.div`
   width: 90%;
   display: flex;
   margin: -40px auto 0 auto;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 
 export const SliderWrapper = styled.div`
-  width: 90%;
+  width: 80%;
   max-width: 768px;
+  margin: 0 30px;
 `;
 
 export const SliderButton = styled.div`
-  font-size: 20px;
+  font-size: 35px;
   &:hover {
     cursor: pointer;
+  }
+  @media (max-width: 768px) {
+    font-size: 25px;
   }
 `;
 
