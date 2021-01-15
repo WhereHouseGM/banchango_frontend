@@ -49,7 +49,7 @@ export const warehouseInfoCardTextDict = (existName) => {
     case 'packingExist':
       return '포장인력';
     case 'insuranceExist':
-      return '보험 있음';
+      return '보험 가입';
     case 'cctvExist':
       return 'CCTV';
     case 'canPark':
@@ -61,7 +61,7 @@ export const warehouseInfoCardTextDict = (existName) => {
     case 'coolingAndHeatingExist':
       return '냉난방';
     case 'lockSystemExist':
-      return '잠금장치';
+      return '경비업체';
     case 'WMSExist':
       return 'WMS';
     default:

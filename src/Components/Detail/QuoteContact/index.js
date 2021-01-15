@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import ImportListModal from './Modal/ImportList';
 
 const Container = styled.div`
+  font-family: 'notosans-Regular', sans-serif;
   width: 100%;
   min-width: 1024px;
 `;
 const Wrapper = styled.div`
+/* font-family: 'notosans-Regular', sans-serif; */
   width: 90%;
   max-width: 1024px;
   margin: 0px auto;

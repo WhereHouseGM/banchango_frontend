@@ -203,7 +203,9 @@ const MainPage = () => {
         </FourthWrapper>
       </FourthContainer>
       <FifthContainer>
-        <FifthTitle>물류 대행,{'\n'} 어렵지 않아요!</FifthTitle>
+        <Fade bottom>
+          <FifthTitle>물류 대행,{'\n'} 어렵지 않아요!</FifthTitle>
+        </Fade>
         <FifthImageBox src={CircleImg} />
         <FifthDesc>"창고 계약이 어렵다면,{'\n'} 반창고를 불러주세요"</FifthDesc>
         <FifthTitleWrapper>
@@ -219,7 +221,9 @@ const MainPage = () => {
           ))}
         </FifthWrapper>
         <FifthDescRed>물류비 25% 이상 절감 효과</FifthDescRed>
-        <FifthTitle>셀러님은,{'\n'} 판매에만 집중하세요!</FifthTitle>
+        <Fade bottom>
+          <FifthTitle>셀러님은,{'\n'} 판매에만 집중하세요!</FifthTitle>
+        </Fade>
         <LastGreyContainer>
           <FifthImageBox src={LastImg} />
         </LastGreyContainer>

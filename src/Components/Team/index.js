@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import Fade from 'react-reveal/Fade';
 import { descImgs, profileImgs } from './Team';
 const Container = styled.div`
   width: 100%;
@@ -263,10 +264,14 @@ const Team = () => {
       <ThirdContainer>
         <ThirdBox>
           <ThirdBoxText>물류와 사람을 잇다</ThirdBoxText>
-          <ThirdBoxImg src={descImgs.left.img} alt={descImgs.left.alt} />
+          <Fade bottom>
+            <ThirdBoxImg src={descImgs.left.img} alt={descImgs.left.alt} />
+          </Fade>
         </ThirdBox>
         <ThirdBox>
-          <ThirdBoxImg src={descImgs.right.img} alt={descImgs.right.alt} />
+          <Fade bottom>
+            <ThirdBoxImg src={descImgs.right.img} alt={descImgs.right.alt} />
+          </Fade>
           <ThirdBoxText>반 : 창고</ThirdBoxText>
         </ThirdBox>
       </ThirdContainer>
