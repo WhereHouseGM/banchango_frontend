@@ -19,6 +19,7 @@ import PrivacyPolicy from '../Routes/PrivacyPolicy';
 import Register from '../Routes/Register';
 import Team from '../Routes/Team';
 import QuoteContact from '../Routes/Detail/QuoteContact';
+import IconSource from '../Routes/IconSource';
 
 const BadAccessText = '잘못된 접근입니다.';
 
@@ -57,8 +58,15 @@ const RouterComponent = () => (
       <Route path="/warehouses/quotecontact">
         <QuoteContact />
       </Route>
-      <Route path="/service-agreements" component={SiteRule} />
-      <Route path="/privacy-policy" component={PrivacyPolicy} />
+      <Route path="/service-agreements">
+        <SiteRule />
+      </Route>
+      <Route path="/privacy-policy">
+        <PrivacyPolicy />
+      </Route>
+      <Route path="/icon-source">
+        <IconSource />
+      </Route>
       <Redirect path="*" to="/" />
     </Switch>
   </Router>
