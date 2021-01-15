@@ -1,5 +1,24 @@
 import styled from 'styled-components';
 
+import canParkImg from '../../assets/images/Detail/Car.png';
+import cctvExistImg from '../../assets/images/Detail/Cctv.png';
+import insuranceExistImg from '../../assets/images/Detail/Certificate.png';
+import coolingExistImg from '../../assets/images/Detail/Cooling.png';
+import lockSystemExistImg from '../../assets/images/Detail/Lock.png';
+import packingExistImg from '../../assets/images/Detail/Packing.png';
+import WMSExistImg from '../../assets/images/Detail/WMS.png';
+
+export const Images = {
+  canParkImg,
+  cctvExistImg,
+  insuranceExistImg,
+  coolingExistImg,
+  heatingExistImg: coolingExistImg,
+  coolingAndHeatingExistImg: coolingExistImg,
+  lockSystemExistImg,
+  packingExistImg,
+  WMSExistImg,
+};
 export const Container = styled.div`
   width: 100%;
   font-family: 'paybooc-Medium', sans-serif;
@@ -117,12 +136,39 @@ export const Content = styled.div`
 `;
 
 export const SectionTitle = styled.div`
+  font-family: 'notosans-Regular', sans-serif;
   margin-top: 100px;
   font-size: 23px;
-  font-family: 'notosans-Regular', sans-serif;
   color: #0079c0;
   font-weight: bold;
   text-align: ${(props) => props.textAlign || 'left'};
+`;
+export const HouseInfoCardWrapper = styled.div`
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+`;
+export const HouseInfoCard = styled.div`
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+export const HouseInfoCardImage = styled.img`
+  width: 100%;
+`;
+export const HouseInfoCardText = styled.div`
+  margin-top: 10px;
+  font-weight: bold;
 `;
 
 export const WorkDaysWrapper = styled.div`
@@ -237,6 +283,20 @@ export const BottomContentValue = styled.div`
   font-size: 14px;
 `;
 
+export const BlogVisitButton = styled.div`
+  margin: 15px 0;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 17px;
+  text-align: center;
+  color: white;
+  background-color: #15c7ab;
+  font-weight: bold;
+  box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.5);
+  &:hover {
+    cursor: pointer;
+  }
+`;
 export const QuoteContactButton = styled.div`
   margin: 10px 0;
   padding: 10px 20px;
