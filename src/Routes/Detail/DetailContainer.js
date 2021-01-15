@@ -30,16 +30,15 @@ const DetailContainer = () => {
         if (data.airConditioningType === 'COOLING') {
           houseInfo.push('coolingExist');
         }
-        if (data.airConditioningType !== 'HEATING') {
+        if (data.airConditioningType === 'HEATING') {
           houseInfo.push('heatingExist');
         }
-        if (data.airConditioningType !== 'BOTH') {
+        if (data.airConditioningType === 'BOTH') {
           houseInfo.push('coolingAndHeatingExist');
         }
         if (data.doorLockExist) {
           houseInfo.push('lockSystemExist');
         }
-        houseInfo.push('WMSExist');
         console.log(houseInfo);
         setWarehouse({ ...data, houseInfo });
         setLoading(false);

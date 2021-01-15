@@ -97,7 +97,7 @@ const Detail = ({ warehouse }) => {
     }
     return resultArr;
   };
-
+  console.log(warehouse);
   const scrollFunc = (ref) => {
     window.scrollTo({ top: ref.current.offsetTop - 90, behavior: 'smooth' });
   };
@@ -223,14 +223,14 @@ const Detail = ({ warehouse }) => {
             </Content>
             <SectionTitle ref={centerRef.info}>시설 정보</SectionTitle>
             <HouseInfoCardWrapper>
-              {warehouse.houseInfo.map((item, idx) => {
+              {warehouse.houseInfo.map((item, idx) => (
                 <HouseInfoCard key={idx}>
                   <HouseInfoCardImage src={Images[item + 'Img']} />
                   <HouseInfoCardText>
                     {warehouseInfoCardTextDict(item)}
                   </HouseInfoCardText>
-                </HouseInfoCard>;
-              })}
+                </HouseInfoCard>
+              ))}
             </HouseInfoCardWrapper>
             <SectionTitle>보험 가입 내역</SectionTitle>
             {warehouse.insurances.map((insurance, idx) => {

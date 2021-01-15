@@ -163,8 +163,11 @@ export const HouseInfoCard = styled.div`
   align-items: center;
   justify-content: center;
 `;
-export const HouseInfoCardImage = styled.img``;
+export const HouseInfoCardImage = styled.img`
+  width: 100%;
+`;
 export const HouseInfoCardText = styled.div`
+  margin-top: 10px;
   font-weight: bold;
 `;
 
