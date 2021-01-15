@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import jwt_decode from 'jwt-decode';
-import {useLocation, useHistory} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import ErrorPage from '../ErrorPage';
 
 const PathNames = {
@@ -15,7 +15,6 @@ const PathNames = {
 }
 
 const TokenAndTypeValidator = ({children}) => {
-    const history = useHistory();
     const location = useLocation();
 
     const verifyAccess = useCallback(() => {
@@ -33,17 +32,14 @@ const TokenAndTypeValidator = ({children}) => {
         switch(location.pathname) {
             case PathNames.LOGIN:
                 if(isUserLoggedIn()) {
-                    console.log("USER IS LOGGED IN");
-                    return <ErrorPage error={'잘못된 접근입니다.'} />
+                    return <ErrorPage error={'잘못된 접근입니다.'} />;
                 } else {
-                    console.log("USER IS NOT LOGGED IN")
                     return children;
                 }
             case PathNames.SIGNUP:
                 if(isUserLoggedIn()) {
-                    history.push("/error");
-                    return null;
-                } else return null;
+                    return <ErrorPage error={'잘못된 접근입니다.'} />;
+                } else return children;
             case PathNames.ADMIN:
                 if(isUserLoggedIn()) {
                    if(isTokenExpired()) {
@@ -53,13 +49,12 @@ const TokenAndTypeValidator = ({children}) => {
                        break;
                    } else {
                        if(localStorage.getItem('Role') === 'ADMIN') {
-                           return null;
+                           return children;
                        } else {
-                           history.push("/error");
-                           return null;
+                           return <ErrorPage error={'잘못된 접근입니다.'} />;
                        }
                    }
-                } else return null;
+                } else return <ErrorPage error={'잘못된 접근입니다.'} />;
             case PathNames.MYPAGE:
                 if(isUserLoggedIn()) {
                     if(isTokenExpired()) {
@@ -68,14 +63,12 @@ const TokenAndTypeValidator = ({children}) => {
                        window.location.href = "/login";
                        break;
                     } else {
-                       return null;
+                       return children;
                     }
                 } else {
-                    window.location.href = "/error"
-                    return null;
+                    return <ErrorPage error={'잘못된 접근입니다.'} />;
                 }
             case PathNames.MYPAGE_QUOTATION:
-                console.log(location.pathname);
                 if(isUserLoggedIn()) {
                     if(isTokenExpired()) {
                         alert('유효기간이 만료되었습니다. 다시 로그인 해주세요.');
@@ -84,15 +77,13 @@ const TokenAndTypeValidator = ({children}) => {
                         break;
                     } else {
                         if(localStorage.getItem('type') === 'SHIPPER') {
-                            return null;
+                            return children;
                         } else {
-                            history.push("/error");
-                            return null;
+                            return <ErrorPage error={'잘못된 접근입니다.'} />;
                         }
                     }
                 } else {
-                    history.push("/error");
-                    break;
+                    return <ErrorPage error={'잘못된 접근입니다.'} />;
                 }
             case PathNames.MYPAGE_HOUSELIST:
                 if(isUserLoggedIn()) {
@@ -103,15 +94,13 @@ const TokenAndTypeValidator = ({children}) => {
                         break;
                     } else {
                         if(localStorage.getItem('type') === 'OWNER') {
-                            return null;
+                            return children;
                         } else {
-                            history.push("/error");
-                            return;
+                            return <ErrorPage error={'잘못된 접근입니다.'} />;
                         }
                     }
                 } else {
-                    history.push("/error");
-                    break;
+                    return <ErrorPage error={'잘못된 접근입니다.'} />;
                 }
             case PathNames.REGISTER:
                 if(isUserLoggedIn()) {
@@ -122,15 +111,13 @@ const TokenAndTypeValidator = ({children}) => {
                         break;
                     } else {
                         if(localStorage.getItem('type') === 'OWNER') {
-                            return null;
+                            return children;
                         } else {
-                            history.push("/error")
-                            return;
+                            return <ErrorPage error={'잘못된 접근입니다.'} />;
                         }
                     }
                 } else {
-                    history.push("/error")
-                    break;
+                    return <ErrorPage error={'잘못된 접근입니다.'} />;
                 }
             case PathNames.WAREHOUSES_QUOTECONTACT:
                 if(isUserLoggedIn()) {
@@ -140,25 +127,19 @@ const TokenAndTypeValidator = ({children}) => {
                         window.location.href = "/login";
                         break;
                     } else {
-                        if(localStorage.getITem('type') === 'SHIPPER') {
-                            return null;
+                        if(localStorage.getItem('type') === 'SHIPPER') {
+                            return children;
                         } else {
-                            history.push("/error")
-                            break;
+                            return <ErrorPage error={'잘못된 접근입니다.'} />;
                         }
                     }
                 } else {
-                    history.push("/error")
-                    break;
+                    return <ErrorPage error={'잘못된 접근입니다.'} />;
                 }
             default:
-                return null;
+                return children;
         }
-    }, [history, location.pathname, children]);
-
-    // useEffect(() => {
-    //     verifyAccess();
-    // }, [verifyAccess]);
+    }, [location.pathname, children]);
 
     return verifyAccess();
 }

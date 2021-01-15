@@ -34,22 +34,34 @@ const RouterComponent = () => (
         </TokenAndTypeValidator>
       </Route>
       <Route path="/signup">
-        <SignUp />
+        <TokenAndTypeValidator>
+          <SignUp />
+        </TokenAndTypeValidator>
       </Route>
       <Route path="/admin">
-        <Message text={BadAccessText} />
+        <TokenAndTypeValidator>
+          <Message text={BadAccessText} />
+        </TokenAndTypeValidator>
       </Route>
       <Route path="/mypage" exact>
-        <MyPage />
+        <TokenAndTypeValidator>
+          <MyPage />
+        </TokenAndTypeValidator>
       </Route>
       <Route path="/mypage/quotation">
-        <QuotationList />
+        <TokenAndTypeValidator>
+          <QuotationList />
+        </TokenAndTypeValidator>
       </Route>
       <Route path="/mypage/houselist">
-        <HouseList />
+        <TokenAndTypeValidator>
+          <HouseList />
+        </TokenAndTypeValidator>
       </Route>
       <Route path="/register">
-        <Register />
+        <TokenAndTypeValidator>
+          <Register />
+        </TokenAndTypeValidator>
       </Route>
       <Route path="/team">
         <Team />
@@ -61,7 +73,9 @@ const RouterComponent = () => (
         <Detail />
       </Route>
       <Route path="/warehouses/quotecontact">
-        <QuoteContact />
+        <TokenAndTypeValidator>
+          <QuoteContact />
+        </TokenAndTypeValidator>
       </Route>
       <Route path="/service-agreements">
         <SiteRule />
