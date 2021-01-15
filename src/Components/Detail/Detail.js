@@ -1,6 +1,24 @@
 import styled from 'styled-components';
 
-export const Images = {};
+import canParkImg from '../../assets/images/Detail/Car.png';
+import cctvExistImg from '../../assets/images/Detail/Cctv.png';
+import insuranceExistImg from '../../assets/images/Detail/Certificate.png';
+import coolingExistImg from '../../assets/images/Detail/Cooling.png';
+import lockSystemExistImg from '../../assets/images/Detail/Lock.png';
+import packingExistImg from '../../assets/images/Detail/Packing.png';
+import WMSExistImg from '../../assets/images/Detail/WMS.png';
+
+export const Images = {
+  canParkImg,
+  cctvExistImg,
+  insuranceExistImg,
+  coolingExistImg,
+  heatingExistImg: coolingExistImg,
+  coolingAndHeatingExistImg: coolingExistImg,
+  lockSystemExistImg,
+  packingExistImg,
+  WMSExistImg,
+};
 export const Container = styled.div`
   width: 100%;
   font-family: 'paybooc-Medium', sans-serif;

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Slider from 'react-slick';
 import Modal from './Modal/ShowImageModal';
+import { warehouseInfoCardTextDict } from '../../static/detail';
 import {
   Container,
   MainImageContainer,
-  ImageButton,
   DetailPageNavbarContainer,
   DetailPageNavbarItemsWrapper,
   DetailPageNavbarWrapper,
@@ -21,7 +21,6 @@ import {
   MainMapDesc,
   QuoteContactContainer,
   ContactTitle,
-  ContactSubTitle,
   ContactContentWrapper,
   LeftContent,
   RightContent,
@@ -45,6 +44,7 @@ import {
   HouseInfoCard,
   HouseInfoCardText,
   BlogVisitButton,
+  Images,
 } from './Detail';
 import { categoryTitleDict } from '../../static/category';
 import { dayOfWeek } from '../../static/detail';
@@ -129,7 +129,7 @@ const Detail = ({ warehouse }) => {
                     setModalImgUrl(warehouse.mainImageUrl);
                     setModalVisible(true);
                   }}
-                />{' '}
+                />
               </SliderChildWrapper>
               {warehouse.images.map((item, idx) => (
                 <SliderChildWrapper key={idx}>
@@ -223,30 +223,14 @@ const Detail = ({ warehouse }) => {
             </Content>
             <SectionTitle ref={centerRef.info}>시설 정보</SectionTitle>
             <HouseInfoCardWrapper>
-              <HouseInfoCard>
-                <HouseInfoCardImage />
-                <HouseInfoCardText></HouseInfoCardText>
-              </HouseInfoCard>
-              <HouseInfoCard>
-                <HouseInfoCardImage />
-                <HouseInfoCardText></HouseInfoCardText>
-              </HouseInfoCard>
-              <HouseInfoCard>
-                <HouseInfoCardImage />
-                <HouseInfoCardText></HouseInfoCardText>
-              </HouseInfoCard>
-              <HouseInfoCard>
-                <HouseInfoCardImage />
-                <HouseInfoCardText></HouseInfoCardText>
-              </HouseInfoCard>
-              <HouseInfoCard>
-                <HouseInfoCardImage />
-                <HouseInfoCardText></HouseInfoCardText>
-              </HouseInfoCard>
-              <HouseInfoCard>
-                <HouseInfoCardImage />
-                <HouseInfoCardText></HouseInfoCardText>
-              </HouseInfoCard>
+              {warehouse.houseInfo.map((item, idx) => {
+                <HouseInfoCard key={idx}>
+                  <HouseInfoCardImage src={Images[item + 'Img']} />
+                  <HouseInfoCardText>
+                    {warehouseInfoCardTextDict(item)}
+                  </HouseInfoCardText>
+                </HouseInfoCard>;
+              })}
             </HouseInfoCardWrapper>
             <SectionTitle>보험 가입 내역</SectionTitle>
             {warehouse.insurances.map((insurance, idx) => {

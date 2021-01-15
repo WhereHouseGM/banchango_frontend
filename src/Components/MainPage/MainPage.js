@@ -337,15 +337,18 @@ export const SliderBox = styled.div`
 `;
 
 export const SliderWrapper = styled.div`
-  width: 90%;
+  width: 80%;
   max-width: 768px;
-  margin: 0 40px;
+  margin: 0 30px;
 `;
 
 export const SliderButton = styled.div`
-  font-size: 40px;
+  font-size: 35px;
   &:hover {
     cursor: pointer;
+  }
+  @media (max-width: 768px) {
+    font-size: 25px;
   }
 `;
 

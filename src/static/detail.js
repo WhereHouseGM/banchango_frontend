@@ -44,6 +44,31 @@ export const categoryDict = (category) => {
   }
 };
 
+export const warehouseInfoCardTextDict = (existName) => {
+  switch (existName) {
+    case 'packingExist':
+      return '포장인력';
+    case 'insuranceExist':
+      return '보험 있음';
+    case 'cctvExist':
+      return 'CCTV';
+    case 'canPark':
+      return '주차 가능';
+    case 'coolingExist':
+      return '냉방';
+    case 'heatingExist':
+      return '난방';
+    case 'coolingAndHeatingExist':
+      return '냉난방';
+    case 'lockSystemExist':
+      return '잠금장치';
+    case 'WMSExist':
+      return 'WMS';
+    default:
+      return '';
+  }
+};
+
 // export const airConditioningTypeDict = (type) => {
 //   switch (type.toString().toUpperCase()) {
 //     case AirConditioningTypes.HEATING:

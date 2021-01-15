@@ -14,7 +14,34 @@ const DetailContainer = () => {
     warehouseApi
       .getWarehouseInfo(warehouseId)
       .then(({ data }) => {
-        setWarehouse(data);
+        let houseInfo = [];
+        if (data.workerExist) {
+          houseInfo.push('packingExist');
+        }
+        if (data.insurances.length !== 0) {
+          houseInfo.push('insuranceExist');
+        }
+        if (data.cctvExist) {
+          houseInfo.push('cctvExist');
+        }
+        if (data.canPark) {
+          houseInfo.push('canPark');
+        }
+        if (data.airConditioningType === 'COOLING') {
+          houseInfo.push('coolingExist');
+        }
+        if (data.airConditioningType !== 'HEATING') {
+          houseInfo.push('heatingExist');
+        }
+        if (data.airConditioningType !== 'BOTH') {
+          houseInfo.push('coolingAndHeatingExist');
+        }
+        if (data.doorLockExist) {
+          houseInfo.push('lockSystemExist');
+        }
+        houseInfo.push('WMSExist');
+        console.log(houseInfo);
+        setWarehouse({ ...data, houseInfo });
         setLoading(false);
       })
       .catch(({ response: { status } }) => {
