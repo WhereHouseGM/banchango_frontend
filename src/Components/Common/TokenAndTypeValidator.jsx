@@ -1,7 +1,5 @@
-import {useEffect, useCallback} from 'react';
 import jwt_decode from 'jwt-decode';
 import {useLocation, useHistory} from 'react-router-dom';
-import ErrorPage from '../ErrorPage';
 
 const PathNames = {
     LOGIN: '/login',
@@ -28,37 +26,134 @@ const TokenValidator = () => {
         Type: localStorage.getItem('type')
     }
 
-    const validateToken = () => {
+    const isTokenExpired = () => {
         if(localStorageItems.AccessToken !== null && localStorageItems.AccessToken !== undefined) {
             return jwt_decode(localStorageItems.AccessToken).exp * 1000 < new Date().getTime();
         }
     }
 
+    const isUserLoggedIn = () => {
+        return localStorageItems.Login === 'true' && localStorageItems.Role !== null && localStorageItems.RefreshToken !== null && localStorageItems.UserId !== null && localStorageItems.Name !== null && localStorageItems.AccessToken !== null && localStorageItems.Email !== null && localStorageItems.Type !== null;
+    }
+
     const verifyAccess = () => {
         switch(location.pathname) {
             case PathNames.LOGIN:
-                if(localStorageItems.Login === 'true' || localStorageItems.Role !== null || localStorageItems.Role !== undefined || localStorageItems.RefreshToken !== null || localStorageItems.RefreshToken !== undefined || localStorageItems.UserId !== null || localStorageItems.UserId !== undefined || localStorageItems.Name !== null || localStorageItems.Name !== undefined || localStorageItems.AccessToken !== null || localStorageItems.AccessToken !== undefined || localStorageItems.Email !== null || localStorageItems.Email !== undefined || localStorageItems.Role !== null || localStorageItems.Role !== undefined) {
+                if(isUserLoggedIn()) {
                     history.push("/error");
+                    break;
                 } else return null;
+            case PathNames.SIGNUP:
+                if(isUserLoggedIn()) {
+                    history.push("/error");
+                    break;
+                } else return null;
+            case PathNames.ADMIN:
+                if(localStorageItems.AccessToken === null || localStorageItems.Role !== 'Admin') {
+                   if(isTokenExpired()) {
+                       alert('유효기간이 만료되었습니다. 다시 로그인 해주세요.');
+                       localStorage.clear();
+                       window.location.href = "/login";
+                       break;
+                   } else {
+                    history.push("/error");
+                    break;
+                   }
+                } else return null;
+            case PathNames.MYPAGE:
+                if(isUserLoggedIn()) {
+                    if(isTokenExpired()) {
+                       alert('유효기간이 만료되었습니다. 다시 로그인 해주세요.');
+                       localStorage.clear();
+                       window.location.href = "/login";
+                       break;
+                    } else {
+                       return null;
+                    }
+                } else {
+                    history.push("/error");
+                    break;
+                }
+            case PathNames.MYPAGE_QUOTATION:
+                if(isUserLoggedIn()) {
+                    if(isTokenExpired()) {
+                        alert('유효기간이 만료되었습니다. 다시 로그인 해주세요.');
+                        localStorage.clear();
+                        window.location.href = "/login";
+                        break;
+                    } else {
+                        if(localStorageItems.Type === 'SHIPPER') {
+                            return null;
+                        } else {
+                            history.push("/error");
+                            return;
+                        }
+                    }
+                } else {
+                    history.push("/error");
+                    break;
+                }
+            case PathNames.MYPAGE_HOUSELIST:
+                if(isUserLoggedIn()) {
+                    if(isTokenExpired()) {
+                        alert('유효기간이 만료되었습니다. 다시 로그인 해주세요.');
+                        localStorage.clear();
+                        window.location.href = "/login";
+                        break;
+                    } else {
+                        if(localStorageItems.Type === 'OWNER') {
+                            return null;
+                        } else {
+                            history.push("/error");
+                            return;
+                        }
+                    }
+                } else {
+                    history.push("/error");
+                    break;
+                }
+            case PathNames.REGISTER:
+                if(isUserLoggedIn()) {
+                    if(isTokenExpired()) {
+                        alert('유효기간이 만료되었습니다. 다시 로그인 해주세요.');
+                        localStorage.clear();
+                        window.location.href = "/login";
+                        break;
+                    } else {
+                        if(localStorageItems.Type === 'OWNER') {
+                            return null;
+                        } else {
+                            history.push("/error")
+                            return;
+                        }
+                    }
+                } else {
+                    history.push("/error")
+                    break;
+                }
+            case PathNames.WAREHOUSES_QUOTECONTACT:
+                if(isUserLoggedIn()) {
+                    if(isTokenExpired()) {
+                        alert('유효기간이 만료되었습니다. 다시 로그인 해주세요.');
+                        localStorage.clear();
+                        window.location.href = "/login";
+                        break;
+                    } else {
+                        if(localStorageItems.Type === 'SHIPPER') {
+                            return null;
+                        } else {
+                            history.push("/error")
+                            break;
+                        }
+                    }
+                } else {
+                    history.push("/error")
+                    break;
+                }
             default:
                 return null;
         }
     }
-
-    // const validateToken = useCallback(() => {
-    //     let token = localStorage.getItem('AccessToken');
-    //     if(token !== null && token !== undefined) {
-    //         let isTokenExpired = jwt_decode(token).exp * 1000 < new Date().getTime();
-    //         if(isTokenExpired) {
-    //             alert('유효기간이 만료되었습니다. 다시 로그인 해주세요.');
-    //             window.location.href = "/login"
-    //         }
-    //     }
-    // }, []);
-
-    useEffect(() => {
-        validateToken();
-    }, [validateToken]);
 
     return verifyAccess();
 }
