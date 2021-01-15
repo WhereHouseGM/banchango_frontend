@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const ModalWrapper = styled.div`
@@ -39,7 +39,7 @@ const ModalInner = styled.div`
   padding: 30px 20px;
 `;
 
-const Con = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -136,7 +136,7 @@ const ImportListModal = ({ onClose, visible }) => {
       <ModalOverlay visible={visible} />
       <ModalWrapper onClick={onMaskClick} tabIndex="-1" visible={visible}>
         <ModalInner tabIndex="0" className="modal-inner">
-          <Con>
+          <Container>
             <Title>내 상품 목록 불러오기</Title>
             <SubTitle>
               해당 창고에 견적 문의했던 상품 목록을 불러옵니다
@@ -156,7 +156,7 @@ const ImportListModal = ({ onClose, visible }) => {
               ))}
             </ListContainer>
             <SubmitButton>불러오기</SubmitButton>
-          </Con>
+          </Container>
         </ModalInner>
       </ModalWrapper>
     </>
