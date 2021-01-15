@@ -74,6 +74,13 @@ const Detail = ({ warehouse }) => {
           position: markerPosition,
         });
         marker.setMap(map);
+        var mapTypeControl = new window.kakao.maps.MapTypeControl();
+        map.addControl(
+          mapTypeControl,
+          window.kakao.maps.ControlPosition.TOPRIGHT,
+        );
+        var zoomControl = new window.kakao.maps.ZoomControl();
+        map.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
       });
     };
   }, [warehouse.latitude, warehouse.longitude]);

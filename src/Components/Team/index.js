@@ -193,7 +193,10 @@ const Team = () => {
     document.head.appendChild(script);
     script.onload = () => {
       window.kakao.maps.load(() => {
-        let targetPos = new window.kakao.maps.LatLng(37.4964976608857, 126.95746664800929);
+        let targetPos = new window.kakao.maps.LatLng(
+          37.4964976608857,
+          126.95746664800929,
+        );
         let container = document.getElementById('kakaoMap');
         let options = {
           center: targetPos,
@@ -205,6 +208,13 @@ const Team = () => {
           position: markerPosition,
         });
         marker.setMap(map);
+        var mapTypeControl = new window.kakao.maps.MapTypeControl();
+        map.addControl(
+          mapTypeControl,
+          window.kakao.maps.ControlPosition.TOPRIGHT,
+        );
+        var zoomControl = new window.kakao.maps.ZoomControl();
+        map.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
       });
     };
   }, []);
