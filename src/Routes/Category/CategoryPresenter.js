@@ -3,7 +3,6 @@ import Category from '../../Components/Category';
 import Navbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
 import Loading from '../../Components/Loading';
-
 import PropTypes from 'prop-types';
 import ErrorPage from '../../Components/ErrorPage';
 
