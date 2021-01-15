@@ -97,7 +97,6 @@ const Detail = ({ warehouse }) => {
     }
     return resultArr;
   };
-  console.log(warehouse);
   const scrollFunc = (ref) => {
     window.scrollTo({ top: ref.current.offsetTop - 90, behavior: 'smooth' });
   };
