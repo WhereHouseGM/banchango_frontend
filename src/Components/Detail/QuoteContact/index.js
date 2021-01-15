@@ -1,211 +1,48 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import ImportListModal from './Modal/ImportList';
 
-const Container = styled.div`
-  font-family: 'notosans-Regular', sans-serif;
-  width: 100%;
-  min-width: 1024px;
-`;
-const Wrapper = styled.div`
-/* font-family: 'notosans-Regular', sans-serif; */
-  width: 90%;
-  max-width: 1024px;
-  margin: 0px auto;
-`;
-const Title = styled.div`
-  font-weight: bold;
-  margin-top: 10px;
-  padding: 15px 15px;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-`;
-const ProductTitleWrapper = styled.div`
-  margin-top: 30px;
-  margin-bottom: 15px;
-  padding: 15px 0;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-`;
-const ProductTitle = styled.div`
-  font-weight: bold;
-  font-size: 30px;
-  padding-left: 25px;
-`;
-const RestoreButton = styled.div`
-  border: 1px solid #1e56a0;
-  border-radius: 20px;
-  padding: 10px 15px;
-  font-weight: bold;
-  font-size: 14px;
-  color: #1e56a0;
-  text-align: center;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-const ProductWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
-const ProductBlankWrapper = styled.div`
-  flex: 1;
-`;
-const ProductLeftWrapper = styled.div`
-  width: 45%;
-`;
-const ProductRightWrapper = styled.div`
-  width: 45%;
-`;
-const InputTitle = styled.div`
-  display: flex;
-  margin-bottom: 10px;
-`;
-const InputTitleText = styled.div`
-  color: #1e56a0;
-  font-size: 20px;
-  margin-right: 5px;
-  font-weight: bold;
-`;
+import {
+  Container,
+  Wrapper,
+  Title,
+  ProductTitleWrapper,
+  ProductTitle,
+  RestoreButton,
+  ProductWrapper,
+  ProductBlankWrapper,
+  ProductLeftWrapper,
+  ProductRightWrapper,
+  InputTitle,
+  InputTitleText,
+  InputWrapper,
+  InputBox,
+  InputSubText,
+  PickButtonWrapper,
+  PickButton,
+  AddProductButton,
+  ProductListWrapper,
+  ProductListTitle,
+  HistoryUpper,
+  HistoryUpperText,
+  HistoryChild,
+  HistoryChildText,
+  TotalCountContainer,
+  TotalCountWrapper,
+  TotalCountTitle,
+  TotalCountInput,
+  TotalCountSubText,
+  AnnounceTitle,
+  TextareaWrapper,
+  AnnounceTextarea,
+  InquiryButton,
+} from './QuoteContact';
+
 const BlueText = ({ text, noRequired }) => (
   <InputTitle>
     <InputTitleText>{text}</InputTitleText>
     {!noRequired && <div style={{ color: 'red' }}>*</div>}
   </InputTitle>
 );
-const InputWrapper = styled.div`
-  display: flex;
-  align-items: flex-start;
-`;
-const InputBox = styled.input`
-  width: 75%;
-  height: 28px;
-  margin-bottom: 40px;
-`;
-const InputSubText = styled.div`
-  color: #1e56a0;
-  font-size: 20px;
-  margin-top: 2px;
-  margin-left: 10px;
-  font-weight: bold;
-`;
-const PickButtonWrapper = styled.div`
-  width: 75%;
-  display: flex;
-  margin-bottom: 40px;
-`;
-const PickButton = styled.div`
-  flex: 1;
-  text-align: center;
-  padding: 7px 0;
-  border: 1px solid rgba(0, 0, 0, 0.25);
-  &:hover {
-    cursor: pointer;
-  }
-`;
-const AddProductButton = styled.div`
-  color: #1e56a0;
-  border: solid 1px #1e56a0;
-  padding: 10px 10px;
-  font-weight: bold;
-  margin: 10px auto;
-  width: 200px;
-  border-radius: 20px;
-  text-align: center;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const ProductListWrapper = styled.div``;
-const ProductListTitle = styled.div`
-  font-weight: bold;
-  width: 100%;
-  font-size: 30px;
-  padding: 25px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-`;
-
-const HistoryUpper = styled.div`
-  display: flex;
-  padding: 15px 0;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  text-align: center;
-`;
-const HistoryUpperText = styled.div`
-  font-weight: bold;
-  font-size: 15px;
-  width: ${(props) => props.width};
-`;
-const HistoryChild = styled.div`
-  padding: 15px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-`;
-const HistoryChildText = styled.div`
-  width: ${(props) => props.width};
-`;
-const TotalCountContainer = styled.div`
-  margin: 25px 0;
-  display: flex;
-  flex-direction: row-reverse;
-`;
-const TotalCountWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  color: #1e56a0;
-  font-size: 25px;
-  font-weight: bold;
-`;
-const TotalCountTitle = styled.div`
-  padding-left: 15px;
-  margin-right: 5px;
-`;
-const TotalCountInput = styled.input`
-  margin-left: 10px;
-  width: 200px;
-`;
-const TotalCountSubText = styled.div`
-  margin-left: 10px;
-`;
-const AnnounceTitle = styled.div`
-  margin-top: 80px;
-  font-weight: bold;
-  width: 100%;
-  font-size: 30px;
-  padding: 25px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-`;
-const TextareaWrapper = styled.div`
-  width: 80%;
-  height: 300px;
-  margin: 30px auto;
-`;
-const AnnounceTextarea = styled.textarea`
-  height: 100%;
-  width: 100%;
-`;
-const InquiryButton = styled.div`
-  background-color: #1e56a0;
-  color: white;
-  border-radius: 40px;
-  padding: 20px 60px;
-  text-align: center;
-  font-size: 20px;
-  width: 300px;
-  margin: 40px auto;
-  &:hover {
-    cursor: pointer;
-  }
-`;
 
 const DUMMY_HISTORY = [
   {
