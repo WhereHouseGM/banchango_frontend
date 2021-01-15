@@ -87,12 +87,6 @@ const RouterComponent = () => (
       <Route path="/error">
         <ErrorPage error={'잘못된 접근 입니다.'} />
       </Route>
-      <Route path="/service-agreements">
-        <SiteRule />
-      </Route>
-      <Route path="/privacy-policy">
-        <PrivacyPolicy />
-      </Route>
       <Route path="/icon-source">
         <IconSource />
       </Route>
