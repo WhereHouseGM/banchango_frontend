@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import Admin from '../../Components/Admin/Admin';
+import TokenAndTypeValidator from '../../Components/Common/TokenAndTypeValidator';
 
 const AdminPresenter = ({
   handleLoginInput,
@@ -18,6 +19,7 @@ const AdminPresenter = ({
     <Helmet>
       <title>반창고 | 관리자 페이지</title>
     </Helmet>
+    <TokenAndTypeValidator />
     <Admin
       handleLoginInput={handleLoginInput}
       handleLoginSubmit={handleLoginSubmit}
