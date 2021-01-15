@@ -7,7 +7,7 @@ import Loading from '../../Components/Loading';
 import ErrorPage from '../../Components/ErrorPage';
 import TokenAndTypeValidator from '../../Components/Common/TokenAndTypeValidator';
 
-const DetailPresenter = ({ userInfo, handleSubmit, error, loading }) => (
+const MyPagePresenter = ({ userInfo, handleSubmit, error, loading }) => (
   <>
     <Helmet>
       <title>반창고 | 마이페이지</title>
@@ -25,11 +25,11 @@ const DetailPresenter = ({ userInfo, handleSubmit, error, loading }) => (
   </>
 );
 
-DetailPresenter.propTypes = {
+MyPagePresenter.propTypes = {
   userInfo: PropTypes.object,
   handleSubmit: PropTypes.func,
   error: PropTypes.string,
   loading: PropTypes.bool,
 };
 
-export default DetailPresenter;
+export default MyPagePresenter;

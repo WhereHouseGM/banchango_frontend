@@ -20,6 +20,7 @@ import Register from '../Routes/Register';
 import Team from '../Routes/Team';
 import QuoteContact from '../Routes/Detail/QuoteContact';
 import ErrorPage from '../Components/ErrorPage';
+import TokenAndTypeValidator from './Common/TokenAndTypeValidator';
 
 const BadAccessText = '잘못된 접근입니다.';
 
@@ -28,7 +29,9 @@ const RouterComponent = () => (
     <Switch>
       <Route path="/" exact component={Main} />
       <Route path="/login">
-        <Login />
+        <TokenAndTypeValidator>
+          <Login />
+        </TokenAndTypeValidator>
       </Route>
       <Route path="/signup">
         <SignUp />
