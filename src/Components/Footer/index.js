@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 const Container = styled.div`
-font-family: 'notosans-Regular', sans-serif;
+  font-family: 'notosans-Regular', sans-serif;
   padding: 35px 0;
   width: 100%;
   background-color: #1e56a0;
@@ -31,14 +33,35 @@ const Wrapper = styled.div`
 `;
 const LeftBox = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
 `;
 const RightBox = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
 `;
 const BoxTitle = styled.div`
   font-weight: bold;
 `;
 const BoxBody = styled.div``;
+const BoxBottomLink = styled(Link)`
+  margin-top: 20px;
+  text-decoration: none;
+  color: white;
+  align-self: flex-start;
+  border-bottom: 1px solid white;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+  }
+`;
+
 const BottomText = styled.div`
   font-weight: bold;
   margin-top: 20px;
@@ -61,6 +84,9 @@ const Footer = () => {
               대표 | 최윤석 <br />
               주소 | 서울특별시 동작구 성도동 창신관 304호
             </BoxBody>
+            <BoxBottomLink to={'/service-agreements'}>
+              개인정보 처리방침
+            </BoxBottomLink>
           </LeftBox>
           <RightBox>
             <BoxTitle>고객센터</BoxTitle>
@@ -69,6 +95,9 @@ const Footer = () => {
               <br />
               대표전화 | 010-4342-1243
             </BoxBody>
+            <BoxBottomLink to={'/icon-source'}>
+              홈페이지 아이콘 출처
+            </BoxBottomLink>
           </RightBox>
         </Wrapper>
       </BoxWrapper>
