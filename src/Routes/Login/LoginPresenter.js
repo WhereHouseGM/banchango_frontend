@@ -1,6 +1,7 @@
 import Helmet from 'react-helmet';
 import Login from '../../Components/Login';
 import PropTypes from 'prop-types';
+import TokenAndTypeValidator from '../../Components/Common/TokenAndTypeValidator';
 
 const LoginPresenter = ({
   handleInput,
@@ -12,6 +13,7 @@ const LoginPresenter = ({
     <Helmet>
       <title>반창고 | 로그인</title>
     </Helmet>
+    <TokenAndTypeValidator />
     <Login
       handleInput={handleInput}
       handleSubmit={handleSubmit}
