@@ -72,7 +72,7 @@ const RouterComponent = () => (
       <Route path="/warehouses/detail/:warehouseId">
         <Detail />
       </Route>
-      <Route path="/warehouses/quotecontact">
+      <Route path="/warehouses/quotecontact/:warehouseId">
         <TokenAndTypeValidator>
           <QuoteContact />
         </TokenAndTypeValidator>

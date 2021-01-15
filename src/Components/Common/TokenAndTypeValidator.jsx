@@ -11,14 +11,13 @@ const PathNames = {
     MYPAGE_QUOTATION: '/mypage/quotation',
     MYPAGE_HOUSELIST: '/mypage/houselist',
     REGISTER: '/register',
-    WAREHOUSES_QUOTECONTACT: '/warehouses/quotecontact'
+    WAREHOUSES_QUOTECONTACT: '/warehouses/quotecontact/',
 }
 
 const TokenAndTypeValidator = ({children}) => {
     const location = useLocation();
 
     const verifyAccess = useCallback(() => {
-        console.log(`VERIFY ACCESS TO ${location.pathname}`)
         const isTokenExpired = () => {
             if(localStorage.getItem('AccessToken') !== null) {
                 return jwt_decode(localStorage.getItem('AccessToken')).exp * 1000 < new Date().getTime();
