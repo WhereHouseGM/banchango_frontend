@@ -86,7 +86,7 @@ const QuoteContact = () => {
       />
       <Container>
         <Wrapper>
-          <Title>견적 문의하기 - 스토리지 원</Title>
+          <Title>{`견적 문의하기 - ${params.name}`}</Title>
           <ProductTitleWrapper>
             <ProductTitle>상품 정보</ProductTitle>
             <RestoreButton
