@@ -45,6 +45,7 @@ import {
   HouseInfoCardText,
   BlogVisitButton,
   Images,
+  QuoteContactCautionText,
 } from './Detail';
 import { categoryTitleDict } from '../../static/category';
 import { dayOfWeek } from '../../static/detail';
@@ -52,6 +53,7 @@ import { dayOfWeek } from '../../static/detail';
 const Detail = ({ warehouse }) => {
   const SliderRef = React.createRef();
   useEffect(() => {
+    window.scrollTo(0, 0);
     const script = document.createElement('script');
     script.async = true;
     script.src =
@@ -74,6 +76,13 @@ const Detail = ({ warehouse }) => {
           position: markerPosition,
         });
         marker.setMap(map);
+        var mapTypeControl = new window.kakao.maps.MapTypeControl();
+        map.addControl(
+          mapTypeControl,
+          window.kakao.maps.ControlPosition.TOPRIGHT,
+        );
+        var zoomControl = new window.kakao.maps.ZoomControl();
+        map.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
       });
     };
   }, [warehouse.latitude, warehouse.longitude]);
@@ -315,6 +324,11 @@ const Detail = ({ warehouse }) => {
             >
               견적 요청하기
             </QuoteContactButton>
+            <QuoteContactCautionText>
+              반창고의 빠른 검토 후,
+              <br />
+              보통 1 영업일 이내에, 견적서가 송부됩니다.
+            </QuoteContactCautionText>
           </QuoteContactContainer>
         </MainContainer>
       </Container>

@@ -311,3 +311,9 @@ export const QuoteContactButton = styled.div`
     cursor: pointer;
   }
 `;
+export const QuoteContactCautionText = styled.div`
+  font-family: 'notosans-Regular', sans-serif;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 11.5px;
+`;

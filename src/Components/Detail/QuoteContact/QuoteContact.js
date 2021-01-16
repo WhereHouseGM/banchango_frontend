@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  font-family: 'notosans-Regular', sans-serif;
   width: 100%;
   min-width: 1024px;
 `;
