@@ -54,6 +54,15 @@ export const NavLinkOpen = styled(Link)`
   padding: 2.2rem;
   cursor: pointer;
   text-decoration: none;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+  }
 `;
 
 export const Bars = styled(FaBars)`
