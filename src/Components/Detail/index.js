@@ -17,7 +17,7 @@ import {
   MainTitle,
   Content,
   SectionTitle,
-  MainMapImg,
+  MainMap,
   MainMapDesc,
   QuoteContactContainer,
   ContactTitle,
@@ -46,6 +46,25 @@ import {
   BlogVisitButton,
   Images,
   QuoteContactCautionText,
+  MobileContainer,
+  MobileUpperDescContainer,
+  MobileUpperSliderContainer,
+  MobileUpperDescWrapper,
+  MobileDetailNavContainer,
+  MobileQuoteContactButton,
+  MobileUpperSliderWrapper,
+  MobileUpperHouseName,
+  MobileUpperAddress,
+  MobileUpperDeliveryTitle,
+  MobileUpperDeliveryText,
+  MobileUpperDeliveryWrapper,
+  MobileUpperCategoryButtonWrapper,
+  MobileUpperCategoryButton,
+  MobileUpperRightDescWrapper,
+  MobileUpperRightDescBox,
+  MobileUpperRightDescText,
+  MobileUpperRightDescTitle,
+  MobileDetailNavButton,
 } from './Detail';
 import { categoryTitleDict } from '../../static/category';
 import { dayOfWeek } from '../../static/detail';
@@ -119,6 +138,117 @@ const Detail = ({ warehouse }) => {
         visible={modalVisible}
         modalImgUrl={modalImgUrl}
       />
+      <MobileContainer>
+        <MobileUpperDescContainer>
+          <MobileUpperSliderContainer>
+            <MobileUpperSliderWrapper>
+              <Slider
+                {...sliderSettings}
+                ref={SliderRef}
+                style={{ height: '30vh' }}
+              >
+                <SliderChildWrapper>
+                  <SliderChildImg
+                    src={warehouse.mainImageUrl}
+                    onClick={() => {
+                      setModalImgUrl(warehouse.mainImageUrl);
+                      setModalVisible(true);
+                    }}
+                  />
+                </SliderChildWrapper>
+                {warehouse.images.map((item, idx) => (
+                  <SliderChildWrapper key={idx}>
+                    <SliderChildImg src={item} alt={'상세 사진'} />
+                  </SliderChildWrapper>
+                ))}
+              </Slider>
+            </MobileUpperSliderWrapper>
+          </MobileUpperSliderContainer>
+          <MobileUpperDescWrapper>
+            <MobileUpperHouseName>{warehouse.name}</MobileUpperHouseName>
+            <MobileUpperAddress>{warehouse.address}</MobileUpperAddress>
+            <MobileUpperDeliveryWrapper>
+              <MobileUpperDeliveryTitle>택배사</MobileUpperDeliveryTitle>
+              <MobileUpperDeliveryText>
+                {warehouse.deliveryTypes.map((item, idx) => {
+                  if (warehouse.deliveryTypes.length - 1 === idx) {
+                    return <span key={idx}>{item}</span>;
+                  } else {
+                    return <span key={idx}>{item + ', '}</span>;
+                  }
+                })}
+              </MobileUpperDeliveryText>
+            </MobileUpperDeliveryWrapper>
+            <MobileUpperCategoryButtonWrapper>
+              {warehouse.mainItemTypes.map((item, idx) => (
+                <MobileUpperCategoryButton key={idx}>
+                  {categoryTitleDict(item)}
+                </MobileUpperCategoryButton>
+              ))}
+            </MobileUpperCategoryButtonWrapper>
+            <MobileUpperRightDescWrapper>
+              <MobileUpperRightDescBox>
+                <MobileUpperRightDescTitle>
+                  월 최소 출고량
+                </MobileUpperRightDescTitle>
+                <MobileUpperRightDescText>
+                  {warehouse.minReleasePerMonth + '건'}
+                </MobileUpperRightDescText>
+              </MobileUpperRightDescBox>
+              <MobileUpperRightDescBox>
+                <MobileUpperRightDescTitle>평수</MobileUpperRightDescTitle>
+                <MobileUpperRightDescText>
+                  {warehouse.space + '평'}
+                </MobileUpperRightDescText>
+              </MobileUpperRightDescBox>
+            </MobileUpperRightDescWrapper>
+          </MobileUpperDescWrapper>
+        </MobileUpperDescContainer>
+        <MobileQuoteContactButton
+          onClick={() => {
+            scrollFunc(centerRef.info);
+          }}
+        >
+          견적 문의하기
+        </MobileQuoteContactButton>
+      </MobileContainer>
+      <MobileDetailNavContainer>
+        <MobileDetailNavButton
+          onClick={() => {
+            scrollFunc(centerRef.desc);
+          }}
+        >
+          센터 소개
+        </MobileDetailNavButton>
+        <MobileDetailNavButton
+          onClick={() => {
+            scrollFunc(centerRef.info);
+          }}
+        >
+          시설 정보
+        </MobileDetailNavButton>
+        <MobileDetailNavButton
+          onClick={() => {
+            scrollFunc(centerRef.announce);
+          }}
+        >
+          안내사항
+        </MobileDetailNavButton>
+        <MobileDetailNavButton
+          onClick={() => {
+            scrollFunc(centerRef.caution);
+          }}
+        >
+          주의사항
+        </MobileDetailNavButton>
+        <MobileDetailNavButton
+          onClick={() => {
+            scrollFunc(centerRef.position);
+          }}
+        >
+          위치 정보
+        </MobileDetailNavButton>
+      </MobileDetailNavContainer>
       <Container>
         <MainImageContainer>
           <SliderChildArrow
@@ -277,9 +407,7 @@ const Detail = ({ warehouse }) => {
             <SectionTitle ref={centerRef.position} textAlign="center">
               위치 정보
             </SectionTitle>
-            <div style={{ margin: '0px auto', width: '50%' }}>
-              <MainMapImg id="kakaoMap" />
-            </div>
+            <MainMap id="kakaoMap" />
             <MainMapDesc>
               {warehouse.address}&nbsp;{warehouse.addressDetail}
             </MainMapDesc>
