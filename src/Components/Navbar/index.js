@@ -49,12 +49,10 @@ const Navbar = () => {
           <NavLinkOpen to="/team">팀소개</NavLinkOpen>
           {loginInfo.logined ? (
             <>
-              <NavLinkOpen to="/" style={{ color: 'black' }} onClick={logout}>
+              <NavLinkOpen to="/" onClick={logout}>
                 로그아웃
               </NavLinkOpen>
-              <NavLinkOpen style={{ color: 'black' }} to="/mypage">
-                {loginInfo.name} 님
-              </NavLinkOpen>
+              <NavLinkOpen to="/mypage">{loginInfo.name} 님</NavLinkOpen>
             </>
           ) : (
             <>
