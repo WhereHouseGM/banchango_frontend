@@ -158,7 +158,6 @@ export const Content = styled.div`
   line-height: ${(props) => props.lineHeight || '1.6'};
   white-space: pre-wrap;
   @media (max-width: 768px) {
-    /* font-size: ${(props) => props.fontSize || '15px'}; */
     font-size: 14px;
   }
 `;
@@ -443,7 +442,6 @@ export const MobileUpperRightDescText = styled.div`
 
 export const MobileDetailNavContainer = styled.div`
   top: 45px;
-  /* z-index: ; */
   width: 100%;
   display: flex;
   text-align: center;
