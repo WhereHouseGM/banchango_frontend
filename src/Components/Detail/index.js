@@ -206,7 +206,7 @@ const Detail = ({ warehouse }) => {
         </MobileUpperDescContainer>
         <MobileQuoteContactButton
           onClick={() => {
-            scrollFunc(centerRef.info);
+            history.push(`/warehouses/quotecontact/${warehouse.warehouseId}`);
           }}
         >
           견적 문의하기

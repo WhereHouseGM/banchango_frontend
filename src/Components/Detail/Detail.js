@@ -224,6 +224,7 @@ export const WorkDayBox = styled.div`
 
 export const MainMap = styled.div`
   margin: 20px auto;
+  z-index: 1;
   width: 50%;
   @media (max-width: 768px) {
     width: 100%;
@@ -442,7 +443,7 @@ export const MobileUpperRightDescText = styled.div`
 
 export const MobileDetailNavContainer = styled.div`
   top: 45px;
-  z-index: 999;
+  /* z-index: ; */
   width: 100%;
   display: flex;
   text-align: center;
@@ -461,7 +462,7 @@ export const MobileDetailNavButton = styled.div`
 `;
 export const MobileQuoteContactButton = styled.div`
   width: 100%;
-  padding: 12px 0;
+  padding: 15px 0;
   text-align: center;
   position: fixed;
   bottom: 0;
