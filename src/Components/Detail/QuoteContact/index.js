@@ -50,44 +50,6 @@ const BlueText = ({ text, noRequired }) => (
   </InputTitle>
 );
 
-// const DUMMY_HISTORY = [
-//   {
-//     category: '마우스',
-//     big: '120cm',
-//     weight: '12.5kg',
-//     sku: '2개',
-//     quantity: '12개',
-//     form: '상온',
-//     barcord: '있음.',
-//   },
-//   {
-//     category: '마우스',
-//     big: '120cm',
-//     weight: '12.5kg',
-//     sku: '2개',
-//     quantity: '12개',
-//     form: '상온',
-//     barcord: '있음.',
-//   },
-//   {
-//     category: '마우스',
-//     big: '120cm',
-//     weight: '12.5kg',
-//     sku: '2개',
-//     quantity: '12개',
-//     form: '상온',
-//     barcord: '있음.',
-//   },
-//   {
-//     category: '마우스',
-//     big: '120cm',
-//     weight: '12.5kg',
-//     sku: '2개',
-//     quantity: '12개',
-//     form: '상온',
-//     barcord: '있음.',
-//   },
-// ];
 const QuoteContact = () => {
   const [importListVisible, setImportListVisible] = useState(false);
   const [estimateItems, setEstimateItems] = useState([]);
@@ -292,11 +254,9 @@ const QuoteContact = () => {
               } else if (estimateItemInput.sku === null) {
                 message.warning('상품 SKU를 입력해주세요.');
               }
-              console.log(estimateItemInput);
               let beforeEstimateItems = estimateItems;
               beforeEstimateItems.push(estimateItemInput);
               setEstimateItems([...beforeEstimateItems]);
-              console.log(estimateItems);
               setEstimateItemInput({
                 name: null,
                 keepingNumber: null,
