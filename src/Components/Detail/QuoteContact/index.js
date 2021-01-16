@@ -41,6 +41,7 @@ import {
   ChildUrlText,
   keepingTypeToText,
   barcodeToText,
+  RemoveItemButton,
 } from './QuoteContact';
 
 const BlueText = ({ text, noRequired }) => (
@@ -313,6 +314,7 @@ const QuoteContact = () => {
               ) : (
                 <ChildUrlText width={'12%'}>없음</ChildUrlText>
               )}
+              <RemoveItemButton>X</RemoveItemButton>
             </HistoryChild>
           ))}
           <TotalCountContainer>
