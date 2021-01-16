@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ImportListModal from './Modal/ImportList';
 import { message } from 'antd';
+import { useParams } from 'react-router-dom';
 
 import {
   Container,
@@ -64,8 +65,15 @@ const QuoteContact = () => {
     sku: null,
     url: null,
   });
+  const params = useParams();
   const [clickedKeepingTypeIndex, setClickedKeepingTypeIndex] = useState(0);
   const [clickedBarcodeIndex, setClickedBarcodeIndex] = useState(0);
+  const [estimate, setEstimate] = useState({
+    warehouseId: parseInt(params.warehouseId),
+    estimateItems: [],
+    content: null,
+    monthlyAverageRelease: null,
+  });
 
   return (
     <>
@@ -258,6 +266,10 @@ const QuoteContact = () => {
               let beforeEstimateItems = estimateItems;
               beforeEstimateItems.push(estimateItemInput);
               setEstimateItems([...beforeEstimateItems]);
+              setEstimate({
+                ...estimate,
+                estimateItems: estimateItems,
+              });
               setEstimateItemInput({
                 name: null,
                 keepingNumber: null,
@@ -273,6 +285,7 @@ const QuoteContact = () => {
               document.getElementById('perimiter').value = '';
               document.getElementById('weight').value = '';
               document.getElementById('sku').value = '';
+              document.getElementById('url').value = '';
             }}
           >
             상품 추가하기
@@ -307,30 +320,83 @@ const QuoteContact = () => {
               <HistoryChildText width={'12%'}>
                 {barcodeToText(item.barcode)}
               </HistoryChildText>
-              {item.url !== null ? (
+              {item.url === null ||
+              item.url === '' ||
+              item.url === undefined ? (
                 <ChildUrlText width={'12%'} href={item.url}>
-                  클릭
+                  없음
                 </ChildUrlText>
               ) : (
-                <ChildUrlText width={'12%'}>없음</ChildUrlText>
+                <ChildUrlText width={'12%'}>클릭</ChildUrlText>
               )}
-              <RemoveItemButton>X</RemoveItemButton>
+              <RemoveItemButton
+                index={idx}
+                onClick={() => {
+                  let beforeEstimateItems = estimateItems;
+                  beforeEstimateItems = beforeEstimateItems.filter(
+                    (item, itemIndex) => idx !== itemIndex,
+                  );
+                  setEstimateItems([...beforeEstimateItems]);
+                  setEstimate({
+                    ...estimate,
+                    estimateItems: beforeEstimateItems,
+                  });
+                }}
+              >
+                X
+              </RemoveItemButton>
             </HistoryChild>
           ))}
           <TotalCountContainer>
             <TotalCountWrapper>
               <TotalCountTitle>월간 총 출고량</TotalCountTitle>
               <div style={{ color: 'red' }}>*</div>
-              <TotalCountInput />
+              <TotalCountInput
+                type="number"
+                onChange={(event) => {
+                  setEstimate({
+                    ...estimate,
+                    monthlyAverageRelease: parseInt(event.target.value),
+                  });
+                }}
+              />
               <TotalCountSubText>건</TotalCountSubText>
             </TotalCountWrapper>
           </TotalCountContainer>
           <ProductListWrapper>
             <AnnounceTitle>요청 및 유의 사항</AnnounceTitle>
             <TextareaWrapper>
-              <AnnounceTextarea placeholder={'내용 입력'} />
+              <AnnounceTextarea
+                placeholder={'내용 입력'}
+                onChange={(event) => {
+                  setEstimate({ ...estimate, content: event.target.value });
+                }}
+              />
             </TextareaWrapper>
-            <InquiryButton>견적 문의하기</InquiryButton>
+            <InquiryButton
+              onClick={() => {
+                if (
+                  estimate.content === null ||
+                  estimate.content.trim() === ''
+                ) {
+                  message.warning('요청 및 유의사항을 작성해주세요.');
+                  return;
+                } else if (estimate.monthlyAverageRelease === null) {
+                  message.warning('월간 총 출고량을 입력해주세요.');
+                  return;
+                }
+                let estimateItemsToSend = estimateItems;
+                if (estimateItemsToSend.length === 0) {
+                  message.warning('상품을 1개 이상 입력해주세요.');
+                  return;
+                }
+                // TODO : API CALL
+
+                console.log(estimate);
+              }}
+            >
+              견적 문의하기
+            </InquiryButton>
           </ProductListWrapper>
         </Wrapper>
       </Container>
