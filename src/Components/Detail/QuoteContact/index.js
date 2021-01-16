@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ImportListModal from './Modal/ImportList';
+import { message } from 'antd';
 
 import {
   Container,
@@ -38,6 +39,8 @@ import {
   KeepingTypes,
   Barcodes,
   ChildUrlText,
+  keepingTypeToText,
+  barcodeToText,
 } from './QuoteContact';
 
 const BlueText = ({ text, noRequired }) => (
@@ -92,12 +95,14 @@ const QuoteContact = () => {
     name: null,
     keepingNumber: null,
     perimiter: null,
-    keepingType: null,
+    keepingType: 'WARM',
     weight: null,
-    barcode: null,
+    barcode: 'ALL',
     sku: null,
     url: null,
   });
+  const [clickedKeepingTypeIndex, setClickedKeepingTypeIndex] = useState(0);
+  const [clickedBarcodeIndex, setClickedBarcodeIndex] = useState(0);
 
   return (
     <>
@@ -125,6 +130,8 @@ const QuoteContact = () => {
             <ProductLeftWrapper>
               <BlueText text={'상품 종류'} />
               <InputBox
+                type="text"
+                id="name"
                 onChange={(event) =>
                   setEstimateItemInput({
                     ...estimateItemInput,
@@ -136,6 +143,7 @@ const QuoteContact = () => {
               <InputWrapper>
                 <InputBox
                   type="number"
+                  id="perimiter"
                   onChange={(event) =>
                     setEstimateItemInput({
                       ...estimateItemInput,
@@ -149,6 +157,7 @@ const QuoteContact = () => {
               <InputWrapper>
                 <InputBox
                   type="number"
+                  id="weight"
                   onChange={(event) => {
                     setEstimateItemInput({
                       ...estimateItemInput,
@@ -162,6 +171,7 @@ const QuoteContact = () => {
               <InputWrapper>
                 <InputBox
                   type="number"
+                  id="sku"
                   onChange={(event) => {
                     setEstimateItemInput({
                       ...estimateItemInput,
@@ -177,6 +187,7 @@ const QuoteContact = () => {
               <InputWrapper>
                 <InputBox
                   type="number"
+                  id="keepingNumber"
                   onChange={(event) => {
                     setEstimateItemInput({
                       ...estimateItemInput,
@@ -190,7 +201,28 @@ const QuoteContact = () => {
               <PickButtonWrapper>
                 {KeepingTypes.map((type, index) => {
                   return (
-                    <PickButton key={`KEEPINGTYPE${index}`} value={type.value}>
+                    <PickButton
+                      key={`KEEPINGTYPE${index}`}
+                      value={type.value}
+                      onClick={() => {
+                        setClickedKeepingTypeIndex(index);
+                        setEstimateItemInput({
+                          ...estimateItemInput,
+                          keepingType: type.value,
+                        });
+                      }}
+                      style={
+                        clickedKeepingTypeIndex === index
+                          ? {
+                              backgroundColor: '#1e56a0',
+                              color: 'white',
+                            }
+                          : {
+                              backgroundColor: 'white',
+                              color: 'black',
+                            }
+                      }
+                    >
                       {type.children}
                     </PickButton>
                   );
@@ -200,7 +232,28 @@ const QuoteContact = () => {
               <PickButtonWrapper>
                 {Barcodes.map((type, index) => {
                   return (
-                    <PickButton key={`BARCODE${index}`} value={type.value}>
+                    <PickButton
+                      key={`BARCODE${index}`}
+                      value={type.value}
+                      onClick={() => {
+                        setClickedBarcodeIndex(index);
+                        setEstimateItemInput({
+                          ...estimateItemInput,
+                          barcode: type.value,
+                        });
+                      }}
+                      style={
+                        clickedBarcodeIndex === index
+                          ? {
+                              backgroundColor: '#1e56a0',
+                              color: 'white',
+                            }
+                          : {
+                              backgroundColor: 'white',
+                              color: 'black',
+                            }
+                      }
+                    >
                       {type.children}
                     </PickButton>
                   );
@@ -209,6 +262,7 @@ const QuoteContact = () => {
               <BlueText text={'URL'} noRequired={true} />
               <InputBox
                 type="text"
+                id="url"
                 onChange={(event) => {
                   setEstimateItemInput({
                     ...estimateItemInput,
@@ -220,23 +274,44 @@ const QuoteContact = () => {
           </ProductWrapper>
           <AddProductButton
             onClick={() => {
+              if (
+                estimateItemInput.name === null ||
+                estimateItemInput.name.trim() === ''
+              ) {
+                message.warning('상품 종류를 입력해주세요.');
+                return;
+              } else if (estimateItemInput.keepingNumber === null) {
+                message.warning('보관 수량을 입력해주세요.');
+                return;
+              } else if (estimateItemInput.perimiter === null) {
+                message.warning('상품 크기를 입력해주세요.');
+                return;
+              } else if (estimateItemInput.weight === null) {
+                message.warning('상품 무게를 입력해주세요.');
+                return;
+              } else if (estimateItemInput.sku === null) {
+                message.warning('상품 SKU를 입력해주세요.');
+              }
               console.log(estimateItemInput);
               let beforeEstimateItems = estimateItems;
               beforeEstimateItems.push(estimateItemInput);
               setEstimateItems([...beforeEstimateItems]);
               console.log(estimateItems);
-              // TODO : NULL CHECK
               setEstimateItemInput({
                 name: null,
                 keepingNumber: null,
                 perimiter: null,
-                keepingType: null,
+                keepingType: 'WARM',
                 weight: null,
-                barcode: null,
+                barcode: 'ALL',
                 sku: null,
                 url: null,
               });
-              // TODO : Empty all input fields.
+              document.getElementById('name').value = '';
+              document.getElementById('keepingNumber').value = '';
+              document.getElementById('perimiter').value = '';
+              document.getElementById('weight').value = '';
+              document.getElementById('sku').value = '';
             }}
           >
             상품 추가하기
@@ -266,9 +341,11 @@ const QuoteContact = () => {
                 {item.keepingNumber}
               </HistoryChildText>
               <HistoryChildText width={'12%'}>
-                {item.keepingType}
+                {keepingTypeToText(item.keepingType)}
               </HistoryChildText>
-              <HistoryChildText width={'12%'}>{item.barcode}</HistoryChildText>
+              <HistoryChildText width={'12%'}>
+                {barcodeToText(item.barcode)}
+              </HistoryChildText>
               {item.url !== null ? (
                 <ChildUrlText width={'12%'} href={item.url}>
                   클릭

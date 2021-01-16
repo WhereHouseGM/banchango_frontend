@@ -255,6 +255,16 @@ export const KeepingTypes = [
   },
 ];
 
+export const keepingTypeToText = (value) => {
+  if (value === 'WARM') {
+    return '상온';
+  } else if (value === 'COLD') {
+    return '냉장';
+  } else if (value === 'FREEZE') {
+    return '냉동';
+  } else return '알수없음';
+};
+
 export const Barcodes = [
   {
     id: 'ALL',
@@ -272,3 +282,13 @@ export const Barcodes = [
     children: '일부',
   },
 ];
+
+export const barcodeToText = (type) => {
+  if (type === 'ALL') {
+    return '있음';
+  } else if (type === 'NONE') {
+    return '없음';
+  } else if (type === 'PARTIAL') {
+    return '일부';
+  } else return '알수없음';
+};
