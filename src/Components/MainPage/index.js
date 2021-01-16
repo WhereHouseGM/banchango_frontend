@@ -97,16 +97,7 @@ const MainPage = () => {
         </FirstButton>
       </FirstContainer>
       <SecondContainer>
-        <SecondSideWrapper>
-          <SecondSideTextWrapper>
-            <SecondSideText>
-              내 상품 종류를 선택하고
-              <br />
-              검색해보세요!
-            </SecondSideText>
-            <SecondSideArrow>&gt;&gt;</SecondSideArrow>
-          </SecondSideTextWrapper>
-        </SecondSideWrapper>
+        <SecondSideWrapper />
         <SecondMiddleWrapper>
           <SecondTitle>내 품목에 맞는{'\n'}창고 검색</SecondTitle>
           <SecondSubTitle>
@@ -159,7 +150,7 @@ const MainPage = () => {
             창고 찾기
           </SecondButton>
         </SecondMiddleWrapper>
-        <SecondSideWrapper></SecondSideWrapper>
+        <SecondSideWrapper />
       </SecondContainer>
       <ThirdContainer>
         <QuickSystemBanner>
@@ -203,7 +194,9 @@ const MainPage = () => {
         </FourthWrapper>
       </FourthContainer>
       <FifthContainer>
-        <FifthTitle>물류 대행,{'\n'} 어렵지 않아요!</FifthTitle>
+        <Fade bottom>
+          <FifthTitle>물류 대행,{'\n'} 어렵지 않아요!</FifthTitle>
+        </Fade>
         <FifthImageBox src={CircleImg} />
         <FifthDesc>"창고 계약이 어렵다면,{'\n'} 반창고를 불러주세요"</FifthDesc>
         <FifthTitleWrapper>
@@ -219,7 +212,9 @@ const MainPage = () => {
           ))}
         </FifthWrapper>
         <FifthDescRed>물류비 25% 이상 절감 효과</FifthDescRed>
-        <FifthTitle>셀러님은,{'\n'} 판매에만 집중하세요!</FifthTitle>
+        <Fade bottom>
+          <FifthTitle>셀러님은,{'\n'} 판매에만 집중하세요!</FifthTitle>
+        </Fade>
         <LastGreyContainer>
           <FifthImageBox src={LastImg} />
         </LastGreyContainer>

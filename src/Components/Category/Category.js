@@ -11,17 +11,20 @@ export const CategoryPickContainer = styled.div`
   padding: 20px 0;
   display: flex;
   justify-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 `;
 
 export const CategoryPickTitle = styled.div`
-  margin-top: -8px;
+  margin-top: -13px;
   font-weight: bold;
   width: 16%;
   font-size: 25px;
+  align-self: center;
 `;
 
 export const CategoryPickButtonWrap = styled.div`
-  width: 63%;
+  width: 50%;
+  max-width: 749px;
   background-color: white;
   display: flex;
   flex-wrap: wrap;
@@ -31,9 +34,10 @@ export const CategoryPickButtonWrap = styled.div`
 `;
 
 export const CategoryPickButton = styled.div`
-  width: 8%;
-  min-width: 120px;
-  margin: 10px;
+  width: 13.5%;
+  font-family: 'notosans-Regular', sans-serif;
+  margin: 8px;
+  font-size: 13px;
   padding: 10px 20px;
   border-radius: 20px;
   border: 1px solid black;
@@ -46,13 +50,16 @@ export const CategoryPickButton = styled.div`
 `;
 export const CategoryFindButton = styled.div`
   padding: 15px 20px;
-  background-color: #1e56a0;
+  border: 1px solid #1e56a0;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  color: white;
+  font-weight: bold;
   border-radius: 20px;
   align-self: center;
+  margin-left: 30px;
   &:hover {
+    background-color: #1e56a0;
+    color: white;
     cursor: pointer;
   }
 `;
