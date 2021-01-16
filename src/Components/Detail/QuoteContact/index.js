@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ImportListModal from './Modal/ImportList';
 import { message } from 'antd';
 import { useParams } from 'react-router-dom';
+import { estimateApi } from '../../../api';
 
 import {
   Container,
@@ -58,7 +59,7 @@ const QuoteContact = () => {
   const [estimateItemInput, setEstimateItemInput] = useState({
     name: null,
     keepingNumber: null,
-    perimiter: null,
+    perimeter: null,
     keepingType: 'WARM',
     weight: null,
     barcode: 'ALL',
@@ -114,11 +115,11 @@ const QuoteContact = () => {
               <InputWrapper>
                 <InputBox
                   type="number"
-                  id="perimiter"
+                  id="perimeter"
                   onChange={(event) =>
                     setEstimateItemInput({
                       ...estimateItemInput,
-                      perimiter: parseFloat(event.target.value),
+                      perimeter: parseFloat(event.target.value),
                     })
                   }
                 />
@@ -254,7 +255,7 @@ const QuoteContact = () => {
               } else if (estimateItemInput.keepingNumber === null) {
                 message.warning('보관 수량을 입력해주세요.');
                 return;
-              } else if (estimateItemInput.perimiter === null) {
+              } else if (estimateItemInput.perimeter === null) {
                 message.warning('상품 크기를 입력해주세요.');
                 return;
               } else if (estimateItemInput.weight === null) {
@@ -273,7 +274,7 @@ const QuoteContact = () => {
               setEstimateItemInput({
                 name: null,
                 keepingNumber: null,
-                perimiter: null,
+                perimeter: null,
                 keepingType: 'WARM',
                 weight: null,
                 barcode: 'ALL',
@@ -282,7 +283,7 @@ const QuoteContact = () => {
               });
               document.getElementById('name').value = '';
               document.getElementById('keepingNumber').value = '';
-              document.getElementById('perimiter').value = '';
+              document.getElementById('perimeter').value = '';
               document.getElementById('weight').value = '';
               document.getElementById('sku').value = '';
               document.getElementById('url').value = '';
@@ -307,7 +308,7 @@ const QuoteContact = () => {
             <HistoryChild key={idx}>
               <HistoryChildText width={'12%'}>{item.name}</HistoryChildText>
               <HistoryChildText width={'12%'}>
-                {item.perimiter}
+                {item.perimeter}
               </HistoryChildText>
               <HistoryChildText width={'12%'}>{item.weight}</HistoryChildText>
               <HistoryChildText width={'12%'}>{item.sku}</HistoryChildText>
@@ -390,9 +391,27 @@ const QuoteContact = () => {
                   message.warning('상품을 1개 이상 입력해주세요.');
                   return;
                 }
-                // TODO : API CALL
-
-                console.log(estimate);
+                estimateApi
+                  .saveEstimate(estimate, localStorage.getItem('AccessToken'))
+                  .then(() => {
+                    alert('견적 문의 요청이 정상적으로 접수되었습니다.');
+                    window.location.href = '/';
+                  })
+                  .catch(({ response: { status } }) => {
+                    if (status === 400) {
+                      alert('[400] : 요청 형식이 잘못되었습니다.');
+                    } else if (status === 401) {
+                      alert('[401] : 로그인을 다시 해주세요.');
+                    } else if (status === 403) {
+                      alert(
+                        '[403] : 해당 창고에는 현재 견적문의를 할 수 없습니다.',
+                      );
+                    } else if (status === 404) {
+                      alert('[404] : 존재하지 않는 창고입니다.');
+                    } else {
+                      alert('UNKNOWN ERROR');
+                    }
+                  });
               }}
             >
               견적 문의하기

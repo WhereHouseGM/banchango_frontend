@@ -47,6 +47,15 @@ export const warehouseApi = {
   getWarehouseInfo: (id) => api.get(`warehouses/${id}`),
 };
 
+export const estimateApi = {
+  saveEstimate: (requestBody, token) =>
+    api.post(`estimates`, requestBody, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
+};
+
 export const imageApi = {
   uploadMainImage: (warehouseId, formData, token) =>
     api.post(`images/upload/main/${warehouseId}`, formData, {
