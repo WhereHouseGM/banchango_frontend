@@ -213,25 +213,6 @@ export const SecondSideWrapper = styled.div`
   }
 `;
 
-export const SecondSideTextWrapper = styled.div`
-  margin-top: 170px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const SecondSideText = styled.div`
-  font-weight: bold;
-  color: #1e56a0;
-  font-size: 20px;
-`;
-
-export const SecondSideArrow = styled.div`
-  color: grey;
-  margin-left: 20px;
-  font-size: 25px;
-`;
-
 export const SecondMiddleWrapper = styled.div`
   flex: 2.5;
   display: flex;

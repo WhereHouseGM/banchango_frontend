@@ -97,16 +97,7 @@ const MainPage = () => {
         </FirstButton>
       </FirstContainer>
       <SecondContainer>
-        <SecondSideWrapper>
-          <SecondSideTextWrapper>
-            <SecondSideText>
-              내 상품 종류를 선택하고
-              <br />
-              검색해보세요!
-            </SecondSideText>
-            <SecondSideArrow>&gt;&gt;</SecondSideArrow>
-          </SecondSideTextWrapper>
-        </SecondSideWrapper>
+        <SecondSideWrapper />
         <SecondMiddleWrapper>
           <SecondTitle>내 품목에 맞는{'\n'}창고 검색</SecondTitle>
           <SecondSubTitle>
@@ -159,7 +150,7 @@ const MainPage = () => {
             창고 찾기
           </SecondButton>
         </SecondMiddleWrapper>
-        <SecondSideWrapper></SecondSideWrapper>
+        <SecondSideWrapper />
       </SecondContainer>
       <ThirdContainer>
         <QuickSystemBanner>
