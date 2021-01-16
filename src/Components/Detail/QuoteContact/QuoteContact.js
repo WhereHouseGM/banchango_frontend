@@ -227,3 +227,39 @@ export const InquiryButton = styled.div`
     cursor: pointer;
   }
 `;
+
+export const KeepingTypes = [
+  {
+    id: 'WARM',
+    value: 'WARM',
+    children: '상온',
+  },
+  {
+    id: 'COLD',
+    value: 'COLD',
+    children: '냉장',
+  },
+  {
+    id: 'FREEZE',
+    value: 'FREEZE',
+    children: '냉동',
+  },
+];
+
+export const Barcodes = [
+  {
+    id: 'ALL',
+    value: 'ALL',
+    children: '있음',
+  },
+  {
+    id: 'NONE',
+    value: 'NONE',
+    children: '없음',
+  },
+  {
+    id: 'PARTIAL',
+    value: 'PARTIAL',
+    children: '일부',
+  },
+];

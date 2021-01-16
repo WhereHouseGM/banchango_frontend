@@ -35,6 +35,8 @@ import {
   TextareaWrapper,
   AnnounceTextarea,
   InquiryButton,
+  KeepingTypes,
+  Barcodes,
 } from './QuoteContact';
 
 const BlueText = ({ text, noRequired }) => (
@@ -44,46 +46,58 @@ const BlueText = ({ text, noRequired }) => (
   </InputTitle>
 );
 
-const DUMMY_HISTORY = [
-  {
-    category: '마우스',
-    big: '120cm',
-    weight: '12.5kg',
-    sku: '2개',
-    quantity: '12개',
-    form: '상온',
-    barcord: '있음.',
-  },
-  {
-    category: '마우스',
-    big: '120cm',
-    weight: '12.5kg',
-    sku: '2개',
-    quantity: '12개',
-    form: '상온',
-    barcord: '있음.',
-  },
-  {
-    category: '마우스',
-    big: '120cm',
-    weight: '12.5kg',
-    sku: '2개',
-    quantity: '12개',
-    form: '상온',
-    barcord: '있음.',
-  },
-  {
-    category: '마우스',
-    big: '120cm',
-    weight: '12.5kg',
-    sku: '2개',
-    quantity: '12개',
-    form: '상온',
-    barcord: '있음.',
-  },
-];
+// const DUMMY_HISTORY = [
+//   {
+//     category: '마우스',
+//     big: '120cm',
+//     weight: '12.5kg',
+//     sku: '2개',
+//     quantity: '12개',
+//     form: '상온',
+//     barcord: '있음.',
+//   },
+//   {
+//     category: '마우스',
+//     big: '120cm',
+//     weight: '12.5kg',
+//     sku: '2개',
+//     quantity: '12개',
+//     form: '상온',
+//     barcord: '있음.',
+//   },
+//   {
+//     category: '마우스',
+//     big: '120cm',
+//     weight: '12.5kg',
+//     sku: '2개',
+//     quantity: '12개',
+//     form: '상온',
+//     barcord: '있음.',
+//   },
+//   {
+//     category: '마우스',
+//     big: '120cm',
+//     weight: '12.5kg',
+//     sku: '2개',
+//     quantity: '12개',
+//     form: '상온',
+//     barcord: '있음.',
+//   },
+// ];
 const QuoteContact = () => {
   const [importListVisible, setImportListVisible] = useState(false);
+  const [estimateItems, setEstimateItems] = useState([]);
+  const [estimateItemInput, setEstimateItemInput] = useState({
+    name: null,
+    keepingNumber: null,
+    perimiter: null,
+    keepingType: null,
+    weight: null,
+    barcode: null,
+    sku: null,
+    url: null,
+  });
+
   return (
     <>
       <ImportListModal
@@ -109,46 +123,123 @@ const QuoteContact = () => {
             <ProductBlankWrapper />
             <ProductLeftWrapper>
               <BlueText text={'상품 종류'} />
-              <InputBox />
+              <InputBox
+                onChange={(event) =>
+                  setEstimateItemInput({
+                    ...estimateItemInput,
+                    name: event.target.value,
+                  })
+                }
+              />
               <BlueText text={'상품 크기 (가로 세로 높이의 합)'} />
               <InputWrapper>
-                <InputBox />
+                <InputBox
+                  type="number"
+                  onChange={(event) =>
+                    setEstimateItemInput({
+                      ...estimateItemInput,
+                      perimiter: parseFloat(event.target.value),
+                    })
+                  }
+                />
                 <InputSubText>cm</InputSubText>
               </InputWrapper>
               <BlueText text={'상품 무게'} />
               <InputWrapper>
-                <InputBox />
+                <InputBox
+                  type="number"
+                  onChange={(event) => {
+                    setEstimateItemInput({
+                      ...estimateItemInput,
+                      weight: parseFloat(event.target.value),
+                    });
+                  }}
+                />
                 <InputSubText>kg</InputSubText>
               </InputWrapper>
               <BlueText text={'SKU'} />
               <InputWrapper>
-                <InputBox />
+                <InputBox
+                  type="number"
+                  onChange={(event) => {
+                    setEstimateItemInput({
+                      ...estimateItemInput,
+                      sku: parseInt(event.target.value),
+                    });
+                  }}
+                />
                 <InputSubText>개</InputSubText>
               </InputWrapper>
             </ProductLeftWrapper>
             <ProductRightWrapper>
               <BlueText text={'보관 수량'} />
               <InputWrapper>
-                <InputBox />
+                <InputBox
+                  type="number"
+                  onChange={(event) => {
+                    setEstimateItemInput({
+                      ...estimateItemInput,
+                      keepingNumber: parseInt(event.target.value),
+                    });
+                  }}
+                />
                 <InputSubText>개</InputSubText>
               </InputWrapper>
               <BlueText text={'보관 형태'} />
               <PickButtonWrapper>
-                <PickButton>상온</PickButton>
-                <PickButton>냉장</PickButton>
-                <PickButton>냉동</PickButton>
+                {KeepingTypes.map((type, index) => {
+                  return (
+                    <PickButton key={`KEEPINGTYPE${index}`} value={type.value}>
+                      {type.children}
+                    </PickButton>
+                  );
+                })}
               </PickButtonWrapper>
               <BlueText text={'바코드'} />
               <PickButtonWrapper>
-                <PickButton>있음</PickButton>
-                <PickButton>없음</PickButton>
-                <PickButton>일부</PickButton>
+                {Barcodes.map((type, index) => {
+                  return (
+                    <PickButton key={`BARCODE${index}`} value={type.value}>
+                      {type.children}
+                    </PickButton>
+                  );
+                })}
               </PickButtonWrapper>
               <BlueText text={'URL'} noRequired={true} />
-              <InputBox />
+              <InputBox
+                type="text"
+                onChange={(event) => {
+                  setEstimateItemInput({
+                    ...estimateItemInput,
+                    url: event.target.value,
+                  });
+                }}
+              />
             </ProductRightWrapper>
           </ProductWrapper>
-          <AddProductButton>상품 추가하기</AddProductButton>
+          <AddProductButton
+            onClick={() => {
+              console.log(estimateItemInput);
+              let beforeEstimateItems = estimateItems;
+              beforeEstimateItems.push(estimateItemInput);
+              setEstimateItems([...beforeEstimateItems]);
+              console.log(estimateItems);
+              // TODO : NULL CHECK
+              setEstimateItemInput({
+                name: null,
+                keepingNumber: null,
+                perimiter: null,
+                keepingType: null,
+                weight: null,
+                barcode: null,
+                sku: null,
+                url: null,
+              });
+              // TODO : Empty all input fields.
+            }}
+          >
+            상품 추가하기
+          </AddProductButton>
           <ProductListWrapper>
             <ProductListTitle>상품 내역</ProductListTitle>
           </ProductListWrapper>
@@ -162,15 +253,21 @@ const QuoteContact = () => {
             <HistoryUpperText width={'12%'}>바코드</HistoryUpperText>
             <HistoryUpperText width={'12%'}>상품 URL</HistoryUpperText>
           </HistoryUpper>
-          {DUMMY_HISTORY.map((item, idx) => (
+          {estimateItems.map((item, idx) => (
             <HistoryChild key={idx}>
-              <HistoryChildText width={'12%'}>{item.category}</HistoryChildText>
-              <HistoryChildText width={'12%'}>{item.big}</HistoryChildText>
+              <HistoryChildText width={'12%'}>{item.name}</HistoryChildText>
+              <HistoryChildText width={'12%'}>
+                {item.perimiter}
+              </HistoryChildText>
               <HistoryChildText width={'12%'}>{item.weight}</HistoryChildText>
               <HistoryChildText width={'12%'}>{item.sku}</HistoryChildText>
-              <HistoryChildText width={'12%'}>{item.quantity}</HistoryChildText>
-              <HistoryChildText width={'12%'}>{item.form}</HistoryChildText>
-              <HistoryChildText width={'12%'}>{item.barcord}</HistoryChildText>
+              <HistoryChildText width={'12%'}>
+                {item.keepingNumber}
+              </HistoryChildText>
+              <HistoryChildText width={'12%'}>
+                {item.keepingType}
+              </HistoryChildText>
+              <HistoryChildText width={'12%'}>{item.barcode}</HistoryChildText>
               <HistoryChildText width={'12%'}>클릭</HistoryChildText>
             </HistoryChild>
           ))}
