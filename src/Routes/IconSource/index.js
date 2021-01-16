@@ -24,7 +24,6 @@ const IconSource = () => {
         >
           메인페이지
         </div>
-        <br />
         <div>
           의류 - Icons made by{' '}
           <a
