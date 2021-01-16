@@ -166,6 +166,15 @@ export const HistoryChildText = styled.div`
   width: ${(props) => props.width};
 `;
 
+export const ChildUrlText = styled.a`
+  width: ${(props) => props.width};
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+    font-weight: bold;
+  }
+`;
+
 export const TotalCountContainer = styled.div`
   margin: 25px 0;
   display: flex;

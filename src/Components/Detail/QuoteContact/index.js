@@ -37,6 +37,7 @@ import {
   InquiryButton,
   KeepingTypes,
   Barcodes,
+  ChildUrlText,
 } from './QuoteContact';
 
 const BlueText = ({ text, noRequired }) => (
@@ -268,7 +269,13 @@ const QuoteContact = () => {
                 {item.keepingType}
               </HistoryChildText>
               <HistoryChildText width={'12%'}>{item.barcode}</HistoryChildText>
-              <HistoryChildText width={'12%'}>클릭</HistoryChildText>
+              {item.url !== null ? (
+                <ChildUrlText width={'12%'} href={item.url}>
+                  클릭
+                </ChildUrlText>
+              ) : (
+                <ChildUrlText width={'12%'}>없음</ChildUrlText>
+              )}
             </HistoryChild>
           ))}
           <TotalCountContainer>
