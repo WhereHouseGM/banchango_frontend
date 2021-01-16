@@ -39,7 +39,6 @@ const DetailContainer = () => {
         if (data.doorLockExist) {
           houseInfo.push('lockSystemExist');
         }
-        console.log(houseInfo);
         setWarehouse({ ...data, houseInfo });
         setLoading(false);
       })
