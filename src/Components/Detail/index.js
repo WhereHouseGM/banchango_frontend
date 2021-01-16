@@ -45,6 +45,7 @@ import {
   HouseInfoCardText,
   BlogVisitButton,
   Images,
+  QuoteContactCautionText,
 } from './Detail';
 import { categoryTitleDict } from '../../static/category';
 import { dayOfWeek } from '../../static/detail';
@@ -323,6 +324,11 @@ const Detail = ({ warehouse }) => {
             >
               견적 요청하기
             </QuoteContactButton>
+            <QuoteContactCautionText>
+              반창고의 빠른 검토 후,
+              <br />
+              보통 1 영업일 이내에, 견적서가 송부됩니다.
+            </QuoteContactCautionText>
           </QuoteContactContainer>
         </MainContainer>
       </Container>
