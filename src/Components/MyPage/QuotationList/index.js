@@ -29,26 +29,32 @@ import {
 const QuotationList = ({ quotes }) => {
   const history = useHistory();
   const [singleQuoteList, setSingleQuoteList] = useState([]);
-  const handleGetSingleQuoteList = useCallback(
-    (item) => {
-      message.loading('불러오는 중..');
-      estimateApi
-        .getEstimateItems(item.id, localStorage.getItem('AccessToken'))
-        .then(({ data }) => {
-          setSingleQuoteList(data.estimateItems);
+  const handleGetSingleQuoteList = useCallback((item) => {
+    message.loading('불러오는 중..');
+    estimateApi
+      .getEstimateItems(item.id, localStorage.getItem('AccessToken'))
+      .then(({ data }) => {
+        setSingleQuoteList(data.estimateItems);
+        message.destroy();
+      })
+      .catch(({ response: { status } }) => {
+        if (status === 400) {
           message.destroy();
-        })
-        .catch(({ response: { status } }) => {
-          if (status === 404) {
-            message.destroy();
-            message.error('견적 내역을 불러올 수 없습니다.');
-          } else {
-            history.push('/error');
-          }
-        });
-    },
-    [history],
-  );
+          message.error('Id값이 주어지지 않았습니다.');
+        } else if (status === 401) {
+          message.destroy();
+          message.error('인증 토큰에 문제가 있습니다. 다시 로그인 해 주세요');
+        } else if (status === 403) {
+          message.destroy();
+          message.error('본인의 견적 문의 목록이 아닙니다.');
+        } else if (status === 404) {
+          message.destroy();
+          message.error(
+            '문의한 내역이 없습니다. 창고가 삭제된 것일 수도 있습니다.',
+          );
+        }
+      });
+  }, []);
   return (
     <Container>
       <LeftBanner>

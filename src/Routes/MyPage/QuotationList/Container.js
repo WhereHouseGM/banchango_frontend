@@ -18,8 +18,12 @@ const Container = () => {
         setLoading(false);
       })
       .catch(({ response: { status } }) => {
-        if (status !== 404) {
-          setError('견적을 문의한 내역이 없습니다');
+        if (status === 400) {
+          setError('잘못된 요청입니다.');
+        } else if (status === 401) {
+          setError('인증 토큰에 문제가 있습니다.');
+        } else if (status === 403) {
+          setError('권한이 없습니다.');
         }
         setLoading(false);
       });
