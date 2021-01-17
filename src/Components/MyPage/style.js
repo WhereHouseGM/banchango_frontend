@@ -151,3 +151,11 @@ export const ConfirmButton = styled.div`
     margin: 0;
   }
 `;
+export const WithdrawalLabel = styled.div`
+  color: #979696;
+  text-align: center;
+  margin: 25px 0 25px -8px;
+  &:hover {
+    cursor: pointer;
+  }
+`;

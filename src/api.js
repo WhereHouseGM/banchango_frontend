@@ -27,6 +27,12 @@ export const userApi = {
         Authorization: `Bearer ${token}`,
       },
     }),
+  withdrawal: (body, token) =>
+    api.post(`users/withdraw`, body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
 };
 
 export const warehouseApi = {
