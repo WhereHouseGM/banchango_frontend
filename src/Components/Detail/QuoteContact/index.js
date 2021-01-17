@@ -83,6 +83,27 @@ const QuoteContact = () => {
         onClose={() => {
           setImportListVisible(false);
         }}
+        getEstimateItems={(id) => {
+          estimateApi
+            .getEstimateItems(id, localStorage.getItem('AccessToken'))
+            .then(({ data: { estimateItems } }) => {
+              setEstimateItems(estimateItems);
+            })
+            .catch(({ response: { status } }) => {
+              if (status === 400) {
+                alert('[400] 요청 형식이 잘못되었습니다.');
+                return;
+              } else if (status === 401) {
+                alert('[401] 로그인을 다시 해주세요.');
+                return;
+              } else if (status === 403) {
+                alert('[403] 해당 요청을 수행할 수 있는 권한이 없습니다.');
+                return;
+              } else if (status === 404) {
+                return;
+              }
+            });
+        }}
       />
       <Container>
         <Wrapper>

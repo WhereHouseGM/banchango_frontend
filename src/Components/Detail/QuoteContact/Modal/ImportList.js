@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { estimateApi } from '../../../../api';
+import PropTypes from 'prop-types';
 
 const ModalWrapper = styled.div`
   box-sizing: border-box;
@@ -112,8 +113,9 @@ const SubmitButton = styled.div`
   }
 `;
 
-const ImportListModal = ({ onClose, visible }) => {
+const ImportListModal = ({ onClose, visible, getEstimateItems }) => {
   const [estimateList, setEstimateList] = useState([]);
+  const [estimateId, setEstimateId] = useState(-1);
 
   const getEstimateLists = useCallback(() => {
     estimateApi
@@ -148,6 +150,7 @@ const ImportListModal = ({ onClose, visible }) => {
       onClose();
     }
   };
+
   return (
     <>
       <ModalOverlay visible={visible} />
@@ -171,6 +174,9 @@ const ImportListModal = ({ onClose, visible }) => {
                     name="estimateList"
                     value={item.id}
                     width={'17%'}
+                    onChange={() => {
+                      setEstimateId(item.id);
+                    }}
                   />
                   <ListChildText width={'30%'}>
                     {item.warehouse.name}
@@ -181,12 +187,25 @@ const ImportListModal = ({ onClose, visible }) => {
                 </ListChild>
               ))}
             </ListContainer>
-            <SubmitButton>불러오기</SubmitButton>
+            <SubmitButton
+              onClick={() => {
+                getEstimateItems(estimateId);
+                onClose();
+              }}
+            >
+              불러오기
+            </SubmitButton>
           </Container>
         </ModalInner>
       </ModalWrapper>
     </>
   );
+};
+
+ImportListModal.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  getEstimateItems: PropTypes.func.isRequired,
 };
 
 export default ImportListModal;
