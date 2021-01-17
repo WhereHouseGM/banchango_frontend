@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Container = styled.div`
   width: 100%;
@@ -11,11 +12,14 @@ const Container = styled.div`
   justify-content: center;
   line-height: 2.2;
 `;
+
 const Title = styled.div`
   font-size: 30px;
   font-weight: bold;
 `;
+
 const Body = styled.div``;
+
 const GoToMainPage = styled.div`
   margin-top: 20px;
   border-radius: 20px;
@@ -27,21 +31,28 @@ const GoToMainPage = styled.div`
     cursor: pointer;
   }
 `;
-const ErrorPage = ({ error }) => {
+
+const ErrorPage = ({ title, message, locationToGo }) => {
   const history = useHistory();
   return (
     <Container>
-      <Title>오류!</Title>
-      <Body>{error}</Body>
+      <Title>{title}</Title>
+      <Body>{message}</Body>
       <GoToMainPage
         onClick={() => {
-          history.push('/');
+          history.push(`${locationToGo}`);
         }}
       >
         메인 화면으로
       </GoToMainPage>
     </Container>
   );
+};
+
+ErrorPage.propTypes = {
+  title: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+  locationToGo: PropTypes.string.isRequired,
 };
 
 export default ErrorPage;
