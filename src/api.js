@@ -54,8 +54,14 @@ export const estimateApi = {
         Authorization: `Bearer ${token}`,
       },
     }),
-  getEstimates: (userId, token) =>
+  getEstimateInfo: (userId, token) =>
     api.get(`users/${userId}/estimates`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
+  getEstimateItems: (estimateId, token) =>
+    api.get(`estimates/${estimateId}/items`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
