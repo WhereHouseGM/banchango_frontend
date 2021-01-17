@@ -443,7 +443,7 @@ export const MobileUpperRightDescText = styled.div`
 export const MobileDetailNavContainer = styled.div`
   top: 45px;
   width: 100%;
-  display: flex;
+  display: none;
   text-align: center;
   border-left: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -451,6 +451,9 @@ export const MobileDetailNavContainer = styled.div`
   position: sticky;
   top: 45px;
   box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.03);
+  @media (max-width: 768px) {
+    display: flex;
+  }
 `;
 export const MobileDetailNavButton = styled.div`
   flex: 1;

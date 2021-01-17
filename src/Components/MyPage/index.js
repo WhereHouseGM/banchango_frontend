@@ -17,12 +17,15 @@ import {
   ConfirmButton,
   MobileUpperMenuWrapper,
   MobileUpperMenuButton,
+  WithdrawalLabel,
 } from './style';
+import WithdrawalModal from './Modal/Withdrawal_Modal';
 
 const MyPage = ({ userInfo, handleSubmit }) => {
   const history = useHistory();
   const [checkModalShow, setCheckModalShow] = useState(false);
   const [changeModalShow, setChangeModalShow] = useState(false);
+  const [withdrawalModalShow, setWithDrawalModalShow] = useState(false);
 
   const [nameIn, setNameIn] = useState(userInfo.name);
   const [telephoneNumberIn, setTelephoneNumberIn] = useState(
@@ -38,6 +41,9 @@ const MyPage = ({ userInfo, handleSubmit }) => {
   };
   const closeChangeModal = () => {
     setChangeModalShow(false);
+  };
+  const closeWithdrawalModal = () => {
+    setWithDrawalModalShow(false);
   };
   const getUserInfo = () => {
     const userInfoSet = {
@@ -65,6 +71,11 @@ const MyPage = ({ userInfo, handleSubmit }) => {
         visible={changeModalShow}
         handleSubmit={handleSubmit}
         getUserInfo={getUserInfo}
+      />
+      <WithdrawalModal
+        className={'withdrawalModal'}
+        onClose={closeWithdrawalModal}
+        visible={withdrawalModalShow}
       />
       <Container>
         <LeftBanner>
@@ -147,6 +158,13 @@ const MyPage = ({ userInfo, handleSubmit }) => {
               수정하기
             </ConfirmButton>
           </ButtonContainer>
+          <WithdrawalLabel
+            onClick={() => {
+              setWithDrawalModalShow(true);
+            }}
+          >
+            회원 탈퇴
+          </WithdrawalLabel>
         </UserInfoContainer>
       </Container>
     </>
