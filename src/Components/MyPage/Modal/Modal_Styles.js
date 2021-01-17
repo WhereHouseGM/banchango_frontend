@@ -92,4 +92,7 @@ export const WithdrawConfirmButton = styled.div`
   text-align: center;
   padding: 15px 0;
   border-radius: 15px;
+  &:hover {
+    cursor: pointer;
+  }
 `;

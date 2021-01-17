@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   ModalWrapper,
@@ -15,21 +16,33 @@ import { message } from 'antd';
 import { userApi } from '../../../api';
 
 export const WithdrawalModal = ({ onClose, visible }) => {
+  const history = useHistory();
   const confirmClicked = () => {
     message.loading('로딩중입니다.');
     userApi
       .withdrawal(
-        { cause: document.getElementById('withdrawalTextarea').textContent },
+        { cause: document.getElementById('withdrawalTextarea').value },
         localStorage.getItem('AccessToken'),
       )
-      .then(() => {})
+      .then(() => {
+        message.destroy();
+        message.success('탈퇴가 완료되었습니다.');
+        localStorage.clear();
+        history.push('/');
+      })
       .catch(({ response: { status } }) => {
         if (status === 401) {
+          message.destroy();
           message.error('인증 토큰에 문제가 있습니다. 다시 로그인해주세요.');
         } else if (status === 404) {
+          message.destroy();
           message.error('탈퇴할 사용자가 없습니다.');
         } else if (status === 409) {
+          message.destroy();
           message.error('이미 탈퇴한 사용자입니다.');
+        } else if (status === 400) {
+          message.destroy();
+          message.error('요청 형식에 문제가 있습니다.');
         }
       });
   };
