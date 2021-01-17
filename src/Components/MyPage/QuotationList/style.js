@@ -85,6 +85,9 @@ export const ListChild = styled.div`
 `;
 export const ListChildText = styled.div`
   width: ${(props) => props.width};
+  &:hover {
+    cursor: ${(props) => (props.isA ? 'pointer' : 'auto')};
+  }
 `;
 export const HistoryContainer = styled.div`
   margin: 30px 0;
@@ -125,4 +128,8 @@ export const HistoryChild = styled.div`
 `;
 export const HistoryChildText = styled.div`
   width: ${(props) => props.width};
+  color: ${(props) => (props.isA ? '#40A9FF' : 'black')};
+  &:hover {
+    cursor: ${(props) => (props.isA ? 'pointer' : 'auto')};
+  }
 `;
