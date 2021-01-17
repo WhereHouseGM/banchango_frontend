@@ -15,7 +15,12 @@ const MyPagePresenter = ({ userInfo, handleSubmit, error, loading }) => (
     {loading ? (
       <Loading />
     ) : error ? (
-      <ErrorPage error={error} />
+      <ErrorPage
+        title={'오류'}
+        message={error}
+        locationToGo={'/'}
+        buttonMessage={'메인 화면으로 이동'}
+      />
     ) : (
       <MyPage userInfo={userInfo} handleSubmit={handleSubmit} />
     )}

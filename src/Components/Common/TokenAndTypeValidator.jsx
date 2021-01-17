@@ -31,13 +31,13 @@ const TokenAndTypeValidator = ({children}) => {
         switch(location.pathname) {
             case PathNames.LOGIN:
                 if(isUserLoggedIn()) {
-                    return <ErrorPage error={'잘못된 접근입니다.'} />;
+                    return <ErrorPage title={'잘못된 접근입니다.'} message={'잘못된 접근입니다.'} locationToGo={'/'} buttonMessage={'메인 화면으로 이동'}/>;
                 } else {
                     return children;
                 }
             case PathNames.SIGNUP:
                 if(isUserLoggedIn()) {
-                    return <ErrorPage error={'잘못된 접근입니다.'} />;
+                    return <ErrorPage title={'잘못된 접근입니다.'} message={'잘못된 접근입니다.'} locationToGo={'/'} buttonMessage={'메인 화면으로 이동'}/>;
                 } else return children;
             case PathNames.ADMIN:
                 if(isUserLoggedIn()) {
@@ -50,10 +50,10 @@ const TokenAndTypeValidator = ({children}) => {
                        if(localStorage.getItem('Role') === 'ADMIN') {
                            return children;
                        } else {
-                           return <ErrorPage error={'잘못된 접근입니다.'} />;
+                           return <ErrorPage title={'잘못된 접근입니다.'} message={'접근 권한이 없습니다.'} locationToGo={'/'} buttonMessage={'메인 화면으로 이동'}/>;
                        }
                    }
-                } else return <ErrorPage error={'잘못된 접근입니다.'} />;
+                } else return <ErrorPage title={'잘못된 접근입니다.'} message={'로그인을 해주세요.'} locationToGo={'/login'} buttonMessage={'로그인 하기'}/>;
             case PathNames.MYPAGE:
                 if(isUserLoggedIn()) {
                     if(isTokenExpired()) {
@@ -65,7 +65,7 @@ const TokenAndTypeValidator = ({children}) => {
                        return children;
                     }
                 } else {
-                    return <ErrorPage error={'잘못된 접근입니다.'} />;
+                    return <ErrorPage title={'잘못된 접근입니다.'} message={'로그인을 먼저 해주세요.'} locationToGo={'/login'} buttonMessage={'로그인 하기'} />;
                 }
             case PathNames.MYPAGE_QUOTATION:
                 if(isUserLoggedIn()) {
@@ -78,11 +78,11 @@ const TokenAndTypeValidator = ({children}) => {
                         if(localStorage.getItem('type') === 'SHIPPER') {
                             return children;
                         } else {
-                            return <ErrorPage error={'잘못된 접근입니다.'} />;
+                            return <ErrorPage title={'잘못된 접근입니다.'} message={'잘못된 접근입니다.'} locationToGo={'/'} buttonMessage={'메인 화면으로 이동'} />;
                         }
                     }
                 } else {
-                    return <ErrorPage error={'잘못된 접근입니다.'} />;
+                    return <ErrorPage title={'잘못된 접근입니다.'} message={'로그인을 먼저 해주세요.'} locationToGo={'/login'} buttonMessage={'로그인 하기'}/>;
                 }
             case PathNames.MYPAGE_HOUSELIST:
                 if(isUserLoggedIn()) {
@@ -95,11 +95,11 @@ const TokenAndTypeValidator = ({children}) => {
                         if(localStorage.getItem('type') === 'OWNER') {
                             return children;
                         } else {
-                            return <ErrorPage error={'잘못된 접근입니다.'} />;
+                            return <ErrorPage title={'잘못된 접근입니다.'} message={'잘못된 접근입니다.'} locationToGo={'/'} buttonMessage={'메인 화면으로 이동'} />;
                         }
                     }
                 } else {
-                    return <ErrorPage error={'잘못된 접근입니다.'} />;
+                    return <ErrorPage title={'잘못된 접근입니다.'} message={'로그인을 먼저 해주세요.'} locationToGo={'/login'} buttonMessage={'로그인 하기'}/>;
                 }
             case PathNames.REGISTER:
                 if(isUserLoggedIn()) {
@@ -112,11 +112,11 @@ const TokenAndTypeValidator = ({children}) => {
                         if(localStorage.getItem('type') === 'OWNER') {
                             return children;
                         } else {
-                            return <ErrorPage error={'잘못된 접근입니다.'} />;
+                            return <ErrorPage title={'잘못된 접근입니다.'} message={'잘못된 접근입니다.'} locationToGo={'/'} buttonMessage={'메인 화면으로 이동'} />;
                         }
                     }
                 } else {
-                    return <ErrorPage error={'잘못된 접근입니다.'} />;
+                    return <ErrorPage title={'잘못된 접근입니다.'} message={'로그인을 먼저 해주세요.'} locationToGo={'/login'}  buttonMessage={'로그인 하기'}/>;
                 }
             case PathNames.WAREHOUSES_QUOTECONTACT:
                 if(isUserLoggedIn()) {
@@ -129,11 +129,11 @@ const TokenAndTypeValidator = ({children}) => {
                         if(localStorage.getItem('type') === 'SHIPPER') {
                             return children;
                         } else {
-                            return <ErrorPage error={'잘못된 접근입니다.'} />;
+                            return <ErrorPage title={'잘못된 접근입니다.'} message={'잘못된 접근입니다.'} locationToGo={'/'} buttonMessage={'메인 화면으로 이동'} />;
                         }
                     }
                 } else {
-                    return <ErrorPage error={'잘못된 접근입니다.'} />;
+                    return <ErrorPage title={'잘못된 접근입니다.'} message={'로그인을 먼저 해주세요.'} locationToGo={'/login'} buttonMessage={'로그인 하기'}/>;
                 }
             default:
                 if(isUserLoggedIn()) {
@@ -146,11 +146,11 @@ const TokenAndTypeValidator = ({children}) => {
                         if(localStorage.getItem('type') === 'SHIPPER') {
                             return children;
                         } else {
-                            return <ErrorPage error={'잘못된 접근입니다.'} />;
+                            return <ErrorPage title={'잘못된 접근입니다.'} message={'잘못된 접근입니다.'} locationToGo={'/'} buttonMessage={'메인 화면으로 이동'}/>;
                         }
                     }
                 } else {
-                    return <ErrorPage error={'잘못된 접근입니다.'} />;
+                    return <ErrorPage title={'잘못된 접근입니다.'} message={'로그인을 먼저 해주세요.'} locationToGo={'/login'} buttonMessage={'로그인 하기'}/>;
                 }
         }
     }, [location.pathname, children]);
