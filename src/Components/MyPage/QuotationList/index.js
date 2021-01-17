@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { WarehouseProgressDict } from '../../../static/mypage';
 
 import {
   BannerTextDisabledBox,
@@ -23,7 +24,8 @@ import {
   UserInfoContainer,
 } from './style';
 
-const QuotationList = () => {
+const QuotationList = ({ quotes }) => {
+  console.log('이거', quotes);
   const history = useHistory();
   const DUMMY_list = [
     {
@@ -110,11 +112,15 @@ const QuotationList = () => {
             <ListUpperText width={'20%'}>진행 상황</ListUpperText>
             <ListUpperText width={'10%'}>보기</ListUpperText>
           </ListUpper>
-          {DUMMY_list.map((item, idx) => (
+          {quotes.map((item, idx) => (
             <ListChild key={idx}>
-              <ListChildText width={'20%'}>{item.name}</ListChildText>
-              <ListChildText width={'50%'}>{item.address}</ListChildText>
-              <ListChildText width={'20%'}>{item.progress}</ListChildText>
+              <ListChildText width={'20%'}>{item.warehouse.name}</ListChildText>
+              <ListChildText width={'50%'}>
+                {item.warehouse.address}
+              </ListChildText>
+              <ListChildText width={'20%'}>
+                {WarehouseProgressDict[item.status]}
+              </ListChildText>
               <ListChildText width={'10%'}>{'>'}</ListChildText>
             </ListChild>
           ))}

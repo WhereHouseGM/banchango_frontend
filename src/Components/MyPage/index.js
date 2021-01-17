@@ -99,7 +99,13 @@ const MyPage = ({ userInfo, handleSubmit }) => {
         <MobileUpperMenuWrapper>
           <MobileUpperMenuButton isIn>내 프로필</MobileUpperMenuButton>
           {userInfo.type === 'SHIPPER' ? (
-            <MobileUpperMenuButton>견적 요청 목록</MobileUpperMenuButton>
+            <MobileUpperMenuButton
+              onClick={() => {
+                history.push('/mypage/quotation');
+              }}
+            >
+              견적 요청 목록
+            </MobileUpperMenuButton>
           ) : (
             <MobileUpperMenuButton>내 창고</MobileUpperMenuButton>
           )}

@@ -16,6 +16,9 @@ export const LeftBanner = styled.div`
   background-color: #1e56a0;
   width: 270px;
   color: white;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 export const BannerTextEnabledBox = styled.div`
   font-size: 20px;

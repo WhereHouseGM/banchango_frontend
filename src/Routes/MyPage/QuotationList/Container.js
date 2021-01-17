@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { userApi } from '../../../api';
+import { estimateApi } from '../../../api';
 
 import Presenter from './Presenter';
 const Container = () => {
@@ -8,13 +8,14 @@ const Container = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    userApi
-      .getEstimates(
+    estimateApi
+      .getEstimateInfo(
         localStorage.getItem('userId'),
         localStorage.getItem('AccessToken'),
       )
       .then(({ data }) => {
-        console.log(data);
+        setQuotes(data.estimates);
+        setLoading(false);
       })
       .catch(({ response: { status } }) => {
         if (status !== 404) {
