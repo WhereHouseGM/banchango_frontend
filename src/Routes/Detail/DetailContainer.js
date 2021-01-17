@@ -48,6 +48,9 @@ const DetailContainer = () => {
         if (status === 404) {
           setError('창고 정보가 존재하지 않습니다.');
           setLoading(false);
+        } else {
+          setError('알 수 없는 오류가 발생했습니다.');
+          setLoading(false);
         }
       });
   }, [warehouseId]);
