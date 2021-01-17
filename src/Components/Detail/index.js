@@ -234,13 +234,15 @@ const Detail = ({ warehouse }) => {
         >
           안내사항
         </MobileDetailNavButton>
-        <MobileDetailNavButton
-          onClick={() => {
-            scrollFunc(centerRef.caution);
-          }}
-        >
-          주의사항
-        </MobileDetailNavButton>
+        {warehouse.warehouseUsageCautions.length !== 0 && (
+          <MobileDetailNavButton
+            onClick={() => {
+              scrollFunc(centerRef.caution);
+            }}
+          >
+            주의사항
+          </MobileDetailNavButton>
+        )}
         <MobileDetailNavButton
           onClick={() => {
             scrollFunc(centerRef.position);
@@ -370,6 +372,10 @@ const Detail = ({ warehouse }) => {
                 </HouseInfoCard>
               ))}
             </HouseInfoCardWrapper>
+            <SectionTitle>경비 업체</SectionTitle>
+            {warehouse.securityCompanies.map((item, idx) => (
+              <Content key={idx}>{item}</Content>
+            ))}
             <SectionTitle>보험 가입 내역</SectionTitle>
             {warehouse.insurances.map((insurance, idx) => {
               return (
