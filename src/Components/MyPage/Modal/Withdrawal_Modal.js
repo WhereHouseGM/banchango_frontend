@@ -21,6 +21,7 @@ export const WithdrawalModal = ({ onClose, visible }) => {
     message.loading('로딩중입니다.');
     userApi
       .withdrawal(
+        localStorage.getItem('userId'),
         { cause: document.getElementById('withdrawalTextarea').value },
         localStorage.getItem('AccessToken'),
       )
