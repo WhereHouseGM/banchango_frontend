@@ -21,7 +21,7 @@ const Container = () => {
         if (status === 400) {
           setError('잘못된 요청입니다.');
         } else if (status === 401) {
-          setError('인증 토큰에 문제가 있습니다.');
+          setError('인증 토큰에 문제가 있습니다. 다시 로그인 해주세요.');
         } else if (status === 403) {
           setError('권한이 없습니다.');
         }
