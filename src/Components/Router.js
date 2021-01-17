@@ -85,7 +85,12 @@ const RouterComponent = () => (
         <PrivacyPolicy />
       </Route>
       <Route path="/error">
-        <ErrorPage error={'잘못된 접근 입니다.'} />
+        <ErrorPage
+          title={'잘못된 접근 입니다.'}
+          message={'잘못된 접근 입니다.'}
+          locationToGo={'/'}
+          buttonMessage={'메인 화면으로 이동'}
+        />
       </Route>
       <Route path="/icon-source">
         <IconSource />

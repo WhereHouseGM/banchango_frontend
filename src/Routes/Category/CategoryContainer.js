@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import CategoryPresenter from './CategoryPresenter';
 import { warehouseApi } from '../../api';
+import ErrorPage from '../../Components/ErrorPage';
+import Loading from '../../Components/Loading';
 
 const CategoryContainer = () => {
   const [results, setResults] = useState([]);
@@ -27,7 +29,20 @@ const CategoryContainer = () => {
   }, [getSearchResults]);
 
   return (
-    <CategoryPresenter warehouses={results} error={error} loading={loading} />
+    <>
+      {loading ? (
+        <Loading />
+      ) : error ? (
+        <ErrorPage
+          title={'오류'}
+          message={error}
+          locationToGo={'/'}
+          buttonMessage={'메인 화면으로 이동'}
+        />
+      ) : (
+        <CategoryPresenter warehouses={results} />
+      )}
+    </>
   );
 };
 

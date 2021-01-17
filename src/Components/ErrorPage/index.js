@@ -32,7 +32,7 @@ const GoToMainPage = styled.div`
   }
 `;
 
-const ErrorPage = ({ title, message, locationToGo }) => {
+const ErrorPage = ({ title, message, locationToGo, buttonMessage }) => {
   const history = useHistory();
   return (
     <Container>
@@ -43,7 +43,7 @@ const ErrorPage = ({ title, message, locationToGo }) => {
           history.push(`${locationToGo}`);
         }}
       >
-        메인 화면으로
+        {buttonMessage}
       </GoToMainPage>
     </Container>
   );
@@ -53,6 +53,7 @@ ErrorPage.propTypes = {
   title: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
   locationToGo: PropTypes.string.isRequired,
+  buttonMessage: PropTypes.string.isRequired,
 };
 
 export default ErrorPage;

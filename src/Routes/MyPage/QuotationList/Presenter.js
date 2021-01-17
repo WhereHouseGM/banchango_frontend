@@ -14,7 +14,12 @@ const Presenter = ({ quotes, loading, error }) => (
     {loading ? (
       <Loading />
     ) : error ? (
-      <ErrorPage error={error} />
+      <ErrorPage
+        title={'오류'}
+        message={error}
+        locationToGo={'/'}
+        buttonMessage={'메인 화면으로 이동'}
+      />
     ) : (
       <QuotationList quotes={quotes} />
     )}
