@@ -27,6 +27,12 @@ export const userApi = {
         Authorization: `Bearer ${token}`,
       },
     }),
+  getEstimates: (userId, token) =>
+    api.get(`users/${userId}/estimates`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
 };
 
 export const warehouseApi = {
