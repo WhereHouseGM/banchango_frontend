@@ -470,7 +470,7 @@ export const FifthTitle = styled.div`
   font-size: 40px;
   color: #15c7ab;
   @media (max-width: 1023px) {
-    width: 80%;
+    width: 100%;
     font-size: 30px;
     white-space: pre-wrap;
   }

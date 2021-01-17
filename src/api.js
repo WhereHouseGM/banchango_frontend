@@ -27,12 +27,6 @@ export const userApi = {
         Authorization: `Bearer ${token}`,
       },
     }),
-  getEstimates: (userId, token) =>
-    api.get(`users/${userId}/estimates`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }),
 };
 
 export const warehouseApi = {
@@ -56,6 +50,12 @@ export const warehouseApi = {
 export const estimateApi = {
   saveEstimate: (requestBody, token) =>
     api.post(`estimates`, requestBody, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
+  getEstimates: (userId, token) =>
+    api.get(`users/${userId}/estimates`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

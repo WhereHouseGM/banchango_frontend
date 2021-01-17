@@ -17,7 +17,7 @@ export const Nav = styled.nav`
   position: fixed;
   top: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  z-index: 99;
+  z-index: 49;
 `;
 export const NavLink = styled(Link)`
   color: #0079c0;
@@ -43,7 +43,7 @@ export const NavOpen = styled.div`
   position: absolute;
   top: 45px;
   background: rgba(0, 0, 0, 80%);
-  z-index: 1;
+  z-index: 999;
   opacity: 1;
   transition: all 0.2s ease;
 `;

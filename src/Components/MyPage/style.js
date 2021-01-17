@@ -43,8 +43,9 @@ export const MobileUpperMenuWrapper = styled.div`
   display: flex;
   position: sticky;
   top: 45px;
-  z-index: 999;
+  z-index: 50;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.05);
   @media (min-width: 769px) {
     display: none;
   }
