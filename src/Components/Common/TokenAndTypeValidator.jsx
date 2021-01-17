@@ -136,7 +136,22 @@ const TokenAndTypeValidator = ({children}) => {
                     return <ErrorPage error={'잘못된 접근입니다.'} />;
                 }
             default:
-                return children;
+                if(isUserLoggedIn()) {
+                    if(isTokenExpired()) {
+                        alert('유효기간이 만료되었습니다. 다시 로그인 해주세요.');
+                        localStorage.clear();
+                        window.location.href = "/login";
+                        break;
+                    } else {
+                        if(localStorage.getItem('type') === 'SHIPPER') {
+                            return children;
+                        } else {
+                            return <ErrorPage error={'잘못된 접근입니다.'} />;
+                        }
+                    }
+                } else {
+                    return <ErrorPage error={'잘못된 접근입니다.'} />;
+                }
         }
     }, [location.pathname, children]);
 
