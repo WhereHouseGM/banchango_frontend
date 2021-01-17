@@ -442,7 +442,15 @@ const Detail = ({ warehouse }) => {
             <BottomContentValue>
               {warehouse.deliveryTypes.map((type) => type + ' ')}
             </BottomContentValue>
-            <BlogVisitButton>방문 인터뷰 블로그</BlogVisitButton>
+            {!!warehouse.blogUrl && (
+              <BlogVisitButton
+                onClick={() => {
+                  history.push(warehouse.blogUrl);
+                }}
+              >
+                방문 인터뷰 블로그
+              </BlogVisitButton>
+            )}
             <QuoteContactButton
               onClick={() => {
                 history.push(
