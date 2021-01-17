@@ -446,7 +446,7 @@ const Detail = ({ warehouse }) => {
             <QuoteContactButton
               onClick={() => {
                 history.push(
-                  `/warehouses/quotecontact/${warehouse.warehouseId}`,
+                  `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}`,
                 );
               }}
             >

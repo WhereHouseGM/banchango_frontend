@@ -166,6 +166,15 @@ export const HistoryChildText = styled.div`
   width: ${(props) => props.width};
 `;
 
+export const ChildUrlText = styled.a`
+  width: ${(props) => props.width};
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+    font-weight: bold;
+  }
+`;
+
 export const TotalCountContainer = styled.div`
   margin: 25px 0;
   display: flex;
@@ -225,5 +234,70 @@ export const InquiryButton = styled.div`
   margin: 40px auto;
   &:hover {
     cursor: pointer;
+  }
+`;
+
+export const KeepingTypes = [
+  {
+    id: 'WARM',
+    value: 'WARM',
+    children: '상온',
+  },
+  {
+    id: 'COLD',
+    value: 'COLD',
+    children: '냉장',
+  },
+  {
+    id: 'FREEZE',
+    value: 'FREEZE',
+    children: '냉동',
+  },
+];
+
+export const keepingTypeToText = (value) => {
+  if (value === 'WARM') {
+    return '상온';
+  } else if (value === 'COLD') {
+    return '냉장';
+  } else if (value === 'FREEZE') {
+    return '냉동';
+  } else return '알수없음';
+};
+
+export const Barcodes = [
+  {
+    id: 'ALL',
+    value: 'ALL',
+    children: '있음',
+  },
+  {
+    id: 'NONE',
+    value: 'NONE',
+    children: '없음',
+  },
+  {
+    id: 'PARTIAL',
+    value: 'PARTIAL',
+    children: '일부',
+  },
+];
+
+export const barcodeToText = (type) => {
+  if (type === 'ALL') {
+    return '있음';
+  } else if (type === 'NONE') {
+    return '없음';
+  } else if (type === 'PARTIAL') {
+    return '일부';
+  } else return '알수없음';
+};
+
+export const RemoveItemButton = styled.div`
+  font-weight: bold;
+  color: gray;
+  &:hover {
+    cursor: pointer;
+    color: black;
   }
 `;
