@@ -19,10 +19,17 @@ export const WithdrawalModal = ({ onClose, visible }) => {
   const history = useHistory();
   const confirmClicked = () => {
     message.loading('로딩중입니다.');
+    let causeText = document.getElementById('withdrawalTextarea').value;
+    if (causeText === null || causeText.trim() === '') {
+      message.destroy();
+      message.warning('탈퇴 사유를 입력해주세요.');
+      document.getElementById('withdrawalTextarea').focus();
+      return;
+    }
     userApi
       .withdrawal(
         localStorage.getItem('userId'),
-        { cause: document.getElementById('withdrawalTextarea').value },
+        { cause: causeText },
         localStorage.getItem('AccessToken'),
       )
       .then(() => {

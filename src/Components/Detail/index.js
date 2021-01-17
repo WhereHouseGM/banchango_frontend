@@ -451,7 +451,7 @@ const Detail = ({ warehouse }) => {
             {!!warehouse.blogUrl && (
               <BlogVisitButton
                 onClick={() => {
-                  history.push(warehouse.blogUrl);
+                  window.open(warehouse.blogUrl);
                 }}
               >
                 방문 인터뷰 블로그
