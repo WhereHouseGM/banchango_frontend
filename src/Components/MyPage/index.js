@@ -15,6 +15,8 @@ import {
   ButtonContainer,
   ChangePWButton,
   ConfirmButton,
+  MobileUpperMenuWrapper,
+  MobileUpperMenuButton,
 } from './style';
 
 const MyPage = ({ userInfo, handleSubmit }) => {
@@ -94,6 +96,20 @@ const MyPage = ({ userInfo, handleSubmit }) => {
             로그아웃
           </BannerTextDisabledBox>
         </LeftBanner>
+        <MobileUpperMenuWrapper>
+          <MobileUpperMenuButton isIn>내 프로필</MobileUpperMenuButton>
+          {userInfo.type === 'SHIPPER' ? (
+            <MobileUpperMenuButton
+              onClick={() => {
+                history.push('/mypage/quotation');
+              }}
+            >
+              견적 요청 목록
+            </MobileUpperMenuButton>
+          ) : (
+            <MobileUpperMenuButton>내 창고</MobileUpperMenuButton>
+          )}
+        </MobileUpperMenuWrapper>
         <UserInfoContainer>
           <HelloTitleText>{userInfo.name}님 안녕하세요.</HelloTitleText>
           <InfoTitleText>이메일</InfoTitleText>
@@ -128,7 +144,7 @@ const MyPage = ({ userInfo, handleSubmit }) => {
                 setCheckModalShow(true);
               }}
             >
-              확인
+              수정하기
             </ConfirmButton>
           </ButtonContainer>
         </UserInfoContainer>
