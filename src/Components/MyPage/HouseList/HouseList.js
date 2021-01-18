@@ -113,10 +113,22 @@ export const TitleUnderLine = styled.div`
   border-top: 1px solid grey;
 `;
 
-export const ConfirmedBox = styled.div`
+export const StatusBox = styled.div`
   position: absolute;
   align-self: flex-end;
   padding: 7px 15px;
   color: white;
   background-color: #1fab89;
 `;
+
+export const statusToText = (status) => {
+  if (status === 'IN_PROGRESS') {
+    return '검토 진행중';
+  } else if (status === 'REJECTED') {
+    return '거절됨';
+  } else if (status === 'VIEWABLE') {
+    return '승인 완료';
+  } else if (status === 'DELETED') {
+    return '삭제됨';
+  } else return '알 수 없음';
+};

@@ -51,6 +51,12 @@ export const warehouseApi = {
       },
     }),
   getWarehouseInfo: (id) => api.get(`warehouses/${id}`),
+  getWarehousesById: (userId, token) =>
+    api.get(`users/${userId}/warehouses`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
 };
 
 export const estimateApi = {
