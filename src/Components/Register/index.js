@@ -396,9 +396,8 @@ const Register = () => {
       .register(requestBody, localStorage.getItem('AccessToken'))
       .then(() => {
         message.destroy();
-        // TODO : Location Fix
         alert('창고 등록 요청이 정상적으로 처리되었습니다.');
-        window.location.href = '/';
+        window.location.href = '/mypage/houselist';
       })
       .catch(({ response: { status } }) => {
         message.destroy();
