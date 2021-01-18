@@ -17,7 +17,7 @@ export const Nav = styled.nav`
   position: fixed;
   top: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  z-index: 99;
+  z-index: 49;
 `;
 export const NavLink = styled(Link)`
   color: #0079c0;
@@ -28,9 +28,6 @@ export const NavLink = styled(Link)`
   font-weight: bold;
   padding: 0 1rem;
   cursor: pointer;
-  &.active {
-    color: #15cdfc;
-  }
 `;
 export const NavLogoText = styled.div`
   color: #0079c0;
@@ -46,7 +43,7 @@ export const NavOpen = styled.div`
   position: absolute;
   top: 45px;
   background: rgba(0, 0, 0, 80%);
-  z-index: 1;
+  z-index: 999;
   opacity: 1;
   transition: all 0.2s ease;
 `;
@@ -57,8 +54,14 @@ export const NavLinkOpen = styled(Link)`
   padding: 2.2rem;
   cursor: pointer;
   text-decoration: none;
-  &.active {
-    color: #15cdfc;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
   }
 `;
 

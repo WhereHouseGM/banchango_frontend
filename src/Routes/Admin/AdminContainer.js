@@ -141,18 +141,21 @@ class AdminContainer extends React.Component {
       email: userEmail,
       password: hashCode,
     };
-    try {
-      const result = await userApi.signIn(requestBody);
-      const {
-        data: { accessToken },
-      } = result;
-      localStorage.setItem('TokenForRegister', accessToken);
-      alert('정상적으로 로그인 되었습니다.');
-    } catch {
-      alert('이메일 또는 비밀번호가 일치하지 않습니다.');
-      document.getElementById('userPass').value = '';
-      document.getElementById('userEmail').focus();
-    }
+    userApi
+      .signIn(requestBody)
+      .then(({ data: { accessToken } }) => {
+        localStorage.setItem('TokenForRegister', accessToken);
+        alert('정상적으로 로그인 되었습니다.');
+      })
+      .catch(({ response: { status } }) => {
+        if (status === 404) {
+          alert('이메일 또는 비밀번호가 일치하지 않습니다.');
+          document.getElementById('usePass').value = '';
+          document.getElementById('userEmail').focus();
+        } else {
+          alert(`[${status}]알 수 없는 오류가 발생했습니다.`);
+        }
+      });
   };
 
   refreshUser = () => {

@@ -34,11 +34,7 @@ export const CheckPWModal = ({
   return (
     <>
       <ModalOverlay visible={visible} />
-      <ModalWrapper
-        onClick={onMaskClick}
-        tabIndex="-1"
-        visible={visible}
-      >
+      <ModalWrapper onClick={onMaskClick} tabIndex="-1" visible={visible}>
         <ModalInner tabIndex="0" className="modal-inner">
           <PWTitleText>비밀번호 확인</PWTitleText>
           <PWInputBox
@@ -49,7 +45,20 @@ export const CheckPWModal = ({
               setPW(e.target.value);
             }}
           />
-          <ConfirmButton onClick={confirmClicked}>확인</ConfirmButton>
+          <ConfirmButton
+            onClick={confirmClicked}
+            style={
+              PW === null || PW.trim() === ''
+                ? {
+                    backgroundColor: '#5ea0ff',
+                  }
+                : {
+                    backgroundColor: '#1e56a0',
+                  }
+            }
+          >
+            확인
+          </ConfirmButton>
         </ModalInner>
       </ModalWrapper>
     </>

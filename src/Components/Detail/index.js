@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Slider from 'react-slick';
 import Modal from './Modal/ShowImageModal';
+import { warehouseInfoCardTextDict } from '../../static/detail';
 import {
   Container,
   MainImageContainer,
-  ImageButton,
   DetailPageNavbarContainer,
   DetailPageNavbarItemsWrapper,
   DetailPageNavbarWrapper,
@@ -17,11 +17,10 @@ import {
   MainTitle,
   Content,
   SectionTitle,
-  MainMapImg,
+  MainMap,
   MainMapDesc,
   QuoteContactContainer,
   ContactTitle,
-  ContactSubTitle,
   ContactContentWrapper,
   LeftContent,
   RightContent,
@@ -40,6 +39,32 @@ import {
   SliderChildWrapper,
   SliderChildImg,
   SliderChildArrow,
+  HouseInfoCardWrapper,
+  HouseInfoCardImage,
+  HouseInfoCard,
+  HouseInfoCardText,
+  BlogVisitButton,
+  Images,
+  QuoteContactCautionText,
+  MobileContainer,
+  MobileUpperDescContainer,
+  MobileUpperSliderContainer,
+  MobileUpperDescWrapper,
+  MobileDetailNavContainer,
+  MobileQuoteContactButton,
+  MobileUpperSliderWrapper,
+  MobileUpperHouseName,
+  MobileUpperAddress,
+  MobileUpperDeliveryTitle,
+  MobileUpperDeliveryText,
+  MobileUpperDeliveryWrapper,
+  MobileUpperCategoryButtonWrapper,
+  MobileUpperCategoryButton,
+  MobileUpperRightDescWrapper,
+  MobileUpperRightDescBox,
+  MobileUpperRightDescText,
+  MobileUpperRightDescTitle,
+  MobileDetailNavButton,
 } from './Detail';
 import { categoryTitleDict } from '../../static/category';
 import { dayOfWeek } from '../../static/detail';
@@ -47,6 +72,7 @@ import { dayOfWeek } from '../../static/detail';
 const Detail = ({ warehouse }) => {
   const SliderRef = React.createRef();
   useEffect(() => {
+    window.scrollTo(0, 0);
     const script = document.createElement('script');
     script.async = true;
     script.src =
@@ -69,6 +95,13 @@ const Detail = ({ warehouse }) => {
           position: markerPosition,
         });
         marker.setMap(map);
+        var mapTypeControl = new window.kakao.maps.MapTypeControl();
+        map.addControl(
+          mapTypeControl,
+          window.kakao.maps.ControlPosition.TOPRIGHT,
+        );
+        var zoomControl = new window.kakao.maps.ZoomControl();
+        map.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
       });
     };
   }, [warehouse.latitude, warehouse.longitude]);
@@ -92,7 +125,6 @@ const Detail = ({ warehouse }) => {
     }
     return resultArr;
   };
-
   const scrollFunc = (ref) => {
     window.scrollTo({ top: ref.current.offsetTop - 90, behavior: 'smooth' });
   };
@@ -106,6 +138,119 @@ const Detail = ({ warehouse }) => {
         visible={modalVisible}
         modalImgUrl={modalImgUrl}
       />
+      <MobileContainer>
+        <MobileUpperDescContainer>
+          <MobileUpperSliderContainer>
+            <MobileUpperSliderWrapper>
+              <Slider
+                {...sliderSettings}
+                ref={SliderRef}
+                style={{ height: '30vh' }}
+              >
+                <SliderChildWrapper>
+                  <SliderChildImg
+                    src={warehouse.mainImageUrl}
+                    onClick={() => {
+                      setModalImgUrl(warehouse.mainImageUrl);
+                      setModalVisible(true);
+                    }}
+                  />
+                </SliderChildWrapper>
+                {warehouse.images.map((item, idx) => (
+                  <SliderChildWrapper key={idx}>
+                    <SliderChildImg src={item} alt={'상세 사진'} />
+                  </SliderChildWrapper>
+                ))}
+              </Slider>
+            </MobileUpperSliderWrapper>
+          </MobileUpperSliderContainer>
+          <MobileUpperDescWrapper>
+            <MobileUpperHouseName>{warehouse.name}</MobileUpperHouseName>
+            <MobileUpperAddress>{warehouse.address}</MobileUpperAddress>
+            <MobileUpperDeliveryWrapper>
+              <MobileUpperDeliveryTitle>택배사</MobileUpperDeliveryTitle>
+              <MobileUpperDeliveryText>
+                {warehouse.deliveryTypes.map((item, idx) => {
+                  if (warehouse.deliveryTypes.length - 1 === idx) {
+                    return <span key={idx}>{item}</span>;
+                  } else {
+                    return <span key={idx}>{item + ', '}</span>;
+                  }
+                })}
+              </MobileUpperDeliveryText>
+            </MobileUpperDeliveryWrapper>
+            <MobileUpperCategoryButtonWrapper>
+              {warehouse.mainItemTypes.map((item, idx) => (
+                <MobileUpperCategoryButton key={idx}>
+                  {categoryTitleDict(item)}
+                </MobileUpperCategoryButton>
+              ))}
+            </MobileUpperCategoryButtonWrapper>
+            <MobileUpperRightDescWrapper>
+              <MobileUpperRightDescBox>
+                <MobileUpperRightDescTitle>
+                  월 최소 출고량
+                </MobileUpperRightDescTitle>
+                <MobileUpperRightDescText>
+                  {warehouse.minReleasePerMonth + '건'}
+                </MobileUpperRightDescText>
+              </MobileUpperRightDescBox>
+              <MobileUpperRightDescBox>
+                <MobileUpperRightDescTitle>평수</MobileUpperRightDescTitle>
+                <MobileUpperRightDescText>
+                  {warehouse.space + '평'}
+                </MobileUpperRightDescText>
+              </MobileUpperRightDescBox>
+            </MobileUpperRightDescWrapper>
+          </MobileUpperDescWrapper>
+        </MobileUpperDescContainer>
+        <MobileQuoteContactButton
+          onClick={() => {
+            history.push(`/warehouses/quotecontact/${warehouse.warehouseId}`);
+          }}
+        >
+          견적 문의하기
+        </MobileQuoteContactButton>
+      </MobileContainer>
+      <MobileDetailNavContainer>
+        <MobileDetailNavButton
+          onClick={() => {
+            scrollFunc(centerRef.desc);
+          }}
+        >
+          센터 소개
+        </MobileDetailNavButton>
+        <MobileDetailNavButton
+          onClick={() => {
+            scrollFunc(centerRef.info);
+          }}
+        >
+          시설 정보
+        </MobileDetailNavButton>
+        <MobileDetailNavButton
+          onClick={() => {
+            scrollFunc(centerRef.announce);
+          }}
+        >
+          안내사항
+        </MobileDetailNavButton>
+        {warehouse.warehouseUsageCautions.length !== 0 && (
+          <MobileDetailNavButton
+            onClick={() => {
+              scrollFunc(centerRef.caution);
+            }}
+          >
+            주의사항
+          </MobileDetailNavButton>
+        )}
+        <MobileDetailNavButton
+          onClick={() => {
+            scrollFunc(centerRef.position);
+          }}
+        >
+          위치 정보
+        </MobileDetailNavButton>
+      </MobileDetailNavContainer>
       <Container>
         <MainImageContainer>
           <SliderChildArrow
@@ -124,7 +269,7 @@ const Detail = ({ warehouse }) => {
                     setModalImgUrl(warehouse.mainImageUrl);
                     setModalVisible(true);
                   }}
-                />{' '}
+                />
               </SliderChildWrapper>
               {warehouse.images.map((item, idx) => (
                 <SliderChildWrapper key={idx}>
@@ -217,6 +362,20 @@ const Detail = ({ warehouse }) => {
               월 최소 {warehouse.minReleasePerMonth}건 출고 필요
             </Content>
             <SectionTitle ref={centerRef.info}>시설 정보</SectionTitle>
+            <HouseInfoCardWrapper>
+              {warehouse.houseInfo.map((item, idx) => (
+                <HouseInfoCard key={idx}>
+                  <HouseInfoCardImage src={Images[item + 'Img']} />
+                  <HouseInfoCardText>
+                    {warehouseInfoCardTextDict(item)}
+                  </HouseInfoCardText>
+                </HouseInfoCard>
+              ))}
+            </HouseInfoCardWrapper>
+            <SectionTitle>경비 업체</SectionTitle>
+            {warehouse.securityCompanies.map((item, idx) => (
+              <Content key={idx}>{item}</Content>
+            ))}
             <SectionTitle>보험 가입 내역</SectionTitle>
             {warehouse.insurances.map((insurance, idx) => {
               return (
@@ -234,7 +393,6 @@ const Detail = ({ warehouse }) => {
                   <Content>
                     {idx + 1}. {usage}
                   </Content>
-                  {/* <br /> */}
                 </React.Fragment>
               );
             })}
@@ -255,9 +413,7 @@ const Detail = ({ warehouse }) => {
             <SectionTitle ref={centerRef.position} textAlign="center">
               위치 정보
             </SectionTitle>
-            <div style={{ margin: '0px auto', width: '50%' }}>
-              <MainMapImg id="kakaoMap" />
-            </div>
+            <MainMap id="kakaoMap" />
             <MainMapDesc>
               {warehouse.address}&nbsp;{warehouse.addressDetail}
             </MainMapDesc>
@@ -292,15 +448,31 @@ const Detail = ({ warehouse }) => {
             <BottomContentValue>
               {warehouse.deliveryTypes.map((type) => type + ' ')}
             </BottomContentValue>
-            <QuoteContactButton
-              onClick={() => {
-                history.push(
-                  `/warehouses/quotecontact/${warehouse.warehouseId}`,
-                );
-              }}
-            >
-              견적 요청하기
-            </QuoteContactButton>
+            {!!warehouse.blogUrl && (
+              <BlogVisitButton
+                onClick={() => {
+                  window.open(warehouse.blogUrl);
+                }}
+              >
+                방문 인터뷰 블로그
+              </BlogVisitButton>
+            )}
+            {localStorage.getItem('type') !== 'OWNER' ? (
+              <QuoteContactButton
+                onClick={() => {
+                  history.push(
+                    `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}`,
+                  );
+                }}
+              >
+                견적 요청하기
+              </QuoteContactButton>
+            ) : null}
+            <QuoteContactCautionText>
+              반창고의 빠른 검토 후,
+              <br />
+              보통 1 영업일 이내에, 견적서가 송부됩니다.
+            </QuoteContactCautionText>
           </QuoteContactContainer>
         </MainContainer>
       </Container>

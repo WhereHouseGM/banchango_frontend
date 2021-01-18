@@ -116,12 +116,12 @@ export const BtnArr = [
   {
     id: 'FREEZE_STORAGE',
     name: '냉동',
-    icon: { normal: RefrigeratorA, clicked: RefrigeratorB },
+    icon: { normal: IcecreamA, clicked: IcecreamB },
   },
   {
     id: 'COLD_STORAGE',
     name: '냉장',
-    icon: { normal: IcecreamA, clicked: IcecreamB },
+    icon: { normal: RefrigeratorA, clicked: RefrigeratorB },
   },
   {
     id: 'LARGE_SIZE',
@@ -211,25 +211,6 @@ export const SecondSideWrapper = styled.div`
   @media (max-width: 768px) {
     display: none;
   }
-`;
-
-export const SecondSideTextWrapper = styled.div`
-  margin-top: 170px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const SecondSideText = styled.div`
-  font-weight: bold;
-  color: #1e56a0;
-  font-size: 20px;
-`;
-
-export const SecondSideArrow = styled.div`
-  color: grey;
-  margin-left: 20px;
-  font-size: 25px;
 `;
 
 export const SecondMiddleWrapper = styled.div`
@@ -332,19 +313,23 @@ export const SliderBox = styled.div`
   width: 90%;
   display: flex;
   margin: -40px auto 0 auto;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 
 export const SliderWrapper = styled.div`
-  width: 90%;
+  width: 80%;
   max-width: 768px;
+  margin: 0 30px;
 `;
 
 export const SliderButton = styled.div`
-  font-size: 20px;
+  font-size: 35px;
   &:hover {
     cursor: pointer;
+  }
+  @media (max-width: 768px) {
+    font-size: 25px;
   }
 `;
 
@@ -485,7 +470,7 @@ export const FifthTitle = styled.div`
   font-size: 40px;
   color: #15c7ab;
   @media (max-width: 1023px) {
-    width: 80%;
+    width: 100%;
     font-size: 30px;
     white-space: pre-wrap;
   }

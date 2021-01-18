@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Loading from '../../Components/Loading';
 import ErrorPage from '../../Components/ErrorPage';
 
-const DetailPresenter = ({ userInfo, handleSubmit, error, loading }) => (
+const MyPagePresenter = ({ userInfo, handleSubmit, error, loading }) => (
   <>
     <Helmet>
       <title>반창고 | 마이페이지</title>
@@ -15,7 +15,12 @@ const DetailPresenter = ({ userInfo, handleSubmit, error, loading }) => (
     {loading ? (
       <Loading />
     ) : error ? (
-      <ErrorPage error={error} />
+      <ErrorPage
+        title={'오류'}
+        message={error}
+        locationToGo={'/'}
+        buttonMessage={'메인 화면으로 이동'}
+      />
     ) : (
       <MyPage userInfo={userInfo} handleSubmit={handleSubmit} />
     )}
@@ -23,11 +28,11 @@ const DetailPresenter = ({ userInfo, handleSubmit, error, loading }) => (
   </>
 );
 
-DetailPresenter.propTypes = {
+MyPagePresenter.propTypes = {
   userInfo: PropTypes.object,
   handleSubmit: PropTypes.func,
   error: PropTypes.string,
   loading: PropTypes.bool,
 };
 
-export default DetailPresenter;
+export default MyPagePresenter;

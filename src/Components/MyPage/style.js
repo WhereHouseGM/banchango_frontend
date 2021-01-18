@@ -5,8 +5,8 @@ export const Container = styled.div`
   min-height: 90vh;
   position: relative;
   display: flex;
-  @media screen and (max-width: 768px) {
-    margin-top: 105px;
+  @media (max-width: 1100px) {
+    display: block;
   }
 `;
 export const LeftBanner = styled.div`
@@ -16,6 +16,9 @@ export const LeftBanner = styled.div`
   position: absolute;
   height: 100%;
   color: white;
+  @media (max-width: 1100px) {
+    display: none;
+  }
 `;
 export const BannerTextEnabledBox = styled.div`
   font-size: 20px;
@@ -35,30 +38,59 @@ export const BannerTextDisabledBox = styled.div`
     cursor: pointer;
   }
 `;
+export const MobileUpperMenuWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  position: sticky;
+  top: 45px;
+  z-index: 50;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.05);
+  @media (min-width: 1101px) {
+    display: none;
+  }
+`;
+export const MobileUpperMenuButton = styled.div`
+  width: 50%;
+  padding: 15px 0;
+  text-align: center;
+  background-color: ${(props) => (props.isIn ? '#1e56a0' : 'white')};
+  color: ${(props) => (props.isIn ? 'white' : 'black')};
+`;
 
 export const UserInfoContainer = styled.div`
   font-family: 'notosans-Regular', sans-serif;
   background-color: white;
-  width: 710px;
+  width: 90%;
+  max-width: 710px;
   padding: 40px 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  @media (max-width: 1100px) {
+    padding: 0;
+  }
 `;
 export const HelloTitleText = styled.h1`
-  color: #5ea0ff;
+  color: #1e56a0;
   text-align: center;
   font-weight: bold;
   font-size: 35px;
+  @media (max-width: 1100px) {
+    display: none;
+  }
 `;
 export const InfoTitleText = styled.h3`
   margin-top: 30px;
   font-size: 25px;
   font-weight: bold;
+
+  @media (max-width: 1100px) {
+    font-size: 15px;
+    font-weight: normal;
+  }
 `;
 export const InfoBox = styled.input`
-  width: 650px;
+  width: 95%;
+  max-width: 650px;
   border: none;
   border-bottom: 1px solid black;
   font-size: 20px;
@@ -73,36 +105,56 @@ export const InfoBox = styled.input`
 `;
 export const ButtonContainer = styled.div`
   display: flex;
-  width: 600px;
+  max-width: 600px;
   margin-top: 48.5px;
   margin-left: auto;
   margin-right: auto;
   align-items: center;
+  @media (max-width: 1100px) {
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+  }
 `;
 
 export const ChangePWButton = styled.div`
   border-radius: 10px 10px 10px 10px;
-  border: 2px solid #5ea0ff;
+  border: 1px solid #1e56a0;
   width: 275px;
-  color: #5ea0ff;
+  color: #1e56a0;
   padding: 20px;
   text-align: center;
   font-size: 20px;
   &:hover {
     cursor: pointer;
   }
+  @media (max-width: 1100px) {
+    margin: 20px 0;
+    width: 100%;
+  }
 `;
 
 export const ConfirmButton = styled.div`
   margin-left: 30px;
-  border-radius: 10px 10px 10px 10px;
-  border: 2px solid #5ea0ff;
+  border-radius: 10px;
+  border: 1px solid #1e56a0;
   color: white;
   width: 275px;
-  background-color: #5ea0ff;
+  background-color: #1e56a0;
   padding: 20px;
   text-align: center;
   font-size: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+  @media (max-width: 1100px) {
+    width: 100%;
+    margin: 0;
+  }
+`;
+export const WithdrawalLabel = styled.div`
+  color: #979696;
+  text-align: center;
+  margin: 25px 0 25px -8px;
   &:hover {
     cursor: pointer;
   }

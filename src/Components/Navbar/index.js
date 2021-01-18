@@ -18,6 +18,7 @@ const Navbar = () => {
   const [loginInfo, setLoginInfo] = useState({});
   const [navClicked, setNavClicked] = useState(false);
   useEffect(() => {
+    window.scrollTo(0, 0);
     let info = {
       logined: JSON.parse(localStorage.getItem('Login')),
       name: localStorage.getItem('Name'),
@@ -49,12 +50,10 @@ const Navbar = () => {
           <NavLinkOpen to="/team">팀소개</NavLinkOpen>
           {loginInfo.logined ? (
             <>
-              <NavLinkOpen to="/" style={{ color: 'black' }} onClick={logout}>
+              <NavLinkOpen to="/" onClick={logout}>
                 로그아웃
               </NavLinkOpen>
-              <NavLinkOpen style={{ color: 'black' }} to="/mypage">
-                {loginInfo.name} 님
-              </NavLinkOpen>
+              <NavLinkOpen to="/mypage">{loginInfo.name} 님</NavLinkOpen>
             </>
           ) : (
             <>

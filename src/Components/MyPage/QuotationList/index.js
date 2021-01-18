@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
+import { message } from 'antd';
 import { useHistory } from 'react-router-dom';
+import { estimateApi } from '../../../api';
+import { WarehouseProgressDict } from '../../../static/mypage';
 
 import {
   BannerTextDisabledBox,
@@ -23,63 +26,35 @@ import {
   UserInfoContainer,
 } from './style';
 
-const QuotationList = () => {
+const QuotationList = ({ quotes }) => {
   const history = useHistory();
-  const DUMMY_list = [
-    {
-      name: '스토리지원',
-      address: '인천광역시 서구 북동로 32길 28',
-      progress: '접수',
-    },
-    {
-      name: '스토리지원',
-      address: '인천광역시 서구 북동로 32길 28',
-      progress: '접수',
-    },
-    {
-      name: '스토리지원',
-      address: '인천광역시 서구 북동로 32길 28',
-      progress: '접수',
-    },
-  ];
-  const DUMMY_HISTORY = [
-    {
-      category: '마우스',
-      big: '120cm',
-      weight: '12.5kg',
-      sku: '2개',
-      quantity: '12개',
-      form: '상온',
-      barcord: '있음.',
-    },
-    {
-      category: '마우스',
-      big: '120cm',
-      weight: '12.5kg',
-      sku: '2개',
-      quantity: '12개',
-      form: '상온',
-      barcord: '있음.',
-    },
-    {
-      category: '마우스',
-      big: '120cm',
-      weight: '12.5kg',
-      sku: '2개',
-      quantity: '12개',
-      form: '상온',
-      barcord: '있음.',
-    },
-    {
-      category: '마우스',
-      big: '120cm',
-      weight: '12.5kg',
-      sku: '2개',
-      quantity: '12개',
-      form: '상온',
-      barcord: '있음.',
-    },
-  ];
+  const [singleQuoteList, setSingleQuoteList] = useState([]);
+  const handleGetSingleQuoteList = useCallback((item) => {
+    message.loading('불러오는 중..');
+    estimateApi
+      .getEstimateItems(item.id, localStorage.getItem('AccessToken'))
+      .then(({ data }) => {
+        setSingleQuoteList(data.estimateItems);
+        message.destroy();
+      })
+      .catch(({ response: { status } }) => {
+        if (status === 400) {
+          message.destroy();
+          message.error('Id값이 주어지지 않았습니다.');
+        } else if (status === 401) {
+          message.destroy();
+          message.error('인증 토큰에 문제가 있습니다. 다시 로그인 해 주세요');
+        } else if (status === 403) {
+          message.destroy();
+          message.error('본인의 견적 문의 목록이 아닙니다.');
+        } else if (status === 404) {
+          message.destroy();
+          message.error(
+            '문의한 내역이 없습니다. 창고가 삭제된 것일 수도 있습니다.',
+          );
+        }
+      });
+  }, []);
   return (
     <Container>
       <LeftBanner>
@@ -110,12 +85,22 @@ const QuotationList = () => {
             <ListUpperText width={'20%'}>진행 상황</ListUpperText>
             <ListUpperText width={'10%'}>보기</ListUpperText>
           </ListUpper>
-          {DUMMY_list.map((item, idx) => (
+          {quotes.map((item, idx) => (
             <ListChild key={idx}>
-              <ListChildText width={'20%'}>{item.name}</ListChildText>
-              <ListChildText width={'50%'}>{item.address}</ListChildText>
-              <ListChildText width={'20%'}>{item.progress}</ListChildText>
-              <ListChildText width={'10%'}>{'>'}</ListChildText>
+              <ListChildText width={'20%'}>{item.warehouse.name}</ListChildText>
+              <ListChildText width={'50%'}>
+                {item.warehouse.address}
+              </ListChildText>
+              <ListChildText width={'20%'}>
+                {WarehouseProgressDict[item.status]}
+              </ListChildText>
+              <ListChildText
+                width={'10%'}
+                isA
+                onClick={() => handleGetSingleQuoteList(item)}
+              >
+                {'>'}
+              </ListChildText>
             </ListChild>
           ))}
         </ListContainer>
@@ -134,16 +119,32 @@ const QuotationList = () => {
             <HistoryUpperText width={'12%'}>바코드</HistoryUpperText>
             <HistoryUpperText width={'12%'}>상품 URL</HistoryUpperText>
           </HistoryUpper>
-          {DUMMY_HISTORY.map((item, idx) => (
+          {singleQuoteList.map((item, idx) => (
             <HistoryChild key={idx}>
-              <HistoryChildText width={'12%'}>{item.category}</HistoryChildText>
-              <HistoryChildText width={'12%'}>{item.big}</HistoryChildText>
+              <HistoryChildText width={'12%'}>
+                {item.keepingType}
+              </HistoryChildText>
+              <HistoryChildText width={'12%'}>
+                {item.perimeter}
+              </HistoryChildText>
               <HistoryChildText width={'12%'}>{item.weight}</HistoryChildText>
               <HistoryChildText width={'12%'}>{item.sku}</HistoryChildText>
-              <HistoryChildText width={'12%'}>{item.quantity}</HistoryChildText>
-              <HistoryChildText width={'12%'}>{item.form}</HistoryChildText>
+              <HistoryChildText width={'12%'}>
+                {item.keepingNumber}
+              </HistoryChildText>
+              <HistoryChildText width={'12%'}>{item.name}</HistoryChildText>
               <HistoryChildText width={'12%'}>{item.barcord}</HistoryChildText>
-              <HistoryChildText width={'12%'}>클릭</HistoryChildText>
+              <HistoryChildText
+                isA={!!item.url}
+                width={'12%'}
+                onClick={() => {
+                  if (!!item.url) {
+                    window.location.href = 'item.url';
+                  }
+                }}
+              >
+                {item.url ? '클릭' : '없음'}
+              </HistoryChildText>
             </HistoryChild>
           ))}
         </HistoryContainer>

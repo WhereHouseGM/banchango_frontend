@@ -27,6 +27,12 @@ export const userApi = {
         Authorization: `Bearer ${token}`,
       },
     }),
+  withdrawal: (userId, body, token) =>
+    api.post(`users/${userId}/withdraw`, body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
 };
 
 export const warehouseApi = {
@@ -45,6 +51,33 @@ export const warehouseApi = {
       },
     }),
   getWarehouseInfo: (id) => api.get(`warehouses/${id}`),
+  getWarehousesById: (userId, token) =>
+    api.get(`users/${userId}/warehouses`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
+};
+
+export const estimateApi = {
+  saveEstimate: (requestBody, token) =>
+    api.post(`estimates`, requestBody, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
+  getEstimateInfo: (userId, token) =>
+    api.get(`users/${userId}/estimates`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
+  getEstimateItems: (estimateId, token) =>
+    api.get(`estimates/${estimateId}/items`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
 };
 
 export const imageApi = {

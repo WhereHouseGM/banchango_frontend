@@ -19,6 +19,9 @@ import PrivacyPolicy from '../Routes/PrivacyPolicy';
 import Register from '../Routes/Register';
 import Team from '../Routes/Team';
 import QuoteContact from '../Routes/Detail/QuoteContact';
+import IconSource from '../Routes/IconSource';
+import ErrorPage from '../Components/ErrorPage';
+import TokenAndTypeValidator from './Common/TokenAndTypeValidator';
 
 const BadAccessText = '잘못된 접근입니다.';
 
@@ -27,25 +30,39 @@ const RouterComponent = () => (
     <Switch>
       <Route path="/" exact component={Main} />
       <Route path="/login">
-        <Login />
+        <TokenAndTypeValidator>
+          <Login />
+        </TokenAndTypeValidator>
       </Route>
       <Route path="/signup">
-        <SignUp />
+        <TokenAndTypeValidator>
+          <SignUp />
+        </TokenAndTypeValidator>
       </Route>
       <Route path="/admin">
-        <Message text={BadAccessText} />
+        <TokenAndTypeValidator>
+          <Message text={BadAccessText} />
+        </TokenAndTypeValidator>
       </Route>
       <Route path="/mypage" exact>
-        <MyPage />
+        <TokenAndTypeValidator>
+          <MyPage />
+        </TokenAndTypeValidator>
       </Route>
       <Route path="/mypage/quotation">
-        <QuotationList />
+        <TokenAndTypeValidator>
+          <QuotationList />
+        </TokenAndTypeValidator>
       </Route>
       <Route path="/mypage/houselist">
-        <HouseList />
+        <TokenAndTypeValidator>
+          <HouseList />
+        </TokenAndTypeValidator>
       </Route>
       <Route path="/register">
-        <Register />
+        <TokenAndTypeValidator>
+          <Register />
+        </TokenAndTypeValidator>
       </Route>
       <Route path="/team">
         <Team />
@@ -53,12 +70,31 @@ const RouterComponent = () => (
       <Route path="/category">
         <Category />
       </Route>
-      <Route path="/warehouses/detail/:warehouseId" component={Detail} />
-      <Route path="/warehouses/quotecontact">
-        <QuoteContact />
+      <Route path="/warehouses/detail/:warehouseId/:name">
+        <Detail />
       </Route>
-      <Route path="/service-agreements" component={SiteRule} />
-      <Route path="/privacy-policy" component={PrivacyPolicy} />
+      <Route path="/warehouses/quotecontact/:warehouseId/:name">
+        <TokenAndTypeValidator>
+          <QuoteContact />
+        </TokenAndTypeValidator>
+      </Route>
+      <Route path="/service-agreements">
+        <SiteRule />
+      </Route>
+      <Route path="/privacy-policy">
+        <PrivacyPolicy />
+      </Route>
+      <Route path="/error">
+        <ErrorPage
+          title={'잘못된 접근 입니다.'}
+          message={'잘못된 접근 입니다.'}
+          locationToGo={'/'}
+          buttonMessage={'메인 화면으로 이동'}
+        />
+      </Route>
+      <Route path="/icon-source">
+        <IconSource />
+      </Route>
       <Redirect path="*" to="/" />
     </Switch>
   </Router>

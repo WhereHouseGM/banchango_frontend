@@ -15,12 +15,17 @@ import {
   ButtonContainer,
   ChangePWButton,
   ConfirmButton,
+  MobileUpperMenuWrapper,
+  MobileUpperMenuButton,
+  WithdrawalLabel,
 } from './style';
+import WithdrawalModal from './Modal/Withdrawal_Modal';
 
 const MyPage = ({ userInfo, handleSubmit }) => {
   const history = useHistory();
   const [checkModalShow, setCheckModalShow] = useState(false);
   const [changeModalShow, setChangeModalShow] = useState(false);
+  const [withdrawalModalShow, setWithDrawalModalShow] = useState(false);
 
   const [nameIn, setNameIn] = useState(userInfo.name);
   const [telephoneNumberIn, setTelephoneNumberIn] = useState(
@@ -36,6 +41,9 @@ const MyPage = ({ userInfo, handleSubmit }) => {
   };
   const closeChangeModal = () => {
     setChangeModalShow(false);
+  };
+  const closeWithdrawalModal = () => {
+    setWithDrawalModalShow(false);
   };
   const getUserInfo = () => {
     const userInfoSet = {
@@ -63,6 +71,11 @@ const MyPage = ({ userInfo, handleSubmit }) => {
         visible={changeModalShow}
         handleSubmit={handleSubmit}
         getUserInfo={getUserInfo}
+      />
+      <WithdrawalModal
+        className={'withdrawalModal'}
+        onClose={closeWithdrawalModal}
+        visible={withdrawalModalShow}
       />
       <Container>
         <LeftBanner>
@@ -94,6 +107,20 @@ const MyPage = ({ userInfo, handleSubmit }) => {
             로그아웃
           </BannerTextDisabledBox>
         </LeftBanner>
+        <MobileUpperMenuWrapper>
+          <MobileUpperMenuButton isIn>내 프로필</MobileUpperMenuButton>
+          {userInfo.type === 'SHIPPER' ? (
+            <MobileUpperMenuButton
+              onClick={() => {
+                history.push('/mypage/quotation');
+              }}
+            >
+              견적 요청 목록
+            </MobileUpperMenuButton>
+          ) : (
+            <MobileUpperMenuButton>내 창고</MobileUpperMenuButton>
+          )}
+        </MobileUpperMenuWrapper>
         <UserInfoContainer>
           <HelloTitleText>{userInfo.name}님 안녕하세요.</HelloTitleText>
           <InfoTitleText>이메일</InfoTitleText>
@@ -102,11 +129,13 @@ const MyPage = ({ userInfo, handleSubmit }) => {
           <InfoBox value={nameIn} onChange={(e) => setNameIn(e.target.value)} />
           <InfoTitleText>유선전화 번호</InfoTitleText>
           <InfoBox
+            type="number"
             value={phoneNumberIn}
             onChange={(e) => setPhoneNumberIn(e.target.value)}
           />
           <InfoTitleText>휴대전화 번호</InfoTitleText>
           <InfoBox
+            type="number"
             value={telephoneNumberIn}
             onChange={(e) => setTelephoneNumberIn(e.target.value)}
           />
@@ -128,9 +157,16 @@ const MyPage = ({ userInfo, handleSubmit }) => {
                 setCheckModalShow(true);
               }}
             >
-              확인
+              수정하기
             </ConfirmButton>
           </ButtonContainer>
+          <WithdrawalLabel
+            onClick={() => {
+              setWithDrawalModalShow(true);
+            }}
+          >
+            회원 탈퇴
+          </WithdrawalLabel>
         </UserInfoContainer>
       </Container>
     </>
