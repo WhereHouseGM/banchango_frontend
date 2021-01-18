@@ -13,6 +13,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   line-height: 1.66;
+  font-size: 15px;
   @media (max-width: 768px) {
     font-size: 9px;
   }
@@ -79,8 +80,6 @@ const Footer = () => {
           <LeftBox>
             <BoxTitle>반창고</BoxTitle>
             <BoxBody>
-              사업자등록번호 | 040-20-191250
-              <br />
               대표 | 최윤석 <br />
               주소 | 서울특별시 동작구 성도동 창신관 304호
             </BoxBody>
