@@ -275,19 +275,24 @@ const QuoteContact = () => {
                 estimateItemInput.name === null ||
                 estimateItemInput.name.trim() === ''
               ) {
+                message.destroy();
                 message.warning('상품 종류를 입력해주세요.');
                 return;
               } else if (estimateItemInput.keepingNumber === null) {
+                message.destroy();
                 message.warning('보관 수량을 입력해주세요.');
                 return;
               } else if (estimateItemInput.perimeter === null) {
                 message.warning('상품 크기를 입력해주세요.');
                 return;
               } else if (estimateItemInput.weight === null) {
+                message.destroy();
                 message.warning('상품 무게를 입력해주세요.');
                 return;
               } else if (estimateItemInput.sku === null) {
+                message.destroy();
                 message.warning('상품 SKU를 입력해주세요.');
+                return;
               }
               let beforeEstimateItems = estimateItems;
               beforeEstimateItems.push(estimateItemInput);
