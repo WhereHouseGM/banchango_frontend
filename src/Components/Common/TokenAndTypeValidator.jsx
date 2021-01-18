@@ -136,22 +136,24 @@ const TokenAndTypeValidator = ({children}) => {
                     return <ErrorPage title={'잘못된 접근입니다.'} message={'로그인을 먼저 해주세요.'} locationToGo={'/login'} buttonMessage={'로그인 하기'}/>;
                 }
             default:
-                if(isUserLoggedIn()) {
-                    if(isTokenExpired()) {
-                        alert('유효기간이 만료되었습니다. 다시 로그인 해주세요.');
-                        localStorage.clear();
-                        window.location.href = "/login";
-                        break;
-                    } else {
-                        if(localStorage.getItem('type') === 'SHIPPER') {
-                            return children;
+                if(location.pathname.includes(PathNames.WAREHOUSES_QUOTECONTACT)) {
+                    if(isUserLoggedIn()) {
+                        if(isTokenExpired()) {
+                            alert('유효기간이 만료되었습니다. 다시 로그인 해주세요.');
+                            localStorage.clear();
+                            window.location.href = "/login";
+                            break;
                         } else {
-                            return <ErrorPage title={'잘못된 접근입니다.'} message={'잘못된 접근입니다.'} locationToGo={'/'} buttonMessage={'메인 화면으로 이동'}/>;
+                            if(localStorage.getItem('type') === 'SHIPPER') {
+                                return children;
+                            } else {
+                                return <ErrorPage title={'잘못된 접근입니다.'} message={'잘못된 접근입니다.'} locationToGo={'/'} buttonMessage={'메인 화면으로 이동'}/>;
+                            }
                         }
+                    } else {
+                        return <ErrorPage title={'로그인 후 견적 요청이 가능합니다.'} message={'로그인을 먼저 해주세요.'} locationToGo={'/login'} buttonMessage={'로그인 하기'}/>;
                     }
-                } else {
-                    return <ErrorPage title={'잘못된 접근입니다.'} message={'로그인을 먼저 해주세요.'} locationToGo={'/login'} buttonMessage={'로그인 하기'}/>;
-                }
+            }
         }
     }, [location.pathname, children]);
 

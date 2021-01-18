@@ -457,7 +457,7 @@ const Detail = ({ warehouse }) => {
                 방문 인터뷰 블로그
               </BlogVisitButton>
             )}
-            {localStorage.getItem('type') === 'SHIPPER' ? (
+            {localStorage.getItem('type') !== 'OWNER' ? (
               <QuoteContactButton
                 onClick={() => {
                   history.push(
