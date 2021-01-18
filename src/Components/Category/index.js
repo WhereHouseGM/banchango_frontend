@@ -57,7 +57,7 @@ const Category = ({ warehouses }) => {
   ] = useState(false);
   const [clickedItems, setClickedItems] = useState(
     selectedMainItemTypes === null || selectedMainItemTypes === undefined
-      ? 'CLOTH'
+      ? 'GENERAL_MERCHANDISE'
       : selectedMainItemTypes,
   );
   const history = useHistory();
