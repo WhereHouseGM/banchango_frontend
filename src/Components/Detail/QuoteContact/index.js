@@ -88,6 +88,10 @@ const QuoteContact = () => {
             .getEstimateItems(id, localStorage.getItem('AccessToken'))
             .then(({ data: { estimateItems } }) => {
               setEstimateItems(estimateItems);
+              setEstimate({
+                ...estimate,
+                estimateItems: estimateItems,
+              });
             })
             .catch(({ response: { status } }) => {
               if (status === 400) {
