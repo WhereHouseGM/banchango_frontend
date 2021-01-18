@@ -107,21 +107,6 @@ const HouseList = () => {
               </ItemBox>
             );
           })}
-          {/* <ItemBox>
-            <ItemImg
-              src={
-                'https://user-images.githubusercontent.com/62606632/104148782-f61c5e00-5416-11eb-9729-d2c9d5197faf.png'
-              }
-            />
-            <ItemDescWrapper>
-              <SubTitle>인천시 서구 석납동 창고</SubTitle>
-              <Title>
-                {'멋진 창고'}
-                <TitleUnderLine />
-              </Title>
-              <ConfirmedBox>승인 완료</ConfirmedBox>
-            </ItemDescWrapper>
-          </ItemBox> */}
         </ItemContainer>
       </UserInfoContainer>
     </Container>
