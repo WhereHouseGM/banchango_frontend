@@ -17,7 +17,7 @@ const FirstContainer = styled.div`
   justify-content: center;
 `;
 const FirstLeftText = styled.div`
-  width: 10%;
+  width: 20%;
   min-width: 165.1px;
   font-weight: bold;
   font-size: 45px;
@@ -222,9 +222,12 @@ const Team = () => {
   return (
     <Container>
       <FirstContainer>
-        <FirstLeftText>㮽창고 :</FirstLeftText>
+        <FirstLeftText>
+          <span>㮽창고{` `}</span>
+          <span style={{ fontSize: '35px' }}>HUB:</span>
+        </FirstLeftText>
         <FirstRightText>
-          국내 최초 창고중개 플랫폼 반창고는 대표가 직접 '화주로서 느끼는
+          국내 최초 창고중개 플랫폼 반창고 허브는 대표가 직접 '화주로서 느끼는
           어려움'에서 시작한 솔루션입니다.
           <br /> IT 성장이 주는 편리함은 잃지 않되, 그 모든 기반에 있는 사람의
           가치 또한 잊지 않고자 합니다.
@@ -235,26 +238,26 @@ const Team = () => {
       <SecondWrapper>
         <SecondLeftBox>
           <SecondLeftFirst>VALUE 01</SecondLeftFirst>
-          <SecondLeftSecond>반창고가 추구하는</SecondLeftSecond>
+          <SecondLeftSecond>반창고 허브가 추구하는</SecondLeftSecond>
           <SecondLeftThird>'성장'</SecondLeftThird>
         </SecondLeftBox>
         <SecondRightBox>
           누구에게나 처음은 낯설고, 어렵습니다.
           <br /> 그러나 처음이기에 성장할 수 있는 무한한 가능성은 설렘으로
           다가옵니다. <br />
-          반창고의 서비스를 준비하는 과정은 설렘의 연속이었습니다.
+          반창고 허브의 서비스를 준비하는 과정은 설렘의 연속이었습니다.
           <br /> 그간 '당연시하게' 여겨져왔던 물류 시장의 불편함은 <br />
           도리어 성장 가능성의 반증이었습니다. <br />
           이제는 그 가능성을 화주분들과 함께 실현시키고자 합니다.
         </SecondRightBox>
         <SecondLeftBox>
           <SecondLeftFirst>VALUE 02</SecondLeftFirst>
-          <SecondLeftSecond>반창고가 추구하는</SecondLeftSecond>
+          <SecondLeftSecond>반창고 허브가 추구하는</SecondLeftSecond>
           <SecondLeftThird>'상생'</SecondLeftThird>
         </SecondLeftBox>
         <SecondRightBox>
           모든 기업의 최우선 가치는 '이윤추구', '생존'입니다.
-          <br /> 반창고는 그러한 생존이 상생이길 바랍니다.
+          <br /> 반창고 허브는 그러한 생존이 상생이길 바랍니다.
           <br /> 규모나 영역에 대한 걱정없이 화주분들의 열정적인 도전에 보탬이
           되고자 합니다.
           <br /> 시작의 막연함부터 성장단계에서 마주하는 어려움까지 모든
@@ -278,7 +281,7 @@ const Team = () => {
       <FourthContainer>
         <FourthLeft>
           <FourthLeftLine />
-          <FourthLeftTitle>반창고 Team</FourthLeftTitle>
+          <FourthLeftTitle>반창고 HUB Team</FourthLeftTitle>
         </FourthLeft>
         <FourthRight>
           <FourthRightFloor>

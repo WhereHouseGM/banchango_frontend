@@ -116,12 +116,12 @@ export const BtnArr = [
   {
     id: 'FREEZE_STORAGE',
     name: '냉동',
-    icon: { normal: RefrigeratorA, clicked: RefrigeratorB },
+    icon: { normal: IcecreamA, clicked: IcecreamB },
   },
   {
     id: 'COLD_STORAGE',
     name: '냉장',
-    icon: { normal: IcecreamA, clicked: IcecreamB },
+    icon: { normal: RefrigeratorA, clicked: RefrigeratorB },
   },
   {
     id: 'LARGE_SIZE',

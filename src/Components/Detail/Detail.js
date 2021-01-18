@@ -272,14 +272,14 @@ export const MainItemTypeWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  font-size: 13px;
+  font-size: 11.5px;
   margin-top: 14px;
 `;
 
 export const MainItemTypeValue = styled.div`
-  margin-right: 9px;
+  margin-right: 6.5px;
   margin-top: 5px;
-  padding: 8px 8px;
+  padding: 8px;
   border: 1px solid #1e56a0;
   color: #1e56a0;
   border-radius: 20px;
