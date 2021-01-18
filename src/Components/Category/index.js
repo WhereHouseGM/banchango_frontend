@@ -62,17 +62,16 @@ const Category = ({ warehouses }) => {
   );
   const history = useHistory();
   const getApi = useCallback(async () => {
-    try {
-      let _results = await warehouseApi.getByMainItemTypes(clickedItems, 0, 10);
-      let { status } = _results;
-      if (status !== 200) throw new Error();
-      const {
-        data: { warehouses },
-      } = _results;
-      setResults(warehouses);
-    } catch (Error) {
-      message.warning('검색 결과가 존재하지 않습니다.');
-    }
+    warehouseApi
+      .getByMainItemTypes(clickedItems, 0, 10)
+      .then(({ data: { warehouses } }) => {
+        setResults(warehouses);
+      })
+      .catch(({ response: { status } }) => {
+        if (status === 404) {
+          message.warning('검색 결과가 존재하지 않습니다.');
+        }
+      });
   }, [clickedItems]);
   useEffect(() => {
     window.scrollTo(0, 0);
