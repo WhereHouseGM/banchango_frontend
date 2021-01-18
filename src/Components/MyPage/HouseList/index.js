@@ -18,7 +18,7 @@ import {
   Title,
   TitleUnderLine,
   ConfirmedBox,
-} from './style';
+} from './HouseList';
 
 const HouseList = () => {
   const history = useHistory();
