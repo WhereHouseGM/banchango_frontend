@@ -427,7 +427,7 @@ const QuoteContact = () => {
                   .saveEstimate(estimate, localStorage.getItem('AccessToken'))
                   .then(() => {
                     alert('견적 문의 요청이 정상적으로 접수되었습니다.');
-                    window.location.href = '/';
+                    window.location.href = '/mypage/quotation';
                   })
                   .catch(({ response: { status } }) => {
                     if (status === 400) {
