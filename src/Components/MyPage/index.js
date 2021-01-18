@@ -129,11 +129,13 @@ const MyPage = ({ userInfo, handleSubmit }) => {
           <InfoBox value={nameIn} onChange={(e) => setNameIn(e.target.value)} />
           <InfoTitleText>유선전화 번호</InfoTitleText>
           <InfoBox
+            type="number"
             value={phoneNumberIn}
             onChange={(e) => setPhoneNumberIn(e.target.value)}
           />
           <InfoTitleText>휴대전화 번호</InfoTitleText>
           <InfoBox
+            type="number"
             value={telephoneNumberIn}
             onChange={(e) => setTelephoneNumberIn(e.target.value)}
           />

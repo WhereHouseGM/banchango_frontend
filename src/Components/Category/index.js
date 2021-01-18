@@ -57,7 +57,7 @@ const Category = ({ warehouses }) => {
   ] = useState(false);
   const [clickedItems, setClickedItems] = useState(
     selectedMainItemTypes === null || selectedMainItemTypes === undefined
-      ? 'CLOTH'
+      ? 'GENERAL_MERCHANDISE'
       : selectedMainItemTypes,
   );
   const history = useHistory();
@@ -209,7 +209,9 @@ const Category = ({ warehouses }) => {
                 src={warehouse.mainImageUrl}
                 alt={'창고 사진'}
                 onClick={() => {
-                  history.push(`/warehouses/detail/${warehouse.warehouseId}`);
+                  history.push(
+                    `/warehouses/detail/${warehouse.warehouseId}/${warehouse.name}`,
+                  );
                 }}
               />
               <ResultBoxDescWrap>
@@ -246,7 +248,9 @@ const Category = ({ warehouses }) => {
                 </ResultBoxDescDeliveryListText>
                 <ResultBoxDescInquiryButton
                   onClick={() => {
-                    history.push(`/warehouses/detail/${warehouse.warehouseId}`);
+                    history.push(
+                      `/warehouses/detail/${warehouse.warehouseId}/${warehouse.name}`,
+                    );
                   }}
                 >
                   창고 상세보기
@@ -262,7 +266,9 @@ const Category = ({ warehouses }) => {
             src={warehouse.mainImageUrl}
             alt={'창고 메인 이미지'}
             onClick={() => {
-              history.push(`/warehouses/detail/${warehouse.warehouseId}`);
+              history.push(
+                `/warehouses/detail/${warehouse.warehouseId}/${warehouse.name}`,
+              );
             }}
           />
           <MobileResultBottomWrapper>
@@ -277,7 +283,9 @@ const Category = ({ warehouses }) => {
             </MobileResultCategoryButtonWrapper>
             <MobileResultQuoteContactButton
               onClick={() => {
-                history.push(`/warehouses/detail/${warehouse.warehouseId}`);
+                history.push(
+                  `/warehouses/detail/${warehouse.warehouseId}/${warehouse.name}`,
+                );
               }}
             >
               상세 보기

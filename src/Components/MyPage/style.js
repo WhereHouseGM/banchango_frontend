@@ -70,7 +70,7 @@ export const UserInfoContainer = styled.div`
   }
 `;
 export const HelloTitleText = styled.h1`
-  color: #5ea0ff;
+  color: #1e56a0;
   text-align: center;
   font-weight: bold;
   font-size: 35px;
@@ -120,7 +120,7 @@ export const ChangePWButton = styled.div`
   border-radius: 10px 10px 10px 10px;
   border: 1px solid #1e56a0;
   width: 275px;
-  color: #5ea0ff;
+  color: #1e56a0;
   padding: 20px;
   text-align: center;
   font-size: 20px;

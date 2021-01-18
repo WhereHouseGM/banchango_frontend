@@ -32,7 +32,13 @@ const GoToMainPage = styled.div`
   }
 `;
 
-const ErrorPage = ({ title, message, locationToGo, buttonMessage }) => {
+const ErrorPage = ({
+  title,
+  message,
+  locationToGo,
+  newLocation,
+  buttonMessage,
+}) => {
   const history = useHistory();
   return (
     <Container>
@@ -40,7 +46,9 @@ const ErrorPage = ({ title, message, locationToGo, buttonMessage }) => {
       <Body>{message}</Body>
       <GoToMainPage
         onClick={() => {
-          history.push(`${locationToGo}`);
+          locationToGo !== null && locationToGo !== undefined
+            ? history.push(`${locationToGo}`)
+            : window.open(newLocation);
         }}
       >
         {buttonMessage}
@@ -52,7 +60,8 @@ const ErrorPage = ({ title, message, locationToGo, buttonMessage }) => {
 ErrorPage.propTypes = {
   title: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
-  locationToGo: PropTypes.string.isRequired,
+  locationToGo: PropTypes.string,
+  newLocation: PropTypes.string,
   buttonMessage: PropTypes.string.isRequired,
 };
 

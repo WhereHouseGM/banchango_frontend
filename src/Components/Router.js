@@ -70,7 +70,7 @@ const RouterComponent = () => (
       <Route path="/category">
         <Category />
       </Route>
-      <Route path="/warehouses/detail/:warehouseId">
+      <Route path="/warehouses/detail/:warehouseId/:name">
         <Detail />
       </Route>
       <Route path="/warehouses/quotecontact/:warehouseId/:name">

@@ -457,15 +457,17 @@ const Detail = ({ warehouse }) => {
                 방문 인터뷰 블로그
               </BlogVisitButton>
             )}
-            <QuoteContactButton
-              onClick={() => {
-                history.push(
-                  `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}`,
-                );
-              }}
-            >
-              견적 요청하기
-            </QuoteContactButton>
+            {localStorage.getItem('type') !== 'OWNER' ? (
+              <QuoteContactButton
+                onClick={() => {
+                  history.push(
+                    `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}`,
+                  );
+                }}
+              >
+                견적 요청하기
+              </QuoteContactButton>
+            ) : null}
             <QuoteContactCautionText>
               반창고의 빠른 검토 후,
               <br />

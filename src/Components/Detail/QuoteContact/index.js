@@ -88,6 +88,10 @@ const QuoteContact = () => {
             .getEstimateItems(id, localStorage.getItem('AccessToken'))
             .then(({ data: { estimateItems } }) => {
               setEstimateItems(estimateItems);
+              setEstimate({
+                ...estimate,
+                estimateItems: estimateItems,
+              });
             })
             .catch(({ response: { status } }) => {
               if (status === 400) {
@@ -271,19 +275,24 @@ const QuoteContact = () => {
                 estimateItemInput.name === null ||
                 estimateItemInput.name.trim() === ''
               ) {
+                message.destroy();
                 message.warning('상품 종류를 입력해주세요.');
                 return;
               } else if (estimateItemInput.keepingNumber === null) {
+                message.destroy();
                 message.warning('보관 수량을 입력해주세요.');
                 return;
               } else if (estimateItemInput.perimeter === null) {
                 message.warning('상품 크기를 입력해주세요.');
                 return;
               } else if (estimateItemInput.weight === null) {
+                message.destroy();
                 message.warning('상품 무게를 입력해주세요.');
                 return;
               } else if (estimateItemInput.sku === null) {
+                message.destroy();
                 message.warning('상품 SKU를 입력해주세요.');
+                return;
               }
               let beforeEstimateItems = estimateItems;
               beforeEstimateItems.push(estimateItemInput);
@@ -397,13 +406,8 @@ const QuoteContact = () => {
             </TextareaWrapper>
             <InquiryButton
               onClick={() => {
-                if (
-                  estimate.content === null ||
-                  estimate.content.trim() === ''
-                ) {
-                  message.warning('요청 및 유의사항을 작성해주세요.');
-                  return;
-                } else if (estimate.monthlyAverageRelease === null) {
+                if (estimate.monthlyAverageRelease === null) {
+                  message.destroy();
                   message.warning('월간 총 출고량을 입력해주세요.');
                   return;
                 }
@@ -416,7 +420,7 @@ const QuoteContact = () => {
                   .saveEstimate(estimate, localStorage.getItem('AccessToken'))
                   .then(() => {
                     alert('견적 문의 요청이 정상적으로 접수되었습니다.');
-                    window.location.href = '/';
+                    window.location.href = '/mypage/quotation';
                   })
                   .catch(({ response: { status } }) => {
                     if (status === 400) {
