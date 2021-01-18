@@ -406,14 +406,7 @@ const QuoteContact = () => {
             </TextareaWrapper>
             <InquiryButton
               onClick={() => {
-                if (
-                  estimate.content === null ||
-                  estimate.content.trim() === ''
-                ) {
-                  message.destroy();
-                  message.warning('요청 및 유의사항을 작성해주세요.');
-                  return;
-                } else if (estimate.monthlyAverageRelease === null) {
+                if (estimate.monthlyAverageRelease === null) {
                   message.destroy();
                   message.warning('월간 총 출고량을 입력해주세요.');
                   return;
