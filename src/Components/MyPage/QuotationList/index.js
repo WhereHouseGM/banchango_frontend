@@ -26,7 +26,6 @@ import {
   UserInfoContainer,
 } from './style';
 import {
-  Barcodes,
   barcodeToText,
   keepingTypeToText,
 } from '../../Detail/QuoteContact/QuoteContact';
