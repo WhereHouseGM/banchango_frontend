@@ -65,6 +65,16 @@ const Navbar = () => {
           )}
         </NavOpen>
         <NavMenu>
+          <NavLink to="/category" style={{ color: 'black' }}>
+            창고검색
+          </NavLink>
+          <NavLink to="/">
+            {/* TODO: 이용방법 REF -> 
+            type 체크 후 창고주이면 안나오고 useHistory로 props 체크해서 이거로 간거면 스크롤 내리기
+            메인으로 이동 후 scrollTo*/}
+            이용방법
+          </NavLink>
+
           <NavLink to="/team">팀소개</NavLink>
           {loginInfo.logined ? (
             <>
