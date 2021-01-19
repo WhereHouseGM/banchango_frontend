@@ -74,6 +74,12 @@ const Category = () => {
         } else {
           setResults(warehouses);
         }
+        if (warehouses.length !== 0) {
+          window.scrollTo({
+            top: document.getElementById('resultTop').offsetTop,
+            behavior: 'smooth',
+          });
+        }
         setLoading(false);
       })
       .catch(({ response: { status } }) => {
@@ -92,7 +98,9 @@ const Category = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     let clickedArr = JSON.parse(sessionStorage.getItem('ClickedButton'));
-    !!clickedArr ? setClicked(clickedArr) : setClicked([true]);
+    !!clickedArr
+      ? setClicked(clickedArr)
+      : setClicked([false, false, false, true]);
   }, []);
 
   useEffect(() => {
@@ -216,6 +224,7 @@ const Category = () => {
           </MobileCategoryFindButton>
         </MobileCategoryPickerBox>
       </CategoryPickContainer>
+      <div id="resultTop" />
       {loading ? (
         <Loading />
       ) : (
