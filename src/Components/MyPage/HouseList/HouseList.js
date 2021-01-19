@@ -5,9 +5,6 @@ export const Container = styled.div`
   height: auto;
   position: relative;
   min-height: 85vh;
-  @media screen and (max-width: 768px) {
-    margin-top: 105px;
-  }
 `;
 
 export const LeftBanner = styled.div`
@@ -17,6 +14,29 @@ export const LeftBanner = styled.div`
   background-color: #1e56a0;
   width: 270px;
   color: white;
+  @media (max-width: 1100px) {
+    display: none;
+  }
+`;
+
+export const MobileUpperMenuWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  position: sticky;
+  top: 45px;
+  z-index: 50;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.05);
+  @media (min-width: 1101px) {
+    display: none;
+  }
+`;
+export const MobileUpperMenuButton = styled.div`
+  width: 50%;
+  padding: 15px 0;
+  text-align: center;
+  background-color: ${(props) => (props.isIn ? '#1e56a0' : 'white')};
+  color: ${(props) => (props.isIn ? 'white' : 'black')};
 `;
 
 export const BannerTextEnabledBox = styled.div`
@@ -44,6 +64,9 @@ export const UserInfoContainer = styled.div`
   width: 900px;
   padding: 40px 20px;
   margin: 0px auto;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const TitleWrapper = styled.div`
