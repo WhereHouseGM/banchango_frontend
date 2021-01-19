@@ -194,3 +194,14 @@ export const MobileDescAccepted = styled.div`
   align-self: flex-end;
   top: 20%;
 `;
+export const NewWarehouseButton = styled.div`
+  border: 1px solid #1e56a0;
+  padding: 15px 0;
+  width: 120px;
+  text-align: center;
+  margin: 30px auto 0 auto;
+  border-radius: 15px;
+  color: #1e56a0;
+  font-weight: bold;
+  font-size: 15px;
+`;

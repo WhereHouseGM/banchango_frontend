@@ -9,6 +9,7 @@ import {
   MobileDescWrapper,
   MobileItemImg,
   MobileItemWrapper,
+  NewWarehouseButton,
 } from '../style';
 
 import {
@@ -113,7 +114,16 @@ const HouseList = () => {
         <ItemContainer>
           {warehouses.map((warehouse, idx) => {
             return (
-              <ItemBox key={`HOUSE${idx}`}>
+              <ItemBox
+                key={`HOUSE${idx}`}
+                onClick={() => {
+                  if (warehouse.status === 'VIEWABLE') {
+                    history.push(
+                      `/warehouses/detail/${warehouse.warehouseId}/${warehouse.name}`,
+                    );
+                  }
+                }}
+              >
                 <ItemImg src={warehouse.mainImageUrl} />
                 <ItemDescWrapper>
                   <SubTitle>
@@ -132,7 +142,16 @@ const HouseList = () => {
       </UserInfoContainer>
       <MobileContainer>
         {warehouses.map((warehouse, idx) => (
-          <MobileItemWrapper key={idx}>
+          <MobileItemWrapper
+            key={idx}
+            onClick={() => {
+              if (warehouse.status === 'VIEWABLE') {
+                history.push(
+                  `/warehouses/detail/${warehouse.id}/${warehouse.name}`,
+                );
+              }
+            }}
+          >
             <MobileItemImg src={warehouse.mainImageUrl} alt={'창고 사진'} />
             <MobileDescWrapper>
               <MobileDescAddress>
@@ -145,6 +164,13 @@ const HouseList = () => {
             </MobileDescWrapper>
           </MobileItemWrapper>
         ))}
+        <NewWarehouseButton
+          onClick={() => {
+            history.push('/register');
+          }}
+        >
+          새로 만들기
+        </NewWarehouseButton>
       </MobileContainer>
     </Container>
   );
