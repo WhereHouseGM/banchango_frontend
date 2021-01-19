@@ -39,9 +39,9 @@ export const BannerTextDisabledBox = styled.div`
   }
 `;
 export const MobileUpperMenuWrapper = styled.div`
+  position: sticky;
   width: 100%;
   display: flex;
-  position: sticky;
   top: 45px;
   z-index: 50;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
