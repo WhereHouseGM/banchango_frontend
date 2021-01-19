@@ -74,6 +74,12 @@ const Category = () => {
         } else {
           setResults(warehouses);
         }
+        if (warehouses.length !== 0) {
+          window.scrollTo({
+            top: document.getElementById('resultTop').offsetTop,
+            behavior: 'smooth',
+          });
+        }
         setLoading(false);
       })
       .catch(({ response: { status } }) => {
@@ -216,6 +222,7 @@ const Category = () => {
           </MobileCategoryFindButton>
         </MobileCategoryPickerBox>
       </CategoryPickContainer>
+      <div id="resultTop" />
       {loading ? (
         <Loading />
       ) : (
