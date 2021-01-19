@@ -1,15 +1,15 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ReactGA from 'react-ga';
 
 const UseGoogleAnalytics = () => {
   const location = useLocation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     ReactGA.initialize('UA-187568714-1');
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const currentPath = location.pathname + location.search;
     ReactGA.set({ page: currentPath });
     ReactGA.pageview(currentPath);
