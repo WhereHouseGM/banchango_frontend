@@ -11,7 +11,7 @@ import {
 } from './Navbar';
 import { useHistory } from 'react-router-dom';
 
-import Logo from '../../assets/icons/LOGO2.png';
+import Logo from '../../assets/icons/LOGO.png';
 
 const Navbar = () => {
   const history = useHistory();
@@ -36,8 +36,7 @@ const Navbar = () => {
     <>
       <Nav>
         <NavLink to="/">
-          <img src={Logo} alt="반창고 로고" style={{ height: '30px' }} />
-          <NavLogoText>반창고</NavLogoText>
+          <img src={Logo} alt="반창고 로고" style={{ height: '29px' }} />
         </NavLink>
         <Bars onClick={() => setNavClicked(!navClicked)} />
         <NavOpen

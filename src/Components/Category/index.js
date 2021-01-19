@@ -173,6 +173,7 @@ const Category = () => {
               }
             })}
           </MobileSelectedCategoryText>
+          {/* TODO: 이거 깃허브 링크 빼자 */}
           <MobileSelectedCategoryArrow
             src={
               'https://user-images.githubusercontent.com/62606632/104792299-457cd880-57e1-11eb-898c-de6451dd1eff.png'
@@ -254,7 +255,9 @@ const Category = () => {
                       </ResultBoxDescBoxText>
                     </ResultBoxDescBoxLeft>
                     <ResultBoxDescBoxRight>
-                      <ResultBoxDescBoxTitle>평수</ResultBoxDescBoxTitle>
+                      <ResultBoxDescBoxTitle>
+                        평수
+                      </ResultBoxDescBoxTitle>
                       <ResultBoxDescBoxText>
                         {warehouse.space}
                       </ResultBoxDescBoxText>

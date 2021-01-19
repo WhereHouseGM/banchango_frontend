@@ -223,12 +223,12 @@ export const ResultBoxDescBoxRight = styled.div`
 `;
 
 export const ResultBoxDescBoxTitle = styled.div`
-  margin-top: 30px;
+   margin-top: 20px; 
   font-weight: bold;
 `;
 
 export const ResultBoxDescBoxText = styled.div`
-  margin-top: 5px;
+  margin-top: 25px;
 `;
 
 export const ResultBoxDescButtonWrap = styled.div`
