@@ -18,7 +18,7 @@ const Navbar = () => {
   const [loginInfo, setLoginInfo] = useState({});
   const [navClicked, setNavClicked] = useState(false);
   useEffect(() => {
-    window.scrollTo(0, 0);
+    
     let info = {
       logined: JSON.parse(localStorage.getItem('Login')),
       name: localStorage.getItem('Name'),

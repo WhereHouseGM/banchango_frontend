@@ -72,7 +72,6 @@ import { dayOfWeek } from '../../static/detail';
 const Detail = ({ warehouse }) => {
   const SliderRef = React.createRef();
   useEffect(() => {
-    window.scrollTo(0, 0);
     const script = document.createElement('script');
     script.async = true;
     script.src =

@@ -96,7 +96,6 @@ const Category = () => {
   }, [clickedItems, pageIndex, isExtraLoading, setResults]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     let clickedArr = JSON.parse(sessionStorage.getItem('ClickedButton'));
     !!clickedArr
       ? setClicked(clickedArr)
