@@ -47,6 +47,7 @@ const BoxTitle = styled.div`
   font-weight: bold;
 `;
 const BoxBody = styled.div``;
+
 const BoxBottomLink = styled(Link)`
   margin: 10px 10px 0 10px;
   font-size: 8.6px;
@@ -99,10 +100,7 @@ const Footer = () => {
               대표전화 | 010-4161-4711
             </BoxBody>
             <BoxBottomLink
-              onClick={() => {
-                window.location.href =
-                  'https://www.cognitoforms.com/WhereHouseGM/%ED%8C%8C%ED%8A%B8%EB%84%88%EC%8B%AD%EB%AC%B8%EC%9D%98';
-              }}
+              to="https://www.cognitoforms.com/WhereHouseGM/%ED%8C%8C%ED%8A%B8%EB%84%88%EC%8B%AD%EB%AC%B8%EC%9D%98"
               style={{ fontSize: '15px' }}
             >
               창고 등록 문의
