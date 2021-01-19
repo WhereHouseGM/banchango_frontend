@@ -119,7 +119,7 @@ const HouseList = () => {
                 onClick={() => {
                   if (warehouse.status === 'VIEWABLE') {
                     history.push(
-                      `/warehouses/detail/${warehouse.warehouseId}/${warehouse.name}`,
+                      `/warehouses/detail/${warehouse.id}/${warehouse.name}`,
                     );
                   }
                 }}
