@@ -325,6 +325,18 @@ export const MobileResultQuoteContactButton = styled.div`
   position: absolute;
 `;
 
+export const ShowMoreButton = styled.div`
+  padding: 15px;
+  width: 30%;
+  font-size: 20px;
+  border-radius: 20px;
+  color: white;
+  background-color: #2e559a;
+  font-weight: bold;
+  margin: 0px auto 30px auto;
+  cursor: pointer;
+`;
+
 export const BtnArr = [
   {
     id: 'CLOTH',
