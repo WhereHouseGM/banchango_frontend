@@ -22,11 +22,13 @@ import QuoteContact from '../Routes/Detail/QuoteContact';
 import IconSource from '../Routes/IconSource';
 import ErrorPage from '../Components/ErrorPage';
 import TokenAndTypeValidator from './Common/TokenAndTypeValidator';
+import UseGoogleAnalytics from './GoogleAnalytics';
 
 const BadAccessText = '잘못된 접근입니다.';
 
-const RouterComponent = () => (
-  <Router>
+const RouterComponent = () => {
+  UseGoogleAnalytics();
+  return (
     <Switch>
       <Route path="/" exact component={Main} />
       <Route path="/login">
@@ -97,7 +99,14 @@ const RouterComponent = () => (
       </Route>
       <Redirect path="*" to="/" />
     </Switch>
-  </Router>
-);
+  );
+};
+const RouterExporter = () => {
+  return (
+    <Router>
+      <RouterComponent />
+    </Router>
+  );
+};
 
-export default RouterComponent;
+export default RouterExporter;
