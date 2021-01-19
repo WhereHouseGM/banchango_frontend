@@ -75,11 +75,18 @@ const QuoteContact = () => {
     content: null,
     monthlyAverageRelease: null,
   });
+  const goToResultList = () => {
+    window.scrollTo({
+      top: document.getElementById('resultList').offsetTop - 53,
+      behavior: 'smooth',
+    });
+  };
 
   return (
     <>
       <ImportListModal
         visible={importListVisible}
+        goToResultList={goToResultList}
         onClose={() => {
           setImportListVisible(false);
         }}
@@ -125,7 +132,7 @@ const QuoteContact = () => {
           <ProductWrapper>
             <ProductBlankWrapper />
             <ProductLeftWrapper>
-              <BlueText text={'상품 종류'} />
+              <BlueText text={'상품 종류'} id={'resultList'} />
               <InputBox
                 type="text"
                 placeholder="상품이름을 적어주세요. ex) 파운데이션, 의자등"

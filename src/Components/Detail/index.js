@@ -204,7 +204,9 @@ const Detail = ({ warehouse }) => {
         </MobileUpperDescContainer>
         <MobileQuoteContactButton
           onClick={() => {
-            history.push(`/warehouses/quotecontact/${warehouse.warehouseId}`);
+            history.push(
+              `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}`,
+            );
           }}
         >
           견적 문의하기
