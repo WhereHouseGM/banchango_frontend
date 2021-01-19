@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import Fade from 'react-reveal/Fade';
 import CircleImg from '../../assets/images/MainPage/Circle.png';
@@ -53,12 +53,23 @@ import {
   FirstImageContainer,
   FirstTitleText,
 } from './MainPage';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const MainPage = () => {
   const [buttonClicked, setButtonClicked] = useState([]);
   const SliderRef = React.createRef();
   const history = useHistory();
+  const location = useLocation();
+  useEffect(() => {
+    if (!!location.state && !!location.state.goToHow) {
+      window.scrollTo({
+        top: document.getElementById('howToUseLocation').offsetTop - 53,
+        behavior: 'smooth',
+      });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
 
   const getClickedMainItemTypes = () => {
     let clickedMainItemTypes = [];
@@ -151,7 +162,9 @@ const MainPage = () => {
       </SecondContainer>
       <ThirdContainer>
         <QuickSystemBanner>
-          <BannerTitle>전화하기 부담스러우셨죠?</BannerTitle>
+          <BannerTitle id="howToUseLocation">
+            전화하기 부담스러우셨죠?
+          </BannerTitle>
           <BannerTextBig>빠른 견적 요청 시스템</BannerTextBig>
           <BannerTextSmall>
             간단한 품목입력으로, 빠르게 견적 요청이 가능합니다.

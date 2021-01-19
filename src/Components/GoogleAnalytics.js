@@ -10,7 +10,9 @@ const UseGoogleAnalytics = () => {
   }, []);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (location.pathname !== '/') {
+      window.scrollTo(0, 0);
+    }
     const currentPath = location.pathname + location.search;
     ReactGA.set({ page: currentPath });
     ReactGA.pageview(currentPath);

@@ -17,7 +17,6 @@ const Navbar = () => {
   const [loginInfo, setLoginInfo] = useState({});
   const [navClicked, setNavClicked] = useState(false);
   useEffect(() => {
-    
     let info = {
       logined: JSON.parse(localStorage.getItem('Login')),
       name: localStorage.getItem('Name'),
@@ -67,9 +66,9 @@ const Navbar = () => {
           ) : (
             <>
               <NavLink to="/category">창고검색</NavLink>
-              <NavLink to="/">
+              <NavLink to={{ pathname: '/', state: { goToHow: true } }}>
                 {/* TODO: 이용방법 REF -> 
-            type 체크 후 창고주이면 안나오고 useHistory로 props 체크해서 이거로 간거면 스크롤 내리기
+           useHistory로 props 체크해서 이거로 간거면 스크롤 내리기
             메인으로 이동 후 scrollTo*/}
                 {/* TODO: 네비 색 다 검정 */}
                 이용방법
