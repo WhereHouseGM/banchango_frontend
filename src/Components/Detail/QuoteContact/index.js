@@ -132,7 +132,7 @@ const QuoteContact = () => {
           <ProductWrapper>
             <ProductBlankWrapper />
             <ProductLeftWrapper>
-              <BlueText text={'상품 종류'} id={'resultList'} />
+              <BlueText text={'상품 종류'} />
               <InputBox
                 type="text"
                 placeholder="상품이름을 적어주세요. ex) 파운데이션, 의자등"
@@ -335,7 +335,7 @@ const QuoteContact = () => {
             상품 추가하기
           </AddProductButton>
           <ProductListWrapper>
-            <ProductListTitle>상품 내역</ProductListTitle>
+            <ProductListTitle id={'resultList'}>상품 내역</ProductListTitle>
           </ProductListWrapper>
           <HistoryUpper>
             <HistoryUpperText width={'12%'}>상품 종류</HistoryUpperText>
