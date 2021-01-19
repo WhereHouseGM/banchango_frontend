@@ -98,7 +98,9 @@ const Category = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     let clickedArr = JSON.parse(sessionStorage.getItem('ClickedButton'));
-    !!clickedArr ? setClicked(clickedArr) : setClicked([true]);
+    !!clickedArr
+      ? setClicked(clickedArr)
+      : setClicked([false, false, false, true]);
   }, []);
 
   useEffect(() => {
