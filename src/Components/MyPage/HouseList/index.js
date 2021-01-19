@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { warehouseApi } from '../../../api';
+import {
+  MobileContainer,
+  MobileDescAccepted,
+  MobileDescAddress,
+  MobileDescName,
+  MobileDescWrapper,
+  MobileItemImg,
+  MobileItemWrapper,
+} from '../style';
 
 import {
   Container,
@@ -81,7 +90,13 @@ const HouseList = () => {
         </BannerTextDisabledBox>
       </LeftBanner>
       <MobileUpperMenuWrapper>
-        <MobileUpperMenuButton>내 프로필</MobileUpperMenuButton>
+        <MobileUpperMenuButton
+          onClick={() => {
+            history.push('/mypage');
+          }}
+        >
+          내 프로필
+        </MobileUpperMenuButton>
         <MobileUpperMenuButton isIn>내 창고</MobileUpperMenuButton>
       </MobileUpperMenuWrapper>
       <UserInfoContainer>
@@ -115,7 +130,22 @@ const HouseList = () => {
           })}
         </ItemContainer>
       </UserInfoContainer>
-      
+      <MobileContainer>
+        {warehouses.map((warehouse, idx) => (
+          <MobileItemWrapper key={idx}>
+            <MobileItemImg src={warehouse.mainImageUrl} alt={'창고 사진'} />
+            <MobileDescWrapper>
+              <MobileDescAddress>
+                {warehouse.address}&nbsp;{warehouse.addressDetail}
+              </MobileDescAddress>
+              <MobileDescName>{warehouse.name}</MobileDescName>
+              <MobileDescAccepted>
+                {statusToText(warehouse.status)}
+              </MobileDescAccepted>
+            </MobileDescWrapper>
+          </MobileItemWrapper>
+        ))}
+      </MobileContainer>
     </Container>
   );
 };

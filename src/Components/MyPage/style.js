@@ -160,9 +160,37 @@ export const WithdrawalLabel = styled.div`
   }
 `;
 export const MobileContainer = styled.div``;
-export const MobileItemWrapper = styled.div``;
-export const MobileItemImg = styled.div``;
-export const MobileDescWrapper = styled.div``;
+export const MobileItemWrapper = styled.div`
+  padding: 20px 20px 5px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-bottom: 1px solid grey;
+`;
+export const MobileItemImg = styled.img`
+  width: 100%;
+`;
+export const MobileDescWrapper = styled.div`
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  line-height: 1.5;
+  position: relative;
+`;
 export const MobileDescAddress = styled.div``;
-export const MobileDescName = styled.div``;
-// export const MobileDesc
+export const MobileDescName = styled.div`
+  font-weight: bold;
+  font-size: 20px;
+`;
+export const MobileDescAccepted = styled.div`
+  background-color: #1fab89;
+  border-radius: 15px;
+  color: white;
+  padding: 10px 20px;
+  position: absolute;
+  align-self: flex-end;
+  top: 20%;
+`;
