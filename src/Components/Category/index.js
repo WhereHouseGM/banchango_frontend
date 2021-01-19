@@ -46,6 +46,7 @@ import {
   MobileCategoryFindButton,
   ShowMoreButton,
 } from './Category';
+import DownButton from '../../assets/icons/DownButton.png';
 import { warehouseApi } from '../../api';
 
 const Category = () => {
@@ -73,12 +74,12 @@ const Category = () => {
           setResults((prevResults) => [...prevResults, ...warehouses]);
         } else {
           setResults(warehouses);
-        }
-        if (warehouses.length !== 0) {
-          window.scrollTo({
-            top: document.getElementById('resultTop').offsetTop,
-            behavior: 'smooth',
-          });
+          if (warehouses.length !== 0) {
+            window.scrollTo({
+              top: document.getElementById('resultTop').offsetTop,
+              behavior: 'smooth',
+            });
+          }
         }
         setLoading(false);
       })
@@ -96,7 +97,6 @@ const Category = () => {
   }, [clickedItems, pageIndex, isExtraLoading, setResults]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     let clickedArr = JSON.parse(sessionStorage.getItem('ClickedButton'));
     !!clickedArr
       ? setClicked(clickedArr)
@@ -156,7 +156,7 @@ const Category = () => {
             }
           }}
         >
-          창고 찾기
+          창고 검색
         </CategoryFindButton>
         <MobileCategoryTitle>맞춤 창고 검색</MobileCategoryTitle>
         <MobileSelectedCategoryListWrapper
@@ -173,12 +173,7 @@ const Category = () => {
               }
             })}
           </MobileSelectedCategoryText>
-          <MobileSelectedCategoryArrow
-            src={
-              'https://user-images.githubusercontent.com/62606632/104792299-457cd880-57e1-11eb-898c-de6451dd1eff.png'
-            }
-            alt={'화살표 아이콘'}
-          />
+          <MobileSelectedCategoryArrow src={DownButton} alt={'화살표 아이콘'} />
         </MobileSelectedCategoryListWrapper>
         <MobileCategoryPickerBox
           style={
@@ -220,7 +215,7 @@ const Category = () => {
               }
             }}
           >
-            창고 찾기
+            창고 검색
           </MobileCategoryFindButton>
         </MobileCategoryPickerBox>
       </CategoryPickContainer>
