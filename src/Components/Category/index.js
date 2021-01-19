@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { categoryTitleDict } from '../../static/category';
 import { message } from 'antd';
 import Loading from '../../Components/Loading';
@@ -70,16 +69,10 @@ const Category = () => {
     warehouseApi
       .getByMainItemTypes(clickedItems, pageIndex, 10)
       .then(({ data: { warehouses } }) => {
-        console.log(warehouses);
-
         if (isExtraLoading) {
-          //setResults((beforeResults) => beforeResults.concat(warehouses));
-          //setResults(results.concat(warehouses));
           setResults((prevResults) => [...prevResults, ...warehouses]);
-          console.log('A');
         } else {
           setResults(warehouses);
-          console.log('B');
         }
         setLoading(false);
       })
@@ -323,7 +316,7 @@ const Category = () => {
           </MobileResultBox>
         ))
       )}
-      {results.length % 10 === 0 && (
+      {results.length % 10 === 0 && results.length !== 0 ? (
         <ShowMoreButton
           onClick={() => {
             setPageIndex(pageIndex + 1);
@@ -332,12 +325,9 @@ const Category = () => {
         >
           더 보기
         </ShowMoreButton>
-      )}
+      ) : null}
     </Container>
   );
 };
 
-// Category.propTypes = {
-//   warehouses: PropTypes.arrayOf(Object),
-// };
 export default Category;
