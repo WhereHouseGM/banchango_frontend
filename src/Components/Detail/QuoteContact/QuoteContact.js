@@ -266,7 +266,7 @@ export const keepingTypeToText = (value) => {
     return '냉동';
   } else return '알수없음';
 };
-
+ 
 export const Barcodes = [
   {
     id: 'ALL',
@@ -294,6 +294,7 @@ export const barcodeToText = (type) => {
     return '일부';
   } else return '알수없음';
 };
+
 
 export const RemoveItemButton = styled.div`
   font-weight: bold;

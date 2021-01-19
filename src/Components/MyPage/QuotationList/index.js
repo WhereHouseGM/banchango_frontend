@@ -25,6 +25,11 @@ import {
   SubTitle,
   UserInfoContainer,
 } from './style';
+import {
+  Barcodes,
+  barcodeToText,
+  keepingTypeToText,
+} from '../../Detail/QuoteContact/QuoteContact';
 
 const QuotationList = ({ quotes }) => {
   const history = useHistory();
@@ -122,7 +127,7 @@ const QuotationList = ({ quotes }) => {
           {singleQuoteList.map((item, idx) => (
             <HistoryChild key={idx}>
               <HistoryChildText width={'12%'}>
-                {item.keepingType}
+                {keepingTypeToText(item.keepingType)}
               </HistoryChildText>
               <HistoryChildText width={'12%'}>
                 {item.perimeter}
@@ -133,7 +138,9 @@ const QuotationList = ({ quotes }) => {
                 {item.keepingNumber}
               </HistoryChildText>
               <HistoryChildText width={'12%'}>{item.name}</HistoryChildText>
-              <HistoryChildText width={'12%'}>{item.barcord}</HistoryChildText>
+              <HistoryChildText width={'12%'}>
+                {barcodeToText(item.barcode)}
+              </HistoryChildText>
               <HistoryChildText
                 isA={!!item.url}
                 width={'12%'}
