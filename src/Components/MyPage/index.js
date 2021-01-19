@@ -118,7 +118,13 @@ const MyPage = ({ userInfo, handleSubmit }) => {
               견적 요청 목록
             </MobileUpperMenuButton>
           ) : (
-            <MobileUpperMenuButton>내 창고</MobileUpperMenuButton>
+            <MobileUpperMenuButton
+              onClick={() => {
+                history.push('/mypage/houselist');
+              }}
+            >
+              내 창고
+            </MobileUpperMenuButton>
           )}
         </MobileUpperMenuWrapper>
         <UserInfoContainer>

@@ -26,6 +26,7 @@ const Container = () => {
           setError('인증 토큰에 문제가 있습니다. 다시 로그인 해주세요.');
         } else if (status === 403) {
           setError('권한이 없습니다.');
+        } else if (status === 404) {
         } else {
           setError('알 수 없는 오류가 발생했습니다.');
         }

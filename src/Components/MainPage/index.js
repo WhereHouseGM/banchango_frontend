@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import Fade from 'react-reveal/Fade';
 import CircleImg from '../../assets/images/MainPage/Circle.png';
@@ -53,12 +53,23 @@ import {
   FirstImageContainer,
   FirstTitleText,
 } from './MainPage';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const MainPage = () => {
   const [buttonClicked, setButtonClicked] = useState([]);
   const SliderRef = React.createRef();
   const history = useHistory();
+  const location = useLocation();
+  useEffect(() => {
+    if (!!location.state && !!location.state.goToHow) {
+      window.scrollTo({
+        top: document.getElementById('howToUseLocation').offsetTop - 53,
+        behavior: 'smooth',
+      });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
 
   const getClickedMainItemTypes = () => {
     let clickedMainItemTypes = [];
@@ -79,7 +90,7 @@ const MainPage = () => {
         <FirstTitle>
           <Fade bottom>
             <FirstTitleText>
-              온라인 셀러 특화, 보관부터 출고까지 전문가에게 맡겨보세요.{'\n'}
+              온라인 셀러 전용, 보관부터 출고까지 전문가에게 맡겨보세요.{'\n'}
               인천, 경기 물류대행(3PL) 센터를 반창고에서 찾을 수 있습니다.
             </FirstTitleText>
           </Fade>
@@ -96,7 +107,7 @@ const MainPage = () => {
       <SecondContainer>
         <SecondSideWrapper />
         <SecondMiddleWrapper>
-          <SecondTitle>내 품목에 맞는{'\n'}창고 검색</SecondTitle>
+          <SecondTitle>내 상품에 맞는{'\n'}창고 검색</SecondTitle>
           <SecondSubTitle>
             내 상품에 최적화된 창고 추천을 위해{'\n'}상품유형들을 선택해주세요.
           </SecondSubTitle>
@@ -144,14 +155,16 @@ const MainPage = () => {
               }
             }}
           >
-            창고 찾기
+            창고 검색
           </SecondButton>
         </SecondMiddleWrapper>
         <SecondSideWrapper />
       </SecondContainer>
       <ThirdContainer>
         <QuickSystemBanner>
-          <BannerTitle>전화하기 부담스러우셨죠?</BannerTitle>
+          <BannerTitle id="howToUseLocation">
+            전화하기 부담스러우셨죠?
+          </BannerTitle>
           <BannerTextBig>빠른 견적 요청 시스템</BannerTextBig>
           <BannerTextSmall>
             간단한 품목입력으로, 빠르게 견적 요청이 가능합니다.

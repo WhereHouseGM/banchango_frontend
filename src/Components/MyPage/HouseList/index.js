@@ -1,6 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { warehouseApi } from '../../../api';
+import {
+  MobileContainer,
+  MobileDescAccepted,
+  MobileDescAddress,
+  MobileDescName,
+  MobileDescWrapper,
+  MobileItemImg,
+  MobileItemWrapper,
+  NewWarehouseButton,
+} from '../style';
 
 import {
   Container,
@@ -20,6 +30,8 @@ import {
   TitleUnderLine,
   StatusBox,
   statusToText,
+  MobileUpperMenuWrapper,
+  MobileUpperMenuButton,
 } from './HouseList';
 
 const HouseList = () => {
@@ -78,6 +90,16 @@ const HouseList = () => {
           로그아웃
         </BannerTextDisabledBox>
       </LeftBanner>
+      <MobileUpperMenuWrapper>
+        <MobileUpperMenuButton
+          onClick={() => {
+            history.push('/mypage');
+          }}
+        >
+          내 프로필
+        </MobileUpperMenuButton>
+        <MobileUpperMenuButton isIn>내 창고</MobileUpperMenuButton>
+      </MobileUpperMenuWrapper>
       <UserInfoContainer>
         <TitleWrapper>
           <ListTitle>내 창고 목록</ListTitle>
@@ -92,7 +114,16 @@ const HouseList = () => {
         <ItemContainer>
           {warehouses.map((warehouse, idx) => {
             return (
-              <ItemBox key={`HOUSE${idx}`}>
+              <ItemBox
+                key={`HOUSE${idx}`}
+                onClick={() => {
+                  if (warehouse.status === 'VIEWABLE') {
+                    history.push(
+                      `/warehouses/detail/${warehouse.id}/${warehouse.name}`,
+                    );
+                  }
+                }}
+              >
                 <ItemImg src={warehouse.mainImageUrl} />
                 <ItemDescWrapper>
                   <SubTitle>
@@ -109,6 +140,38 @@ const HouseList = () => {
           })}
         </ItemContainer>
       </UserInfoContainer>
+      <MobileContainer>
+        {warehouses.map((warehouse, idx) => (
+          <MobileItemWrapper
+            key={idx}
+            onClick={() => {
+              if (warehouse.status === 'VIEWABLE') {
+                history.push(
+                  `/warehouses/detail/${warehouse.id}/${warehouse.name}`,
+                );
+              }
+            }}
+          >
+            <MobileItemImg src={warehouse.mainImageUrl} alt={'창고 사진'} />
+            <MobileDescWrapper>
+              <MobileDescAddress>
+                {warehouse.address}&nbsp;{warehouse.addressDetail}
+              </MobileDescAddress>
+              <MobileDescName>{warehouse.name}</MobileDescName>
+              <MobileDescAccepted>
+                {statusToText(warehouse.status)}
+              </MobileDescAccepted>
+            </MobileDescWrapper>
+          </MobileItemWrapper>
+        ))}
+        <NewWarehouseButton
+          onClick={() => {
+            history.push('/register');
+          }}
+        >
+          새로 만들기
+        </NewWarehouseButton>
+      </MobileContainer>
     </Container>
   );
 };

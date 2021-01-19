@@ -224,7 +224,7 @@ const Team = () => {
       <FirstContainer>
         <FirstLeftText>
           <span>㮽창고{` `}</span>
-          <span style={{ fontSize: '35px' }}>HUB:</span>
+          <span style={{ fontSize: '25px' }}>허브 :</span>
         </FirstLeftText>
         <FirstRightText>
           국내 최초 창고중개 플랫폼 반창고 허브는 대표가 직접 '화주로서 느끼는
@@ -275,13 +275,13 @@ const Team = () => {
           <Fade bottom>
             <ThirdBoxImg src={descImgs.right.img} alt={descImgs.right.alt} />
           </Fade>
-          <ThirdBoxText>반 : 창고</ThirdBoxText>
+          <ThirdBoxText>반창고 허브</ThirdBoxText>
         </ThirdBox>
       </ThirdContainer>
       <FourthContainer>
         <FourthLeft>
           <FourthLeftLine />
-          <FourthLeftTitle>반창고 HUB Team</FourthLeftTitle>
+          <FourthLeftTitle>반창고 허브팀</FourthLeftTitle>
         </FourthLeft>
         <FourthRight>
           <FourthRightFloor>

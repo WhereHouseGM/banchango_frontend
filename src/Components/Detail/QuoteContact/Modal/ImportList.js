@@ -113,7 +113,12 @@ const SubmitButton = styled.div`
   }
 `;
 
-const ImportListModal = ({ onClose, visible, getEstimateItems }) => {
+const ImportListModal = ({
+  onClose,
+  visible,
+  getEstimateItems,
+  goToResultList,
+}) => {
   const [estimateList, setEstimateList] = useState([]);
   const [estimateId, setEstimateId] = useState(-1);
 
@@ -191,6 +196,7 @@ const ImportListModal = ({ onClose, visible, getEstimateItems }) => {
               onClick={() => {
                 getEstimateItems(estimateId);
                 onClose();
+                goToResultList();
               }}
             >
               불러오기
