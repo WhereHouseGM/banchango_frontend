@@ -64,7 +64,7 @@ export const UserInfoContainer = styled.div`
   width: 900px;
   padding: 40px 20px;
   margin: 0px auto;
-  @media (max-width: 768px) {
+  @media (max-width: 1101px) {
     display: none;
   }
 `;
@@ -87,7 +87,7 @@ export const ListTitle = styled.div`
 
 export const NewButton = styled.div`
   border-radius: 20px;
-  padding: 10px 18px;
+  padding: 9px 13px;
   border: solid 1px #1e56a0;
   font-weight: bold;
   text-align: center;
