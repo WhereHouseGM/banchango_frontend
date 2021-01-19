@@ -22,6 +22,7 @@ const Navbar = () => {
     let info = {
       logined: JSON.parse(localStorage.getItem('Login')),
       name: localStorage.getItem('Name'),
+      type: localStorage.getItem('type'),
     };
     setLoginInfo(info);
   }, []);
@@ -62,14 +63,20 @@ const Navbar = () => {
           )}
         </NavOpen>
         <NavMenu>
-          <NavLink to="/category">창고검색</NavLink>
-          <NavLink to="/">
-            {/* TODO: 이용방법 REF -> 
+          {loginInfo.type === 'OWNER' ? (
+            <NavLink to="/register">창고등록</NavLink>
+          ) : (
+            <>
+              <NavLink to="/category">창고검색</NavLink>
+              <NavLink to="/">
+                {/* TODO: 이용방법 REF -> 
             type 체크 후 창고주이면 안나오고 useHistory로 props 체크해서 이거로 간거면 스크롤 내리기
             메인으로 이동 후 scrollTo*/}
-            {/* TODO: 네비 색 다 검정 */}
-            이용방법
-          </NavLink>
+                {/* TODO: 네비 색 다 검정 */}
+                이용방법
+              </NavLink>
+            </>
+          )}
 
           <NavLink to="/team">팀소개</NavLink>
           {loginInfo.logined ? (
