@@ -88,6 +88,7 @@ export const InputBox = styled.input`
   width: 75%;
   height: 28px;
   margin-bottom: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
 export const InputSubText = styled.div`
@@ -197,6 +198,7 @@ export const TotalCountTitle = styled.div`
 export const TotalCountInput = styled.input`
   margin-left: 10px;
   width: 200px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
 export const TotalCountSubText = styled.div`
