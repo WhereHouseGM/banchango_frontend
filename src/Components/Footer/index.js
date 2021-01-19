@@ -88,7 +88,7 @@ const Footer = () => {
             <BoxTitle>반창고</BoxTitle>
             <BoxBody>
               대표 | 최윤석 <br />
-              주소 | 서울특별시 동작구 성도동 창신관 304호
+              주소 | 서울특별시 동작구 상도동 창신관 304호
             </BoxBody>
           </LeftBox>
           <RightBox>
