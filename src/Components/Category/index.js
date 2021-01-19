@@ -46,6 +46,7 @@ import {
   MobileCategoryFindButton,
   ShowMoreButton,
 } from './Category';
+import DownButton from '../../assets/icons/DownButton.png';
 import { warehouseApi } from '../../api';
 
 const Category = () => {
@@ -172,13 +173,7 @@ const Category = () => {
               }
             })}
           </MobileSelectedCategoryText>
-          {/* TODO: 이거 깃허브 링크 빼자 */}
-          <MobileSelectedCategoryArrow
-            src={
-              'https://user-images.githubusercontent.com/62606632/104792299-457cd880-57e1-11eb-898c-de6451dd1eff.png'
-            }
-            alt={'화살표 아이콘'}
-          />
+          <MobileSelectedCategoryArrow src={DownButton} alt={'화살표 아이콘'} />
         </MobileSelectedCategoryListWrapper>
         <MobileCategoryPickerBox
           style={
