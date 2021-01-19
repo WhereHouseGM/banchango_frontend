@@ -156,7 +156,7 @@ const Category = () => {
             }
           }}
         >
-          창고 찾기
+          창고 검색
         </CategoryFindButton>
         <MobileCategoryTitle>맞춤 창고 검색</MobileCategoryTitle>
         <MobileSelectedCategoryListWrapper
@@ -220,7 +220,7 @@ const Category = () => {
               }
             }}
           >
-            창고 찾기
+            창고 검색
           </MobileCategoryFindButton>
         </MobileCategoryPickerBox>
       </CategoryPickContainer>

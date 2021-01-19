@@ -79,7 +79,7 @@ const MainPage = () => {
         <FirstTitle>
           <Fade bottom>
             <FirstTitleText>
-              온라인 셀러 특화, 보관부터 출고까지 전문가에게 맡겨보세요.{'\n'}
+              온라인 셀러 전용, 보관부터 출고까지 전문가에게 맡겨보세요.{'\n'}
               인천, 경기 물류대행(3PL) 센터를 반창고에서 찾을 수 있습니다.
             </FirstTitleText>
           </Fade>
@@ -96,7 +96,7 @@ const MainPage = () => {
       <SecondContainer>
         <SecondSideWrapper />
         <SecondMiddleWrapper>
-          <SecondTitle>내 품목에 맞는{'\n'}창고 검색</SecondTitle>
+          <SecondTitle>내 상품에 맞는{'\n'}창고 검색</SecondTitle>
           <SecondSubTitle>
             내 상품에 최적화된 창고 추천을 위해{'\n'}상품유형들을 선택해주세요.
           </SecondSubTitle>
@@ -144,7 +144,7 @@ const MainPage = () => {
               }
             }}
           >
-            창고 찾기
+            창고 검색
           </SecondButton>
         </SecondMiddleWrapper>
         <SecondSideWrapper />
