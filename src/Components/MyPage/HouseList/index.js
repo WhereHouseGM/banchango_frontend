@@ -20,6 +20,8 @@ import {
   TitleUnderLine,
   StatusBox,
   statusToText,
+  MobileUpperMenuWrapper,
+  MobileUpperMenuButton,
 } from './HouseList';
 
 const HouseList = () => {
@@ -78,6 +80,10 @@ const HouseList = () => {
           로그아웃
         </BannerTextDisabledBox>
       </LeftBanner>
+      <MobileUpperMenuWrapper>
+        <MobileUpperMenuButton>내 프로필</MobileUpperMenuButton>
+        <MobileUpperMenuButton isIn>내 창고</MobileUpperMenuButton>
+      </MobileUpperMenuWrapper>
       <UserInfoContainer>
         <TitleWrapper>
           <ListTitle>내 창고 목록</ListTitle>
@@ -109,6 +115,7 @@ const HouseList = () => {
           })}
         </ItemContainer>
       </UserInfoContainer>
+      
     </Container>
   );
 };
