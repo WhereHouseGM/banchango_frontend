@@ -161,7 +161,7 @@ export const userTypes = [
     id: 'SHIPPER',
     type: 'radio',
     value: 'SHIPPER',
-    children: '화주',
+    children: '셀러',
   },
   {
     id: 'OWNER',
