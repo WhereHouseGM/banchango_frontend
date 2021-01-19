@@ -159,7 +159,11 @@ export const WithdrawalLabel = styled.div`
     cursor: pointer;
   }
 `;
-export const MobileContainer = styled.div``;
+export const MobileContainer = styled.div`
+  @media (min-width: 1101px) {
+    display: none;
+  }
+`;
 export const MobileItemWrapper = styled.div`
   padding: 20px 20px 5px 20px;
   display: flex;
