@@ -57,16 +57,12 @@ const Navbar = () => {
           ) : (
             <>
               <NavLinkOpen to="/signup">회원가입</NavLinkOpen>
-              <NavLinkOpen to="/login" style={{ color: 'white' }}>
-                로그인
-              </NavLinkOpen>
+              <NavLinkOpen to="/login">로그인</NavLinkOpen>
             </>
           )}
         </NavOpen>
         <NavMenu>
-          <NavLink to="/category" style={{ color: 'black' }}>
-            창고검색
-          </NavLink>
+          <NavLink to="/category">창고검색</NavLink>
           <NavLink to="/">
             {/* TODO: 이용방법 REF -> 
             type 체크 후 창고주이면 안나오고 useHistory로 props 체크해서 이거로 간거면 스크롤 내리기
@@ -78,19 +74,15 @@ const Navbar = () => {
           <NavLink to="/team">팀소개</NavLink>
           {loginInfo.logined ? (
             <>
-              <NavLink to="/" style={{ color: 'black' }} onClick={logout}>
+              <NavLink to="/" onClick={logout}>
                 로그아웃
               </NavLink>
-              <NavLink style={{ color: 'black' }} to="/mypage">
-                {loginInfo.name} 님
-              </NavLink>
+              <NavLink to="/mypage">{loginInfo.name} 님</NavLink>
             </>
           ) : (
             <>
               <NavLink to="/signup">회원가입</NavLink>
-              <NavLink to="/login" style={{ color: 'black' }}>
-                로그인
-              </NavLink>
+              <NavLink to="/login">로그인</NavLink>
             </>
           )}
         </NavMenu>

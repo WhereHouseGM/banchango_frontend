@@ -73,12 +73,12 @@ const Category = () => {
           setResults((prevResults) => [...prevResults, ...warehouses]);
         } else {
           setResults(warehouses);
-        }
-        if (warehouses.length !== 0) {
-          window.scrollTo({
-            top: document.getElementById('resultTop').offsetTop,
-            behavior: 'smooth',
-          });
+          if (warehouses.length !== 0) {
+            window.scrollTo({
+              top: document.getElementById('resultTop').offsetTop,
+              behavior: 'smooth',
+            });
+          }
         }
         setLoading(false);
       })
@@ -255,9 +255,7 @@ const Category = () => {
                       </ResultBoxDescBoxText>
                     </ResultBoxDescBoxLeft>
                     <ResultBoxDescBoxRight>
-                      <ResultBoxDescBoxTitle>
-                        평수
-                      </ResultBoxDescBoxTitle>
+                      <ResultBoxDescBoxTitle>평수</ResultBoxDescBoxTitle>
                       <ResultBoxDescBoxText>
                         {warehouse.space}
                       </ResultBoxDescBoxText>
