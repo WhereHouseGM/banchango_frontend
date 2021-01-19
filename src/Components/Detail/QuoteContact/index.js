@@ -128,6 +128,7 @@ const QuoteContact = () => {
               <BlueText text={'상품 종류'} />
               <InputBox
                 type="text"
+                placeholder="상품이름을 적어주세요. ex) 파운데이션, 의자등"
                 id="name"
                 onChange={(event) =>
                   setEstimateItemInput({
@@ -140,6 +141,7 @@ const QuoteContact = () => {
               <InputWrapper>
                 <InputBox
                   type="number"
+                  placeholder="상품 또는 상품을 포장한 가로세로높이 합"
                   id="perimeter"
                   onChange={(event) =>
                     setEstimateItemInput({
@@ -154,6 +156,7 @@ const QuoteContact = () => {
               <InputWrapper>
                 <InputBox
                   type="number"
+                  placeholder="상품의 대략적인 무게를 적어주세요."
                   id="weight"
                   onChange={(event) => {
                     setEstimateItemInput({
@@ -168,6 +171,7 @@ const QuoteContact = () => {
               <InputWrapper>
                 <InputBox
                   type="number"
+                  placeholder="ex) 머그컵에 색이 3가지인 경우 SKU: 3"
                   id="sku"
                   onChange={(event) => {
                     setEstimateItemInput({
@@ -184,6 +188,7 @@ const QuoteContact = () => {
               <InputWrapper>
                 <InputBox
                   type="number"
+                  placeholder="창고에 보관할 적정 재고량을 적어주세요."
                   id="keepingNumber"
                   onChange={(event) => {
                     setEstimateItemInput({
@@ -259,6 +264,7 @@ const QuoteContact = () => {
               <BlueText text={'URL'} noRequired={true} />
               <InputBox
                 type="text"
+                placeholder="상품의 판매링크가 있다면 넣어주세요."
                 id="url"
                 onChange={(event) => {
                   setEstimateItemInput({
