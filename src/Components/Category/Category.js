@@ -223,12 +223,12 @@ export const ResultBoxDescBoxRight = styled.div`
 `;
 
 export const ResultBoxDescBoxTitle = styled.div`
-  margin-top: 30px;
+   margin-top: 20px; 
   font-weight: bold;
 `;
 
 export const ResultBoxDescBoxText = styled.div`
-  margin-top: 5px;
+  margin-top: 25px;
 `;
 
 export const ResultBoxDescButtonWrap = styled.div`
@@ -323,6 +323,18 @@ export const MobileResultQuoteContactButton = styled.div`
   color: #1e56a0;
   border-radius: 20px;
   position: absolute;
+`;
+
+export const ShowMoreButton = styled.div`
+  padding: 15px;
+  width: 30%;
+  font-size: 20px;
+  border-radius: 20px;
+  color: white;
+  background-color: #2e559a;
+  font-weight: bold;
+  margin: 0px auto 30px auto;
+  cursor: pointer;
 `;
 
 export const BtnArr = [

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://dev-api.banchangohub.com/v3/',
+  baseURL: 'https://api.banchangohub.com/v3/',
 });
 
 export const userApi = {
@@ -51,6 +51,12 @@ export const warehouseApi = {
       },
     }),
   getWarehouseInfo: (id) => api.get(`warehouses/${id}`),
+  getWarehousesById: (userId, token) =>
+    api.get(`users/${userId}/warehouses`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }),
 };
 
 export const estimateApi = {

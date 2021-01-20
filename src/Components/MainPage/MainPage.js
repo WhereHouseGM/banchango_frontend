@@ -4,6 +4,8 @@ import BackgroundImg from '../../assets/images/MainPage/Background.png';
 import SliderImg1 from '../../assets/images/MainPage/SliderImg1.png';
 import SliderImg2 from '../../assets/images/MainPage/SliderImg2.png';
 import SliderImg3 from '../../assets/images/MainPage/SliderImg3.png';
+import SliderImg4 from '../../assets/images/MainPage/SliderImg4.png';
+import SliderImg5 from '../../assets/images/MainPage/SliderImg5.png';
 
 import Card_1 from '../../assets/images/MainPage/Card_1.png';
 import Card_2 from '../../assets/images/MainPage/Card_2.png';
@@ -53,6 +55,8 @@ export const SliderImgArr = [
   { path: SliderImg1, alt: '첫번째 슬라이드 이미지' },
   { path: SliderImg2, alt: '두번째 슬라이드 이미지' },
   { path: SliderImg3, alt: '세번째 슬라이드 이미지' },
+  { path: SliderImg4, alt: '네번째 슬라이드 이미지' },
+  { path: SliderImg5, alt: '다섯번째 슬라이드 이미지' },
 ];
 
 export const CardImgArr = [
@@ -116,12 +120,12 @@ export const BtnArr = [
   {
     id: 'FREEZE_STORAGE',
     name: '냉동',
-    icon: { normal: RefrigeratorA, clicked: RefrigeratorB },
+    icon: { normal: IcecreamA, clicked: IcecreamB },
   },
   {
     id: 'COLD_STORAGE',
     name: '냉장',
-    icon: { normal: IcecreamA, clicked: IcecreamB },
+    icon: { normal: RefrigeratorA, clicked: RefrigeratorB },
   },
   {
     id: 'LARGE_SIZE',

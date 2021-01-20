@@ -5,7 +5,7 @@ export const Container = styled.div`
   min-height: 90vh;
   position: relative;
   display: flex;
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     display: block;
   }
 `;
@@ -16,7 +16,7 @@ export const LeftBanner = styled.div`
   position: absolute;
   height: 100%;
   color: white;
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     display: none;
   }
 `;
@@ -39,14 +39,14 @@ export const BannerTextDisabledBox = styled.div`
   }
 `;
 export const MobileUpperMenuWrapper = styled.div`
+  position: sticky;
   width: 100%;
   display: flex;
-  position: sticky;
   top: 45px;
   z-index: 50;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.05);
-  @media (min-width: 769px) {
+  @media (min-width: 1101px) {
     display: none;
   }
 `;
@@ -65,7 +65,7 @@ export const UserInfoContainer = styled.div`
   max-width: 710px;
   padding: 40px 20px;
   margin: 0 auto;
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     padding: 0;
   }
 `;
@@ -74,7 +74,7 @@ export const HelloTitleText = styled.h1`
   text-align: center;
   font-weight: bold;
   font-size: 35px;
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     display: none;
   }
 `;
@@ -83,7 +83,7 @@ export const InfoTitleText = styled.h3`
   font-size: 25px;
   font-weight: bold;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     font-size: 15px;
     font-weight: normal;
   }
@@ -110,7 +110,7 @@ export const ButtonContainer = styled.div`
   margin-left: auto;
   margin-right: auto;
   align-items: center;
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     flex-direction: column-reverse;
     flex-wrap: wrap;
   }
@@ -127,7 +127,7 @@ export const ChangePWButton = styled.div`
   &:hover {
     cursor: pointer;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     margin: 20px 0;
     width: 100%;
   }
@@ -146,7 +146,7 @@ export const ConfirmButton = styled.div`
   &:hover {
     cursor: pointer;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     width: 100%;
     margin: 0;
   }
@@ -158,4 +158,54 @@ export const WithdrawalLabel = styled.div`
   &:hover {
     cursor: pointer;
   }
+`;
+export const MobileContainer = styled.div`
+  @media (min-width: 1101px) {
+    display: none;
+  }
+`;
+export const MobileItemWrapper = styled.div`
+  padding: 20px 20px 5px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-bottom: 1px solid grey;
+`;
+export const MobileItemImg = styled.img`
+  width: 100%;
+`;
+export const MobileDescWrapper = styled.div`
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  line-height: 1.5;
+  position: relative;
+`;
+export const MobileDescAddress = styled.div``;
+export const MobileDescName = styled.div`
+  font-weight: bold;
+  font-size: 20px;
+`;
+export const MobileDescAccepted = styled.div`
+  background-color: #1fab89;
+  border-radius: 15px;
+  color: white;
+  padding: 10px 20px;
+  position: absolute;
+  align-self: flex-end;
+  top: 20%;
+`;
+export const NewWarehouseButton = styled.div`
+  border: 1px solid #1e56a0;
+  padding: 15px 0;
+  width: 120px;
+  text-align: center;
+  margin: 30px auto 0 auto;
+  border-radius: 15px;
+  color: #1e56a0;
+  font-weight: bold;
+  font-size: 15px;
 `;

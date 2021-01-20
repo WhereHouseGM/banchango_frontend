@@ -13,14 +13,13 @@ export const Nav = styled.nav`
   padding: 0 calc((100vw - 1000px) / 2);
   box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.05);
   width: 100%;
-  z-index: 10;
   position: fixed;
   top: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  z-index: 49;
+  z-index: 999;
 `;
 export const NavLink = styled(Link)`
-  color: #0079c0;
+  color: black;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -35,12 +34,12 @@ export const NavLogoText = styled.div`
   font-size: 18px;
 `;
 export const NavOpen = styled.div`
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  position: absolute;
   top: 45px;
   background: rgba(0, 0, 0, 80%);
   z-index: 999;

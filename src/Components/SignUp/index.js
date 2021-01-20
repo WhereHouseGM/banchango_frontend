@@ -274,7 +274,7 @@ const SignUp = () => {
             <Input
               id="telephoneNumber"
               type="number"
-              placeholder="0321231234"
+              placeholder="032"
               name="telephoneNumber"
               onChange={(event) => {
                 if (regEx.phoneNumber.test(event.target.value)) {
@@ -287,13 +287,13 @@ const SignUp = () => {
               required
             />
             <SmallInformationText id="telephoneNumberText">
-              유선 전화번호를 입력해주세요.
+              유선전화 번호를 입력해주세요.
             </SmallInformationText>
             <InputTitle>휴대전화 번호</InputTitle>
             <Input
               id="phoneNumber"
               type="number"
-              placeholder="01012345678"
+              placeholder="010"
               name="phoneNumber"
               onChange={(event) => {
                 if (regEx.phoneNumber.test(event.target.value)) {
@@ -306,7 +306,7 @@ const SignUp = () => {
               required
             />
             <SmallInformationText id="phoneNumberText">
-              휴대 전화 번호를 입력해주세요.
+              휴대전화 번호를 입력해주세요.
             </SmallInformationText>
             <InputTitle>회사명</InputTitle>
             <Input

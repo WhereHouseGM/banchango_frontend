@@ -68,13 +68,12 @@ import {
   MobileQuoteContactButtonWrapper,
   MobileBlogVisitButton,
 } from './Detail';
-import { categoryTitleDict } from '../../static/category';
+import { categoryTitleDict, conditionDict } from '../../static/category';
 import { dayOfWeek } from '../../static/detail';
 
 const Detail = ({ warehouse }) => {
   const SliderRef = React.createRef();
   useEffect(() => {
-    window.scrollTo(0, 0);
     const script = document.createElement('script');
     script.async = true;
     script.src =
@@ -111,7 +110,6 @@ const Detail = ({ warehouse }) => {
   const [modalImgUrl, setModalImgUrl] = useState('');
 
   const history = useHistory();
-
   const centerRef = {
     desc: React.createRef(),
     info: React.createRef(),
@@ -385,6 +383,10 @@ const Detail = ({ warehouse }) => {
                 </HouseInfoCard>
               ))}
             </HouseInfoCardWrapper>
+            <SectionTitle>창고 종류</SectionTitle>
+            {warehouse.warehouseCondition.map((item, idx) => (
+              <Content key={idx}>{conditionDict(item)}</Content>
+            ))}
             <SectionTitle>경비 업체</SectionTitle>
             {warehouse.securityCompanies.map((item, idx) => (
               <Content key={idx}>{item}</Content>

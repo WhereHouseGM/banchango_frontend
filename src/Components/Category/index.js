@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { categoryTitleDict } from '../../static/category';
 import { message } from 'antd';
+import Loading from '../../Components/Loading';
 
 import {
   Container,
@@ -44,12 +44,17 @@ import {
   MobileCategoryPickerButtonWrapper,
   MobileCategoryPickerButton,
   MobileCategoryFindButton,
+  ShowMoreButton,
 } from './Category';
+import DownButton from '../../assets/icons/DownButton.png';
 import { warehouseApi } from '../../api';
 
-const Category = ({ warehouses }) => {
-  const [results, setResults] = useState(warehouses === null ? [] : warehouses);
+const Category = () => {
+  const [results, setResults] = useState([]);
   const [clicked, setClicked] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [isExtraLoading, setIsExtraLoading] = useState(false);
+  const [pageIndex, setPageIndex] = useState(0);
   const selectedMainItemTypes = sessionStorage.getItem('MainItemTypes');
   const [
     mobileCategoryPickerClicked,
@@ -62,22 +67,40 @@ const Category = ({ warehouses }) => {
   );
   const history = useHistory();
   const getApi = useCallback(async () => {
-    try {
-      let _results = await warehouseApi.getByMainItemTypes(clickedItems, 0, 10);
-      let { status } = _results;
-      if (status !== 200) throw new Error();
-      const {
-        data: { warehouses },
-      } = _results;
-      setResults(warehouses);
-    } catch (Error) {
-      message.warning('검색 결과가 존재하지 않습니다.');
-    }
-  }, [clickedItems]);
+    warehouseApi
+      .getByMainItemTypes(clickedItems, pageIndex, 10)
+      .then(({ data: { warehouses } }) => {
+        if (isExtraLoading) {
+          setResults((prevResults) => [...prevResults, ...warehouses]);
+        } else {
+          setResults(warehouses);
+          if (warehouses.length !== 0) {
+            window.scrollTo({
+              top: document.getElementById('resultTop').offsetTop,
+              behavior: 'smooth',
+            });
+          }
+        }
+        setLoading(false);
+      })
+      .catch(({ response: { status } }) => {
+        if (status === 404) {
+          if (isExtraLoading) {
+            message.warning('더 이상 검색 결과가 없습니다.');
+          } else {
+            message.warning('검색 결과가 존재하지 않습니다.');
+          }
+        } else {
+        }
+        setLoading(false);
+      });
+  }, [clickedItems, pageIndex, isExtraLoading, setResults]);
+
   useEffect(() => {
-    window.scrollTo(0, 0);
     let clickedArr = JSON.parse(sessionStorage.getItem('ClickedButton'));
-    !!clickedArr ? setClicked(clickedArr) : setClicked([true]);
+    !!clickedArr
+      ? setClicked(clickedArr)
+      : setClicked([false, false, false, true]);
   }, []);
 
   useEffect(() => {
@@ -133,7 +156,7 @@ const Category = ({ warehouses }) => {
             }
           }}
         >
-          창고 찾기
+          창고 검색
         </CategoryFindButton>
         <MobileCategoryTitle>맞춤 창고 검색</MobileCategoryTitle>
         <MobileSelectedCategoryListWrapper
@@ -150,12 +173,7 @@ const Category = ({ warehouses }) => {
               }
             })}
           </MobileSelectedCategoryText>
-          <MobileSelectedCategoryArrow
-            src={
-              'https://user-images.githubusercontent.com/62606632/104792299-457cd880-57e1-11eb-898c-de6451dd1eff.png'
-            }
-            alt={'화살표 아이콘'}
-          />
+          <MobileSelectedCategoryArrow src={DownButton} alt={'화살표 아이콘'} />
         </MobileSelectedCategoryListWrapper>
         <MobileCategoryPickerBox
           style={
@@ -197,107 +215,123 @@ const Category = ({ warehouses }) => {
               }
             }}
           >
-            창고 찾기
+            창고 검색
           </MobileCategoryFindButton>
         </MobileCategoryPickerBox>
       </CategoryPickContainer>
-      {results.map((warehouse, index) => (
-        <React.Fragment key={index}>
-          <ResultWrap>
-            <ResultBox>
-              <ResultBoxImage
-                src={warehouse.mainImageUrl}
-                alt={'창고 사진'}
-                onClick={() => {
-                  history.push(
-                    `/warehouses/detail/${warehouse.warehouseId}/${warehouse.name}`,
-                  );
-                }}
-              />
-              <ResultBoxDescWrap>
-                <ResultBoxDescTitle>{warehouse.name}</ResultBoxDescTitle>
-                <ResultBoxDescSub>{warehouse.address}</ResultBoxDescSub>
-                <ResultBoxDescBoxWrap>
-                  <ResultBoxDescBoxLeft>
-                    <ResultBoxDescBoxTitle>
-                      월 최소 출고량
-                    </ResultBoxDescBoxTitle>
-                    <ResultBoxDescBoxText>
-                      {warehouse.minReleasePerMonth}
-                    </ResultBoxDescBoxText>
-                  </ResultBoxDescBoxLeft>
-                  <ResultBoxDescBoxRight>
-                    <ResultBoxDescBoxTitle>평수</ResultBoxDescBoxTitle>
-                    <ResultBoxDescBoxText>
-                      {warehouse.space}
-                    </ResultBoxDescBoxText>
-                  </ResultBoxDescBoxRight>
-                </ResultBoxDescBoxWrap>
-                <ResultBoxDescButtonWrap>
-                  {warehouse.mainItemTypes.map((type, idx) => (
-                    <ResultBoxDescButton key={idx} match={type.match}>
-                      {categoryTitleDict(type.name)}
-                    </ResultBoxDescButton>
-                  ))}
-                </ResultBoxDescButtonWrap>
-                <ResultBoxDescDeliveryListTitle>
-                  택배사
-                </ResultBoxDescDeliveryListTitle>
-                <ResultBoxDescDeliveryListText>
-                  {warehouse.deliveryTypes.join(' ')}
-                </ResultBoxDescDeliveryListText>
-                <ResultBoxDescInquiryButton
+      <div id="resultTop" />
+      {loading ? (
+        <Loading />
+      ) : (
+        results.map((warehouse, index) => (
+          <React.Fragment key={index}>
+            <ResultWrap>
+              <ResultBox>
+                <ResultBoxImage
+                  src={warehouse.mainImageUrl}
+                  alt={'창고 사진'}
                   onClick={() => {
                     history.push(
                       `/warehouses/detail/${warehouse.warehouseId}/${warehouse.name}`,
                     );
                   }}
-                >
-                  창고 상세보기
-                </ResultBoxDescInquiryButton>
-              </ResultBoxDescWrap>
-            </ResultBox>
-          </ResultWrap>
-        </React.Fragment>
-      ))}
-      {results.map((warehouse, index) => (
-        <MobileResultBox key={index}>
-          <MobileResultImage
-            src={warehouse.mainImageUrl}
-            alt={'창고 메인 이미지'}
-            onClick={() => {
-              history.push(
-                `/warehouses/detail/${warehouse.warehouseId}/${warehouse.name}`,
-              );
-            }}
-          />
-          <MobileResultBottomWrapper>
-            <MobileResultHouseName>{warehouse.name}</MobileResultHouseName>
-            <MobileResultAddress>{warehouse.address}</MobileResultAddress>
-            <MobileResultCategoryButtonWrapper>
-              {warehouse.mainItemTypes.map((type, idx) => (
-                <MobileResultCategoryButton key={idx} match={type.match}>
-                  {categoryTitleDict(type.name)}
-                </MobileResultCategoryButton>
-              ))}
-            </MobileResultCategoryButtonWrapper>
-            <MobileResultQuoteContactButton
+                />
+                <ResultBoxDescWrap>
+                  <ResultBoxDescTitle>{warehouse.name}</ResultBoxDescTitle>
+                  <ResultBoxDescSub>{warehouse.address}</ResultBoxDescSub>
+                  <ResultBoxDescBoxWrap>
+                    <ResultBoxDescBoxLeft>
+                      <ResultBoxDescBoxTitle>
+                        월 최소 출고량
+                      </ResultBoxDescBoxTitle>
+                      <ResultBoxDescBoxText>
+                        {warehouse.minReleasePerMonth}
+                      </ResultBoxDescBoxText>
+                    </ResultBoxDescBoxLeft>
+                    <ResultBoxDescBoxRight>
+                      <ResultBoxDescBoxTitle>평수</ResultBoxDescBoxTitle>
+                      <ResultBoxDescBoxText>
+                        {warehouse.space}
+                      </ResultBoxDescBoxText>
+                    </ResultBoxDescBoxRight>
+                  </ResultBoxDescBoxWrap>
+                  <ResultBoxDescButtonWrap>
+                    {warehouse.mainItemTypes.map((type, idx) => (
+                      <ResultBoxDescButton key={idx} match={type.match}>
+                        {categoryTitleDict(type.name)}
+                      </ResultBoxDescButton>
+                    ))}
+                  </ResultBoxDescButtonWrap>
+                  <ResultBoxDescDeliveryListTitle>
+                    택배사
+                  </ResultBoxDescDeliveryListTitle>
+                  <ResultBoxDescDeliveryListText>
+                    {warehouse.deliveryTypes.join(' ')}
+                  </ResultBoxDescDeliveryListText>
+                  <ResultBoxDescInquiryButton
+                    onClick={() => {
+                      history.push(
+                        `/warehouses/detail/${warehouse.warehouseId}/${warehouse.name}`,
+                      );
+                    }}
+                  >
+                    창고 상세보기
+                  </ResultBoxDescInquiryButton>
+                </ResultBoxDescWrap>
+              </ResultBox>
+            </ResultWrap>
+          </React.Fragment>
+        ))
+      )}
+      {loading ? (
+        <Loading />
+      ) : (
+        results.map((warehouse, index) => (
+          <MobileResultBox key={index}>
+            <MobileResultImage
+              src={warehouse.mainImageUrl}
+              alt={'창고 메인 이미지'}
               onClick={() => {
                 history.push(
                   `/warehouses/detail/${warehouse.warehouseId}/${warehouse.name}`,
                 );
               }}
-            >
-              상세 보기
-            </MobileResultQuoteContactButton>
-          </MobileResultBottomWrapper>
-        </MobileResultBox>
-      ))}
+            />
+            <MobileResultBottomWrapper>
+              <MobileResultHouseName>{warehouse.name}</MobileResultHouseName>
+              <MobileResultAddress>{warehouse.address}</MobileResultAddress>
+              <MobileResultCategoryButtonWrapper>
+                {warehouse.mainItemTypes.map((type, idx) => (
+                  <MobileResultCategoryButton key={idx} match={type.match}>
+                    {categoryTitleDict(type.name)}
+                  </MobileResultCategoryButton>
+                ))}
+              </MobileResultCategoryButtonWrapper>
+              <MobileResultQuoteContactButton
+                onClick={() => {
+                  history.push(
+                    `/warehouses/detail/${warehouse.warehouseId}/${warehouse.name}`,
+                  );
+                }}
+              >
+                상세 보기
+              </MobileResultQuoteContactButton>
+            </MobileResultBottomWrapper>
+          </MobileResultBox>
+        ))
+      )}
+      {results.length % 10 === 0 && results.length !== 0 ? (
+        <ShowMoreButton
+          onClick={() => {
+            setPageIndex(pageIndex + 1);
+            setIsExtraLoading(true);
+          }}
+        >
+          더 보기
+        </ShowMoreButton>
+      ) : null}
     </Container>
   );
 };
 
-Category.propTypes = {
-  warehouses: PropTypes.arrayOf(Object),
-};
 export default Category;
