@@ -47,15 +47,9 @@ export const CheckPWModal = ({
           />
           <ConfirmButton
             onClick={confirmClicked}
-            style={
-              PW === null || PW.trim() === ''
-                ? {
-                    backgroundColor: '#5ea0ff',
-                  }
-                : {
-                    backgroundColor: '#1e56a0',
-                  }
-            }
+            style={{
+              backgroundColor: '#1e56a0',
+            }}
           >
             확인
           </ConfirmButton>
