@@ -473,7 +473,7 @@ export const MobileQuoteContactButtonWrapper = styled.div`
   display: flex;
 `;
 export const MobileBlogVisitButton = styled.div`
-  width: 50%;
+  flex: 1;
   padding: 15px 0;
   background-color: #15c7ab;
 `;

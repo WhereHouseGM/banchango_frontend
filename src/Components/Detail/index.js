@@ -214,13 +214,17 @@ const Detail = ({ warehouse }) => {
               블로그 방문하기
             </MobileBlogVisitButton>
           )}
-          <MobileQuoteContactButton
-            onClick={() => {
-              history.push(`/warehouses/quotecontact/${warehouse.warehouseId}`);
-            }}
-          >
-            견적 문의하기
-          </MobileQuoteContactButton>
+          {localStorage.getItem('type') !== 'OWNER' && (
+            <MobileQuoteContactButton
+              onClick={() => {
+                history.push(
+                  `/warehouses/quotecontact/${warehouse.warehouseId}`,
+                );
+              }}
+            >
+              견적 문의하기
+            </MobileQuoteContactButton>
+          )}
         </MobileQuoteContactButtonWrapper>
       </MobileContainer>
       <MobileDetailNavContainer>
