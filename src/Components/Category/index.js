@@ -152,7 +152,15 @@ const Category = () => {
               message.warning('상품 종류를 1개 이상 선택해 주세요!');
               return;
             } else {
-              setClickedItems(getClickedMainItemTypes().join(',').toString());
+              if (
+                getClickedMainItemTypes().join(',').toString() !== clickedItems
+              ) {
+                setIsExtraLoading(false);
+                setPageIndex(0);
+                setClickedItems(getClickedMainItemTypes().join(',').toString());
+              } else {
+                setClickedItems(getClickedMainItemTypes().join(',').toString());
+              }
             }
           }}
         >
