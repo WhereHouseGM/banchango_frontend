@@ -49,12 +49,8 @@ export const CheckPWModal = ({
             onClick={confirmClicked}
             style={
               PW === null || PW.trim() === ''
-                ? {
-                    backgroundColor: '#5ea0ff',
-                  }
-                : {
-                    backgroundColor: '#1e56a0',
-                  }
+                ? { backgroundColor: '#1e56a0' }
+                : { backgroundColor: '#5ea0ff' }
             }
           >
             확인
