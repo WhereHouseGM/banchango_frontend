@@ -65,6 +65,8 @@ import {
   MobileUpperRightDescText,
   MobileUpperRightDescTitle,
   MobileDetailNavButton,
+  MobileQuoteContactButtonWrapper,
+  MobileBlogVisitButton,
 } from './Detail';
 import { categoryTitleDict, conditionDict } from '../../static/category';
 import { dayOfWeek } from '../../static/detail';
@@ -202,15 +204,28 @@ const Detail = ({ warehouse }) => {
             </MobileUpperRightDescWrapper>
           </MobileUpperDescWrapper>
         </MobileUpperDescContainer>
-        <MobileQuoteContactButton
-          onClick={() => {
-            history.push(
-              `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}`,
-            );
-          }}
-        >
-          견적 문의하기
-        </MobileQuoteContactButton>
+        <MobileQuoteContactButtonWrapper>
+          {!!warehouse.blogUrl && (
+            <MobileBlogVisitButton
+              onClick={() => {
+                window.open(warehouse.blogUrl);
+              }}
+            >
+              블로그 방문하기
+            </MobileBlogVisitButton>
+          )}
+          {localStorage.getItem('type') !== 'OWNER' && (
+            <MobileQuoteContactButton
+              onClick={() => {
+                history.push(
+                  `/warehouses/quotecontact/${warehouse.warehouseId}`,
+                );
+              }}
+            >
+              견적 문의하기
+            </MobileQuoteContactButton>
+          )}
+        </MobileQuoteContactButtonWrapper>
       </MobileContainer>
       <MobileDetailNavContainer>
         <MobileDetailNavButton

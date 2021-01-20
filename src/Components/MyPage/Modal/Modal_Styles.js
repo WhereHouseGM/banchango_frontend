@@ -50,7 +50,7 @@ export const PWInputBox = styled.input`
   padding: 5px;
   outline: none;
   border: none;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
 `;
 export const ConfirmButton = styled.div`
   margin-top: 30px;
@@ -58,7 +58,7 @@ export const ConfirmButton = styled.div`
   color: white;
   font-weight: bold;
   text-align: center;
-  background-color: #5ea0ff;
+  background-color: #1e56a0;
   padding: 12px;
 `;
 export const WithdrawContainer = styled.div``;

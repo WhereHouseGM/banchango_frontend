@@ -461,15 +461,24 @@ export const MobileDetailNavButton = styled.div`
   padding: 15px 0;
   font-size: 13px;
 `;
-export const MobileQuoteContactButton = styled.div`
+export const MobileQuoteContactButtonWrapper = styled.div`
   width: 100%;
-  padding: 15px 0;
-  text-align: center;
   position: fixed;
-  bottom: 0;
-  color: white;
-  background-color: #1e56a0;
-  font-weight: bold;
-  font-size: 17px;
   z-index: 50;
+  font-weight: bold;
+  text-align: center;
+  font-size: 17px;
+  color: white;
+  bottom: 0;
+  display: flex;
+`;
+export const MobileBlogVisitButton = styled.div`
+  flex: 1;
+  padding: 15px 0;
+  background-color: #15c7ab;
+`;
+export const MobileQuoteContactButton = styled.div`
+  flex: 1;
+  padding: 15px 0;
+  background-color: #1e56a0;
 `;
