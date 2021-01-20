@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { Link } from 'react-router-dom';
-
 import canParkImg from '../../assets/images/Detail/Car.png';
 import cctvExistImg from '../../assets/images/Detail/Cctv.png';
 import insuranceExistImg from '../../assets/images/Detail/Certificate.png';
