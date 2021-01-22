@@ -18,4 +18,13 @@ const UseGoogleAnalytics = () => {
     ReactGA.pageview(currentPath);
   }, [location]);
 };
+export const searchWarehouseEvent = () => {
+  ReactGA.event({
+    category: '창고 검색',
+    action: '창고 검색 버튼 클릭',
+    label: '창고 검색',
+    value: 1,
+  });
+};
+
 export default UseGoogleAnalytics;
