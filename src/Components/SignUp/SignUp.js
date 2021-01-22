@@ -141,7 +141,6 @@ export const CheckButton = styled.input`
   margin-right: 10px;
 `;
 export const CheckButtonText = styled.div`
-  color: black;
   border-bottom: 1px solid black;
 `;
 

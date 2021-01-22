@@ -354,15 +354,23 @@ const SignUp = () => {
             </RadioButtonContainer>
             <CheckButtonWrapper>
               <CheckButton id="serviceCheckButton" type="checkbox" />
-              <Link to="/service-agreements">
-                <CheckButtonText>서비스 이용약관 (필수)</CheckButtonText>
-              </Link>
+              <CheckButtonText
+                onClick={() => {
+                  window.open('/service-agreements');
+                }}
+              >
+                서비스 이용약관 (필수)
+              </CheckButtonText>
             </CheckButtonWrapper>
             <CheckButtonWrapper>
               <CheckButton id="policyCheckButton" type="checkbox" />
-              <Link to="/privacy-policy">
-                <CheckButtonText>개인 정보 처리 방침 (필수)</CheckButtonText>
-              </Link>
+              <CheckButtonText
+                onClick={() => {
+                  window.open('/privacy-policy');
+                }}
+              >
+                개인 정보 처리 방침 (필수)
+              </CheckButtonText>
             </CheckButtonWrapper>
             <RegisterButton onClick={signUp}>회원 가입</RegisterButton>
             <TextBottomContainer>
