@@ -368,11 +368,19 @@ const QuoteContact = () => {
               {item.url === null ||
               item.url === '' ||
               item.url === undefined ? (
-                <ChildUrlText width={'12%'} href={item.url}>
+                <ChildUrlText width={'12%'} isNotNull={false}>
                   없음
                 </ChildUrlText>
               ) : (
-                <ChildUrlText width={'12%'}>클릭</ChildUrlText>
+                <ChildUrlText
+                  width={'12%'}
+                  isNotNull={true}
+                  onClick={() => {
+                    window.open(`${item.url}`);
+                  }}
+                >
+                  클릭
+                </ChildUrlText>
               )}
               <RemoveItemButton
                 index={idx}
