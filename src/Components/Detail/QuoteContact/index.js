@@ -45,6 +45,7 @@ import {
   barcodeToText,
   RemoveItemButton,
 } from './QuoteContact';
+import { quoteDoneEvent } from '../../GoogleAnalytics';
 
 const BlueText = ({ text, noRequired }) => (
   <InputTitle>
@@ -432,6 +433,7 @@ const QuoteContact = () => {
                 estimateApi
                   .saveEstimate(estimate, localStorage.getItem('AccessToken'))
                   .then(() => {
+                    quoteDoneEvent();
                     alert('견적 문의 요청이 정상적으로 접수되었습니다.');
                     window.location.href = '/mypage/quotation';
                   })
