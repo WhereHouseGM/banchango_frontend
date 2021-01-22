@@ -218,7 +218,7 @@ const Detail = ({ warehouse }) => {
             <MobileQuoteContactButton
               onClick={() => {
                 history.push(
-                  `/warehouses/quotecontact/${warehouse.warehouseId}`,
+                  `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}`,
                 );
               }}
             >
