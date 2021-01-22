@@ -4,6 +4,7 @@ import Fade from 'react-reveal/Fade';
 import CircleImg from '../../assets/images/MainPage/Circle.png';
 import LastImg from '../../assets/images/MainPage/Last.png';
 import { message } from 'antd';
+import ReactGA from 'react-ga';
 
 import {
   SliderImgArr,
@@ -54,6 +55,7 @@ import {
   FirstTitleText,
 } from './MainPage';
 import { useHistory, useLocation } from 'react-router-dom';
+import { searchWarehouseEvent } from '../GoogleAnalytics';
 
 const MainPage = () => {
   const [buttonClicked, setButtonClicked] = useState([]);
@@ -71,11 +73,17 @@ const MainPage = () => {
     }
   }, [location]);
 
-  const getClickedMainItemTypes = () => {
+  const getClickedMainItemTypesAndGA = () => {
     let clickedMainItemTypes = [];
     for (let i = 0; i < buttonClicked.length; i++) {
       if (buttonClicked[i] === true) {
         clickedMainItemTypes.push(BtnArr[i].id);
+        ReactGA.event({
+          category: '카테고리',
+          action: BtnArr[i].name + ' 버튼 선택',
+          label: BtnArr[i].name,
+          value: 1,
+        });
       }
     }
     return clickedMainItemTypes;
@@ -99,6 +107,7 @@ const MainPage = () => {
           onClick={() => {
             sessionStorage.clear();
             history.push('/category');
+            searchWarehouseEvent();
           }}
         >
           바로 시작하기
@@ -138,7 +147,8 @@ const MainPage = () => {
           </SecondWrapper>
           <SecondButton
             onClick={() => {
-              let clickedMainItemTypes = getClickedMainItemTypes();
+              searchWarehouseEvent();
+              let clickedMainItemTypes = getClickedMainItemTypesAndGA();
               if (clickedMainItemTypes.length === 0) {
                 message.warning('상품 종류를 1개 이상 선택해 주세요!');
                 return;

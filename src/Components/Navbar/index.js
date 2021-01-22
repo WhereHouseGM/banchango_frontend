@@ -11,6 +11,7 @@ import {
 import { useHistory } from 'react-router-dom';
 
 import Logo from '../../assets/icons/LOGO.png';
+import { searchWarehouseEvent } from '../GoogleAnalytics';
 
 const Navbar = () => {
   const history = useHistory();
@@ -65,7 +66,14 @@ const Navbar = () => {
             <NavLink to="/register">창고등록</NavLink>
           ) : (
             <>
-              <NavLink to="/category">창고검색</NavLink>
+              <NavLink
+                to="/category"
+                onClick={() => {
+                  searchWarehouseEvent();
+                }}
+              >
+                창고검색
+              </NavLink>
               <NavLink to={{ pathname: '/', state: { goToHow: true } }}>
                 이용방법
               </NavLink>
