@@ -33,6 +33,7 @@ import {
 const QuotationList = ({ quotes }) => {
   const history = useHistory();
   const [singleQuoteList, setSingleQuoteList] = useState([]);
+  const [selectedWarehouseName, setSelectedWarehouseName] = useState('');
   const handleGetSingleQuoteList = useCallback((item) => {
     message.loading('불러오는 중..');
     estimateApi
@@ -101,7 +102,10 @@ const QuotationList = ({ quotes }) => {
               <ListChildText
                 width={'10%'}
                 isA
-                onClick={() => handleGetSingleQuoteList(item)}
+                onClick={() => {
+                  handleGetSingleQuoteList(item);
+                  setSelectedWarehouseName(item.warehouse.name);
+                }}
               >
                 {'>'}
               </ListChildText>
@@ -110,7 +114,7 @@ const QuotationList = ({ quotes }) => {
         </ListContainer>
         <HistoryContainer>
           <HistoryTitle>
-            <HistoryTitleText>스토리지원</HistoryTitleText>
+            <HistoryTitleText>{selectedWarehouseName}</HistoryTitleText>
             <HistoryTitleText color={'black'}>견적 내역</HistoryTitleText>
           </HistoryTitle>
           <HistoryUpper>

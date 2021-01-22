@@ -20,11 +20,14 @@ import {
   RadioButtonLabel,
   RadioButtonContainer,
   userTypes,
+  CheckButtonWrapper,
+  CheckButton,
+  CheckButtonText,
 } from './SignUp';
 import { userApi } from '../../api';
 import { message } from 'antd';
 import sha256 from 'crypto';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -45,6 +48,16 @@ const SignUp = () => {
   };
 
   const signUp = () => {
+    if (
+      !document.getElementById('policyCheckButton').checked ||
+      !document.getElementById('serviceCheckButton').checked
+    ) {
+      message.destroy();
+      message.warning(
+        '서비스 이용약관, 개인 정보 처리 방침에 동의하셔야 합니다.',
+      );
+      return;
+    }
     if (inputs.email === null || inputs.email.trim() === '') {
       message.destroy();
       message.warning('이메일을 입력해주세요.');
@@ -115,6 +128,7 @@ const SignUp = () => {
       message.warning('유선전화 번호 형식이 올바르지 않습니다.');
       return;
     }
+
     userApi
       .signUp(inputs)
       .then(() => {
@@ -338,6 +352,26 @@ const SignUp = () => {
                 </React.Fragment>
               ))}
             </RadioButtonContainer>
+            <CheckButtonWrapper>
+              <CheckButton id="serviceCheckButton" type="checkbox" />
+              <CheckButtonText
+                onClick={() => {
+                  window.open('/service-agreements');
+                }}
+              >
+                서비스 이용약관 (필수)
+              </CheckButtonText>
+            </CheckButtonWrapper>
+            <CheckButtonWrapper>
+              <CheckButton id="policyCheckButton" type="checkbox" />
+              <CheckButtonText
+                onClick={() => {
+                  window.open('/privacy-policy');
+                }}
+              >
+                개인 정보 처리 방침 (필수)
+              </CheckButtonText>
+            </CheckButtonWrapper>
             <RegisterButton onClick={signUp}>회원 가입</RegisterButton>
             <TextBottomContainer>
               <TextBottom href="/service-agreements">이용 약관 </TextBottom>|
