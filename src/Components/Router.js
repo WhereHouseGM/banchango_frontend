@@ -43,7 +43,7 @@ const RouterComponent = () => {
       </Route>
       <Route path="/admin">
         <TokenAndTypeValidator>
-          <Message text={BadAccessText} />
+          <Message text={'여길 바꾸어라!'} />
         </TokenAndTypeValidator>
       </Route>
       <Route path="/mypage" exact>
