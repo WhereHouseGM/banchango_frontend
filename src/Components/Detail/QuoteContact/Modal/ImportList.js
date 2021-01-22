@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { estimateApi } from '../../../../api';
 import PropTypes from 'prop-types';
+import { getProductHistoryClickedEvent } from '../../../GoogleAnalytics';
 
 const ModalWrapper = styled.div`
   box-sizing: border-box;
@@ -194,6 +195,7 @@ const ImportListModal = ({
             </ListContainer>
             <SubmitButton
               onClick={() => {
+                getProductHistoryClickedEvent();
                 getEstimateItems(estimateId);
                 onClose();
                 goToResultList();
