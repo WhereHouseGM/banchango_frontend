@@ -167,12 +167,15 @@ export const HistoryChildText = styled.div`
   width: ${(props) => props.width};
 `;
 
-export const ChildUrlText = styled.a`
+export const ChildUrlText = styled.div`
   width: ${(props) => props.width};
   text-decoration: none;
+  color: ${(props) => (props.isNotNull === true ? '#1fa5de' : 'black')};
   &:hover {
     text-decoration: none;
-    font-weight: bold;
+    cursor: ${(props) => (props.isNotNull === true ? 'pointer' : 'default')};
+    font-weight: ${(props) => (props.isNotNull === true ? 'bold' : 'normal')};
+    color: ${(props) => (props.isNotNull === true ? '#1e56a0' : 'black')};
   }
 `;
 
@@ -266,7 +269,7 @@ export const keepingTypeToText = (value) => {
     return '냉동';
   } else return '알수없음';
 };
- 
+
 export const Barcodes = [
   {
     id: 'ALL',
@@ -294,7 +297,6 @@ export const barcodeToText = (type) => {
     return '일부';
   } else return '알수없음';
 };
-
 
 export const RemoveItemButton = styled.div`
   font-weight: bold;
