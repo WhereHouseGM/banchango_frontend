@@ -323,7 +323,7 @@ const Register = () => {
     setInputs(tempInputs);
   };
 
-  const register = async () => {
+  const register = () => {
     setDeliveryTypesToState();
     setWarehouseFacilityUsagesToState();
     setWarehouseUsageCautionsToState();
@@ -392,7 +392,7 @@ const Register = () => {
       return;
     }
     message.loading('잠시만 기다려주세요.');
-    return await warehouseApi
+    return warehouseApi
       .register(requestBody, localStorage.getItem('AccessToken'))
       .then(() => {
         message.destroy();
