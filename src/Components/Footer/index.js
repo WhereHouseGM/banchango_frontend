@@ -48,7 +48,7 @@ const BoxTitle = styled.div`
 `;
 const BoxBody = styled.div``;
 
-const BoxBottomA = styled.a`
+const BoxBottomA = styled.div`
   margin: 25px 10px 0 10px;
   font-size: 16px;
   text-decoration: none;
@@ -117,7 +117,13 @@ const Footer = () => (
         </RightBox>
       </Wrapper>
     </BoxWrapper>
-    <BoxBottomA href="https://www.cognitoforms.com/WhereHouseGM/%ED%8C%8C%ED%8A%B8%EB%84%88%EC%8B%AD%EB%AC%B8%EC%9D%98">
+    <BoxBottomA
+      onClick={() => {
+        window.open(
+          'https://www.cognitoforms.com/WhereHouseGM/%ED%8C%8C%ED%8A%B8%EB%84%88%EC%8B%AD%EB%AC%B8%EC%9D%98',
+        );
+      }}
+    >
       창고 등록 문의
     </BoxBottomA>
     <BottomText>@ BANCHANGOHUB INT Co.Ltd.</BottomText>
