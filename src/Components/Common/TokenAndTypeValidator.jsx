@@ -12,7 +12,6 @@ const PathNames = {
     MYPAGE_HOUSELIST: '/mypage/houselist',
     REGISTER: '/register',
     WAREHOUSES_QUOTECONTACT: '/warehouses/quotecontact/',
-    ADMIN: '/admin'
 }
 
 const TokenAndTypeValidator = ({children}) => {
@@ -44,21 +43,6 @@ const TokenAndTypeValidator = ({children}) => {
                 if(isUserLoggedIn()) {
                     return <ErrorPage title={'잘못된 접근입니다.'} message={'잘못된 접근입니다.'} locationToGo={'/'} buttonMessage={'메인 화면으로 이동'}/>;
                 } else return children;
-            case PathNames.ADMIN:
-                if(isUserLoggedIn()) {
-                   if(isTokenExpired()) {
-                       alert('유효기간이 만료되었습니다. 다시 로그인 해주세요.');
-                       localStorage.clear();
-                       window.location.href = "/login";
-                       break;
-                   } else {
-                       if(localStorage.getItem('Role') === 'ADMIN') {
-                           return children;
-                       } else {
-                           return <ErrorPage title={'잘못된 접근입니다.'} message={'접근 권한이 없습니다.'} locationToGo={'/'} buttonMessage={'메인 화면으로 이동'}/>;
-                       }
-                   }
-                } else return <ErrorPage title={'잘못된 접근입니다.'} message={'로그인을 해주세요.'} locationToGo={'/login'} buttonMessage={'로그인 하기'}/>;
             case PathNames.MYPAGE:
                 if(isUserLoggedIn()) {
                     if(isTokenExpired()) {

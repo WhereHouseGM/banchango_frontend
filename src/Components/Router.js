@@ -13,7 +13,7 @@ import QuotationList from '../Routes/MyPage/QuotationList';
 import HouseList from '../Routes/MyPage/HouseList';
 import Detail from '../Routes/Detail';
 import Category from '../Routes/Category';
-import Message from '../Components/Message';
+import AdminWarehouses from '../Routes/Admin/Warehouses';
 import SiteRule from '../Routes/SiteRule';
 import PrivacyPolicy from '../Routes/PrivacyPolicy';
 import Register from '../Routes/Register';
@@ -23,8 +23,6 @@ import IconSource from '../Routes/IconSource';
 import ErrorPage from '../Components/ErrorPage';
 import TokenAndTypeValidator from './Common/TokenAndTypeValidator';
 import UseGoogleAnalytics from './GoogleAnalytics';
-
-const BadAccessText = '잘못된 접근입니다.';
 
 const RouterComponent = () => {
   UseGoogleAnalytics();
@@ -43,7 +41,7 @@ const RouterComponent = () => {
       </Route>
       <Route path="/admin">
         <TokenAndTypeValidator>
-          <Message text={'여길 바꾸어라!'} />
+          <AdminWarehouses />
         </TokenAndTypeValidator>
       </Route>
       <Route path="/mypage" exact>
