@@ -27,7 +27,7 @@ import {
   ArrayInput,
   InputType,
 } from './Register';
-
+import { registerEvent } from '../GoogleAnalytics';
 import RegisterBackground from '../../assets/images/login-background.jpg';
 
 import MainImage from '../../assets/images/banchango-main.png';
@@ -323,7 +323,7 @@ const Register = () => {
     setInputs(tempInputs);
   };
 
-  const register = () => {
+  const register = async () => {
     setDeliveryTypesToState();
     setWarehouseFacilityUsagesToState();
     setWarehouseUsageCautionsToState();
@@ -392,12 +392,12 @@ const Register = () => {
       return;
     }
     message.loading('잠시만 기다려주세요.');
-    warehouseApi
+    return await warehouseApi
       .register(requestBody, localStorage.getItem('AccessToken'))
       .then(() => {
         message.destroy();
         alert('창고 등록 요청이 정상적으로 처리되었습니다.');
-        window.location.href = '/mypage/houselist';
+        return 'SUCCESS';
       })
       .catch(({ response: { status } }) => {
         message.destroy();
@@ -782,7 +782,16 @@ const Register = () => {
               <InputTitle>창고 이용 주의사항</InputTitle>
               {warehouseUsageCautions}
             </ItemContainer>
-            <SubmitButton onClick={() => register()}>
+            <SubmitButton
+              onClick={async () => {
+                if ((await register()) === 'SUCCESS') {
+                  registerEvent.success();
+                  window.location.href = '/mypage/houselist';
+                } else {
+                  registerEvent.failed();
+                }
+              }}
+            >
               창고 등록 요청하기
             </SubmitButton>
           </TextContainer>

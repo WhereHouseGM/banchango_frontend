@@ -50,5 +50,23 @@ export const quoteDoneEvent = () => {
     value: 1,
   });
 };
+export const registerEvent = {
+  success: () => {
+    ReactGA.event({
+      category: '창고 등록',
+      action: '창고 등록 요청 완료',
+      label: '창고 등록',
+      value: 1,
+    });
+  },
+  failed: () => {
+    ReactGA.event({
+      category: '창고 등록',
+      action: '창고 등록 요청 미스',
+      label: '창고 등록',
+      value: 1,
+    });
+  },
+};
 
 export default UseGoogleAnalytics;
