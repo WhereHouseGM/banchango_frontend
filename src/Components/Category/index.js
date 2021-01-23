@@ -48,6 +48,7 @@ import {
 } from './Category';
 import DownButton from '../../assets/icons/DownButton.png';
 import { warehouseApi } from '../../api';
+import { searchWarehouseEvent } from '../GoogleAnalytics';
 
 const Category = () => {
   const [results, setResults] = useState([]);
@@ -152,6 +153,7 @@ const Category = () => {
               message.warning('상품 종류를 1개 이상 선택해 주세요!');
               return;
             } else {
+              searchWarehouseEvent();
               if (
                 getClickedMainItemTypes().join(',').toString() !== clickedItems
               ) {
@@ -218,6 +220,7 @@ const Category = () => {
                 message.warning('상품 종류를 1개 이상 선택해 주세요!');
                 return;
               } else {
+                searchWarehouseEvent();
                 setClickedItems(getClickedMainItemTypes().join(',').toString());
                 setMobileCategoryPickerClicked(false);
               }

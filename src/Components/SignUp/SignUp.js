@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  font-family: 'notosans-Regular', sans-serif;
   height: 100vh;
   overflow: auto;
 `;
@@ -72,7 +73,7 @@ export const TextContainer = styled.div`
 
 export const HeaderTitleTop = styled.div`
   color: black;
-  font-family: 'Nanum Gothic', sans-serif;
+
   font-size: 20px;
   line-height: 1.8;
   margin-top: 20px;
@@ -82,7 +83,7 @@ export const HeaderTitleTop = styled.div`
 
 export const InputTitle = styled.div`
   color: black;
-  font-family: 'Nanum Gothic', sans-serif;
+
   font-weight: bold;
   font-size: 16px;
   margin-top: 30px;
@@ -92,7 +93,7 @@ export const InputTitle = styled.div`
 
 export const SmallInformationText = styled.div`
   color: black;
-  font-family: 'Nanum Gothic', sans-serif;
+
   font-size: 10px;
   margin-top: 10px;
   align-self: flex-start;
@@ -115,6 +116,7 @@ export const RadioButtonContainer = styled.span`
   margin-top: 10px;
   display: flex;
   width: 73%;
+  margin-bottom: 20px;
 `;
 
 export const RadioButton = styled.input`
@@ -123,9 +125,23 @@ export const RadioButton = styled.input`
 `;
 
 export const RadioButtonLabel = styled.label`
-  font-family: 'Nanum Gothic', sans-serif;
   font-size: 16px;
   color: black;
+`;
+
+export const CheckButtonWrapper = styled.div`
+  width: 73%;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  padding-left: 10px;
+`;
+export const CheckButton = styled.input`
+  margin-right: 10px;
+`;
+export const CheckButtonText = styled.div`
+  border-bottom: 1px solid black;
 `;
 
 export const RegisterButton = styled.button`
@@ -135,7 +151,6 @@ export const RegisterButton = styled.button`
   color: white;
   text-align: center;
   padding: 10px 80px 10px 80px;
-  font-family: 'Nanum Gothic', sans-serif;
   font-weight: bold;
   transition: all 0.2s ease;
   margin-top: 30px;
@@ -151,7 +166,6 @@ export const TextBottomContainer = styled.span`
 `;
 
 export const TextBottom = styled.a`
-  font-family: 'Nanum Gothic', sans-serif;
   font-size: 12px;
   color: gray;
 `;

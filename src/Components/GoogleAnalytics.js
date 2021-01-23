@@ -18,4 +18,55 @@ const UseGoogleAnalytics = () => {
     ReactGA.pageview(currentPath);
   }, [location]);
 };
+export const searchWarehouseEvent = () => {
+  ReactGA.event({
+    category: '창고 검색',
+    action: '창고 검색 버튼 클릭',
+    label: '창고 검색',
+    value: 1,
+  });
+};
+export const howToUseClickedEvent = () => {
+  ReactGA.event({
+    category: '메인페이지',
+    action: '이용방법 버튼 클릭',
+    label: '이용방법',
+    value: 1,
+  });
+};
+export const getProductHistoryClickedEvent = () => {
+  ReactGA.event({
+    category: '견적 문의',
+    action: '불러오기 버튼 클릭',
+    label: '불러오기',
+    value: 1,
+  });
+};
+export const quoteDoneEvent = () => {
+  ReactGA.event({
+    category: '견적 문의',
+    action: '견적 문의하기 버튼 클릭',
+    label: '견적 문의',
+    value: 1,
+  });
+};
+export const registerEvent = {
+  success: () => {
+    ReactGA.event({
+      category: '창고 등록',
+      action: '창고 등록 요청 완료',
+      label: '창고 등록',
+      value: 1,
+    });
+  },
+  failed: () => {
+    ReactGA.event({
+      category: '창고 등록',
+      action: '창고 등록 요청 미스',
+      label: '창고 등록',
+      value: 1,
+    });
+  },
+};
+
 export default UseGoogleAnalytics;

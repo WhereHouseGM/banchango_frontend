@@ -45,6 +45,7 @@ import {
   barcodeToText,
   RemoveItemButton,
 } from './QuoteContact';
+import { quoteDoneEvent } from '../../GoogleAnalytics';
 
 const BlueText = ({ text, noRequired }) => (
   <InputTitle>
@@ -367,11 +368,19 @@ const QuoteContact = () => {
               {item.url === null ||
               item.url === '' ||
               item.url === undefined ? (
-                <ChildUrlText width={'12%'} href={item.url}>
+                <ChildUrlText width={'12%'} isNotNull={false}>
                   없음
                 </ChildUrlText>
               ) : (
-                <ChildUrlText width={'12%'}>클릭</ChildUrlText>
+                <ChildUrlText
+                  width={'12%'}
+                  isNotNull={true}
+                  onClick={() => {
+                    window.open(`${item.url}`);
+                  }}
+                >
+                  클릭
+                </ChildUrlText>
               )}
               <RemoveItemButton
                 index={idx}
@@ -432,6 +441,7 @@ const QuoteContact = () => {
                 estimateApi
                   .saveEstimate(estimate, localStorage.getItem('AccessToken'))
                   .then(() => {
+                    quoteDoneEvent();
                     alert('견적 문의 요청이 정상적으로 접수되었습니다.');
                     window.location.href = '/mypage/quotation';
                   })

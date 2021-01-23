@@ -48,6 +48,22 @@ const BoxTitle = styled.div`
 `;
 const BoxBody = styled.div``;
 
+const BoxBottomA = styled.div`
+  margin: 25px 10px 0 10px;
+  font-size: 16px;
+  text-decoration: none;
+  color: white;
+  border-bottom: 1px solid white;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+  }
+`;
 const BoxBottomLink = styled(Link)`
   margin: 10px 10px 0 10px;
   font-size: 8.6px;
@@ -79,46 +95,48 @@ const BottomLinkWrapper = styled.div`
   justify-content: center;
 `;
 
-const Footer = () => {
-  return (
-    <Container>
-      <BoxWrapper>
-        <MarginBox />
-        <Wrapper>
-          <LeftBox>
-            <BoxTitle>반창고</BoxTitle>
-            <BoxBody>
-              대표 | 최윤석 <br />
-              주소 | 서울특별시 동작구 상도동 창신관 304호
-            </BoxBody>
-          </LeftBox>
-          <RightBox>
-            <BoxTitle>고객센터</BoxTitle>
-            <BoxBody>
-              이메일 | wherehousegm@gmail.com
-              <br />
-              대표전화 | 010-4161-4711
-            </BoxBody>
-            <BoxBottomLink
-              to="https://www.cognitoforms.com/WhereHouseGM/%ED%8C%8C%ED%8A%B8%EB%84%88%EC%8B%AD%EB%AC%B8%EC%9D%98"
-              style={{ fontSize: '15px' }}
-            >
-              창고 등록 문의
-            </BoxBottomLink>
-          </RightBox>
-        </Wrapper>
-      </BoxWrapper>
-      <BottomText>@ BANCHANGOHUB INT Co.Ltd.</BottomText>
-      <BottomLinkWrapper>
-        <BoxBottomLink to={'/service-agreements'}>
-          홈페이지 이용 약관
-        </BoxBottomLink>
-        <BoxBottomLink to={'/privacy-policy'}>개인정보 처리방침</BoxBottomLink>
-        <BoxBottomLink to={'/icon-source'}>
-          홈페이지 디자인 저작권 공시
-        </BoxBottomLink>
-      </BottomLinkWrapper>
-    </Container>
-  );
-};
+const Footer = () => (
+  <Container>
+    <BoxWrapper>
+      <MarginBox />
+      <Wrapper>
+        <LeftBox>
+          <BoxTitle>반창고</BoxTitle>
+          <BoxBody>
+            대표 | 최윤석 <br />
+            주소 | 서울특별시 동작구 상도동 창신관 304호
+          </BoxBody>
+        </LeftBox>
+        <RightBox>
+          <BoxTitle>고객센터</BoxTitle>
+          <BoxBody>
+            이메일 | wherehousegm@gmail.com
+            <br />
+            대표전화 | 010-4161-4711
+          </BoxBody>
+        </RightBox>
+      </Wrapper>
+    </BoxWrapper>
+    <BoxBottomA
+      onClick={() => {
+        window.open(
+          'https://www.cognitoforms.com/WhereHouseGM/%ED%8C%8C%ED%8A%B8%EB%84%88%EC%8B%AD%EB%AC%B8%EC%9D%98',
+        );
+      }}
+    >
+      창고 등록 문의
+    </BoxBottomA>
+    <BottomText>@ BANCHANGOHUB INT Co.Ltd.</BottomText>
+    <BottomLinkWrapper>
+      <BoxBottomLink to={'/service-agreements'}>
+        홈페이지 이용 약관
+      </BoxBottomLink>
+      <BoxBottomLink to={'/privacy-policy'}>개인정보 처리방침</BoxBottomLink>
+      <BoxBottomLink to={'/icon-source'}>
+        홈페이지 디자인 저작권 공시
+      </BoxBottomLink>
+    </BottomLinkWrapper>
+  </Container>
+);
+
 export default Footer;
