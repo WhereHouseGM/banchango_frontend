@@ -4,6 +4,8 @@ import sha256 from 'crypto';
 import { userApi } from '../../api';
 import 'react-toastify/dist/ReactToastify.css';
 import { message } from 'antd';
+import { userLogin } from '../../Redux/User/userActions';
+import { connect } from 'react-redux';
 
 const InputType = {
   EMAIL: 'email',
@@ -128,6 +130,8 @@ class LoginContainer extends React.Component {
       email: email,
       password: hashCode,
     };
+    this.props.userLogin(requestBody);
+    console.log(this.props.userData);
     userApi
       .signIn(requestBody)
       .then(({ data: { accessToken, refreshToken, user } }) => {
@@ -136,7 +140,7 @@ class LoginContainer extends React.Component {
           RefreshToken: refreshToken,
         };
         this.saveToken(tokenSet, user);
-        window.location.href = '/';
+        // window.location.href = '/';
       })
       .catch(({ response: { status } }) => {
         if (status === 400) {
@@ -164,5 +168,11 @@ class LoginContainer extends React.Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  userData: state.user,
+});
 
-export default LoginContainer;
+const mapDispatchToProps = (dispatch) => ({
+  userLogin: (requestBody) => dispatch(userLogin(requestBody)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
