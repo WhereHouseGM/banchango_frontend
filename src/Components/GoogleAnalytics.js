@@ -69,4 +69,23 @@ export const registerEvent = {
   },
 };
 
+export const signUpEvent = {
+  success: () => {
+    ReactGA.event({
+      category: '회원가입',
+      action: '회원가입 버튼 클릭',
+      label: '회원가입 완료',
+      value: 1,
+    });
+  },
+  failed: () => {
+    ReactGA.event({
+      category: '회원가입',
+      action: '회원가입 버튼 클릭',
+      label: '회원가입 정보 누락',
+      value: 1,
+    });
+  },
+};
+
 export default UseGoogleAnalytics;
