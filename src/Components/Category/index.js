@@ -310,7 +310,7 @@ const Category = () => {
             />
             <MobileResultBottomWrapper>
               <MobileResultHouseName>{warehouse.name}</MobileResultHouseName>
-              <MobileResultAddress>{warehouse.address}</MobileResultAddress>
+              <MobileResultAddress>{`${warehouse.address}\n월 최소 출고 ${warehouse.minReleasePerMonth}건 | ${warehouse.space}평`}</MobileResultAddress>
               <MobileResultCategoryButtonWrapper>
                 {warehouse.mainItemTypes.map((type, idx) => (
                   <MobileResultCategoryButton key={idx} match={type.match}>

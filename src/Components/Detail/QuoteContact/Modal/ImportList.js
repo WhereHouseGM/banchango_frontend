@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { estimateApi } from '../../../../api';
 import PropTypes from 'prop-types';
 import { getProductHistoryClickedEvent } from '../../../GoogleAnalytics';
+import { message } from 'antd';
 
 const ModalWrapper = styled.div`
   box-sizing: border-box;
@@ -141,6 +142,7 @@ const ImportListModal = ({
           return;
         } else if (status === 403) {
           alert('[403] 해당 요청을 수행할 권한이 없습니다.');
+          return;
         } else if (status === 404) {
           return;
         }
@@ -196,9 +198,13 @@ const ImportListModal = ({
             <SubmitButton
               onClick={() => {
                 getProductHistoryClickedEvent();
-                getEstimateItems(estimateId);
-                onClose();
-                goToResultList();
+                if (estimateId !== -1) {
+                  getEstimateItems(estimateId);
+                  onClose();
+                  goToResultList();
+                } else {
+                  message.error('불러올 견적 내역을 선택해주세요.');
+                }
               }}
             >
               불러오기

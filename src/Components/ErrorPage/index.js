@@ -4,21 +4,26 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Container = styled.div`
-  width: 100%;
-  height: 90vh;
+  width: 90%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  line-height: 2.2;
+  margin: 0 auto;
+  line-height: 1.7;
+  text-align: center;
 `;
 
 const Title = styled.div`
   font-size: 30px;
   font-weight: bold;
+  white-space: pre-wrap;
 `;
 
-const Body = styled.div``;
+const Body = styled.div`
+  margin: 20px 0;
+`;
 
 const GoToMainPage = styled.div`
   margin-top: 20px;
