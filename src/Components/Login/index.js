@@ -4,7 +4,6 @@ import MainImage from '../../assets/images/banchango-main.png';
 import PropTypes from 'prop-types';
 import {
   Container,
-  BackgroundImage,
   LoginContainer,
   ImageContainer,
   LoginImage,

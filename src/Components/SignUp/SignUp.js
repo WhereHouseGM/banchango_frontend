@@ -2,20 +2,12 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   font-family: 'notosans-Regular', sans-serif;
-  height: 100vh;
-  overflow: auto;
-`;
-
-export const Wrapper = styled.div`
-  height: 100%;
-  min-height: 100vh;
-  box-align: center;
-  align-items: center;
-  box-pack: center;
-  justify-content: center;
   width: 100%;
+  min-height: 100vh;
   display: flex;
-  align-content: center;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
 `;
 
 export const BackgroundImage = styled.div`
@@ -35,7 +27,7 @@ export const SignUpContainer = styled.div`
   width: 375px;
   border-radius: 15px;
   overflow: hidden;
-  margin-top: 150px;
+  margin: 30px 0;
 `;
 
 export const ImageContainer = styled.div`
