@@ -25,6 +25,7 @@ const FirstLeftText = styled.div`
   font-weight: bold;
   font-size: 45px;
   @media (max-width: 768px) {
+    text-align: center;
     font-size: 25px;
     min-width: 110px;
     white-space: pre-wrap;
