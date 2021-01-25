@@ -20,9 +20,12 @@ export const Wrapper = styled.div`
 export const Title = styled.div`
   font-weight: bold;
   margin-top: 10px;
-  padding: 15px 15px;
+  padding: 15px;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  @media (max-width: 768px) {
+    border-top: 0;
+  }
 `;
 
 export const ProductTitleWrapper = styled.div`
@@ -32,6 +35,10 @@ export const ProductTitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  @media (max-width: 768px) {
+    margin-top: 0px;
+    border-bottom: 0;
+  }
 `;
 
 export const ProductTitle = styled.div`
@@ -107,8 +114,10 @@ export const InputBox = styled.input`
   height: 28px;
   margin-bottom: 40px;
   border: 1px solid rgba(0, 0, 0, 0.2);
+  padding-left: 10px;
   @media (max-width: 768px) {
     width: 85%;
+    height: 40px;
   }
 `;
 
@@ -245,17 +254,25 @@ export const AnnounceTitle = styled.div`
   font-size: 30px;
   padding: 25px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  @media (max-width: 768px) {
+    border-bottom: 0;
+  }
 `;
 
 export const TextareaWrapper = styled.div`
   width: 80%;
   height: 300px;
   margin: 30px auto;
+  @media (max-width: 768px) {
+    width: 97%;
+    margin: 0px auto;
+  }
 `;
 
 export const AnnounceTextarea = styled.textarea`
   height: 100%;
   width: 100%;
+  padding: 10px;
 `;
 
 export const InquiryButton = styled.div`

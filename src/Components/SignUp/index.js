@@ -28,6 +28,7 @@ import { userApi } from '../../api';
 import { message } from 'antd';
 import sha256 from 'crypto';
 import { useHistory, Link } from 'react-router-dom';
+import { signUpEvent } from '../GoogleAnalytics';
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -129,11 +130,10 @@ const SignUp = () => {
       return;
     }
 
-    userApi
+    return userApi
       .signUp(inputs)
       .then(() => {
-        alert('회원가입이 완료되었습니다!\n 로그인 페이지로 이동합니다.');
-        history.push('/login');
+        return 'SUCCESS';
       })
       .catch(({ response: { status } }) => {
         if (status === 400) {
@@ -142,6 +142,7 @@ const SignUp = () => {
           alert('해당 이메일은 이미 가입되어 있습니다.');
           document.getElementById('email').focus();
         }
+        return 'FAILED';
       });
   };
 
@@ -370,7 +371,21 @@ const SignUp = () => {
               개인 정보 처리 방침 (필수)
             </CheckButtonText>
           </CheckButtonWrapper>
-          <RegisterButton onClick={signUp}>회원 가입</RegisterButton>
+          <RegisterButton
+            onClick={async () => {
+              if ((await signUp()) === 'SUCCESS') {
+                signUpEvent.success();
+                alert(
+                  '회원가입이 완료되었습니다!\n 로그인 페이지로 이동합니다.',
+                );
+                history.push('/login');
+              } else {
+                signUpEvent.failed();
+              }
+            }}
+          >
+            회원 가입
+          </RegisterButton>
           <TextBottomContainer>
             <TextBottom href="/service-agreements">이용 약관 </TextBottom>|
             <TextBottom href="/privacy-policy">개인 정보 처리 방침</TextBottom>

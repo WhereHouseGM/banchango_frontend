@@ -155,3 +155,14 @@ export const statusToText = (status) => {
     return '삭제됨';
   } else return '알 수 없음';
 };
+export const statusToColorObject = (status) => {
+  if (status === 'IN_PROGRESS') {
+    return { backgroundColor: '#1e56a0' };
+  } else if (status === 'REJECTED') {
+    return { backgroundColor: '#ff5555' };
+  } else if (status === 'VIEWABLE') {
+    return { backgroundColor: '#1fab89' };
+  } else if (status === 'DELETED') {
+    return { backgroundColor: '#ff5555' };
+  } else return { backgroundColor: '#ff5555' };
+};
