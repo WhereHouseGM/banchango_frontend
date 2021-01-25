@@ -15,19 +15,32 @@ const FirstContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
 `;
 const FirstLeftText = styled.div`
   width: 20%;
   min-width: 165.1px;
   font-weight: bold;
   font-size: 45px;
+  @media (max-width: 768px) {
+    font-size: 25px;
+    min-width: 110px;
+    white-space: pre-wrap;
+  }
 `;
 const FirstRightText = styled.div`
   font-family: 'notosans-Regular', sans-serif;
-  width: 50%;
+  /* width: 50%; */
+  flex: 1;
   max-width: 615px;
   font-size: 14px;
   line-height: 1.5;
+  white-space: normal;
+  @media (max-width: 768px) {
+    white-space: pre-wrap;
+  }
 `;
 const SecondWrapper = styled.div`
   width: 95%;
@@ -223,15 +236,17 @@ const Team = () => {
     <Container>
       <FirstContainer>
         <FirstLeftText>
-          <span>㮽창고{` `}</span>
+          <span>㮽창고{`\n`}</span>
           <span style={{ fontSize: '25px' }}>허브 :</span>
         </FirstLeftText>
         <FirstRightText>
           국내 최초 창고중개 플랫폼 반창고 허브는 대표가 직접 '화주로서 느끼는
           어려움'에서 시작한 솔루션입니다.
-          <br /> IT 성장이 주는 편리함은 잃지 않되, 그 모든 기반에 있는 사람의
+          <br />
+          {'\n'} IT 성장이 주는 편리함은 잃지 않되, 그 모든 기반에 있는 사람의
           가치 또한 잊지 않고자 합니다.
-          <br /> 반창고가 화주와 창고주에게 각자의 영역에서 발돋움하기 위한
+          <br />
+          {'\n'} 반창고가 화주와 창고주에게 각자의 영역에서 발돋움하기 위한
           도움닫기가 되길 바랍니다.
         </FirstRightText>
       </FirstContainer>
