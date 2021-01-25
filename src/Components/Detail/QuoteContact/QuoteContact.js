@@ -158,9 +158,6 @@ export const ProductListTitle = styled.div`
   font-size: 30px;
   padding: 25px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  /* @media (max-width: 768px) {
-    font-size: 20px;
-  } */
 `;
 
 export const HistoryUpper = styled.div`
