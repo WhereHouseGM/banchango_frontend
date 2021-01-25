@@ -160,6 +160,7 @@ export const WithdrawalLabel = styled.div`
   }
 `;
 export const MobileContainer = styled.div`
+  padding-bottom: 40px;
   @media (min-width: 1101px) {
     display: none;
   }

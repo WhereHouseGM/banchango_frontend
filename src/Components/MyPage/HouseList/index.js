@@ -32,6 +32,7 @@ import {
   statusToText,
   MobileUpperMenuWrapper,
   MobileUpperMenuButton,
+  statusToColorObject,
 } from './HouseList';
 
 const HouseList = () => {
@@ -133,7 +134,9 @@ const HouseList = () => {
                     {warehouse.name}
                     <TitleUnderLine />
                   </Title>
-                  <StatusBox>{statusToText(warehouse.status)}</StatusBox>
+                  <StatusBox style={statusToColorObject(warehouse.status)}>
+                    {statusToText(warehouse.status)}
+                  </StatusBox>
                 </ItemDescWrapper>
               </ItemBox>
             );
@@ -158,7 +161,7 @@ const HouseList = () => {
                 {warehouse.address}&nbsp;{warehouse.addressDetail}
               </MobileDescAddress>
               <MobileDescName>{warehouse.name}</MobileDescName>
-              <MobileDescAccepted>
+              <MobileDescAccepted style={statusToColorObject(warehouse.status)}>
                 {statusToText(warehouse.status)}
               </MobileDescAccepted>
             </MobileDescWrapper>
