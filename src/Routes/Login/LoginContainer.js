@@ -130,8 +130,9 @@ class LoginContainer extends React.Component {
       email: email,
       password: hashCode,
     };
-    this.props.userLogin(requestBody);
+    // await this.props.userLogin(requestBody);
     console.log(this.props.userData);
+    console.log(typeof this.props.userLogin(requestBody));
     userApi
       .signIn(requestBody)
       .then(({ data: { accessToken, refreshToken, user } }) => {

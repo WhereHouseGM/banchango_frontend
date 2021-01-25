@@ -1,9 +1,9 @@
 import { userApi } from '../../api';
 import { USER_ACTION_TYPES } from './userTypes';
 
-export const userLogin = (requestBody) => (dispatch) => {
+export const userLogin = (requestBody) => async (dispatch) => {
   dispatch(userLoginActions.request());
-  userApi
+  await userApi
     .signIn(requestBody)
     .then(({ data: { accessToken, refreshToken, user } }) => {
       dispatch(
