@@ -220,7 +220,7 @@ const MainPage = () => {
         <FifthImageBox src={CircleImg} />
         <FifthDesc>"창고 계약이 어렵다면,{'\n'} 반창고를 불러주세요"</FifthDesc>
         <FifthTitleWrapper>
-          <FifthTitleFirst>안쓸 이유가 없습니다.</FifthTitleFirst>
+          <FifthTitleFirst>안 쓸 이유가 없습니다.</FifthTitleFirst>
           <FifthTitleSecond>반창고 파트너 도입 효과</FifthTitleSecond>
           <FifthTitleThird>
             *경기지역 200평 규모 기준{'\n'}반창고 파트너 자료 일부 발췌
