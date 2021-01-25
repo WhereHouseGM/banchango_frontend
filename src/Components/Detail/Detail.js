@@ -216,9 +216,10 @@ export const WorkDayBox = styled.div`
   padding: 5px 10px;
   margin: 5px;
   text-align: center;
-  color: white;
+  color: ${(props) => (props.workOn ? 'white' : 'black')};
   border-radius: 15px;
-  background-color: ${(props) => (props.workOn ? '#15c7ab' : '#557b75')};
+  background-color: ${(props) => (props.workOn ? '#15c7ab' : 'white')};
+  border: 2px solid #15c7ab;
 `;
 
 export const MainMap = styled.div`
