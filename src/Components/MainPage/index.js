@@ -99,7 +99,7 @@ const MainPage = () => {
           <Fade bottom>
             <FirstTitleText>
               온라인 셀러 전용, 보관부터 출고까지 전문가에게 맡겨보세요.{'\n'}
-              인천, 경기 물류대행(3PL) 센터를 반창고에서 찾을 수 있습니다.
+              인천, 경기 물류대행(3PL) 센터를 반창고 허브에서 찾을 수 있습니다.
             </FirstTitleText>
           </Fade>
         </FirstTitle>
