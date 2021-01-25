@@ -4,6 +4,11 @@ export const Container = styled.div`
   font-family: 'notosans-Regular', sans-serif;
   width: 100%;
   min-width: 1024px;
+  @media (max-width: 768px) {
+    min-width: 0px;
+    width: 95%;
+    margin: 0 auto;
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -53,18 +58,31 @@ export const ProductWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    align-items: center;
+    justify-content: flex-end;
+  }
 `;
 
 export const ProductBlankWrapper = styled.div`
   flex: 1;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const ProductLeftWrapper = styled.div`
   width: 45%;
+  @media (max-width: 768px) {
+    width: 94%;
+  }
 `;
 
 export const ProductRightWrapper = styled.div`
   width: 45%;
+  @media (max-width: 768px) {
+    width: 94%;
+  }
 `;
 
 export const InputTitle = styled.div`
@@ -89,6 +107,9 @@ export const InputBox = styled.input`
   height: 28px;
   margin-bottom: 40px;
   border: 1px solid rgba(0, 0, 0, 0.2);
+  @media (max-width: 768px) {
+    width: 85%;
+  }
 `;
 
 export const InputSubText = styled.div`
@@ -152,6 +173,9 @@ export const HistoryUpperText = styled.div`
   font-weight: bold;
   font-size: 15px;
   width: ${(props) => props.width};
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
 `;
 
 export const HistoryChild = styled.div`
@@ -196,12 +220,18 @@ export const TotalCountWrapper = styled.div`
 export const TotalCountTitle = styled.div`
   padding-left: 15px;
   margin-right: 5px;
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 export const TotalCountInput = styled.input`
   margin-left: 10px;
   width: 200px;
   border: 1px solid rgba(0, 0, 0, 0.2);
+  @media (max-width: 768px) {
+    width: 150px;
+  }
 `;
 
 export const TotalCountSubText = styled.div`
