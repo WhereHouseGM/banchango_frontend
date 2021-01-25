@@ -96,3 +96,8 @@ export const WithdrawConfirmButton = styled.div`
     cursor: pointer;
   }
 `;
+export const GreyAlertText = styled.div`
+  margin-top: 15px;
+  color: grey;
+  font-size: 12px;
+`;
