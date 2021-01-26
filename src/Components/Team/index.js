@@ -472,7 +472,7 @@ const Team = () => {
             창신관 3F
           </BottomMapDescText>
           <BottomMapDescPhoneNumber>
-            T. 010 - 4161 - 4711
+            T. 0507-1370-4711
           </BottomMapDescPhoneNumber>
         </BottomMapDescWrapper>
         <MapContainer ref={mapRef} id="kakaoMap" />

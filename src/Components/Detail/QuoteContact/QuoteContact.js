@@ -167,6 +167,9 @@ export const ProductListTitle = styled.div`
   font-size: 30px;
   padding: 25px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  @media (max-width: 768px) {
+    border: 0;
+  }
 `;
 
 export const HistoryUpper = styled.div`
@@ -176,6 +179,9 @@ export const HistoryUpper = styled.div`
   align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   text-align: center;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const HistoryUpperText = styled.div`
@@ -183,8 +189,48 @@ export const HistoryUpperText = styled.div`
   font-size: 15px;
   width: ${(props) => props.width};
   @media (max-width: 768px) {
-    font-size: 10px;
+    display: none;
   }
+`;
+export const MobileHistoryContainer = styled.div`
+  display: none;
+  @media (max-width: 768px) {
+    width: 100%;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    display: block;
+    text-align: center;
+  }
+`;
+export const MobileHistoryUpperContainer = styled.div`
+  width: 100%;
+  align-items: center;
+  display: flex;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+`;
+export const MobileHistoryUpperText = styled.div`
+  font-weight: bold;
+  font-size: 14px;
+  width: ${(props) => props.width};
+`;
+export const MobileHistoryChild = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+`;
+export const MobileHistoryChildText = styled.div`
+  width: ${(props) => props.width};
+`;
+export const MobileHistoryAdditionalInfoButtonWrapper = styled.div`
+  width: 7%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+export const MobileHistoryAdditionalInfoButton = styled.img`
+  width: ${(props) => props.width};
+  margin: auto;
 `;
 
 export const HistoryChild = styled.div`
@@ -194,6 +240,9 @@ export const HistoryChild = styled.div`
   justify-content: center;
   text-align: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const HistoryChildText = styled.div`
@@ -230,7 +279,7 @@ export const TotalCountTitle = styled.div`
   padding-left: 15px;
   margin-right: 5px;
   @media (max-width: 768px) {
-    font-size: 20px;
+    font-size: 18px;
   }
 `;
 
@@ -239,12 +288,15 @@ export const TotalCountInput = styled.input`
   width: 200px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   @media (max-width: 768px) {
-    width: 150px;
+    width: 130px;
   }
 `;
 
 export const TotalCountSubText = styled.div`
   margin-left: 10px;
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 export const AnnounceTitle = styled.div`

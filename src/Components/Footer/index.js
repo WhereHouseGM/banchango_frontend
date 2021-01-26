@@ -110,9 +110,9 @@ const Footer = () => (
         <RightBox>
           <BoxTitle>고객센터</BoxTitle>
           <BoxBody>
-            이메일 | wherehousegm@gmail.com
+            이메일 | info@banchangohub.com
             <br />
-            대표전화 | 010-4161-4711
+            대표전화 | 0507-1370-4711
           </BoxBody>
         </RightBox>
       </Wrapper>
