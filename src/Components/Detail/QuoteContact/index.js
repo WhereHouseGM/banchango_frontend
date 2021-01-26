@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import ImportListModal from './Modal/ImportList';
 import AdditionalInfoModal from './Modal/AdditionalInfo';
-import { message } from 'antd';
 import { useParams } from 'react-router-dom';
 import { estimateApi } from '../../../api';
 
@@ -55,6 +54,7 @@ import {
 } from './QuoteContact';
 import { quoteDoneEvent } from '../../GoogleAnalytics';
 import AdditionalInfoButtonImg from '../../../assets/icons/QuoteContact/AdditionalInfoButton.png';
+import { message } from 'antd';
 
 const BlueText = ({ text, noRequired }) => (
   <InputTitle>
@@ -64,6 +64,7 @@ const BlueText = ({ text, noRequired }) => (
 );
 
 const QuoteContact = () => {
+  const [isQuoteLoading, setIsQuoteLoading] = useState(false);
   const [importListVisible, setImportListVisible] = useState(false);
   const [additionalInfoVisible, setAdditionalInfoVisible] = useState(false);
   const [additionalInfo, setAdditionalInfo] = useState({});
@@ -500,7 +501,18 @@ const QuoteContact = () => {
               />
             </TextareaWrapper>
             <InquiryButton
+              style={
+                isQuoteLoading
+                  ? {
+                      backgroundColor: 'white',
+                      color: 'black',
+                      border: '1px solid black',
+                      cursor: 'default',
+                    }
+                  : {}
+              }
               onClick={() => {
+                if (isQuoteLoading) return;
                 if (estimate.monthlyAverageRelease === null) {
                   message.destroy();
                   message.warning('월간 총 출고량을 입력해주세요.');
@@ -511,6 +523,8 @@ const QuoteContact = () => {
                   message.warning('상품을 1개 이상 입력해주세요.');
                   return;
                 }
+                setIsQuoteLoading(true);
+                message.loading('접수 중 입니다..');
                 estimateApi
                   .saveEstimate(estimate, localStorage.getItem('AccessToken'))
                   .then(() => {
@@ -532,6 +546,10 @@ const QuoteContact = () => {
                     } else {
                       alert('UNKNOWN ERROR');
                     }
+                  })
+                  .finally(() => {
+                    setIsQuoteLoading(false);
+                    message.destroy();
                   });
               }}
             >
