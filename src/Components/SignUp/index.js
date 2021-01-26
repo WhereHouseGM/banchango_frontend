@@ -28,6 +28,7 @@ import { userApi } from '../../api';
 import { message } from 'antd';
 import sha256 from 'crypto';
 import { useHistory, Link } from 'react-router-dom';
+import { signUpEvent } from '../GoogleAnalytics';
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -129,11 +130,10 @@ const SignUp = () => {
       return;
     }
 
-    userApi
+    return userApi
       .signUp(inputs)
       .then(() => {
-        alert('회원가입이 완료되었습니다!\n 로그인 페이지로 이동합니다.');
-        history.push('/login');
+        return 'SUCCESS';
       })
       .catch(({ response: { status } }) => {
         if (status === 400) {
@@ -142,6 +142,7 @@ const SignUp = () => {
           alert('해당 이메일은 이미 가입되어 있습니다.');
           document.getElementById('email').focus();
         }
+        return 'FAILED';
       });
   };
 
@@ -201,187 +202,196 @@ const SignUp = () => {
 
   return (
     <Container>
-      <Wrapper>
-        <BackgroundImage bgImage={Background} alt="Background Image." />
-        <SignUpContainer>
-          <ImageContainer>
-            <Image bgImage={MainImage} alt="Main image." />
-          </ImageContainer>
-          <TextContainer>
-            <HeaderTitleTop>간단한 정보를 입력해주세요.</HeaderTitleTop>
-            <InputTitle>이메일</InputTitle>
-            <Input
-              id="email"
-              type="email"
-              placeholder="example@example.com"
-              name="email"
-              required
-              onChange={(event) => {
-                if (regEx.email.test(event.target.value)) {
-                  switchToRightEmailRegEx();
-                } else {
-                  switchToWrongEmailRegEx();
-                }
-                setInputs({ ...inputs, email: event.target.value });
+      <BackgroundImage bgImage={Background} alt="Background Image." />
+      <SignUpContainer>
+        <ImageContainer>
+          <Image bgImage={MainImage} alt="Main image." />
+        </ImageContainer>
+        <TextContainer>
+          <HeaderTitleTop>간단한 정보를 입력해주세요.</HeaderTitleTop>
+          <InputTitle>이메일</InputTitle>
+          <Input
+            id="email"
+            type="email"
+            placeholder="example@example.com"
+            name="email"
+            required
+            onChange={(event) => {
+              if (regEx.email.test(event.target.value)) {
+                switchToRightEmailRegEx();
+              } else {
+                switchToWrongEmailRegEx();
+              }
+              setInputs({ ...inputs, email: event.target.value });
+            }}
+          />
+          <SmallInformationText id="emailText">
+            이메일을 입력해주세요.
+          </SmallInformationText>
+          <InputTitle>성함</InputTitle>
+          <Input
+            id="name"
+            type="name"
+            placeholder="홍길동"
+            name="name"
+            onChange={(event) => {
+              setInputs({ ...inputs, name: event.target.value });
+            }}
+            required
+          />
+          <InputTitle>비밀번호</InputTitle>
+          <Input
+            id="password"
+            type="password"
+            placeholder="비밀번호 입력"
+            name="password"
+            onChange={(event) => {
+              let rePasswordValue = document.getElementById('rePassword').value;
+              if (event.target.value !== rePasswordValue) {
+                switchToPasswordMisMatch();
+              } else {
+                switchToPasswordMatch();
+              }
+              let hashCode = sha256
+                .createHash('sha256')
+                .update(event.target.value)
+                .digest('hex');
+              setInputs({ ...inputs, password: hashCode });
+            }}
+            required
+          />
+          <InputTitle>비밀번호 재입력</InputTitle>
+          <Input
+            id="rePassword"
+            type="password"
+            placeholder=""
+            name="rePassword"
+            onChange={(event) => {
+              let passwordValue = inputs.password;
+              let rePasswordHash = sha256
+                .createHash('sha256')
+                .update(event.target.value)
+                .digest('hex');
+              if (rePasswordHash !== passwordValue) {
+                switchToPasswordMisMatch();
+              } else {
+                switchToPasswordMatch();
+              }
+            }}
+            required
+          />
+          <SmallInformationText id="rePasswordText">
+            비밀번호가 다릅니다.
+          </SmallInformationText>
+          <InputTitle>유선전화 번호</InputTitle>
+          <Input
+            id="telephoneNumber"
+            type="number"
+            placeholder="032"
+            name="telephoneNumber"
+            onChange={(event) => {
+              if (regEx.phoneNumber.test(event.target.value)) {
+                switchToRightTelephoneNumberRegEx();
+              } else {
+                switchToWrongTelephoneNumberRegEx();
+              }
+              setInputs({ ...inputs, telephoneNumber: event.target.value });
+            }}
+            required
+          />
+          <SmallInformationText id="telephoneNumberText">
+            유선전화 번호를 입력해주세요.
+          </SmallInformationText>
+          <InputTitle>휴대전화 번호</InputTitle>
+          <Input
+            id="phoneNumber"
+            type="number"
+            placeholder="010"
+            name="phoneNumber"
+            onChange={(event) => {
+              if (regEx.phoneNumber.test(event.target.value)) {
+                switchToRightPhoneNumberRegEx();
+              } else {
+                switchToWrongPhoneNumberRegEx();
+              }
+              setInputs({ ...inputs, phoneNumber: event.target.value });
+            }}
+            required
+          />
+          <SmallInformationText id="phoneNumberText">
+            휴대전화 번호를 입력해주세요.
+          </SmallInformationText>
+          <InputTitle>회사명</InputTitle>
+          <Input
+            id="companyName"
+            type="text"
+            placeholder="없을 시에는 없음 입력"
+            name="companyName"
+            onChange={(event) => {
+              setInputs({ ...inputs, companyName: event.target.value });
+            }}
+            required
+          />
+          <InputTitle>업종 선택</InputTitle>
+          <RadioButtonContainer>
+            {userTypes.map((type, index) => (
+              <React.Fragment key={`USERTYPE${index}`}>
+                <RadioButton
+                  id={type.id}
+                  type="radio"
+                  value={type.value}
+                  name="type"
+                  onChange={(event) => {
+                    setInputs({ ...inputs, type: event.target.value });
+                  }}
+                />
+                <RadioButtonLabel htmlFor={type.value}>
+                  {type.children}
+                </RadioButtonLabel>
+              </React.Fragment>
+            ))}
+          </RadioButtonContainer>
+          <CheckButtonWrapper>
+            <CheckButton id="serviceCheckButton" type="checkbox" />
+            <CheckButtonText
+              onClick={() => {
+                window.open('/service-agreements');
               }}
-            />
-            <SmallInformationText id="emailText">
-              이메일을 입력해주세요.
-            </SmallInformationText>
-            <InputTitle>성함</InputTitle>
-            <Input
-              id="name"
-              type="name"
-              placeholder="홍길동"
-              name="name"
-              onChange={(event) => {
-                setInputs({ ...inputs, name: event.target.value });
+            >
+              서비스 이용약관 (필수)
+            </CheckButtonText>
+          </CheckButtonWrapper>
+          <CheckButtonWrapper>
+            <CheckButton id="policyCheckButton" type="checkbox" />
+            <CheckButtonText
+              onClick={() => {
+                window.open('/privacy-policy');
               }}
-              required
-            />
-            <InputTitle>비밀번호</InputTitle>
-            <Input
-              id="password"
-              type="password"
-              placeholder="비밀번호 입력"
-              name="password"
-              onChange={(event) => {
-                let rePasswordValue = document.getElementById('rePassword')
-                  .value;
-                if (event.target.value !== rePasswordValue) {
-                  switchToPasswordMisMatch();
-                } else {
-                  switchToPasswordMatch();
-                }
-                let hashCode = sha256
-                  .createHash('sha256')
-                  .update(event.target.value)
-                  .digest('hex');
-                setInputs({ ...inputs, password: hashCode });
-              }}
-              required
-            />
-            <InputTitle>비밀번호 재입력</InputTitle>
-            <Input
-              id="rePassword"
-              type="password"
-              placeholder=""
-              name="rePassword"
-              onChange={(event) => {
-                let passwordValue = inputs.password;
-                let rePasswordHash = sha256
-                  .createHash('sha256')
-                  .update(event.target.value)
-                  .digest('hex');
-                if (rePasswordHash !== passwordValue) {
-                  switchToPasswordMisMatch();
-                } else {
-                  switchToPasswordMatch();
-                }
-              }}
-              required
-            />
-            <SmallInformationText id="rePasswordText">
-              비밀번호가 다릅니다.
-            </SmallInformationText>
-            <InputTitle>유선전화 번호</InputTitle>
-            <Input
-              id="telephoneNumber"
-              type="number"
-              placeholder="032"
-              name="telephoneNumber"
-              onChange={(event) => {
-                if (regEx.phoneNumber.test(event.target.value)) {
-                  switchToRightTelephoneNumberRegEx();
-                } else {
-                  switchToWrongTelephoneNumberRegEx();
-                }
-                setInputs({ ...inputs, telephoneNumber: event.target.value });
-              }}
-              required
-            />
-            <SmallInformationText id="telephoneNumberText">
-              유선전화 번호를 입력해주세요.
-            </SmallInformationText>
-            <InputTitle>휴대전화 번호</InputTitle>
-            <Input
-              id="phoneNumber"
-              type="number"
-              placeholder="010"
-              name="phoneNumber"
-              onChange={(event) => {
-                if (regEx.phoneNumber.test(event.target.value)) {
-                  switchToRightPhoneNumberRegEx();
-                } else {
-                  switchToWrongPhoneNumberRegEx();
-                }
-                setInputs({ ...inputs, phoneNumber: event.target.value });
-              }}
-              required
-            />
-            <SmallInformationText id="phoneNumberText">
-              휴대전화 번호를 입력해주세요.
-            </SmallInformationText>
-            <InputTitle>회사명</InputTitle>
-            <Input
-              id="companyName"
-              type="text"
-              placeholder="없을 시에는 없음 입력"
-              name="companyName"
-              onChange={(event) => {
-                setInputs({ ...inputs, companyName: event.target.value });
-              }}
-              required
-            />
-            <InputTitle>업종 선택</InputTitle>
-            <RadioButtonContainer>
-              {userTypes.map((type, index) => (
-                <React.Fragment key={`USERTYPE${index}`}>
-                  <RadioButton
-                    id={type.id}
-                    type="radio"
-                    value={type.value}
-                    name="type"
-                    onChange={(event) => {
-                      setInputs({ ...inputs, type: event.target.value });
-                    }}
-                  />
-                  <RadioButtonLabel htmlFor={type.value}>
-                    {type.children}
-                  </RadioButtonLabel>
-                </React.Fragment>
-              ))}
-            </RadioButtonContainer>
-            <CheckButtonWrapper>
-              <CheckButton id="serviceCheckButton" type="checkbox" />
-              <CheckButtonText
-                onClick={() => {
-                  window.open('/service-agreements');
-                }}
-              >
-                서비스 이용약관 (필수)
-              </CheckButtonText>
-            </CheckButtonWrapper>
-            <CheckButtonWrapper>
-              <CheckButton id="policyCheckButton" type="checkbox" />
-              <CheckButtonText
-                onClick={() => {
-                  window.open('/privacy-policy');
-                }}
-              >
-                개인 정보 처리 방침 (필수)
-              </CheckButtonText>
-            </CheckButtonWrapper>
-            <RegisterButton onClick={signUp}>회원 가입</RegisterButton>
-            <TextBottomContainer>
-              <TextBottom href="/service-agreements">이용 약관 </TextBottom>|
-              <TextBottom href="/privacy-policy">
-                개인 정보 처리 방침
-              </TextBottom>
-            </TextBottomContainer>
-          </TextContainer>
-        </SignUpContainer>
-      </Wrapper>
+            >
+              개인 정보 처리 방침 (필수)
+            </CheckButtonText>
+          </CheckButtonWrapper>
+          <RegisterButton
+            onClick={async () => {
+              if ((await signUp()) === 'SUCCESS') {
+                signUpEvent.success();
+                alert(
+                  '회원가입이 완료되었습니다!\n 로그인 페이지로 이동합니다.',
+                );
+                history.push('/login');
+              } else {
+                signUpEvent.failed();
+              }
+            }}
+          >
+            회원 가입
+          </RegisterButton>
+          <TextBottomContainer>
+            <TextBottom href="/service-agreements">이용 약관 </TextBottom>|
+            <TextBottom href="/privacy-policy">개인 정보 처리 방침</TextBottom>
+          </TextBottomContainer>
+        </TextContainer>
+      </SignUpContainer>
     </Container>
   );
 };

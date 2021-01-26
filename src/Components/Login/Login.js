@@ -1,20 +1,17 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 100vh;
+  min-height: -webkit-fill-available;
   overflow: auto;
-`;
-
-export const Wrapper = styled.div`
-  height: 100%;
   min-height: 100vh;
-  box-align: center;
-  align-items: center;
-  box-pack: center;
-  justify-content: center;
   width: 100%;
   display: flex;
-  align-content: center;
+  align-items: center;
+  justify-content: center;
+  background-image: url(${(props) => props.bgImage});
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 `;
 
 export const BackgroundImage = styled.div`

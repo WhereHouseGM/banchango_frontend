@@ -223,7 +223,7 @@ export const ResultBoxDescBoxRight = styled.div`
 `;
 
 export const ResultBoxDescBoxTitle = styled.div`
-   margin-top: 20px; 
+  margin-top: 20px;
   font-weight: bold;
 `;
 
@@ -295,6 +295,7 @@ export const MobileResultHouseName = styled.div`
 `;
 export const MobileResultAddress = styled.div`
   font-size: 14px;
+  white-space: pre-wrap;
 `;
 export const MobileResultCategoryButtonWrapper = styled.div`
   display: flex;

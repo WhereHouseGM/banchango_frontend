@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ImportListModal from './Modal/ImportList';
-import { message } from 'antd';
+import AdditionalInfoModal from './Modal/AdditionalInfo';
 import { useParams } from 'react-router-dom';
 import { estimateApi } from '../../../api';
 
@@ -44,8 +44,17 @@ import {
   keepingTypeToText,
   barcodeToText,
   RemoveItemButton,
+  MobileHistoryChild,
+  MobileHistoryChildText,
+  MobileHistoryUpperText,
+  MobileHistoryContainer,
+  MobileHistoryUpperContainer,
+  MobileHistoryAdditionalInfoButton,
+  MobileHistoryAdditionalInfoButtonWrapper,
 } from './QuoteContact';
 import { quoteDoneEvent } from '../../GoogleAnalytics';
+import AdditionalInfoButtonImg from '../../../assets/icons/QuoteContact/AdditionalInfoButton.png';
+import { message } from 'antd';
 
 const BlueText = ({ text, noRequired }) => (
   <InputTitle>
@@ -55,7 +64,10 @@ const BlueText = ({ text, noRequired }) => (
 );
 
 const QuoteContact = () => {
+  const [isQuoteLoading, setIsQuoteLoading] = useState(false);
   const [importListVisible, setImportListVisible] = useState(false);
+  const [additionalInfoVisible, setAdditionalInfoVisible] = useState(false);
+  const [additionalInfo, setAdditionalInfo] = useState({});
   const [estimateItems, setEstimateItems] = useState([]);
   const [estimateItemInput, setEstimateItemInput] = useState({
     name: null,
@@ -88,9 +100,7 @@ const QuoteContact = () => {
       <ImportListModal
         visible={importListVisible}
         goToResultList={goToResultList}
-        onClose={() => {
-          setImportListVisible(false);
-        }}
+        onClose={() => setImportListVisible(false)}
         getEstimateItems={(id) => {
           estimateApi
             .getEstimateItems(id, localStorage.getItem('AccessToken'))
@@ -116,6 +126,11 @@ const QuoteContact = () => {
               }
             });
         }}
+      />
+      <AdditionalInfoModal
+        visible={additionalInfoVisible}
+        onClose={() => setAdditionalInfoVisible(false)}
+        additionalInfo={additionalInfo}
       />
       <Container>
         <Wrapper>
@@ -338,6 +353,65 @@ const QuoteContact = () => {
           <ProductListWrapper>
             <ProductListTitle id={'resultList'}>상품 내역</ProductListTitle>
           </ProductListWrapper>
+          <MobileHistoryContainer>
+            <MobileHistoryUpperContainer>
+              <MobileHistoryUpperText width="9%" />
+              <MobileHistoryUpperText width="21%">
+                상품 종류
+              </MobileHistoryUpperText>
+              <MobileHistoryUpperText width="21%">
+                상품 크기
+              </MobileHistoryUpperText>
+              <MobileHistoryUpperText width="21%">
+                상품 무게
+              </MobileHistoryUpperText>
+              <MobileHistoryUpperText width="21%">SKU</MobileHistoryUpperText>
+              <MobileHistoryUpperText width="7%" />
+            </MobileHistoryUpperContainer>
+            {estimateItems.map((item, idx) => (
+              <MobileHistoryChild key={idx}>
+                <RemoveItemButton
+                  style={{ width: '9%' }}
+                  index={idx}
+                  onClick={() => {
+                    let beforeEstimateItems = estimateItems;
+                    beforeEstimateItems = beforeEstimateItems.filter(
+                      (_item, itemIndex) => idx !== itemIndex,
+                    );
+                    setEstimateItems([...beforeEstimateItems]);
+                    setEstimate({
+                      ...estimate,
+                      estimateItems: beforeEstimateItems,
+                    });
+                  }}
+                >
+                  X
+                </RemoveItemButton>
+                <MobileHistoryChildText width={'21%'}>
+                  {item.name}
+                </MobileHistoryChildText>
+                <MobileHistoryChildText width={'21%'}>
+                  {item.perimeter}
+                </MobileHistoryChildText>
+                <MobileHistoryChildText width={'21%'}>
+                  {item.weight}
+                </MobileHistoryChildText>
+                <MobileHistoryChildText width={'21%'}>
+                  {item.sku}
+                </MobileHistoryChildText>
+                <MobileHistoryAdditionalInfoButtonWrapper>
+                  <MobileHistoryAdditionalInfoButton
+                    width={'70%'}
+                    src={AdditionalInfoButtonImg}
+                    onClick={() => {
+                      setAdditionalInfo(item);
+                      setAdditionalInfoVisible(true);
+                    }}
+                  />
+                </MobileHistoryAdditionalInfoButtonWrapper>
+              </MobileHistoryChild>
+            ))}
+          </MobileHistoryContainer>
           <HistoryUpper>
             <HistoryUpperText width={'12%'}>상품 종류</HistoryUpperText>
             <HistoryUpperText width={'12%'}>상품 크기</HistoryUpperText>
@@ -387,7 +461,7 @@ const QuoteContact = () => {
                 onClick={() => {
                   let beforeEstimateItems = estimateItems;
                   beforeEstimateItems = beforeEstimateItems.filter(
-                    (item, itemIndex) => idx !== itemIndex,
+                    (_item, itemIndex) => idx !== itemIndex,
                   );
                   setEstimateItems([...beforeEstimateItems]);
                   setEstimate({
@@ -427,7 +501,18 @@ const QuoteContact = () => {
               />
             </TextareaWrapper>
             <InquiryButton
+              style={
+                isQuoteLoading
+                  ? {
+                      backgroundColor: 'white',
+                      color: 'black',
+                      border: '1px solid black',
+                      cursor: 'default',
+                    }
+                  : {}
+              }
               onClick={() => {
+                if (isQuoteLoading) return;
                 if (estimate.monthlyAverageRelease === null) {
                   message.destroy();
                   message.warning('월간 총 출고량을 입력해주세요.');
@@ -438,6 +523,8 @@ const QuoteContact = () => {
                   message.warning('상품을 1개 이상 입력해주세요.');
                   return;
                 }
+                setIsQuoteLoading(true);
+                message.loading('접수 중 입니다..');
                 estimateApi
                   .saveEstimate(estimate, localStorage.getItem('AccessToken'))
                   .then(() => {
@@ -459,6 +546,10 @@ const QuoteContact = () => {
                     } else {
                       alert('UNKNOWN ERROR');
                     }
+                  })
+                  .finally(() => {
+                    setIsQuoteLoading(false);
+                    message.destroy();
                   });
               }}
             >

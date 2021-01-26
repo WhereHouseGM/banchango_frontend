@@ -7,6 +7,7 @@ import {
   PWTitleText,
   PWInputBox,
   ConfirmButton,
+  GreyAlertText,
 } from './Modal_Styles';
 import { message } from 'antd';
 import sha256 from 'crypto';
@@ -45,6 +46,9 @@ export const CheckPWModal = ({
               setPW(e.target.value);
             }}
           />
+          <GreyAlertText>
+            *변경된 내용은 다음 로그인부터 적용됩니다.
+          </GreyAlertText>
           <ConfirmButton
             onClick={confirmClicked}
             style={

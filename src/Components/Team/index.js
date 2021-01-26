@@ -15,19 +15,33 @@ const FirstContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
 `;
 const FirstLeftText = styled.div`
   width: 20%;
   min-width: 165.1px;
   font-weight: bold;
   font-size: 45px;
+  @media (max-width: 768px) {
+    text-align: center;
+    font-size: 25px;
+    min-width: 110px;
+    white-space: pre-wrap;
+  }
 `;
 const FirstRightText = styled.div`
   font-family: 'notosans-Regular', sans-serif;
-  width: 50%;
+  flex: 1;
   max-width: 615px;
   font-size: 14px;
   line-height: 1.5;
+  white-space: normal;
+  @media (max-width: 768px) {
+    white-space: pre-wrap;
+    font-size: 11px;
+  }
 `;
 const SecondWrapper = styled.div`
   width: 95%;
@@ -72,9 +86,19 @@ const SecondRightBox = styled.div`
   padding: 50px 0px 20px 40px;
   font-size: 18px;
   @media (max-width: 768px) {
+    display: none;
+  }
+`;
+const MobileSecondRightBox = styled.div`
+  font-family: 'notosans-Regular', sans-serif;
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+    font-size: 12px;
+    text-align: center;
     height: auto;
     width: 100%;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
   }
 `;
 const ThirdContainer = styled.div`
@@ -153,7 +177,24 @@ const FourthRightCard = styled.div`
 const FourthRightImg = styled.img`
   width: 100%;
 `;
-const FourthRightText = styled.div``;
+const FourthRightText = styled.div`
+  font-size: 16px;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+const MobileFourthRightText = styled.div`
+  display: none;
+  @media (max-width: 768px) {
+    font-size: 14px;
+    display: block;
+    color: black;
+  }
+`;
+const MobileFourthRightSubText = styled.div`
+  font-size: 12px;
+  color: #1e56a0;
+`;
 const BottomMapContainer = styled.div`
   width: 95%;
   max-width: 1000px;
@@ -223,15 +264,17 @@ const Team = () => {
     <Container>
       <FirstContainer>
         <FirstLeftText>
-          <span>㮽창고{` `}</span>
+          <span>㮽창고{`\n`}</span>
           <span style={{ fontSize: '25px' }}>허브 :</span>
         </FirstLeftText>
         <FirstRightText>
           국내 최초 창고중개 플랫폼 반창고 허브는 대표가 직접 '화주로서 느끼는
           어려움'에서 시작한 솔루션입니다.
-          <br /> IT 성장이 주는 편리함은 잃지 않되, 그 모든 기반에 있는 사람의
+          <br />
+          {'\n'} IT 성장이 주는 편리함은 잃지 않되, 그 모든 기반에 있는 사람의
           가치 또한 잊지 않고자 합니다.
-          <br /> 반창고가 화주와 창고주에게 각자의 영역에서 발돋움하기 위한
+          <br />
+          {'\n'} 반창고가 화주와 창고주에게 각자의 영역에서 발돋움하기 위한
           도움닫기가 되길 바랍니다.
         </FirstRightText>
       </FirstContainer>
@@ -250,6 +293,18 @@ const Team = () => {
           도리어 성장 가능성의 반증이었습니다. <br />
           이제는 그 가능성을 화주분들과 함께 실현시키고자 합니다.
         </SecondRightBox>
+        <MobileSecondRightBox>
+          누구에게나 처음은 낯설고, 어렵습니다.
+          <br />
+          그러나 처음이기에 성장할 수 있는
+          <br />
+          무한한 가능성은 설렘으로 다가옵니다.
+          <br />
+          반창고 허브의 서비스를 준비하는 과정은 설렘의 연속이었습니다.
+          <br /> 그간 '당연시하게' 여겨져왔던 물류 시장의 불편함은 <br />
+          도리어 성장 가능성의 반증이었습니다. <br />
+          이제는 그 가능성을 화주분들과 함께 실현시키고자 합니다.
+        </MobileSecondRightBox>
         <SecondLeftBox>
           <SecondLeftFirst>VALUE 02</SecondLeftFirst>
           <SecondLeftSecond>반창고 허브가 추구하는</SecondLeftSecond>
@@ -257,12 +312,27 @@ const Team = () => {
         </SecondLeftBox>
         <SecondRightBox>
           모든 기업의 최우선 가치는 '이윤추구', '생존'입니다.
-          <br /> 반창고 허브는 그러한 생존이 상생이길 바랍니다.
-          <br /> 규모나 영역에 대한 걱정없이 화주분들의 열정적인 도전에 보탬이
-          되고자 합니다.
-          <br /> 시작의 막연함부터 성장단계에서 마주하는 어려움까지 모든
-          단계에서 저희와 함께 상생할 수 있도록 노력하겠습니다.
+          <br />
+          반창고 허브는 그러한 생존이 상생이길 바랍니다.
+          <br />
+          규모나 영역에 대한 걱정없이 화주분들의 열정적인 도전에 보탬이 되고자
+          합니다.
+          <br />
+          시작의 막연함부터 성장단계에서 마주하는 어려움까지 모든 단계에서
+          저희와 함께 상생할 수 있도록 노력하겠습니다.
         </SecondRightBox>
+        <MobileSecondRightBox>
+          모든 기업의 최우선 가치는 '이윤추구', '생존'입니다.
+          <br />
+          반창고 허브는 그러한 생존이 상생이길 바랍니다.
+          <br />
+          규모나 영역에 대한 걱정없이 화주분들의 열정적인 도전에 보탬이 되고자
+          합니다.
+          <br />
+          시작의 막연함부터 성장단계에서 마주하는 어려움까지
+          <br />
+          모든 단계에서 저희와 함께 상생할 수 있도록 노력하겠습니다.
+        </MobileSecondRightBox>
       </SecondWrapper>
       <ThirdContainer>
         <ThirdBox>
@@ -291,6 +361,10 @@ const Team = () => {
                 alt={profileImgs.CEO.alt}
               />
               <FourthRightText>최윤석 / CEO</FourthRightText>
+              <MobileFourthRightText>
+                최윤석
+                <MobileFourthRightSubText>CEO</MobileFourthRightSubText>
+              </MobileFourthRightText>
             </FourthRightCard>
           </FourthRightFloor>
           <FourthRightFloor>
@@ -300,6 +374,10 @@ const Team = () => {
                 alt={profileImgs.DEV[0].alt}
               />
               <FourthRightText>나상우 / 개발</FourthRightText>
+              <MobileFourthRightText>
+                나상우
+                <MobileFourthRightSubText>개발</MobileFourthRightSubText>
+              </MobileFourthRightText>
             </FourthRightCard>
             <FourthRightCard>
               <FourthRightImg
@@ -307,6 +385,10 @@ const Team = () => {
                 alt={profileImgs.DEV[1].alt}
               />
               <FourthRightText>오범수 / 개발</FourthRightText>
+              <MobileFourthRightText>
+                오범수
+                <MobileFourthRightSubText>개발</MobileFourthRightSubText>
+              </MobileFourthRightText>
             </FourthRightCard>
             <FourthRightCard>
               <FourthRightImg
@@ -314,6 +396,10 @@ const Team = () => {
                 alt={profileImgs.DEV[2].alt}
               />
               <FourthRightText>조영현 / 개발</FourthRightText>
+              <MobileFourthRightText>
+                조영현
+                <MobileFourthRightSubText>개발</MobileFourthRightSubText>
+              </MobileFourthRightText>
             </FourthRightCard>
           </FourthRightFloor>
           <FourthRightFloor>
@@ -323,6 +409,10 @@ const Team = () => {
                 alt={profileImgs.ARCH[0].alt}
               />
               <FourthRightText>전정표 / 서비스 기획</FourthRightText>
+              <MobileFourthRightText>
+                전정표
+                <MobileFourthRightSubText>서비스 기획</MobileFourthRightSubText>
+              </MobileFourthRightText>
             </FourthRightCard>
             <FourthRightCard>
               <FourthRightImg
@@ -330,6 +420,10 @@ const Team = () => {
                 alt={profileImgs.ARCH[1].alt}
               />
               <FourthRightText>문효원 / 서비스 기획</FourthRightText>
+              <MobileFourthRightText>
+                문효원
+                <MobileFourthRightSubText>서비스 기획</MobileFourthRightSubText>
+              </MobileFourthRightText>
             </FourthRightCard>
           </FourthRightFloor>
           <FourthRightFloor>
@@ -339,6 +433,10 @@ const Team = () => {
                 alt={profileImgs.SALER[0].alt}
               />
               <FourthRightText>황성지 / 영업</FourthRightText>
+              <MobileFourthRightText>
+                황성지
+                <MobileFourthRightSubText>영업</MobileFourthRightSubText>
+              </MobileFourthRightText>
             </FourthRightCard>
             <FourthRightCard>
               <FourthRightImg
@@ -346,6 +444,10 @@ const Team = () => {
                 alt={profileImgs.SALER[1].alt}
               />
               <FourthRightText>이소정 / 영업</FourthRightText>
+              <MobileFourthRightText>
+                이소정
+                <MobileFourthRightSubText>영업</MobileFourthRightSubText>
+              </MobileFourthRightText>
             </FourthRightCard>
             <FourthRightCard>
               <FourthRightImg
@@ -353,6 +455,10 @@ const Team = () => {
                 alt={profileImgs.DESIGN.alt}
               />
               <FourthRightText>조성현 / 디자인</FourthRightText>
+              <MobileFourthRightText>
+                조성현
+                <MobileFourthRightSubText>디자인</MobileFourthRightSubText>
+              </MobileFourthRightText>
             </FourthRightCard>
           </FourthRightFloor>
         </FourthRight>
@@ -366,7 +472,7 @@ const Team = () => {
             창신관 3F
           </BottomMapDescText>
           <BottomMapDescPhoneNumber>
-            T. 010 - 4161 - 4711
+            T. 0507-1370-4711
           </BottomMapDescPhoneNumber>
         </BottomMapDescWrapper>
         <MapContainer ref={mapRef} id="kakaoMap" />

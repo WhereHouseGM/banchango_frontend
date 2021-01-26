@@ -4,6 +4,11 @@ export const Container = styled.div`
   font-family: 'notosans-Regular', sans-serif;
   width: 100%;
   min-width: 1024px;
+  @media (max-width: 768px) {
+    min-width: 0px;
+    width: 95%;
+    margin: 0 auto;
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -15,9 +20,12 @@ export const Wrapper = styled.div`
 export const Title = styled.div`
   font-weight: bold;
   margin-top: 10px;
-  padding: 15px 15px;
+  padding: 15px;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  @media (max-width: 768px) {
+    border-top: 0;
+  }
 `;
 
 export const ProductTitleWrapper = styled.div`
@@ -27,6 +35,10 @@ export const ProductTitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  @media (max-width: 768px) {
+    margin-top: 0px;
+    border-bottom: 0;
+  }
 `;
 
 export const ProductTitle = styled.div`
@@ -53,18 +65,31 @@ export const ProductWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    align-items: center;
+    justify-content: flex-end;
+  }
 `;
 
 export const ProductBlankWrapper = styled.div`
   flex: 1;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const ProductLeftWrapper = styled.div`
   width: 45%;
+  @media (max-width: 768px) {
+    width: 94%;
+  }
 `;
 
 export const ProductRightWrapper = styled.div`
   width: 45%;
+  @media (max-width: 768px) {
+    width: 94%;
+  }
 `;
 
 export const InputTitle = styled.div`
@@ -89,6 +114,11 @@ export const InputBox = styled.input`
   height: 28px;
   margin-bottom: 40px;
   border: 1px solid rgba(0, 0, 0, 0.2);
+  padding-left: 10px;
+  @media (max-width: 768px) {
+    width: 85%;
+    height: 40px;
+  }
 `;
 
 export const InputSubText = styled.div`
@@ -137,6 +167,9 @@ export const ProductListTitle = styled.div`
   font-size: 30px;
   padding: 25px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  @media (max-width: 768px) {
+    border: 0;
+  }
 `;
 
 export const HistoryUpper = styled.div`
@@ -146,12 +179,58 @@ export const HistoryUpper = styled.div`
   align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   text-align: center;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const HistoryUpperText = styled.div`
   font-weight: bold;
   font-size: 15px;
   width: ${(props) => props.width};
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+export const MobileHistoryContainer = styled.div`
+  display: none;
+  @media (max-width: 768px) {
+    width: 100%;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    display: block;
+    text-align: center;
+  }
+`;
+export const MobileHistoryUpperContainer = styled.div`
+  width: 100%;
+  align-items: center;
+  display: flex;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+`;
+export const MobileHistoryUpperText = styled.div`
+  font-weight: bold;
+  font-size: 14px;
+  width: ${(props) => props.width};
+`;
+export const MobileHistoryChild = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+`;
+export const MobileHistoryChildText = styled.div`
+  width: ${(props) => props.width};
+`;
+export const MobileHistoryAdditionalInfoButtonWrapper = styled.div`
+  width: 7%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+export const MobileHistoryAdditionalInfoButton = styled.img`
+  width: ${(props) => props.width};
+  margin: auto;
 `;
 
 export const HistoryChild = styled.div`
@@ -161,6 +240,9 @@ export const HistoryChild = styled.div`
   justify-content: center;
   text-align: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const HistoryChildText = styled.div`
@@ -196,16 +278,25 @@ export const TotalCountWrapper = styled.div`
 export const TotalCountTitle = styled.div`
   padding-left: 15px;
   margin-right: 5px;
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 export const TotalCountInput = styled.input`
   margin-left: 10px;
   width: 200px;
   border: 1px solid rgba(0, 0, 0, 0.2);
+  @media (max-width: 768px) {
+    width: 130px;
+  }
 `;
 
 export const TotalCountSubText = styled.div`
   margin-left: 10px;
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 export const AnnounceTitle = styled.div`
@@ -215,17 +306,25 @@ export const AnnounceTitle = styled.div`
   font-size: 30px;
   padding: 25px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  @media (max-width: 768px) {
+    border-bottom: 0;
+  }
 `;
 
 export const TextareaWrapper = styled.div`
   width: 80%;
   height: 300px;
   margin: 30px auto;
+  @media (max-width: 768px) {
+    width: 97%;
+    margin: 0px auto;
+  }
 `;
 
 export const AnnounceTextarea = styled.textarea`
   height: 100%;
   width: 100%;
+  padding: 10px;
 `;
 
 export const InquiryButton = styled.div`
