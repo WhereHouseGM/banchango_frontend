@@ -55,12 +55,18 @@ const Title = styled.div`
   font-weight: bold;
   font-size: 30px;
   margin-bottom: 12px;
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 const SubTitle = styled.div`
   font-size: 18px;
   color: #969696;
   margin-bottom: 13px;
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 const ListContainer = styled.div`
@@ -80,6 +86,9 @@ const ListUpper = styled.div`
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const ListUpperText = styled.div`
@@ -93,6 +102,9 @@ const ListChild = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const ListChildText = styled.div`
