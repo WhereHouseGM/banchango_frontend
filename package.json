@@ -33,8 +33,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build": "cp ./.env.production ./.env && react-scripts build",
+    "build_dev": "cp ./.env.development ./.env && react-scripts build",
+    "build_normal": "react-scripts build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

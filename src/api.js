@@ -1,10 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL:
-    process.env.NODE_ENV === 'development'
-      ? 'https://dev-api.banchangohub.com/v3/'
-      : 'https://api.banchangohub.com/v3/',
+  baseURL: process.env.REACT_APP_API_ADDRESS,
 });
 
 export const userApi = {
