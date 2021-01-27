@@ -30,11 +30,17 @@ import {
   keepingTypeToText,
 } from '../../Detail/QuoteContact/QuoteContact';
 import { MobileMyPageQuoteListComponent } from './mobile';
+import AdditionalInfoModal from './Modal/AdditionalInfo';
 
 const QuotationList = ({ quotes }) => {
   const history = useHistory();
-
+  const [clickedQuote, setClickedQuote] = useState(-1);
   const historyPush = (url) => history.push(url);
+
+  const [additionalInfo, setAdditionalInfo] = useState({});
+  const [additionalInfoModalVisible, setAdditionalInfoModalVisible] = useState(
+    false,
+  );
 
   const [singleQuoteList, setSingleQuoteList] = useState([]);
   const [selectedWarehouseName, setSelectedWarehouseName] = useState('');
@@ -66,7 +72,23 @@ const QuotationList = ({ quotes }) => {
   }, []);
   return (
     <>
-      <MobileMyPageQuoteListComponent historyPush={historyPush} />
+      <AdditionalInfoModal
+        visible={additionalInfoModalVisible}
+        additionalInfo={additionalInfo}
+        onClose={() => setAdditionalInfoModalVisible(false)}
+      />
+      <MobileMyPageQuoteListComponent
+        historyPush={historyPush}
+        handleGetSingleQuoteList={handleGetSingleQuoteList}
+        selectedWarehouseName={selectedWarehouseName}
+        setSelectedWarehouseName={setSelectedWarehouseName}
+        quotes={quotes}
+        setClickedQuote={setClickedQuote}
+        clickedQuote={clickedQuote}
+        singleQuoteList={singleQuoteList}
+        setAdditionalInfoModalVisible={setAdditionalInfoModalVisible}
+        setAdditionalInfo={setAdditionalInfo}
+      />
       <Container>
         <LeftBanner>
           <BannerTextDisabledBox
