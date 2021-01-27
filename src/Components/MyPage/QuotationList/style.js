@@ -5,8 +5,8 @@ export const Container = styled.div`
   height: auto;
   position: relative;
   min-height: 85vh;
-  @media screen and (max-width: 768px) {
-    margin-top: 105px;
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 export const LeftBanner = styled.div`
@@ -16,9 +16,6 @@ export const LeftBanner = styled.div`
   background-color: #1e56a0;
   width: 270px;
   color: white;
-  @media (max-width: 768px) {
-    display: none;
-  }
 `;
 export const BannerTextEnabledBox = styled.div`
   font-size: 20px;
