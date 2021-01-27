@@ -119,9 +119,7 @@ const MyPage = ({ userInfo, handleSubmit }) => {
             </MobileUpperMenuButton>
           ) : (
             <MobileUpperMenuButton
-              onClick={() => {
-                history.push('/mypage/houselist');
-              }}
+              onClick={() => history.push('/mypage/houselist')}
             >
               내 창고
             </MobileUpperMenuButton>
