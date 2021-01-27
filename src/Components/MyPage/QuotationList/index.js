@@ -179,11 +179,11 @@ const QuotationList = ({ quotes }) => {
                   width={'12%'}
                   onClick={() => {
                     if (!!item.url) {
-                      window.location.href = 'item.url';
+                      window.open(item.url);
                     }
                   }}
                 >
-                  {item.url ? '클릭' : '없음'}
+                  {!!item.url ? '클릭' : '없음'}
                 </HistoryChildText>
               </HistoryChild>
             ))}
