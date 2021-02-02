@@ -57,7 +57,7 @@ const Register = () => {
     availableTimeDetail: null,
     insurances: [''],
     cctvExist: false,
-    securityCompanies: [],
+    securityCompanies: [''],
     doorLockExist: false,
     airConditioningType: null,
     workerExist: false,
@@ -83,6 +83,18 @@ const Register = () => {
     let temp = inputs.insurances;
     temp.splice(idx, 1);
     setInputs({ ...inputs, insurances: temp });
+  };
+
+  const addSecurityCompanies = () => {
+    let temp = inputs.securityCompanies;
+    temp.push('');
+    setInputs({ ...inputs, securityCompanies: temp });
+  };
+
+  const removeSecurityCompanies = (idx) => {
+    let temp = inputs.securityCompanies;
+    temp.splice(idx, 1);
+    setInputs({ ...inputs, securityCompanies: temp });
   };
 
   const [deliveryTypes, setDeliveryTypes] = useState([
@@ -134,13 +146,13 @@ const Register = () => {
   //   </ButtonAndInputContainer>,
   // ]);
 
-  const [securityCompanies, setSecurityCompanies] = useState([
-    <ButtonAndInputContainer key="SECCOMPS0">
-      <Input type="text" width="256px" name="securityCompanies" />
-      &nbsp;
-      <AddButton onClick={() => addSecurityCompanies()}>추가</AddButton>
-    </ButtonAndInputContainer>,
-  ]);
+  // const [securityCompanies, setSecurityCompanies] = useState([
+  //   <ButtonAndInputContainer key="SECCOMPS0">
+  //     <Input type="text" width="256px" name="securityCompanies" />
+  //     &nbsp;
+  //     <AddButton onClick={() => addSecurityCompanies()}>추가</AddButton>
+  //   </ButtonAndInputContainer>,
+  // ]);
 
   // const addInsurances = () => {
   //   let arrOfInsurances = insurances;
@@ -157,22 +169,22 @@ const Register = () => {
   //   setInsurances([...arrOfInsurances]);
   // };
 
-  const addSecurityCompanies = () => {
-    let arrOfSecurityCompanies = securityCompanies;
-    let key = arrOfSecurityCompanies.length;
-    arrOfSecurityCompanies.push(
-      <ButtonAndInputContainer key={`SECCOMPS${key}`}>
-        <Input type="text" width="256px" name="securityCompanies" />
-        &nbsp;
-        {key === 1 ? (
-          <RemoveButton onClick={() => removeSecurityCompanies()}>
-            삭제
-          </RemoveButton>
-        ) : null}
-      </ButtonAndInputContainer>,
-    );
-    setSecurityCompanies([...arrOfSecurityCompanies]);
-  };
+  // const addSecurityCompanies = () => {
+  //   let arrOfSecurityCompanies = securityCompanies;
+  //   let key = arrOfSecurityCompanies.length;
+  //   arrOfSecurityCompanies.push(
+  //     <ButtonAndInputContainer key={`SECCOMPS${key}`}>
+  //       <Input type="text" width="256px" name="securityCompanies" />
+  //       &nbsp;
+  //       {key === 1 ? (
+  //         <RemoveButton onClick={() => removeSecurityCompanies()}>
+  //           삭제
+  //         </RemoveButton>
+  //       ) : null}
+  //     </ButtonAndInputContainer>,
+  //   );
+  //   setSecurityCompanies([...arrOfSecurityCompanies]);
+  // };
 
   const addDeliveryTypes = () => {
     let tempDeliveryTypes = deliveryTypes;
@@ -264,11 +276,11 @@ const Register = () => {
   //   setInsurances([...arrOfInsurances]);
   // };
 
-  const removeSecurityCompanies = () => {
-    let arrOfSecurityCompanies = securityCompanies;
-    arrOfSecurityCompanies.pop();
-    setSecurityCompanies([...arrOfSecurityCompanies]);
-  };
+  // const removeSecurityCompanies = () => {
+  //   let arrOfSecurityCompanies = securityCompanies;
+  //   arrOfSecurityCompanies.pop();
+  //   setSecurityCompanies([...arrOfSecurityCompanies]);
+  // };
 
   const setDeliveryTypesToState = () => {
     let list = document.getElementsByName(InputType.DELIVERY_TYPES);
@@ -322,25 +334,25 @@ const Register = () => {
   //   setInputs(tempInputs);
   // };
 
-  const setSecurityCompaniesToState = () => {
-    let list = document.getElementsByName(InputType.SECURITY_COMPANIES);
-    let _securityCompanies = [];
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].value.trim() !== '') {
-        _securityCompanies.push(list[i].value);
-      }
-    }
-    let tempInputs = inputs;
-    tempInputs.securityCompanies = _securityCompanies;
-    setInputs(tempInputs);
-  };
+  // const setSecurityCompaniesToState = () => {
+  //   let list = document.getElementsByName(InputType.SECURITY_COMPANIES);
+  //   let _securityCompanies = [];
+  //   for (let i = 0; i < list.length; i++) {
+  //     if (list[i].value.trim() !== '') {
+  //       _securityCompanies.push(list[i].value);
+  //     }
+  //   }
+  //   let tempInputs = inputs;
+  //   tempInputs.securityCompanies = _securityCompanies;
+  //   setInputs(tempInputs);
+  // };
 
   const register = () => {
     setDeliveryTypesToState();
     setWarehouseFacilityUsagesToState();
     setWarehouseUsageCautionsToState();
     // setInsurancesToState();
-    setSecurityCompaniesToState();
+    // setSecurityCompaniesToState();
     let requestBody = inputs;
     console.log(requestBody);
     // if (inputs.name === null || inputs.name.trim() === '') {
@@ -662,7 +674,36 @@ const Register = () => {
                 <InputTitle>
                   경비 업체<span style={{ color: 'red' }}>*</span>
                 </InputTitle>
-                {securityCompanies}
+                {/* {securityCompanies} */}
+                {inputs.securityCompanies.map((company, idx) => {
+                  return (
+                    <ButtonAndInputContainer key={`SEC_COMP${idx}`}>
+                      <Input
+                        type="text"
+                        width="256px"
+                        value={company}
+                        onChange={(event) => {
+                          let temp = inputs.securityCompanies;
+                          temp[idx] = event.currentTarget.value;
+                          setInputs({ ...inputs, securityCompanies: temp });
+                        }}
+                      />
+                      &nbsp;
+                      {idx === 0 ? (
+                        <AddButton onClick={() => addSecurityCompanies()}>
+                          추가
+                        </AddButton>
+                      ) : null}
+                      {idx !== 0 ? (
+                        <RemoveButton
+                          onClick={() => removeSecurityCompanies(idx)}
+                        >
+                          삭제
+                        </RemoveButton>
+                      ) : null}
+                    </ButtonAndInputContainer>
+                  );
+                })}
               </ItemContainer>
             </TwoElementContainer>
             <InputTitle>
