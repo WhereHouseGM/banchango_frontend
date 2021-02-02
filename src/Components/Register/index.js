@@ -55,7 +55,7 @@ const Register = () => {
     openAt: null,
     closeAt: null,
     availableTimeDetail: null,
-    insurances: [],
+    insurances: [''],
     cctvExist: false,
     securityCompanies: [],
     doorLockExist: false,
@@ -72,6 +72,18 @@ const Register = () => {
     latitude: 88.88,
     longitude: 99.99,
   });
+
+  const addInsurances = () => {
+    let temp = inputs.insurances;
+    temp.push('');
+    setInputs({ ...inputs, insurances: temp });
+  };
+
+  const removeInsurances = (idx) => {
+    let temp = inputs.insurances;
+    temp.splice(idx, 1);
+    setInputs({ ...inputs, insurances: temp });
+  };
 
   const [deliveryTypes, setDeliveryTypes] = useState([
     <ButtonAndInputContainer key="DELIVERYTYPES0">
@@ -114,13 +126,13 @@ const Register = () => {
     </ButtonAndInputContainer>,
   ]);
 
-  const [insurances, setInsurances] = useState([
-    <ButtonAndInputContainer key="INSURANCES0">
-      <Input type="text" width="256px" name="insurances" />
-      &nbsp;
-      <AddButton onClick={() => addInsurances()}>추가</AddButton>
-    </ButtonAndInputContainer>,
-  ]);
+  // const [insurances, setInsurances] = useState([
+  //   <ButtonAndInputContainer key="INSURANCES0">
+  //     <Input type="text" width="256px" name="insurances" />
+  //     &nbsp;
+  //     <AddButton onClick={() => addInsurances()}>추가</AddButton>
+  //   </ButtonAndInputContainer>,
+  // ]);
 
   const [securityCompanies, setSecurityCompanies] = useState([
     <ButtonAndInputContainer key="SECCOMPS0">
@@ -130,20 +142,20 @@ const Register = () => {
     </ButtonAndInputContainer>,
   ]);
 
-  const addInsurances = () => {
-    let arrOfInsurances = insurances;
-    let key = arrOfInsurances.length;
-    arrOfInsurances.push(
-      <ButtonAndInputContainer key={`INSURANCES${key}`}>
-        <Input type="text" width="256px" name="insurances" />
-        &nbsp;
-        {key === 1 ? (
-          <RemoveButton onClick={() => removeInsurances()}>삭제</RemoveButton>
-        ) : null}
-      </ButtonAndInputContainer>,
-    );
-    setInsurances([...arrOfInsurances]);
-  };
+  // const addInsurances = () => {
+  //   let arrOfInsurances = insurances;
+  //   let key = arrOfInsurances.length;
+  //   arrOfInsurances.push(
+  //     <ButtonAndInputContainer key={`INSURANCES${key}`}>
+  //       <Input type="text" width="256px" name="insurances" />
+  //       &nbsp;
+  //       {key === 1 ? (
+  //         <RemoveButton onClick={() => removeInsurances()}>삭제</RemoveButton>
+  //       ) : null}
+  //     </ButtonAndInputContainer>,
+  //   );
+  //   setInsurances([...arrOfInsurances]);
+  // };
 
   const addSecurityCompanies = () => {
     let arrOfSecurityCompanies = securityCompanies;
@@ -246,11 +258,11 @@ const Register = () => {
     setWarehouseUsageCautions([...arrOfWarehouseUsageCautions]);
   };
 
-  const removeInsurances = () => {
-    let arrOfInsurances = insurances;
-    arrOfInsurances.pop();
-    setInsurances([...arrOfInsurances]);
-  };
+  // const removeInsurances = () => {
+  //   let arrOfInsurances = insurances;
+  //   arrOfInsurances.pop();
+  //   setInsurances([...arrOfInsurances]);
+  // };
 
   const removeSecurityCompanies = () => {
     let arrOfSecurityCompanies = securityCompanies;
@@ -297,18 +309,18 @@ const Register = () => {
     setInputs(tempInputs);
   };
 
-  const setInsurancesToState = () => {
-    let list = document.getElementsByName(InputType.INSURANCES);
-    let _insurances = [];
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].value.trim() !== '') {
-        _insurances.push(list[i].value);
-      }
-    }
-    let tempInputs = inputs;
-    tempInputs.insurances = _insurances;
-    setInputs(tempInputs);
-  };
+  // const setInsurancesToState = () => {
+  //   let list = document.getElementsByName(InputType.INSURANCES);
+  //   let _insurances = [];
+  //   for (let i = 0; i < list.length; i++) {
+  //     if (list[i].value.trim() !== '') {
+  //       _insurances.push(list[i].value);
+  //     }
+  //   }
+  //   let tempInputs = inputs;
+  //   tempInputs.insurances = _insurances;
+  //   setInputs(tempInputs);
+  // };
 
   const setSecurityCompaniesToState = () => {
     let list = document.getElementsByName(InputType.SECURITY_COMPANIES);
@@ -327,90 +339,91 @@ const Register = () => {
     setDeliveryTypesToState();
     setWarehouseFacilityUsagesToState();
     setWarehouseUsageCautionsToState();
-    setInsurancesToState();
+    // setInsurancesToState();
     setSecurityCompaniesToState();
     let requestBody = inputs;
-    if (inputs.name === null || inputs.name.trim() === '') {
-      message.warning('창고명을 입력해주세요.');
-      return;
-    } else if (inputs.space === null) {
-      message.warning('창고 평수를 입력해주세요.');
-      return;
-    } else if (inputs.address === null || inputs.address.trim() === '') {
-      message.warning('주소를 입력해주세요.');
-      return;
-    } else if (
-      inputs.addressDetail === null ||
-      inputs.addressDetail.trim() === ''
-    ) {
-      message.warning('상세 주소를 입력해주세요.');
-      return;
-    } else if (
-      inputs.description === null ||
-      inputs.description.trim() === ''
-    ) {
-      message.warning('창고 소개를 입력해주세요.');
-      return;
-    } else if (inputs.openAt === null || inputs.openAt.trim() === '') {
-      message.warning('영업 시작 시간을 입력해주세요.');
-      return;
-    } else if (inputs.closeAt === null || inputs.closeAt.trim() === '') {
-      message.warning('영업 종료 시간을 입력해주세요.');
-      return;
-    } else if (
-      inputs.availableTimeDetail === null ||
-      inputs.availableTimeDetail.trim() === ''
-    ) {
-      message.warning('영업 시간 유의사항을 입력해주세요');
-      return;
-    } else if (inputs.availableWeekdays === null) {
-      message.warning('영업요일을 선택해주세요.');
-      return;
-    } else if (inputs.minReleasePerMonth === null) {
-      message.warning('월 최소 출고량을 입력해 주세요.');
-      return;
-    } else if (inputs.insurances.length === 0) {
-      message.warning('보험사를 1개 이상 입력해주세요.');
-      return;
-    } else if (inputs.securityCompanies.length === 0) {
-      message.warning('경비 업체를 1개 이상 입력해주세요.');
-      return;
-    } else if (inputs.warehouseType === null) {
-      message.warning('업종을 선택해주세요.');
-      return;
-    } else if (inputs.airConditioningType === null) {
-      message.warning('냉난방 지원 방식을 선택해주세요.');
-      return;
-    } else if (inputs.mainItemTypes.length === 0) {
-      message.warning('대표 품목을 1개 이상 선택해주세요.');
-      return;
-    } else if (inputs.warehouseCondition.length === 0) {
-      message.warning('창고 유형을 1개 이상 선택해주세요.');
-      return;
-    } else if (inputs.deliveryTypes.length === 0) {
-      message.warning('제휴 택배사를 1개 이상 입력해주세요.');
-      return;
-    }
-    message.loading('잠시만 기다려주세요.');
-    return warehouseApi
-      .register(requestBody, localStorage.getItem('AccessToken'))
-      .then(() => {
-        message.destroy();
-        alert('창고 등록 요청이 정상적으로 처리되었습니다.');
-        return 'SUCCESS';
-      })
-      .catch(({ response: { status } }) => {
-        message.destroy();
-        if (status === 400) {
-          alert('[400]요청 형식이 잘못되었습니다.');
-        } else if (status === 401) {
-          alert('[401] 로그인을 다시 해주세요.');
-        } else if (status === 403) {
-          alert('[403] 해당 요청을 수행할 수 있는 권한이 없습니다.');
-        } else if (status === 500) {
-          alert('[500]서버 오류가 발생했습니다.');
-        }
-      });
+    console.log(requestBody);
+    // if (inputs.name === null || inputs.name.trim() === '') {
+    //   message.warning('창고명을 입력해주세요.');
+    //   return;
+    // } else if (inputs.space === null) {
+    //   message.warning('창고 평수를 입력해주세요.');
+    //   return;
+    // } else if (inputs.address === null || inputs.address.trim() === '') {
+    //   message.warning('주소를 입력해주세요.');
+    //   return;
+    // } else if (
+    //   inputs.addressDetail === null ||
+    //   inputs.addressDetail.trim() === ''
+    // ) {
+    //   message.warning('상세 주소를 입력해주세요.');
+    //   return;
+    // } else if (
+    //   inputs.description === null ||
+    //   inputs.description.trim() === ''
+    // ) {
+    //   message.warning('창고 소개를 입력해주세요.');
+    //   return;
+    // } else if (inputs.openAt === null || inputs.openAt.trim() === '') {
+    //   message.warning('영업 시작 시간을 입력해주세요.');
+    //   return;
+    // } else if (inputs.closeAt === null || inputs.closeAt.trim() === '') {
+    //   message.warning('영업 종료 시간을 입력해주세요.');
+    //   return;
+    // } else if (
+    //   inputs.availableTimeDetail === null ||
+    //   inputs.availableTimeDetail.trim() === ''
+    // ) {
+    //   message.warning('영업 시간 유의사항을 입력해주세요');
+    //   return;
+    // } else if (inputs.availableWeekdays === null) {
+    //   message.warning('영업요일을 선택해주세요.');
+    //   return;
+    // } else if (inputs.minReleasePerMonth === null) {
+    //   message.warning('월 최소 출고량을 입력해 주세요.');
+    //   return;
+    // } else if (inputs.insurances.length === 0) {
+    //   message.warning('보험사를 1개 이상 입력해주세요.');
+    //   return;
+    // } else if (inputs.securityCompanies.length === 0) {
+    //   message.warning('경비 업체를 1개 이상 입력해주세요.');
+    //   return;
+    // } else if (inputs.warehouseType === null) {
+    //   message.warning('업종을 선택해주세요.');
+    //   return;
+    // } else if (inputs.airConditioningType === null) {
+    //   message.warning('냉난방 지원 방식을 선택해주세요.');
+    //   return;
+    // } else if (inputs.mainItemTypes.length === 0) {
+    //   message.warning('대표 품목을 1개 이상 선택해주세요.');
+    //   return;
+    // } else if (inputs.warehouseCondition.length === 0) {
+    //   message.warning('창고 유형을 1개 이상 선택해주세요.');
+    //   return;
+    // } else if (inputs.deliveryTypes.length === 0) {
+    //   message.warning('제휴 택배사를 1개 이상 입력해주세요.');
+    //   return;
+    // }
+    // message.loading('잠시만 기다려주세요.');
+    // return warehouseApi
+    //   .register(requestBody, localStorage.getItem('AccessToken'))
+    //   .then(() => {
+    //     message.destroy();
+    //     alert('창고 등록 요청이 정상적으로 처리되었습니다.');
+    //     return 'SUCCESS';
+    //   })
+    //   .catch(({ response: { status } }) => {
+    //     message.destroy();
+    //     if (status === 400) {
+    //       alert('[400]요청 형식이 잘못되었습니다.');
+    //     } else if (status === 401) {
+    //       alert('[401] 로그인을 다시 해주세요.');
+    //     } else if (status === 403) {
+    //       alert('[403] 해당 요청을 수행할 수 있는 권한이 없습니다.');
+    //     } else if (status === 500) {
+    //       alert('[500]서버 오류가 발생했습니다.');
+    //     }
+    //   });
   };
 
   return (
@@ -617,7 +630,33 @@ const Register = () => {
                 <InputTitle>
                   보험사 / 보험명<span style={{ color: 'red' }}>*</span>
                 </InputTitle>
-                {insurances}
+                {inputs.insurances.map((insurance, idx) => {
+                  return (
+                    <ButtonAndInputContainer key={`INSURANCES${idx}`}>
+                      <Input
+                        type="text"
+                        width="256px"
+                        value={insurance}
+                        onChange={(event) => {
+                          let temp = inputs.insurances;
+                          temp[idx] = event.currentTarget.value;
+                          setInputs({ ...inputs, insurances: temp });
+                        }}
+                      />
+                      &nbsp;
+                      {idx === 0 ? (
+                        <AddButton onClick={() => addInsurances()}>
+                          추가
+                        </AddButton>
+                      ) : null}
+                      {idx !== 0 ? (
+                        <RemoveButton onClick={() => removeInsurances(idx)}>
+                          삭제
+                        </RemoveButton>
+                      ) : null}
+                    </ButtonAndInputContainer>
+                  );
+                })}
               </ItemContainer>
               <ItemContainer>
                 <InputTitle>
