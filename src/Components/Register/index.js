@@ -121,6 +121,18 @@ const Register = () => {
     setInputs({ ...inputs, warehouseFacilityUsages: temp });
   };
 
+  const addWarehouseUsageCautions = () => {
+    let temp = inputs.warehouseUsageCautions;
+    temp.push('');
+    setInputs({ ...inputs, warehouseUsageCautions: temp });
+  };
+
+  const removeWarehouseUsageCautions = (idx) => {
+    let temp = inputs.warehouseUsageCautions;
+    temp.splice(idx, 1);
+    setInputs({ ...inputs, warehouseUsageCautions: temp });
+  };
+
   // const [deliveryTypes, setDeliveryTypes] = useState([
   //   <ButtonAndInputContainer key="DELIVERYTYPES0">
   //     <Input
@@ -148,19 +160,19 @@ const Register = () => {
   //   </ButtonAndInputContainer>,
   // ]);
 
-  const [warehouseUsageCautions, setWarehouseUsageCautions] = useState([
-    <ButtonAndInputContainer key="WHUSAGECAUTIONS0">
-      <ArrayInput
-        id="warehouseUsageCautions0"
-        className="warehouseUsageCautions"
-        name="warehouseUsageCautions"
-        type="text"
-        width="316px"
-      />
-      &nbsp;
-      <AddButton onClick={() => addWarehouseUsageCautions()}>추가</AddButton>
-    </ButtonAndInputContainer>,
-  ]);
+  // const [warehouseUsageCautions, setWarehouseUsageCautions] = useState([
+  //   <ButtonAndInputContainer key="WHUSAGECAUTIONS0">
+  //     <ArrayInput
+  //       id="warehouseUsageCautions0"
+  //       className="warehouseUsageCautions"
+  //       name="warehouseUsageCautions"
+  //       type="text"
+  //       width="316px"
+  //     />
+  //     &nbsp;
+  //     <AddButton onClick={() => addWarehouseUsageCautions()}>추가</AddButton>
+  //   </ButtonAndInputContainer>,
+  // ]);
 
   // const [insurances, setInsurances] = useState([
   //   <ButtonAndInputContainer key="INSURANCES0">
@@ -253,28 +265,28 @@ const Register = () => {
   //   setWarehouseFaciltiyUsages([...arrOfWarehouseFacilityUsages]);
   // };
 
-  const addWarehouseUsageCautions = () => {
-    let arrOfWarehouseUsageCautions = warehouseUsageCautions;
-    let key = arrOfWarehouseUsageCautions.length;
-    arrOfWarehouseUsageCautions.push(
-      <ButtonAndInputContainer key={`WHUSAGECAUTIONS${key}`}>
-        <ArrayInput
-          id={`warehouseUsageCautions${key}`}
-          className="warehouseUsageCautions"
-          name="warehouseUsageCautions"
-          type="text"
-          width="316px"
-        />
-        &nbsp;
-        {key === 1 ? (
-          <RemoveButton onClick={removeWarehouseUsageCautions}>
-            삭제
-          </RemoveButton>
-        ) : null}
-      </ButtonAndInputContainer>,
-    );
-    setWarehouseUsageCautions([...arrOfWarehouseUsageCautions]);
-  };
+  // const addWarehouseUsageCautions = () => {
+  //   let arrOfWarehouseUsageCautions = warehouseUsageCautions;
+  //   let key = arrOfWarehouseUsageCautions.length;
+  //   arrOfWarehouseUsageCautions.push(
+  //     <ButtonAndInputContainer key={`WHUSAGECAUTIONS${key}`}>
+  //       <ArrayInput
+  //         id={`warehouseUsageCautions${key}`}
+  //         className="warehouseUsageCautions"
+  //         name="warehouseUsageCautions"
+  //         type="text"
+  //         width="316px"
+  //       />
+  //       &nbsp;
+  //       {key === 1 ? (
+  //         <RemoveButton onClick={removeWarehouseUsageCautions}>
+  //           삭제
+  //         </RemoveButton>
+  //       ) : null}
+  //     </ButtonAndInputContainer>,
+  //   );
+  //   setWarehouseUsageCautions([...arrOfWarehouseUsageCautions]);
+  // };
 
   // const removeDeliveryTypes = () => {
   //   let beforeDeliveryTypes = deliveryTypes;
@@ -288,11 +300,11 @@ const Register = () => {
   //   setWarehouseFaciltiyUsages([...arrOfWarehouseFacilityUsages]);
   // };
 
-  const removeWarehouseUsageCautions = () => {
-    let arrOfWarehouseUsageCautions = warehouseUsageCautions;
-    arrOfWarehouseUsageCautions.pop();
-    setWarehouseUsageCautions([...arrOfWarehouseUsageCautions]);
-  };
+  // const removeWarehouseUsageCautions = () => {
+  //   let arrOfWarehouseUsageCautions = warehouseUsageCautions;
+  //   arrOfWarehouseUsageCautions.pop();
+  //   setWarehouseUsageCautions([...arrOfWarehouseUsageCautions]);
+  // };
 
   // const removeInsurances = () => {
   //   let arrOfInsurances = insurances;
@@ -332,18 +344,18 @@ const Register = () => {
   //   setInputs(tempInputs);
   // };
 
-  const setWarehouseUsageCautionsToState = () => {
-    let list = document.getElementsByName(InputType.WAREHOUSE_USAGE_CAUTIONS);
-    let _warehouseUsageCautions = [];
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].value.trim() !== '') {
-        _warehouseUsageCautions.push(list[i].value);
-      }
-    }
-    let tempInputs = inputs;
-    tempInputs.warehouseUsageCautions = _warehouseUsageCautions;
-    setInputs(tempInputs);
-  };
+  // const setWarehouseUsageCautionsToState = () => {
+  //   let list = document.getElementsByName(InputType.WAREHOUSE_USAGE_CAUTIONS);
+  //   let _warehouseUsageCautions = [];
+  //   for (let i = 0; i < list.length; i++) {
+  //     if (list[i].value.trim() !== '') {
+  //       _warehouseUsageCautions.push(list[i].value);
+  //     }
+  //   }
+  //   let tempInputs = inputs;
+  //   tempInputs.warehouseUsageCautions = _warehouseUsageCautions;
+  //   setInputs(tempInputs);
+  // };
 
   // const setInsurancesToState = () => {
   //   let list = document.getElementsByName(InputType.INSURANCES);
@@ -374,7 +386,7 @@ const Register = () => {
   const register = () => {
     // setDeliveryTypesToState();
     // setWarehouseFacilityUsagesToState();
-    setWarehouseUsageCautionsToState();
+    //setWarehouseUsageCautionsToState();
     // setInsurancesToState();
     // setSecurityCompaniesToState();
     let requestBody = inputs;
@@ -940,7 +952,36 @@ const Register = () => {
             </ItemContainer>
             <ItemContainer>
               <InputTitle>창고 이용 주의사항</InputTitle>
-              {warehouseUsageCautions}
+              {/* {warehouseUsageCautions} */}
+              {inputs.warehouseUsageCautions.map((caution, idx) => {
+                return (
+                  <ButtonAndInputContainer key={`WH_USAGE_CAUTION${idx}`}>
+                    <Input
+                      type="text"
+                      value={caution}
+                      onChange={(event) => {
+                        let temp = inputs.warehouseUsageCautions;
+                        temp[idx] = event.currentTarget.value;
+                        setInputs({ ...inputs, warehouseUsageCautions: temp });
+                      }}
+                      width="316px"
+                    />
+                    &nbsp;
+                    {idx === 0 ? (
+                      <AddButton onClick={() => addWarehouseUsageCautions()}>
+                        추가
+                      </AddButton>
+                    ) : null}
+                    {idx !== 0 ? (
+                      <RemoveButton
+                        onClick={() => removeWarehouseUsageCautions(idx)}
+                      >
+                        삭제
+                      </RemoveButton>
+                    ) : null}
+                  </ButtonAndInputContainer>
+                );
+              })}
             </ItemContainer>
             <SubmitButton
               onClick={async () => {
