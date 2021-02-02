@@ -65,7 +65,7 @@ const Register = () => {
     mainItemTypes: [],
     warehouseType: null,
     minReleasePerMonth: null,
-    deliveryTypes: [],
+    deliveryTypes: [''],
     warehouseFacilityUsages: [],
     warehouseUsageCautions: [],
     warehouseCondition: [],
@@ -97,18 +97,30 @@ const Register = () => {
     setInputs({ ...inputs, securityCompanies: temp });
   };
 
-  const [deliveryTypes, setDeliveryTypes] = useState([
-    <ButtonAndInputContainer key="DELIVERYTYPES0">
-      <Input
-        className="deliveryTypes"
-        name="deliveryTypes"
-        type="text"
-        width="256px"
-      />
-      &nbsp;
-      <AddButton onClick={() => addDeliveryTypes()}>추가</AddButton>
-    </ButtonAndInputContainer>,
-  ]);
+  const addDeliveryTypes = () => {
+    let temp = inputs.deliveryTypes;
+    temp.push('');
+    setInputs({ ...inputs, deliveryTypes: temp });
+  };
+
+  const removeDeliveryTypes = (idx) => {
+    let temp = inputs.deliveryTypes;
+    temp.splice(idx, 1);
+    setInputs({ ...inputs, deliveryTypes: temp });
+  };
+
+  // const [deliveryTypes, setDeliveryTypes] = useState([
+  //   <ButtonAndInputContainer key="DELIVERYTYPES0">
+  //     <Input
+  //       className="deliveryTypes"
+  //       name="deliveryTypes"
+  //       type="text"
+  //       width="256px"
+  //     />
+  //     &nbsp;
+  //     <AddButton onClick={() => addDeliveryTypes()}>추가</AddButton>
+  //   </ButtonAndInputContainer>,
+  // ]);
 
   const [warehouseFacilityUsages, setWarehouseFaciltiyUsages] = useState([
     <ButtonAndInputContainer key="WHFACILITYUSAGES0">
@@ -186,25 +198,25 @@ const Register = () => {
   //   setSecurityCompanies([...arrOfSecurityCompanies]);
   // };
 
-  const addDeliveryTypes = () => {
-    let tempDeliveryTypes = deliveryTypes;
-    let key = tempDeliveryTypes.length;
-    tempDeliveryTypes.push(
-      <ButtonAndInputContainer key={`DELIVERYTYPES${key}`}>
-        <Input
-          className="deliveryTypes"
-          name="deliveryTypes"
-          type="text"
-          width="256px"
-        />
-        &nbsp;
-        {key === 1 ? (
-          <RemoveButton onClick={removeDeliveryTypes}>삭제</RemoveButton>
-        ) : null}
-      </ButtonAndInputContainer>,
-    );
-    setDeliveryTypes([...tempDeliveryTypes]);
-  };
+  // const addDeliveryTypes = () => {
+  //   let tempDeliveryTypes = deliveryTypes;
+  //   let key = tempDeliveryTypes.length;
+  //   tempDeliveryTypes.push(
+  //     <ButtonAndInputContainer key={`DELIVERYTYPES${key}`}>
+  //       <Input
+  //         className="deliveryTypes"
+  //         name="deliveryTypes"
+  //         type="text"
+  //         width="256px"
+  //       />
+  //       &nbsp;
+  //       {key === 1 ? (
+  //         <RemoveButton onClick={removeDeliveryTypes}>삭제</RemoveButton>
+  //       ) : null}
+  //     </ButtonAndInputContainer>,
+  //   );
+  //   setDeliveryTypes([...tempDeliveryTypes]);
+  // };
 
   const addWarehouseFacilityUsages = () => {
     let arrOfWarehouseFacilityUsages = warehouseFacilityUsages;
@@ -252,11 +264,11 @@ const Register = () => {
     setWarehouseUsageCautions([...arrOfWarehouseUsageCautions]);
   };
 
-  const removeDeliveryTypes = () => {
-    let beforeDeliveryTypes = deliveryTypes;
-    beforeDeliveryTypes.pop();
-    setDeliveryTypes([...beforeDeliveryTypes]);
-  };
+  // const removeDeliveryTypes = () => {
+  //   let beforeDeliveryTypes = deliveryTypes;
+  //   beforeDeliveryTypes.pop();
+  //   setDeliveryTypes([...beforeDeliveryTypes]);
+  // };
 
   const removeWarehouseFacilityUsages = () => {
     let arrOfWarehouseFacilityUsages = warehouseFacilityUsages;
@@ -282,18 +294,18 @@ const Register = () => {
   //   setSecurityCompanies([...arrOfSecurityCompanies]);
   // };
 
-  const setDeliveryTypesToState = () => {
-    let list = document.getElementsByName(InputType.DELIVERY_TYPES);
-    let _deliveryTypes = [];
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].value.trim() !== '') {
-        _deliveryTypes.push(list[i].value);
-      }
-    }
-    let tempInputs = inputs;
-    tempInputs.deliveryTypes = _deliveryTypes;
-    setInputs(tempInputs);
-  };
+  // const setDeliveryTypesToState = () => {
+  //   let list = document.getElementsByName(InputType.DELIVERY_TYPES);
+  //   let _deliveryTypes = [];
+  //   for (let i = 0; i < list.length; i++) {
+  //     if (list[i].value.trim() !== '') {
+  //       _deliveryTypes.push(list[i].value);
+  //     }
+  //   }
+  //   let tempInputs = inputs;
+  //   tempInputs.deliveryTypes = _deliveryTypes;
+  //   setInputs(tempInputs);
+  // };
 
   const setWarehouseFacilityUsagesToState = () => {
     let list = document.getElementsByName(InputType.WAREHOUSE_FACILITY_USAGES);
@@ -348,7 +360,7 @@ const Register = () => {
   // };
 
   const register = () => {
-    setDeliveryTypesToState();
+    // setDeliveryTypesToState();
     setWarehouseFacilityUsagesToState();
     setWarehouseUsageCautionsToState();
     // setInsurancesToState();
@@ -852,7 +864,34 @@ const Register = () => {
               <InputTitle>
                 제휴 택배사<span style={{ color: 'red' }}>*</span>
               </InputTitle>
-              {deliveryTypes}
+              {/* {deliveryTypes} */}
+              {inputs.deliveryTypes.map((delivery, idx) => {
+                return (
+                  <ButtonAndInputContainer key={`DELIVERYTYPES${idx}`}>
+                    <Input
+                      type="text"
+                      value={delivery}
+                      onChange={(event) => {
+                        let temp = inputs.deliveryTypes;
+                        temp[idx] = event.currentTarget.value;
+                        setInputs({ ...inputs, deliveryTypes: temp });
+                      }}
+                      width="256px"
+                    />
+                    &nbsp;
+                    {idx === 0 ? (
+                      <AddButton onClick={() => addDeliveryTypes()}>
+                        추가
+                      </AddButton>
+                    ) : null}
+                    {idx !== 0 ? (
+                      <RemoveButton onClick={() => removeDeliveryTypes(idx)}>
+                        삭제
+                      </RemoveButton>
+                    ) : null}
+                  </ButtonAndInputContainer>
+                );
+              })}
             </ItemContainer>
             <ItemContainer>
               <InputTitle>창고 시설 안내사항</InputTitle>
