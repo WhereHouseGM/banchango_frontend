@@ -133,345 +133,89 @@ const Register = () => {
     setInputs({ ...inputs, warehouseUsageCautions: temp });
   };
 
-  // const [deliveryTypes, setDeliveryTypes] = useState([
-  //   <ButtonAndInputContainer key="DELIVERYTYPES0">
-  //     <Input
-  //       className="deliveryTypes"
-  //       name="deliveryTypes"
-  //       type="text"
-  //       width="256px"
-  //     />
-  //     &nbsp;
-  //     <AddButton onClick={() => addDeliveryTypes()}>추가</AddButton>
-  //   </ButtonAndInputContainer>,
-  // ]);
-
-  // const [warehouseFacilityUsages, setWarehouseFaciltiyUsages] = useState([
-  //   <ButtonAndInputContainer key="WHFACILITYUSAGES0">
-  //     <ArrayInput
-  //       id="warehouseFacilityUsages0"
-  //       className="warehouseFacilityUsages"
-  //       name="warehouseFacilityUsages"
-  //       type="text"
-  //       width="316px"
-  //     />
-  //     &nbsp;
-  //     <AddButton onClick={() => addWarehouseFacilityUsages()}>추가</AddButton>
-  //   </ButtonAndInputContainer>,
-  // ]);
-
-  // const [warehouseUsageCautions, setWarehouseUsageCautions] = useState([
-  //   <ButtonAndInputContainer key="WHUSAGECAUTIONS0">
-  //     <ArrayInput
-  //       id="warehouseUsageCautions0"
-  //       className="warehouseUsageCautions"
-  //       name="warehouseUsageCautions"
-  //       type="text"
-  //       width="316px"
-  //     />
-  //     &nbsp;
-  //     <AddButton onClick={() => addWarehouseUsageCautions()}>추가</AddButton>
-  //   </ButtonAndInputContainer>,
-  // ]);
-
-  // const [insurances, setInsurances] = useState([
-  //   <ButtonAndInputContainer key="INSURANCES0">
-  //     <Input type="text" width="256px" name="insurances" />
-  //     &nbsp;
-  //     <AddButton onClick={() => addInsurances()}>추가</AddButton>
-  //   </ButtonAndInputContainer>,
-  // ]);
-
-  // const [securityCompanies, setSecurityCompanies] = useState([
-  //   <ButtonAndInputContainer key="SECCOMPS0">
-  //     <Input type="text" width="256px" name="securityCompanies" />
-  //     &nbsp;
-  //     <AddButton onClick={() => addSecurityCompanies()}>추가</AddButton>
-  //   </ButtonAndInputContainer>,
-  // ]);
-
-  // const addInsurances = () => {
-  //   let arrOfInsurances = insurances;
-  //   let key = arrOfInsurances.length;
-  //   arrOfInsurances.push(
-  //     <ButtonAndInputContainer key={`INSURANCES${key}`}>
-  //       <Input type="text" width="256px" name="insurances" />
-  //       &nbsp;
-  //       {key === 1 ? (
-  //         <RemoveButton onClick={() => removeInsurances()}>삭제</RemoveButton>
-  //       ) : null}
-  //     </ButtonAndInputContainer>,
-  //   );
-  //   setInsurances([...arrOfInsurances]);
-  // };
-
-  // const addSecurityCompanies = () => {
-  //   let arrOfSecurityCompanies = securityCompanies;
-  //   let key = arrOfSecurityCompanies.length;
-  //   arrOfSecurityCompanies.push(
-  //     <ButtonAndInputContainer key={`SECCOMPS${key}`}>
-  //       <Input type="text" width="256px" name="securityCompanies" />
-  //       &nbsp;
-  //       {key === 1 ? (
-  //         <RemoveButton onClick={() => removeSecurityCompanies()}>
-  //           삭제
-  //         </RemoveButton>
-  //       ) : null}
-  //     </ButtonAndInputContainer>,
-  //   );
-  //   setSecurityCompanies([...arrOfSecurityCompanies]);
-  // };
-
-  // const addDeliveryTypes = () => {
-  //   let tempDeliveryTypes = deliveryTypes;
-  //   let key = tempDeliveryTypes.length;
-  //   tempDeliveryTypes.push(
-  //     <ButtonAndInputContainer key={`DELIVERYTYPES${key}`}>
-  //       <Input
-  //         className="deliveryTypes"
-  //         name="deliveryTypes"
-  //         type="text"
-  //         width="256px"
-  //       />
-  //       &nbsp;
-  //       {key === 1 ? (
-  //         <RemoveButton onClick={removeDeliveryTypes}>삭제</RemoveButton>
-  //       ) : null}
-  //     </ButtonAndInputContainer>,
-  //   );
-  //   setDeliveryTypes([...tempDeliveryTypes]);
-  // };
-
-  // const addWarehouseFacilityUsages = () => {
-  //   let arrOfWarehouseFacilityUsages = warehouseFacilityUsages;
-  //   let key = arrOfWarehouseFacilityUsages.length;
-  //   arrOfWarehouseFacilityUsages.push(
-  //     <ButtonAndInputContainer key={`WHFACILITYUSAGES${key}`}>
-  //       <ArrayInput
-  //         id={`warehouseFacilityUsages${key}`}
-  //         className="warehouseFacilityUsages"
-  //         name="warehouseFacilityUsages"
-  //         type="text"
-  //         width="316px"
-  //       />
-  //       &nbsp;
-  //       {key === 1 ? (
-  //         <RemoveButton onClick={removeWarehouseFacilityUsages}>
-  //           삭제
-  //         </RemoveButton>
-  //       ) : null}
-  //     </ButtonAndInputContainer>,
-  //   );
-  //   setWarehouseFaciltiyUsages([...arrOfWarehouseFacilityUsages]);
-  // };
-
-  // const addWarehouseUsageCautions = () => {
-  //   let arrOfWarehouseUsageCautions = warehouseUsageCautions;
-  //   let key = arrOfWarehouseUsageCautions.length;
-  //   arrOfWarehouseUsageCautions.push(
-  //     <ButtonAndInputContainer key={`WHUSAGECAUTIONS${key}`}>
-  //       <ArrayInput
-  //         id={`warehouseUsageCautions${key}`}
-  //         className="warehouseUsageCautions"
-  //         name="warehouseUsageCautions"
-  //         type="text"
-  //         width="316px"
-  //       />
-  //       &nbsp;
-  //       {key === 1 ? (
-  //         <RemoveButton onClick={removeWarehouseUsageCautions}>
-  //           삭제
-  //         </RemoveButton>
-  //       ) : null}
-  //     </ButtonAndInputContainer>,
-  //   );
-  //   setWarehouseUsageCautions([...arrOfWarehouseUsageCautions]);
-  // };
-
-  // const removeDeliveryTypes = () => {
-  //   let beforeDeliveryTypes = deliveryTypes;
-  //   beforeDeliveryTypes.pop();
-  //   setDeliveryTypes([...beforeDeliveryTypes]);
-  // };
-
-  // const removeWarehouseFacilityUsages = () => {
-  //   let arrOfWarehouseFacilityUsages = warehouseFacilityUsages;
-  //   arrOfWarehouseFacilityUsages.pop();
-  //   setWarehouseFaciltiyUsages([...arrOfWarehouseFacilityUsages]);
-  // };
-
-  // const removeWarehouseUsageCautions = () => {
-  //   let arrOfWarehouseUsageCautions = warehouseUsageCautions;
-  //   arrOfWarehouseUsageCautions.pop();
-  //   setWarehouseUsageCautions([...arrOfWarehouseUsageCautions]);
-  // };
-
-  // const removeInsurances = () => {
-  //   let arrOfInsurances = insurances;
-  //   arrOfInsurances.pop();
-  //   setInsurances([...arrOfInsurances]);
-  // };
-
-  // const removeSecurityCompanies = () => {
-  //   let arrOfSecurityCompanies = securityCompanies;
-  //   arrOfSecurityCompanies.pop();
-  //   setSecurityCompanies([...arrOfSecurityCompanies]);
-  // };
-
-  // const setDeliveryTypesToState = () => {
-  //   let list = document.getElementsByName(InputType.DELIVERY_TYPES);
-  //   let _deliveryTypes = [];
-  //   for (let i = 0; i < list.length; i++) {
-  //     if (list[i].value.trim() !== '') {
-  //       _deliveryTypes.push(list[i].value);
-  //     }
-  //   }
-  //   let tempInputs = inputs;
-  //   tempInputs.deliveryTypes = _deliveryTypes;
-  //   setInputs(tempInputs);
-  // };
-
-  // const setWarehouseFacilityUsagesToState = () => {
-  //   let list = document.getElementsByName(InputType.WAREHOUSE_FACILITY_USAGES);
-  //   let _warehouseFacilityUsages = [];
-  //   for (let i = 0; i < list.length; i++) {
-  //     if (list[i].value.trim() !== '') {
-  //       _warehouseFacilityUsages.push(list[i].value);
-  //     }
-  //   }
-  //   let tempInputs = inputs;
-  //   tempInputs.warehouseFacilityUsages = _warehouseFacilityUsages;
-  //   setInputs(tempInputs);
-  // };
-
-  // const setWarehouseUsageCautionsToState = () => {
-  //   let list = document.getElementsByName(InputType.WAREHOUSE_USAGE_CAUTIONS);
-  //   let _warehouseUsageCautions = [];
-  //   for (let i = 0; i < list.length; i++) {
-  //     if (list[i].value.trim() !== '') {
-  //       _warehouseUsageCautions.push(list[i].value);
-  //     }
-  //   }
-  //   let tempInputs = inputs;
-  //   tempInputs.warehouseUsageCautions = _warehouseUsageCautions;
-  //   setInputs(tempInputs);
-  // };
-
-  // const setInsurancesToState = () => {
-  //   let list = document.getElementsByName(InputType.INSURANCES);
-  //   let _insurances = [];
-  //   for (let i = 0; i < list.length; i++) {
-  //     if (list[i].value.trim() !== '') {
-  //       _insurances.push(list[i].value);
-  //     }
-  //   }
-  //   let tempInputs = inputs;
-  //   tempInputs.insurances = _insurances;
-  //   setInputs(tempInputs);
-  // };
-
-  // const setSecurityCompaniesToState = () => {
-  //   let list = document.getElementsByName(InputType.SECURITY_COMPANIES);
-  //   let _securityCompanies = [];
-  //   for (let i = 0; i < list.length; i++) {
-  //     if (list[i].value.trim() !== '') {
-  //       _securityCompanies.push(list[i].value);
-  //     }
-  //   }
-  //   let tempInputs = inputs;
-  //   tempInputs.securityCompanies = _securityCompanies;
-  //   setInputs(tempInputs);
-  // };
-
   const register = () => {
-    // setDeliveryTypesToState();
-    // setWarehouseFacilityUsagesToState();
-    //setWarehouseUsageCautionsToState();
-    // setInsurancesToState();
-    // setSecurityCompaniesToState();
     let requestBody = inputs;
-    console.log(requestBody);
-    // if (inputs.name === null || inputs.name.trim() === '') {
-    //   message.warning('창고명을 입력해주세요.');
-    //   return;
-    // } else if (inputs.space === null) {
-    //   message.warning('창고 평수를 입력해주세요.');
-    //   return;
-    // } else if (inputs.address === null || inputs.address.trim() === '') {
-    //   message.warning('주소를 입력해주세요.');
-    //   return;
-    // } else if (
-    //   inputs.addressDetail === null ||
-    //   inputs.addressDetail.trim() === ''
-    // ) {
-    //   message.warning('상세 주소를 입력해주세요.');
-    //   return;
-    // } else if (
-    //   inputs.description === null ||
-    //   inputs.description.trim() === ''
-    // ) {
-    //   message.warning('창고 소개를 입력해주세요.');
-    //   return;
-    // } else if (inputs.openAt === null || inputs.openAt.trim() === '') {
-    //   message.warning('영업 시작 시간을 입력해주세요.');
-    //   return;
-    // } else if (inputs.closeAt === null || inputs.closeAt.trim() === '') {
-    //   message.warning('영업 종료 시간을 입력해주세요.');
-    //   return;
-    // } else if (
-    //   inputs.availableTimeDetail === null ||
-    //   inputs.availableTimeDetail.trim() === ''
-    // ) {
-    //   message.warning('영업 시간 유의사항을 입력해주세요');
-    //   return;
-    // } else if (inputs.availableWeekdays === null) {
-    //   message.warning('영업요일을 선택해주세요.');
-    //   return;
-    // } else if (inputs.minReleasePerMonth === null) {
-    //   message.warning('월 최소 출고량을 입력해 주세요.');
-    //   return;
-    // } else if (inputs.insurances.length === 0) {
-    //   message.warning('보험사를 1개 이상 입력해주세요.');
-    //   return;
-    // } else if (inputs.securityCompanies.length === 0) {
-    //   message.warning('경비 업체를 1개 이상 입력해주세요.');
-    //   return;
-    // } else if (inputs.warehouseType === null) {
-    //   message.warning('업종을 선택해주세요.');
-    //   return;
-    // } else if (inputs.airConditioningType === null) {
-    //   message.warning('냉난방 지원 방식을 선택해주세요.');
-    //   return;
-    // } else if (inputs.mainItemTypes.length === 0) {
-    //   message.warning('대표 품목을 1개 이상 선택해주세요.');
-    //   return;
-    // } else if (inputs.warehouseCondition.length === 0) {
-    //   message.warning('창고 유형을 1개 이상 선택해주세요.');
-    //   return;
-    // } else if (inputs.deliveryTypes.length === 0) {
-    //   message.warning('제휴 택배사를 1개 이상 입력해주세요.');
-    //   return;
-    // }
-    // message.loading('잠시만 기다려주세요.');
-    // return warehouseApi
-    //   .register(requestBody, localStorage.getItem('AccessToken'))
-    //   .then(() => {
-    //     message.destroy();
-    //     alert('창고 등록 요청이 정상적으로 처리되었습니다.');
-    //     return 'SUCCESS';
-    //   })
-    //   .catch(({ response: { status } }) => {
-    //     message.destroy();
-    //     if (status === 400) {
-    //       alert('[400]요청 형식이 잘못되었습니다.');
-    //     } else if (status === 401) {
-    //       alert('[401] 로그인을 다시 해주세요.');
-    //     } else if (status === 403) {
-    //       alert('[403] 해당 요청을 수행할 수 있는 권한이 없습니다.');
-    //     } else if (status === 500) {
-    //       alert('[500]서버 오류가 발생했습니다.');
-    //     }
-    //   });
+    if (inputs.name === null || inputs.name.trim() === '') {
+      message.warning('창고명을 입력해주세요.');
+      return;
+    } else if (inputs.space === null) {
+      message.warning('창고 평수를 입력해주세요.');
+      return;
+    } else if (inputs.address === null || inputs.address.trim() === '') {
+      message.warning('주소를 입력해주세요.');
+      return;
+    } else if (
+      inputs.addressDetail === null ||
+      inputs.addressDetail.trim() === ''
+    ) {
+      message.warning('상세 주소를 입력해주세요.');
+      return;
+    } else if (
+      inputs.description === null ||
+      inputs.description.trim() === ''
+    ) {
+      message.warning('창고 소개를 입력해주세요.');
+      return;
+    } else if (inputs.openAt === null || inputs.openAt.trim() === '') {
+      message.warning('영업 시작 시간을 입력해주세요.');
+      return;
+    } else if (inputs.closeAt === null || inputs.closeAt.trim() === '') {
+      message.warning('영업 종료 시간을 입력해주세요.');
+      return;
+    } else if (
+      inputs.availableTimeDetail === null ||
+      inputs.availableTimeDetail.trim() === ''
+    ) {
+      message.warning('영업 시간 유의사항을 입력해주세요');
+      return;
+    } else if (inputs.availableWeekdays === null) {
+      message.warning('영업요일을 선택해주세요.');
+      return;
+    } else if (inputs.minReleasePerMonth === null) {
+      message.warning('월 최소 출고량을 입력해 주세요.');
+      return;
+    } else if (inputs.insurances.length === 0) {
+      message.warning('보험사를 1개 이상 입력해주세요.');
+      return;
+    } else if (inputs.securityCompanies.length === 0) {
+      message.warning('경비 업체를 1개 이상 입력해주세요.');
+      return;
+    } else if (inputs.warehouseType === null) {
+      message.warning('업종을 선택해주세요.');
+      return;
+    } else if (inputs.airConditioningType === null) {
+      message.warning('냉난방 지원 방식을 선택해주세요.');
+      return;
+    } else if (inputs.mainItemTypes.length === 0) {
+      message.warning('대표 품목을 1개 이상 선택해주세요.');
+      return;
+    } else if (inputs.warehouseCondition.length === 0) {
+      message.warning('창고 유형을 1개 이상 선택해주세요.');
+      return;
+    } else if (inputs.deliveryTypes.length === 0) {
+      message.warning('제휴 택배사를 1개 이상 입력해주세요.');
+      return;
+    }
+    message.loading('잠시만 기다려주세요.');
+    return warehouseApi
+      .register(requestBody, localStorage.getItem('AccessToken'))
+      .then(() => {
+        message.destroy();
+        alert('창고 등록 요청이 정상적으로 처리되었습니다.');
+        return 'SUCCESS';
+      })
+      .catch(({ response: { status } }) => {
+        message.destroy();
+        if (status === 400) {
+          alert('[400]요청 형식이 잘못되었습니다.');
+        } else if (status === 401) {
+          alert('[401] 로그인을 다시 해주세요.');
+        } else if (status === 403) {
+          alert('[403] 해당 요청을 수행할 수 있는 권한이 없습니다.');
+        } else if (status === 500) {
+          alert('[500]서버 오류가 발생했습니다\n관리자에게 문의해 주세요.');
+        }
+      });
   };
 
   return (
@@ -710,7 +454,6 @@ const Register = () => {
                 <InputTitle>
                   경비 업체<span style={{ color: 'red' }}>*</span>
                 </InputTitle>
-                {/* {securityCompanies} */}
                 {inputs.securityCompanies.map((company, idx) => {
                   return (
                     <ButtonAndInputContainer key={`SEC_COMP${idx}`}>
@@ -888,7 +631,6 @@ const Register = () => {
               <InputTitle>
                 제휴 택배사<span style={{ color: 'red' }}>*</span>
               </InputTitle>
-              {/* {deliveryTypes} */}
               {inputs.deliveryTypes.map((delivery, idx) => {
                 return (
                   <ButtonAndInputContainer key={`DELIVERYTYPES${idx}`}>
@@ -919,7 +661,6 @@ const Register = () => {
             </ItemContainer>
             <ItemContainer>
               <InputTitle>창고 시설 안내사항</InputTitle>
-              {/* {warehouseFacilityUsages} */}
               {inputs.warehouseFacilityUsages.map((usage, idx) => {
                 return (
                   <ButtonAndInputContainer key={`WH_FACILITY_USAGE${idx}`}>
@@ -952,7 +693,6 @@ const Register = () => {
             </ItemContainer>
             <ItemContainer>
               <InputTitle>창고 이용 주의사항</InputTitle>
-              {/* {warehouseUsageCautions} */}
               {inputs.warehouseUsageCautions.map((caution, idx) => {
                 return (
                   <ButtonAndInputContainer key={`WH_USAGE_CAUTION${idx}`}>
