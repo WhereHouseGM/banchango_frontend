@@ -66,8 +66,8 @@ const Register = () => {
     warehouseType: null,
     minReleasePerMonth: null,
     deliveryTypes: [''],
-    warehouseFacilityUsages: [],
-    warehouseUsageCautions: [],
+    warehouseFacilityUsages: [''],
+    warehouseUsageCautions: [''],
     warehouseCondition: [],
     latitude: 88.88,
     longitude: 99.99,
@@ -109,6 +109,18 @@ const Register = () => {
     setInputs({ ...inputs, deliveryTypes: temp });
   };
 
+  const addWarehouseFacilityUsages = () => {
+    let temp = inputs.warehouseFacilityUsages;
+    temp.push('');
+    setInputs({ ...inputs, warehouseFacilityUsages: temp });
+  };
+
+  const removeWarehouseFacilityUsages = (idx) => {
+    let temp = inputs.warehouseFacilityUsages;
+    temp.splice(idx, 1);
+    setInputs({ ...inputs, warehouseFacilityUsages: temp });
+  };
+
   // const [deliveryTypes, setDeliveryTypes] = useState([
   //   <ButtonAndInputContainer key="DELIVERYTYPES0">
   //     <Input
@@ -122,19 +134,19 @@ const Register = () => {
   //   </ButtonAndInputContainer>,
   // ]);
 
-  const [warehouseFacilityUsages, setWarehouseFaciltiyUsages] = useState([
-    <ButtonAndInputContainer key="WHFACILITYUSAGES0">
-      <ArrayInput
-        id="warehouseFacilityUsages0"
-        className="warehouseFacilityUsages"
-        name="warehouseFacilityUsages"
-        type="text"
-        width="316px"
-      />
-      &nbsp;
-      <AddButton onClick={() => addWarehouseFacilityUsages()}>추가</AddButton>
-    </ButtonAndInputContainer>,
-  ]);
+  // const [warehouseFacilityUsages, setWarehouseFaciltiyUsages] = useState([
+  //   <ButtonAndInputContainer key="WHFACILITYUSAGES0">
+  //     <ArrayInput
+  //       id="warehouseFacilityUsages0"
+  //       className="warehouseFacilityUsages"
+  //       name="warehouseFacilityUsages"
+  //       type="text"
+  //       width="316px"
+  //     />
+  //     &nbsp;
+  //     <AddButton onClick={() => addWarehouseFacilityUsages()}>추가</AddButton>
+  //   </ButtonAndInputContainer>,
+  // ]);
 
   const [warehouseUsageCautions, setWarehouseUsageCautions] = useState([
     <ButtonAndInputContainer key="WHUSAGECAUTIONS0">
@@ -218,28 +230,28 @@ const Register = () => {
   //   setDeliveryTypes([...tempDeliveryTypes]);
   // };
 
-  const addWarehouseFacilityUsages = () => {
-    let arrOfWarehouseFacilityUsages = warehouseFacilityUsages;
-    let key = arrOfWarehouseFacilityUsages.length;
-    arrOfWarehouseFacilityUsages.push(
-      <ButtonAndInputContainer key={`WHFACILITYUSAGES${key}`}>
-        <ArrayInput
-          id={`warehouseFacilityUsages${key}`}
-          className="warehouseFacilityUsages"
-          name="warehouseFacilityUsages"
-          type="text"
-          width="316px"
-        />
-        &nbsp;
-        {key === 1 ? (
-          <RemoveButton onClick={removeWarehouseFacilityUsages}>
-            삭제
-          </RemoveButton>
-        ) : null}
-      </ButtonAndInputContainer>,
-    );
-    setWarehouseFaciltiyUsages([...arrOfWarehouseFacilityUsages]);
-  };
+  // const addWarehouseFacilityUsages = () => {
+  //   let arrOfWarehouseFacilityUsages = warehouseFacilityUsages;
+  //   let key = arrOfWarehouseFacilityUsages.length;
+  //   arrOfWarehouseFacilityUsages.push(
+  //     <ButtonAndInputContainer key={`WHFACILITYUSAGES${key}`}>
+  //       <ArrayInput
+  //         id={`warehouseFacilityUsages${key}`}
+  //         className="warehouseFacilityUsages"
+  //         name="warehouseFacilityUsages"
+  //         type="text"
+  //         width="316px"
+  //       />
+  //       &nbsp;
+  //       {key === 1 ? (
+  //         <RemoveButton onClick={removeWarehouseFacilityUsages}>
+  //           삭제
+  //         </RemoveButton>
+  //       ) : null}
+  //     </ButtonAndInputContainer>,
+  //   );
+  //   setWarehouseFaciltiyUsages([...arrOfWarehouseFacilityUsages]);
+  // };
 
   const addWarehouseUsageCautions = () => {
     let arrOfWarehouseUsageCautions = warehouseUsageCautions;
@@ -270,11 +282,11 @@ const Register = () => {
   //   setDeliveryTypes([...beforeDeliveryTypes]);
   // };
 
-  const removeWarehouseFacilityUsages = () => {
-    let arrOfWarehouseFacilityUsages = warehouseFacilityUsages;
-    arrOfWarehouseFacilityUsages.pop();
-    setWarehouseFaciltiyUsages([...arrOfWarehouseFacilityUsages]);
-  };
+  // const removeWarehouseFacilityUsages = () => {
+  //   let arrOfWarehouseFacilityUsages = warehouseFacilityUsages;
+  //   arrOfWarehouseFacilityUsages.pop();
+  //   setWarehouseFaciltiyUsages([...arrOfWarehouseFacilityUsages]);
+  // };
 
   const removeWarehouseUsageCautions = () => {
     let arrOfWarehouseUsageCautions = warehouseUsageCautions;
@@ -307,18 +319,18 @@ const Register = () => {
   //   setInputs(tempInputs);
   // };
 
-  const setWarehouseFacilityUsagesToState = () => {
-    let list = document.getElementsByName(InputType.WAREHOUSE_FACILITY_USAGES);
-    let _warehouseFacilityUsages = [];
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].value.trim() !== '') {
-        _warehouseFacilityUsages.push(list[i].value);
-      }
-    }
-    let tempInputs = inputs;
-    tempInputs.warehouseFacilityUsages = _warehouseFacilityUsages;
-    setInputs(tempInputs);
-  };
+  // const setWarehouseFacilityUsagesToState = () => {
+  //   let list = document.getElementsByName(InputType.WAREHOUSE_FACILITY_USAGES);
+  //   let _warehouseFacilityUsages = [];
+  //   for (let i = 0; i < list.length; i++) {
+  //     if (list[i].value.trim() !== '') {
+  //       _warehouseFacilityUsages.push(list[i].value);
+  //     }
+  //   }
+  //   let tempInputs = inputs;
+  //   tempInputs.warehouseFacilityUsages = _warehouseFacilityUsages;
+  //   setInputs(tempInputs);
+  // };
 
   const setWarehouseUsageCautionsToState = () => {
     let list = document.getElementsByName(InputType.WAREHOUSE_USAGE_CAUTIONS);
@@ -361,7 +373,7 @@ const Register = () => {
 
   const register = () => {
     // setDeliveryTypesToState();
-    setWarehouseFacilityUsagesToState();
+    // setWarehouseFacilityUsagesToState();
     setWarehouseUsageCautionsToState();
     // setInsurancesToState();
     // setSecurityCompaniesToState();
@@ -895,7 +907,36 @@ const Register = () => {
             </ItemContainer>
             <ItemContainer>
               <InputTitle>창고 시설 안내사항</InputTitle>
-              {warehouseFacilityUsages}
+              {/* {warehouseFacilityUsages} */}
+              {inputs.warehouseFacilityUsages.map((usage, idx) => {
+                return (
+                  <ButtonAndInputContainer key={`WH_FACILITY_USAGE${idx}`}>
+                    <Input
+                      type="text"
+                      value={usage}
+                      onChange={(event) => {
+                        let temp = inputs.warehouseFacilityUsages;
+                        temp[idx] = event.currentTarget.value;
+                        setInputs({ ...inputs, warehouseFacilityUsages: temp });
+                      }}
+                      width="316px"
+                    />
+                    &nbsp;
+                    {idx === 0 ? (
+                      <AddButton onClick={() => addWarehouseFacilityUsages()}>
+                        추가
+                      </AddButton>
+                    ) : null}
+                    {idx !== 0 ? (
+                      <RemoveButton
+                        onClick={() => removeWarehouseFacilityUsages(idx)}
+                      >
+                        삭제
+                      </RemoveButton>
+                    ) : null}
+                  </ButtonAndInputContainer>
+                );
+              })}
             </ItemContainer>
             <ItemContainer>
               <InputTitle>창고 이용 주의사항</InputTitle>
