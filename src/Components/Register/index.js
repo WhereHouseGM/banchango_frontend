@@ -24,8 +24,6 @@ import {
   ButtonAndInputContainer,
   RemoveButton,
   SubmitButton,
-  ArrayInput,
-  InputType,
 } from './Register';
 import { registerEvent } from '../GoogleAnalytics';
 import RegisterBackground from '../../assets/images/login-background.jpg';
@@ -55,9 +53,9 @@ const Register = () => {
     openAt: null,
     closeAt: null,
     availableTimeDetail: null,
-    insurances: [],
+    insurances: [''],
     cctvExist: false,
-    securityCompanies: [],
+    securityCompanies: [''],
     doorLockExist: false,
     airConditioningType: null,
     workerExist: false,
@@ -65,270 +63,75 @@ const Register = () => {
     mainItemTypes: [],
     warehouseType: null,
     minReleasePerMonth: null,
-    deliveryTypes: [],
-    warehouseFacilityUsages: [],
-    warehouseUsageCautions: [],
+    deliveryTypes: [''],
+    warehouseFacilityUsages: [''],
+    warehouseUsageCautions: [''],
     warehouseCondition: [],
     latitude: 88.88,
     longitude: 99.99,
   });
 
-  const [deliveryTypes, setDeliveryTypes] = useState([
-    <ButtonAndInputContainer key="DELIVERYTYPES0">
-      <Input
-        className="deliveryTypes"
-        name="deliveryTypes"
-        type="text"
-        width="256px"
-      />
-      &nbsp;
-      <AddButton onClick={() => addDeliveryTypes()}>추가</AddButton>
-    </ButtonAndInputContainer>,
-  ]);
-
-  const [warehouseFacilityUsages, setWarehouseFaciltiyUsages] = useState([
-    <ButtonAndInputContainer key="WHFACILITYUSAGES0">
-      <ArrayInput
-        id="warehouseFacilityUsages0"
-        className="warehouseFacilityUsages"
-        name="warehouseFacilityUsages"
-        type="text"
-        width="316px"
-      />
-      &nbsp;
-      <AddButton onClick={() => addWarehouseFacilityUsages()}>추가</AddButton>
-    </ButtonAndInputContainer>,
-  ]);
-
-  const [warehouseUsageCautions, setWarehouseUsageCautions] = useState([
-    <ButtonAndInputContainer key="WHUSAGECAUTIONS0">
-      <ArrayInput
-        id="warehouseUsageCautions0"
-        className="warehouseUsageCautions"
-        name="warehouseUsageCautions"
-        type="text"
-        width="316px"
-      />
-      &nbsp;
-      <AddButton onClick={() => addWarehouseUsageCautions()}>추가</AddButton>
-    </ButtonAndInputContainer>,
-  ]);
-
-  const [insurances, setInsurances] = useState([
-    <ButtonAndInputContainer key="INSURANCES0">
-      <Input type="text" width="256px" name="insurances" />
-      &nbsp;
-      <AddButton onClick={() => addInsurances()}>추가</AddButton>
-    </ButtonAndInputContainer>,
-  ]);
-
-  const [securityCompanies, setSecurityCompanies] = useState([
-    <ButtonAndInputContainer key="SECCOMPS0">
-      <Input type="text" width="256px" name="securityCompanies" />
-      &nbsp;
-      <AddButton onClick={() => addSecurityCompanies()}>추가</AddButton>
-    </ButtonAndInputContainer>,
-  ]);
-
   const addInsurances = () => {
-    let arrOfInsurances = insurances;
-    let key = arrOfInsurances.length;
-    arrOfInsurances.push(
-      <ButtonAndInputContainer key={`INSURANCES${key}`}>
-        <Input type="text" width="256px" name="insurances" />
-        &nbsp;
-        {key === 1 ? (
-          <RemoveButton onClick={() => removeInsurances()}>삭제</RemoveButton>
-        ) : null}
-      </ButtonAndInputContainer>,
-    );
-    setInsurances([...arrOfInsurances]);
+    let temp = inputs.insurances;
+    temp.push('');
+    setInputs({ ...inputs, insurances: temp });
+  };
+
+  const removeInsurances = (idx) => {
+    let temp = inputs.insurances;
+    temp.splice(idx, 1);
+    setInputs({ ...inputs, insurances: temp });
   };
 
   const addSecurityCompanies = () => {
-    let arrOfSecurityCompanies = securityCompanies;
-    let key = arrOfSecurityCompanies.length;
-    arrOfSecurityCompanies.push(
-      <ButtonAndInputContainer key={`SECCOMPS${key}`}>
-        <Input type="text" width="256px" name="securityCompanies" />
-        &nbsp;
-        {key === 1 ? (
-          <RemoveButton onClick={() => removeSecurityCompanies()}>
-            삭제
-          </RemoveButton>
-        ) : null}
-      </ButtonAndInputContainer>,
-    );
-    setSecurityCompanies([...arrOfSecurityCompanies]);
+    let temp = inputs.securityCompanies;
+    temp.push('');
+    setInputs({ ...inputs, securityCompanies: temp });
+  };
+
+  const removeSecurityCompanies = (idx) => {
+    let temp = inputs.securityCompanies;
+    temp.splice(idx, 1);
+    setInputs({ ...inputs, securityCompanies: temp });
   };
 
   const addDeliveryTypes = () => {
-    let tempDeliveryTypes = deliveryTypes;
-    let key = tempDeliveryTypes.length;
-    tempDeliveryTypes.push(
-      <ButtonAndInputContainer key={`DELIVERYTYPES${key}`}>
-        <Input
-          className="deliveryTypes"
-          name="deliveryTypes"
-          type="text"
-          width="256px"
-        />
-        &nbsp;
-        {key === 1 ? (
-          <RemoveButton onClick={removeDeliveryTypes}>삭제</RemoveButton>
-        ) : null}
-      </ButtonAndInputContainer>,
-    );
-    setDeliveryTypes([...tempDeliveryTypes]);
+    let temp = inputs.deliveryTypes;
+    temp.push('');
+    setInputs({ ...inputs, deliveryTypes: temp });
+  };
+
+  const removeDeliveryTypes = (idx) => {
+    let temp = inputs.deliveryTypes;
+    temp.splice(idx, 1);
+    setInputs({ ...inputs, deliveryTypes: temp });
   };
 
   const addWarehouseFacilityUsages = () => {
-    let arrOfWarehouseFacilityUsages = warehouseFacilityUsages;
-    let key = arrOfWarehouseFacilityUsages.length;
-    arrOfWarehouseFacilityUsages.push(
-      <ButtonAndInputContainer key={`WHFACILITYUSAGES${key}`}>
-        <ArrayInput
-          id={`warehouseFacilityUsages${key}`}
-          className="warehouseFacilityUsages"
-          name="warehouseFacilityUsages"
-          type="text"
-          width="316px"
-        />
-        &nbsp;
-        {key === 1 ? (
-          <RemoveButton onClick={removeWarehouseFacilityUsages}>
-            삭제
-          </RemoveButton>
-        ) : null}
-      </ButtonAndInputContainer>,
-    );
-    setWarehouseFaciltiyUsages([...arrOfWarehouseFacilityUsages]);
+    let temp = inputs.warehouseFacilityUsages;
+    temp.push('');
+    setInputs({ ...inputs, warehouseFacilityUsages: temp });
+  };
+
+  const removeWarehouseFacilityUsages = (idx) => {
+    let temp = inputs.warehouseFacilityUsages;
+    temp.splice(idx, 1);
+    setInputs({ ...inputs, warehouseFacilityUsages: temp });
   };
 
   const addWarehouseUsageCautions = () => {
-    let arrOfWarehouseUsageCautions = warehouseUsageCautions;
-    let key = arrOfWarehouseUsageCautions.length;
-    arrOfWarehouseUsageCautions.push(
-      <ButtonAndInputContainer key={`WHUSAGECAUTIONS${key}`}>
-        <ArrayInput
-          id={`warehouseUsageCautions${key}`}
-          className="warehouseUsageCautions"
-          name="warehouseUsageCautions"
-          type="text"
-          width="316px"
-        />
-        &nbsp;
-        {key === 1 ? (
-          <RemoveButton onClick={removeWarehouseUsageCautions}>
-            삭제
-          </RemoveButton>
-        ) : null}
-      </ButtonAndInputContainer>,
-    );
-    setWarehouseUsageCautions([...arrOfWarehouseUsageCautions]);
+    let temp = inputs.warehouseUsageCautions;
+    temp.push('');
+    setInputs({ ...inputs, warehouseUsageCautions: temp });
   };
 
-  const removeDeliveryTypes = () => {
-    let beforeDeliveryTypes = deliveryTypes;
-    beforeDeliveryTypes.pop();
-    setDeliveryTypes([...beforeDeliveryTypes]);
-  };
-
-  const removeWarehouseFacilityUsages = () => {
-    let arrOfWarehouseFacilityUsages = warehouseFacilityUsages;
-    arrOfWarehouseFacilityUsages.pop();
-    setWarehouseFaciltiyUsages([...arrOfWarehouseFacilityUsages]);
-  };
-
-  const removeWarehouseUsageCautions = () => {
-    let arrOfWarehouseUsageCautions = warehouseUsageCautions;
-    arrOfWarehouseUsageCautions.pop();
-    setWarehouseUsageCautions([...arrOfWarehouseUsageCautions]);
-  };
-
-  const removeInsurances = () => {
-    let arrOfInsurances = insurances;
-    arrOfInsurances.pop();
-    setInsurances([...arrOfInsurances]);
-  };
-
-  const removeSecurityCompanies = () => {
-    let arrOfSecurityCompanies = securityCompanies;
-    arrOfSecurityCompanies.pop();
-    setSecurityCompanies([...arrOfSecurityCompanies]);
-  };
-
-  const setDeliveryTypesToState = () => {
-    let list = document.getElementsByName(InputType.DELIVERY_TYPES);
-    let _deliveryTypes = [];
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].value.trim() !== '') {
-        _deliveryTypes.push(list[i].value);
-      }
-    }
-    let tempInputs = inputs;
-    tempInputs.deliveryTypes = _deliveryTypes;
-    setInputs(tempInputs);
-  };
-
-  const setWarehouseFacilityUsagesToState = () => {
-    let list = document.getElementsByName(InputType.WAREHOUSE_FACILITY_USAGES);
-    let _warehouseFacilityUsages = [];
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].value.trim() !== '') {
-        _warehouseFacilityUsages.push(list[i].value);
-      }
-    }
-    let tempInputs = inputs;
-    tempInputs.warehouseFacilityUsages = _warehouseFacilityUsages;
-    setInputs(tempInputs);
-  };
-
-  const setWarehouseUsageCautionsToState = () => {
-    let list = document.getElementsByName(InputType.WAREHOUSE_USAGE_CAUTIONS);
-    let _warehouseUsageCautions = [];
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].value.trim() !== '') {
-        _warehouseUsageCautions.push(list[i].value);
-      }
-    }
-    let tempInputs = inputs;
-    tempInputs.warehouseUsageCautions = _warehouseUsageCautions;
-    setInputs(tempInputs);
-  };
-
-  const setInsurancesToState = () => {
-    let list = document.getElementsByName(InputType.INSURANCES);
-    let _insurances = [];
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].value.trim() !== '') {
-        _insurances.push(list[i].value);
-      }
-    }
-    let tempInputs = inputs;
-    tempInputs.insurances = _insurances;
-    setInputs(tempInputs);
-  };
-
-  const setSecurityCompaniesToState = () => {
-    let list = document.getElementsByName(InputType.SECURITY_COMPANIES);
-    let _securityCompanies = [];
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].value.trim() !== '') {
-        _securityCompanies.push(list[i].value);
-      }
-    }
-    let tempInputs = inputs;
-    tempInputs.securityCompanies = _securityCompanies;
-    setInputs(tempInputs);
+  const removeWarehouseUsageCautions = (idx) => {
+    let temp = inputs.warehouseUsageCautions;
+    temp.splice(idx, 1);
+    setInputs({ ...inputs, warehouseUsageCautions: temp });
   };
 
   const register = () => {
-    setDeliveryTypesToState();
-    setWarehouseFacilityUsagesToState();
-    setWarehouseUsageCautionsToState();
-    setInsurancesToState();
-    setSecurityCompaniesToState();
     let requestBody = inputs;
     if (inputs.name === null || inputs.name.trim() === '') {
       message.warning('창고명을 입력해주세요.');
@@ -408,7 +211,7 @@ const Register = () => {
         } else if (status === 403) {
           alert('[403] 해당 요청을 수행할 수 있는 권한이 없습니다.');
         } else if (status === 500) {
-          alert('[500]서버 오류가 발생했습니다.');
+          alert('[500]서버 오류가 발생했습니다\n관리자에게 문의해 주세요.');
         }
       });
   };
@@ -617,13 +420,67 @@ const Register = () => {
                 <InputTitle>
                   보험사 / 보험명<span style={{ color: 'red' }}>*</span>
                 </InputTitle>
-                {insurances}
+                {inputs.insurances.map((insurance, idx) => {
+                  return (
+                    <ButtonAndInputContainer key={`INSURANCES${idx}`}>
+                      <Input
+                        type="text"
+                        width="256px"
+                        value={insurance}
+                        onChange={(event) => {
+                          let temp = inputs.insurances;
+                          temp[idx] = event.currentTarget.value;
+                          setInputs({ ...inputs, insurances: temp });
+                        }}
+                      />
+                      &nbsp;
+                      {idx === 0 ? (
+                        <AddButton onClick={() => addInsurances()}>
+                          추가
+                        </AddButton>
+                      ) : null}
+                      {idx !== 0 ? (
+                        <RemoveButton onClick={() => removeInsurances(idx)}>
+                          삭제
+                        </RemoveButton>
+                      ) : null}
+                    </ButtonAndInputContainer>
+                  );
+                })}
               </ItemContainer>
               <ItemContainer>
                 <InputTitle>
                   경비 업체<span style={{ color: 'red' }}>*</span>
                 </InputTitle>
-                {securityCompanies}
+                {inputs.securityCompanies.map((company, idx) => {
+                  return (
+                    <ButtonAndInputContainer key={`SEC_COMP${idx}`}>
+                      <Input
+                        type="text"
+                        width="256px"
+                        value={company}
+                        onChange={(event) => {
+                          let temp = inputs.securityCompanies;
+                          temp[idx] = event.currentTarget.value;
+                          setInputs({ ...inputs, securityCompanies: temp });
+                        }}
+                      />
+                      &nbsp;
+                      {idx === 0 ? (
+                        <AddButton onClick={() => addSecurityCompanies()}>
+                          추가
+                        </AddButton>
+                      ) : null}
+                      {idx !== 0 ? (
+                        <RemoveButton
+                          onClick={() => removeSecurityCompanies(idx)}
+                        >
+                          삭제
+                        </RemoveButton>
+                      ) : null}
+                    </ButtonAndInputContainer>
+                  );
+                })}
               </ItemContainer>
             </TwoElementContainer>
             <InputTitle>
@@ -772,15 +629,97 @@ const Register = () => {
               <InputTitle>
                 제휴 택배사<span style={{ color: 'red' }}>*</span>
               </InputTitle>
-              {deliveryTypes}
+              {inputs.deliveryTypes.map((delivery, idx) => {
+                return (
+                  <ButtonAndInputContainer key={`DELIVERYTYPES${idx}`}>
+                    <Input
+                      type="text"
+                      value={delivery}
+                      onChange={(event) => {
+                        let temp = inputs.deliveryTypes;
+                        temp[idx] = event.currentTarget.value;
+                        setInputs({ ...inputs, deliveryTypes: temp });
+                      }}
+                      width="256px"
+                    />
+                    &nbsp;
+                    {idx === 0 ? (
+                      <AddButton onClick={() => addDeliveryTypes()}>
+                        추가
+                      </AddButton>
+                    ) : null}
+                    {idx !== 0 ? (
+                      <RemoveButton onClick={() => removeDeliveryTypes(idx)}>
+                        삭제
+                      </RemoveButton>
+                    ) : null}
+                  </ButtonAndInputContainer>
+                );
+              })}
             </ItemContainer>
             <ItemContainer>
               <InputTitle>창고 시설 안내사항</InputTitle>
-              {warehouseFacilityUsages}
+              {inputs.warehouseFacilityUsages.map((usage, idx) => {
+                return (
+                  <ButtonAndInputContainer key={`WH_FACILITY_USAGE${idx}`}>
+                    <Input
+                      type="text"
+                      value={usage}
+                      onChange={(event) => {
+                        let temp = inputs.warehouseFacilityUsages;
+                        temp[idx] = event.currentTarget.value;
+                        setInputs({ ...inputs, warehouseFacilityUsages: temp });
+                      }}
+                      width="316px"
+                    />
+                    &nbsp;
+                    {idx === 0 ? (
+                      <AddButton onClick={() => addWarehouseFacilityUsages()}>
+                        추가
+                      </AddButton>
+                    ) : null}
+                    {idx !== 0 ? (
+                      <RemoveButton
+                        onClick={() => removeWarehouseFacilityUsages(idx)}
+                      >
+                        삭제
+                      </RemoveButton>
+                    ) : null}
+                  </ButtonAndInputContainer>
+                );
+              })}
             </ItemContainer>
             <ItemContainer>
               <InputTitle>창고 이용 주의사항</InputTitle>
-              {warehouseUsageCautions}
+              {inputs.warehouseUsageCautions.map((caution, idx) => {
+                return (
+                  <ButtonAndInputContainer key={`WH_USAGE_CAUTION${idx}`}>
+                    <Input
+                      type="text"
+                      value={caution}
+                      onChange={(event) => {
+                        let temp = inputs.warehouseUsageCautions;
+                        temp[idx] = event.currentTarget.value;
+                        setInputs({ ...inputs, warehouseUsageCautions: temp });
+                      }}
+                      width="316px"
+                    />
+                    &nbsp;
+                    {idx === 0 ? (
+                      <AddButton onClick={() => addWarehouseUsageCautions()}>
+                        추가
+                      </AddButton>
+                    ) : null}
+                    {idx !== 0 ? (
+                      <RemoveButton
+                        onClick={() => removeWarehouseUsageCautions(idx)}
+                      >
+                        삭제
+                      </RemoveButton>
+                    ) : null}
+                  </ButtonAndInputContainer>
+                );
+              })}
             </ItemContainer>
             <SubmitButton
               onClick={async () => {
