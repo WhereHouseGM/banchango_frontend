@@ -24,8 +24,6 @@ import {
   ButtonAndInputContainer,
   RemoveButton,
   SubmitButton,
-  ArrayInput,
-  InputType,
 } from './Register';
 import { registerEvent } from '../GoogleAnalytics';
 import RegisterBackground from '../../assets/images/login-background.jpg';
