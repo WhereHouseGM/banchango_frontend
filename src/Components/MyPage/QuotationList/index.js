@@ -159,9 +159,7 @@ const QuotationList = ({ quotes }) => {
             </HistoryUpper>
             {singleQuoteList.map((item, idx) => (
               <HistoryChild key={idx}>
-                <HistoryChildText width={'12%'}>
-                  {keepingTypeToText(item.keepingType)}
-                </HistoryChildText>
+                <HistoryChildText width={'12%'}>{item.name}</HistoryChildText>
                 <HistoryChildText width={'12%'}>
                   {item.perimeter}
                 </HistoryChildText>
@@ -170,7 +168,9 @@ const QuotationList = ({ quotes }) => {
                 <HistoryChildText width={'12%'}>
                   {item.keepingNumber}
                 </HistoryChildText>
-                <HistoryChildText width={'12%'}>{item.name}</HistoryChildText>
+                <HistoryChildText width={'12%'}>
+                  {keepingTypeToText(item.keepingType)}
+                </HistoryChildText>
                 <HistoryChildText width={'12%'}>
                   {barcodeToText(item.barcode)}
                 </HistoryChildText>
