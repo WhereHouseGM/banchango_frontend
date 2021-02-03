@@ -72,7 +72,7 @@ const Register = () => {
     latitude: 88.88,
     longitude: 99.99,
   });
-
+  const [uploading, setUploading] = useState(false);
   const [deliveryTypes, setDeliveryTypes] = useState([
     <ButtonAndInputContainer key="DELIVERYTYPES0">
       <Input
@@ -392,6 +392,7 @@ const Register = () => {
       return;
     }
     message.loading('잠시만 기다려주세요.');
+    setUploading(true);
     return warehouseApi
       .register(requestBody, localStorage.getItem('AccessToken'))
       .then(() => {
@@ -410,6 +411,9 @@ const Register = () => {
         } else if (status === 500) {
           alert('[500]서버 오류가 발생했습니다.');
         }
+      })
+      .finally(() => {
+        setUploading(false);
       });
   };
 
@@ -784,6 +788,7 @@ const Register = () => {
             </ItemContainer>
             <SubmitButton
               onClick={async () => {
+                if (uploading === true) return;
                 if ((await register()) === 'SUCCESS') {
                   registerEvent.success();
                   window.location.href = '/mypage/houselist';
