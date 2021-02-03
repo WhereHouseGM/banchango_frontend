@@ -45,7 +45,7 @@ const QuotationList = ({ quotes }) => {
   const [singleQuoteList, setSingleQuoteList] = useState([]);
   const [selectedWarehouseName, setSelectedWarehouseName] = useState('');
   const handleGetSingleQuoteList = useCallback((item) => {
-    message.loading('불러오는 중..');
+    message.loading('불러오는 중..', 10);
     estimateApi
       .getEstimateItems(item.id, localStorage.getItem('AccessToken'))
       .then(({ data }) => {

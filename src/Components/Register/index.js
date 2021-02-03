@@ -194,7 +194,7 @@ const Register = () => {
       message.warning('제휴 택배사를 1개 이상 입력해주세요.');
       return;
     }
-    message.loading('잠시만 기다려주세요.');
+    message.loading('잠시만 기다려주세요.', 10);
     setUploading(true);
     return warehouseApi
       .register(requestBody, localStorage.getItem('AccessToken'))
