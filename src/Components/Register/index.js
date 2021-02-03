@@ -71,63 +71,6 @@ const Register = () => {
     longitude: 99.99,
   });
   const [uploading, setUploading] = useState(false);
-  const [deliveryTypes, setDeliveryTypes] = useState([
-    <ButtonAndInputContainer key="DELIVERYTYPES0">
-      <Input
-        className="deliveryTypes"
-        name="deliveryTypes"
-        type="text"
-        width="256px"
-      />
-      &nbsp;
-      <AddButton onClick={() => addDeliveryTypes()}>추가</AddButton>
-    </ButtonAndInputContainer>,
-  ]);
-
-  const [warehouseFacilityUsages, setWarehouseFaciltiyUsages] = useState([
-    <ButtonAndInputContainer key="WHFACILITYUSAGES0">
-      <ArrayInput
-        id="warehouseFacilityUsages0"
-        className="warehouseFacilityUsages"
-        name="warehouseFacilityUsages"
-        type="text"
-        width="316px"
-      />
-      &nbsp;
-      <AddButton onClick={() => addWarehouseFacilityUsages()}>추가</AddButton>
-    </ButtonAndInputContainer>,
-  ]);
-
-  const [warehouseUsageCautions, setWarehouseUsageCautions] = useState([
-    <ButtonAndInputContainer key="WHUSAGECAUTIONS0">
-      <ArrayInput
-        id="warehouseUsageCautions0"
-        className="warehouseUsageCautions"
-        name="warehouseUsageCautions"
-        type="text"
-        width="316px"
-      />
-      &nbsp;
-      <AddButton onClick={() => addWarehouseUsageCautions()}>추가</AddButton>
-    </ButtonAndInputContainer>,
-  ]);
-
-  const [insurances, setInsurances] = useState([
-    <ButtonAndInputContainer key="INSURANCES0">
-      <Input type="text" width="256px" name="insurances" />
-      &nbsp;
-      <AddButton onClick={() => addInsurances()}>추가</AddButton>
-    </ButtonAndInputContainer>,
-  ]);
-
-  const [securityCompanies, setSecurityCompanies] = useState([
-    <ButtonAndInputContainer key="SECCOMPS0">
-      <Input type="text" width="256px" name="securityCompanies" />
-      &nbsp;
-      <AddButton onClick={() => addSecurityCompanies()}>추가</AddButton>
-    </ButtonAndInputContainer>,
-  ]);
-
   const addInsurances = () => {
     let temp = inputs.insurances;
     temp.push('');
