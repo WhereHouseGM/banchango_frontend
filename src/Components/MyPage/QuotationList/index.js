@@ -179,7 +179,13 @@ const QuotationList = ({ quotes }) => {
                   width={'12%'}
                   onClick={() => {
                     if (!!item.url) {
-                      window.open(item.url);
+                      window.open(
+                        item.url.startsWith('http://') ||
+                          item.url.startsWith('https://')
+                          ? item.url
+                          : 'http://' + item.url,
+                        '_blank',
+                      );
                     }
                   }}
                 >
