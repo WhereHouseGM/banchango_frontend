@@ -70,7 +70,7 @@ const Register = () => {
     latitude: 88.88,
     longitude: 99.99,
   });
-
+  const [uploading, setUploading] = useState(false);
   const addInsurances = () => {
     let temp = inputs.insurances;
     temp.push('');
@@ -194,7 +194,8 @@ const Register = () => {
       message.warning('제휴 택배사를 1개 이상 입력해주세요.');
       return;
     }
-    message.loading('잠시만 기다려주세요.');
+    message.loading('잠시만 기다려주세요.', 10);
+    setUploading(true);
     return warehouseApi
       .register(requestBody, localStorage.getItem('AccessToken'))
       .then(() => {
@@ -213,6 +214,9 @@ const Register = () => {
         } else if (status === 500) {
           alert('[500]서버 오류가 발생했습니다\n관리자에게 문의해 주세요.');
         }
+      })
+      .finally(() => {
+        setUploading(false);
       });
   };
 
@@ -723,6 +727,7 @@ const Register = () => {
             </ItemContainer>
             <SubmitButton
               onClick={async () => {
+                if (uploading === true) return;
                 if ((await register()) === 'SUCCESS') {
                   registerEvent.success();
                   window.location.href = '/mypage/houselist';

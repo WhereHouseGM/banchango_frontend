@@ -3,7 +3,6 @@ import Background from '../../assets/images/login-background.jpg';
 import MainImage from '../../assets/images/banchango-main.png';
 import {
   Container,
-  Wrapper,
   BackgroundImage,
   SignUpContainer,
   ImageContainer,
@@ -27,7 +26,7 @@ import {
 import { userApi } from '../../api';
 import { message } from 'antd';
 import sha256 from 'crypto';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { signUpEvent } from '../GoogleAnalytics';
 
 const SignUp = () => {
