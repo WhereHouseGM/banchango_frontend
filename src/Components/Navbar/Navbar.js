@@ -7,6 +7,7 @@ export const NavMarginTop = styled.div`
 `;
 export const Nav = styled.nav`
   background: white;
+  font-family: 'notosans-Regular', sans-serif;
   height: 45px;
   display: flex;
   justify-content: space-between;
