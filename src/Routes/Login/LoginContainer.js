@@ -78,7 +78,7 @@ class LoginContainer extends React.Component {
   };
 
   alertWaitingMessage = () => {
-    message.loading('알림창이 뜰 때까지 잠시만 기다려 주세요...');
+    message.loading('알림창이 뜰 때까지 잠시만 기다려 주세요...', 10);
   };
 
   destroyWaitingMessage = () => {

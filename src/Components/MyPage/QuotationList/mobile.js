@@ -7,7 +7,6 @@ import {
   MobileHistoryContainer,
   MobileHistoryUpperContainer,
   MobileHistoryUpperText,
-  RemoveItemButton,
 } from '../../Detail/QuoteContact/QuoteContact';
 import AdditionalInfoButtonImg from '../../../assets/icons/QuoteContact/AdditionalInfoButton.png';
 import { MobileUpperMenuButton, MobileUpperMenuWrapper } from '../style';

@@ -18,7 +18,7 @@ import { userApi } from '../../../api';
 export const WithdrawalModal = ({ onClose, visible }) => {
   const history = useHistory();
   const confirmClicked = () => {
-    message.loading('로딩중입니다.');
+    message.loading('로딩중입니다.', 10);
     let causeText = document.getElementById('withdrawalTextarea').value;
     if (causeText === null || causeText.trim() === '') {
       message.destroy();

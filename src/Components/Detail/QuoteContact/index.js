@@ -524,7 +524,7 @@ const QuoteContact = () => {
                   return;
                 }
                 setIsQuoteLoading(true);
-                message.loading('접수 중 입니다..');
+                message.loading('접수 중 입니다..',10);
                 estimateApi
                   .saveEstimate(estimate, localStorage.getItem('AccessToken'))
                   .then(() => {

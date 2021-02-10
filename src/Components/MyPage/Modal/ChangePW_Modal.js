@@ -29,7 +29,7 @@ export const ChangePWModal = ({ onClose, visible }) => {
       message.error('새 비밀번호가 일치하지 않습니다.');
       return null;
     }
-    message.loading('로딩중입니다.');
+    message.loading('로딩중입니다.', 10);
     setPreviousPW('');
     setNewPW('');
     setCheckNewPW('');

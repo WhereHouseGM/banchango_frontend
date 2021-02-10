@@ -20,7 +20,7 @@ export const CheckPWModal = ({
 }) => {
   const [PW, setPW] = useState('');
   const confirmClicked = async () => {
-    message.loading('로딩중입니다.');
+    message.loading('로딩중입니다.', 10);
     setPW('');
     const hashedPW = sha256.createHash('sha256').update(PW).digest('hex');
     const targetInfo = { ...getUserInfo(), password: hashedPW };
