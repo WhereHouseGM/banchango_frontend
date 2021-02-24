@@ -70,11 +70,9 @@ import {
 } from './Detail';
 import { categoryTitleDict, conditionDict } from '../../static/category';
 import { dayOfWeek } from '../../static/detail';
-import { usePath } from 'hookrouter';
 
 const Detail = ({ warehouse }) => {
   const SliderRef = React.createRef();
-  const path = usePath();
   useEffect(() => {
     const script = document.createElement('script');
     script.async = true;
@@ -225,7 +223,7 @@ const Detail = ({ warehouse }) => {
                   );
                 } else {
                   history.push(
-                    `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}?redirectURL=${path}`,
+                    `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}?redirectURL=${window.location.pathname}`,
                   );
                 }
               }}
@@ -493,7 +491,7 @@ const Detail = ({ warehouse }) => {
                     );
                   } else {
                     history.push(
-                      `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}?redirectURL=${path}`,
+                      `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}?redirectURL=${window.location.pathname}`,
                     );
                   }
                 }}
