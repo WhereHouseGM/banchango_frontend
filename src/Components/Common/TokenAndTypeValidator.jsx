@@ -16,7 +16,6 @@ const PathNames = {
 
 const TokenAndTypeValidator = ({ children }) => {
   const location = useLocation();
-
   const verifyAccess = useCallback(() => {
     const isTokenExpired = () => {
       if (localStorage.getItem('AccessToken') !== null) {
@@ -266,7 +265,9 @@ const TokenAndTypeValidator = ({ children }) => {
               <ErrorPage
                 title={`로그인 후\n견적 요청이 가능합니다.`}
                 message={'로그인을 먼저 해주세요.'}
-                locationToGo={'/login'}
+                locationToGo={`/login?redirectURL=${
+                  window.location.search.split('=')[1]
+                }`}
                 buttonMessage={'로그인 하기'}
               />
             );

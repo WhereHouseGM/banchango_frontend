@@ -6,7 +6,7 @@ import HouseList from '../../../Components/MyPage/HouseList';
 const Presenter = () => (
   <>
     <Helmet>
-      <title>반창고 | 내 창고 목록보기</title>
+      <title>반창고 허브 | 내 창고 목록보기</title>
     </Helmet>
     <Navbar />
     <HouseList />
