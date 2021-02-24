@@ -4,7 +4,7 @@ import SignUp from '../../Components/SignUp';
 const SignUpPresenter = () => (
   <>
     <Helmet>
-      <title>반창고 | 회원가입</title>
+      <title>반창고 허브 | 회원가입</title>
     </Helmet>
     <SignUp />
   </>

@@ -8,7 +8,7 @@ const MainPresenter = () => {
   return (
     <>
       <Helmet>
-        <title>반창고 | 창고중개플랫폼</title>
+        <title>반창고 허브 | 창고중개플랫폼</title>
       </Helmet>
       <Navbar />
       <MainPage />

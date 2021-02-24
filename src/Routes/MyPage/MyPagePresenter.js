@@ -9,7 +9,7 @@ import ErrorPage from '../../Components/ErrorPage';
 const MyPagePresenter = ({ userInfo, handleSubmit, error, loading }) => (
   <>
     <Helmet>
-      <title>반창고 | 마이페이지</title>
+      <title>반창고 허브 | 마이페이지</title>
     </Helmet>
     <Navbar />
     {loading ? (

@@ -17,7 +17,7 @@ const AdminPresenter = ({
 }) => (
   <>
     <Helmet>
-      <title>반창고 | 관리자 페이지</title>
+      <title>반창고 허브 | 관리자 페이지</title>
     </Helmet>
     <TokenAndTypeValidator />
     <Admin

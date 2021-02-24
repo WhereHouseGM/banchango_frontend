@@ -6,7 +6,7 @@ import QuoteContact from '../../../Components/Detail/QuoteContact';
 const Presenter = () => (
   <>
     <Helmet>
-      <title>반창고 | 견적 요청 목록</title>
+      <title>반창고 허브 | 견적 요청 목록</title>
     </Helmet>
     <Navbar />
     <QuoteContact />

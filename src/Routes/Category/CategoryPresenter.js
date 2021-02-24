@@ -7,7 +7,7 @@ const CategoryPresenter = () => {
   return (
     <>
       <Helmet>
-        <title>반창고 | 창고 목록 보기</title>
+        <title>반창고 허브 | 창고 목록 보기</title>
       </Helmet>
       <Navbar />
       <Category />

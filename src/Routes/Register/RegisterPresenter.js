@@ -5,7 +5,7 @@ const RegisterPresenter = () => {
   return (
     <>
       <Helmet>
-        <title>반창고 | 창고 등록</title>
+        <title>반창고 허브 | 창고 등록</title>
       </Helmet>
       <Register />
     </>

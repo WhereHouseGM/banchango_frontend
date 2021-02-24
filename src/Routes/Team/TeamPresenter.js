@@ -7,7 +7,7 @@ const TeamPresenter = () => {
   return (
     <>
       <Helmet>
-        <title>반창고 | 팀 소개</title>
+        <title>반창고 허브 | 팀 소개</title>
       </Helmet>
       <Navbar />
       <Team />
