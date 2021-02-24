@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import jwt_decode from 'jwt-decode';
 import { useLocation } from 'react-router-dom';
 import ErrorPage from '../ErrorPage';
+import { usePath } from 'hookrouter';
 
 const PathNames = {
   LOGIN: '/login',
@@ -16,7 +17,7 @@ const PathNames = {
 
 const TokenAndTypeValidator = ({ children }) => {
   const location = useLocation();
-
+  const path = usePath();
   const verifyAccess = useCallback(() => {
     const isTokenExpired = () => {
       if (localStorage.getItem('AccessToken') !== null) {
@@ -262,18 +263,19 @@ const TokenAndTypeValidator = ({ children }) => {
               }
             }
           } else {
+            console.log(path);
             return (
               <ErrorPage
                 title={`로그인 후\n견적 요청이 가능합니다.`}
                 message={'로그인을 먼저 해주세요.'}
-                locationToGo={'/login'}
+                locationToGo={`/login?redirectURL=${path}`}
                 buttonMessage={'로그인 하기'}
               />
             );
           }
         }
     }
-  }, [location.pathname, children]);
+  }, [location.pathname, children, path]);
 
   return verifyAccess();
 };

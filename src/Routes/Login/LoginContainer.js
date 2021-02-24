@@ -136,7 +136,13 @@ class LoginContainer extends React.Component {
           RefreshToken: refreshToken,
         };
         this.saveToken(tokenSet, user);
-        window.location.href = '/';
+        if (!!window.location.search('redirectURL')) {
+          window.location.href = window.location.search('redirectURL');
+          return;
+        } else {
+          window.location.href = '/';
+          return;
+        }
       })
       .catch(({ response: { status } }) => {
         if (status === 400) {

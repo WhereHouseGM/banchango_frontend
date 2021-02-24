@@ -70,9 +70,11 @@ import {
 } from './Detail';
 import { categoryTitleDict, conditionDict } from '../../static/category';
 import { dayOfWeek } from '../../static/detail';
+import { usePath } from 'hookrouter';
 
 const Detail = ({ warehouse }) => {
   const SliderRef = React.createRef();
+  const path = usePath();
   useEffect(() => {
     const script = document.createElement('script');
     script.async = true;
@@ -130,6 +132,7 @@ const Detail = ({ warehouse }) => {
   };
   return (
     <>
+      {console.log(path)}
       <Modal
         className="Modal"
         onClose={() => {
@@ -217,9 +220,15 @@ const Detail = ({ warehouse }) => {
           {localStorage.getItem('type') !== 'OWNER' && (
             <MobileQuoteContactButton
               onClick={() => {
-                history.push(
-                  `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}`,
-                );
+                if (!!localStorage.getItem('AccessToken')) {
+                  history.push(
+                    `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}`,
+                  );
+                } else {
+                  history.push(
+                    `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}?redirectURL=${path}`,
+                  );
+                }
               }}
             >
               견적 문의하기
@@ -479,9 +488,15 @@ const Detail = ({ warehouse }) => {
             {localStorage.getItem('type') !== 'OWNER' ? (
               <QuoteContactButton
                 onClick={() => {
-                  history.push(
-                    `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}`,
-                  );
+                  if (!!localStorage.getItem('AccessToken')) {
+                    history.push(
+                      `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}`,
+                    );
+                  } else {
+                    history.push(
+                      `/warehouses/quotecontact/${warehouse.warehouseId}/${warehouse.name}?redirectURL=${path}`,
+                    );
+                  }
                 }}
               >
                 견적 요청하기
