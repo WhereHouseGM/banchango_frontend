@@ -110,7 +110,6 @@ const Login = () => {
         }
       })
       .catch(({ response: { status } }) => {
-        console.log(status);
         if (status === 400) {
           alert('[400] : 요청 형식이 잘못되었습니다.');
         } else if (status === 404) {

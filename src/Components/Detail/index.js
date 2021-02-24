@@ -132,7 +132,6 @@ const Detail = ({ warehouse }) => {
   };
   return (
     <>
-      {console.log(path)}
       <Modal
         className="Modal"
         onClose={() => {
