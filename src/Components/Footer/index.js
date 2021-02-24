@@ -101,7 +101,7 @@ const Footer = () => (
       <MarginBox />
       <Wrapper>
         <LeftBox>
-          <BoxTitle>반창고</BoxTitle>
+          <BoxTitle>반창고 허브</BoxTitle>
           <BoxBody>
             대표 | 최윤석 <br />
             주소 | 서울특별시 동작구 상도동 창신관 304호

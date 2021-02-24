@@ -57,7 +57,7 @@ const Login = () => {
         if (status === 400) {
           alert('[400] : 요청 형식이 잘못되었습니다.');
         } else if (status === 404) {
-          alert('반창고에 회원가입 되어 있지 않은 이메일입니다.');
+          alert('반창고 허브에 회원가입 되어 있지 않은 이메일입니다.');
           emailRef.current.value = '';
           passwordRef.current.value = '';
           document.getElementById('email').focus();
