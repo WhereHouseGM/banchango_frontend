@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import LoginBackground from '../../assets/images/login-background.jpg';
 import MainImage from '../../assets/images/banchango-main.png';
 import { userApi } from '../../api';
@@ -21,7 +21,6 @@ import {
 import { ToLoginText } from './PWFind_Styles';
 import { message } from 'antd';
 import { useHistory } from 'react-router';
-import { useRef } from 'react';
 import sha256 from 'crypto';
 
 const Login = () => {
@@ -31,6 +30,7 @@ const Login = () => {
   const history = useHistory();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const buttonRef = useRef();
 
   const checkEmail = () => {
     let form = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+.[A-Za-z0-9]+/;
@@ -80,7 +80,15 @@ const Login = () => {
     localStorage.setItem('LoginFirst', true);
   };
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (!checkEmail(email)) {
+      message.warning('이메일 형식이 올바르지 않습니다.');
+      return;
+    }
+    if (password === '') {
+      message.warning('비밀번호를 입력해 주세요.');
+    }
     const requestBody = {
       email: email,
       password: `${sha256.createHash('sha256').update(password).digest('hex')}`,
@@ -93,8 +101,16 @@ const Login = () => {
           RefreshToken: refreshToken,
         };
         saveTokenAndUserInfo(tokenSet, user);
+        const query = window.location.search;
+        if (query === '') {
+          history.push('/');
+        } else {
+          const redirectURL = query.split('=')[1];
+          history.push(redirectURL);
+        }
       })
       .catch(({ response: { status } }) => {
+        console.log(status);
         if (status === 400) {
           alert('[400] : 요청 형식이 잘못되었습니다.');
         } else if (status === 404) {
@@ -156,10 +172,14 @@ const Login = () => {
               <Input
                 id="password"
                 type="password"
-                placeholder="password"
                 name="password"
                 onChange={(e) => {
                   setPassword(e.target.value);
+                }}
+                onKeyUp={(e) => {
+                  if (e.key === 'Enter') {
+                    buttonRef.current.click();
+                  }
                 }}
                 required
                 ref={passwordRef}
@@ -167,7 +187,11 @@ const Login = () => {
               <PasswordFindText onClick={() => setPWLostClick(!pwLostClick)}>
                 비밀번호를 잃어버리셨나요?
               </PasswordFindText>
-              <LoginButton id="btnLogin" onClick={handleLogin}>
+              <LoginButton
+                id="btnLogin"
+                onClick={(e) => handleLogin(e)}
+                ref={buttonRef}
+              >
                 로그인
               </LoginButton>
               <RegisterButton
