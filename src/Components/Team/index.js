@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
-import { descImgs, profileImgs } from './Team';
 import {
   Container,
   FirstContainer,
