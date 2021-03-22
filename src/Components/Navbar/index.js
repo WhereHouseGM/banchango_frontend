@@ -46,7 +46,7 @@ const Navbar = () => {
               : { left: '-100%', opacity: '0' }
           }
         >
-          <NavLinkOpen to="/team">팀소개</NavLinkOpen>
+          <NavLinkOpen to="/team">회사소개</NavLinkOpen>
           {loginInfo.logined ? (
             <>
               <NavLinkOpen to="/" onClick={logout}>
@@ -84,7 +84,7 @@ const Navbar = () => {
               </NavLink>
             </>
           )}
-          <NavLink to="/team">팀소개</NavLink>
+          <NavLink to="/team">회사소개</NavLink>
           {loginInfo.logined ? (
             <>
               <NavLink to="/" onClick={logout}>

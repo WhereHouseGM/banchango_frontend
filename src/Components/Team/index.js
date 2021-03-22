@@ -1,222 +1,23 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import Fade from 'react-reveal/Fade';
-import { descImgs, profileImgs } from './Team';
-const Container = styled.div`
-  width: 100%;
-  font-family: 'paybooc-Medium', sans-serif;
-  text-align: center;
-  line-height: 1.3;
-`;
-const FirstContainer = styled.div`
-  background-color: #1e56a0;
-  padding: 40px;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @media (max-width: 768px) {
-    padding: 15px;
-  }
-`;
-const FirstLeftText = styled.div`
-  width: 20%;
-  min-width: 165.1px;
-  font-weight: bold;
-  font-size: 45px;
-  @media (max-width: 768px) {
-    text-align: center;
-    font-size: 25px;
-    min-width: 110px;
-    white-space: pre-wrap;
-  }
-`;
-const FirstRightText = styled.div`
-  font-family: 'notosans-Regular', sans-serif;
-  flex: 1;
-  max-width: 615px;
-  font-size: 14px;
-  line-height: 1.5;
-  white-space: normal;
-  @media (max-width: 768px) {
-    white-space: pre-wrap;
-    font-size: 11px;
-  }
-`;
-const SecondWrapper = styled.div`
-  width: 95%;
-  max-width: 1024px;
-  padding: 70px 0;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  text-align: left;
-`;
-const SecondLeftBox = styled.div`
-  width: 28%;
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  line-height: 1.5;
-  font-size: 28px;
-  font-weight: bold;
-  @media (max-width: 768px) {
-    width: 100%;
-    text-align: center;
-    height: auto;
-    padding: 20px 0;
-  }
-`;
-const SecondLeftFirst = styled.div`
-  color: #1e56a0;
-`;
-const SecondLeftSecond = styled.div`
-  color: black;
-`;
-const SecondLeftThird = styled.div`
-  color: #1e56a0;
-`;
-const SecondRightBox = styled.div`
-  font-family: 'notosans-Regular', sans-serif;
-  width: 70%;
-  height: 200px;
-  padding: 50px 0px 20px 40px;
-  font-size: 18px;
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-const MobileSecondRightBox = styled.div`
-  font-family: 'notosans-Regular', sans-serif;
-  display: none;
-  @media (max-width: 768px) {
-    display: block;
-    font-size: 12px;
-    text-align: center;
-    height: auto;
-    width: 100%;
-    padding: 0 20px 20px 20px;
-  }
-`;
-const ThirdContainer = styled.div`
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-`;
-const ThirdBox = styled.div`
-  width: 50%;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
-const ThirdBoxText = styled.div`
-  color: #1e56a0;
-  margin: 20px 0;
-  font-weight: bold;
-  font-size: 25px;
-`;
-const ThirdBoxImg = styled.img`
-  width: 100%;
-  @media (max-width: 768px) {
-    width: 80%;
-  }
-`;
-const FourthContainer = styled.div`
-  width: 90%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 100px 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
-const FourthLeft = styled.div`
-  width: 38%;
-  height: 200px;
-  color: #1e56a0;
-  @media (max-width: 768px) {
-    width: 100%;
-    height: auto;
-    padding: 20px 0;
-  }
-`;
-const FourthLeftLine = styled.div`
-  width: 25px;
-  height: 1px;
-  margin-bottom: 10px;
-  border-bottom: 3px solid #1e56a0;
-`;
-const FourthLeftTitle = styled.div`
-  text-align: left;
-  font-size: 20px;
-  font-weight: bold;
-`;
-const FourthRight = styled.div`
-  width: 62%;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
-const FourthRightFloor = styled.div`
-  width: 100%;
-  display: flex;
-  color: #1e56a0;
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
-`;
-const FourthRightCard = styled.div`
-  width: 20%;
-  margin: 20px;
-`;
-const FourthRightImg = styled.img`
-  width: 100%;
-`;
-const FourthRightText = styled.div`
-  font-size: 16px;
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-const MobileFourthRightText = styled.div`
-  display: none;
-  @media (max-width: 768px) {
-    font-size: 14px;
-    display: block;
-    color: black;
-  }
-`;
-const MobileFourthRightSubText = styled.div`
-  font-size: 12px;
-  color: #1e56a0;
-`;
-const BottomMapContainer = styled.div`
-  width: 95%;
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-`;
-const BottomMapDescWrapper = styled.div`
-  width: 300px;
-  align-self: flex-start;
-  text-align: left;
-  font-size: 20px;
-`;
-const BottomMapDescTitle = styled.div`
-  font-weight: bold;
-`;
-const BottomMapDescText = styled.div``;
-const BottomMapDescPhoneNumber = styled.div`
-  margin: 15px;
-`;
+import {
+  Container,
+  FirstContainer,
+  FirstLeftText,
+  FirstRightText,
+  SecondWrapper,
+  SecondLeftBox,
+  SecondLeftFirst,
+  SecondLeftSecond,
+  SecondLeftThird,
+  SecondRightBox,
+  MobileSecondRightBox,
+  BottomMapContainer,
+  BottomMapDescPhoneNumber,
+  BottomMapDescText,
+  BottomMapDescTitle,
+  BottomMapDescWrapper,
+} from './styles';
 
 const MapContainer = styled.div`
   width: 700px;
@@ -334,135 +135,6 @@ const Team = () => {
           모든 단계에서 저희와 함께 상생할 수 있도록 노력하겠습니다.
         </MobileSecondRightBox>
       </SecondWrapper>
-      <ThirdContainer>
-        <ThirdBox>
-          <ThirdBoxText>물류와 사람을 잇다</ThirdBoxText>
-          <Fade bottom>
-            <ThirdBoxImg src={descImgs.left.img} alt={descImgs.left.alt} />
-          </Fade>
-        </ThirdBox>
-        <ThirdBox>
-          <Fade bottom>
-            <ThirdBoxImg src={descImgs.right.img} alt={descImgs.right.alt} />
-          </Fade>
-          <ThirdBoxText>반창고 허브</ThirdBoxText>
-        </ThirdBox>
-      </ThirdContainer>
-      <FourthContainer>
-        <FourthLeft>
-          <FourthLeftLine />
-          <FourthLeftTitle>반창고 허브팀</FourthLeftTitle>
-        </FourthLeft>
-        <FourthRight>
-          <FourthRightFloor>
-            <FourthRightCard>
-              <FourthRightImg
-                src={profileImgs.CEO.img}
-                alt={profileImgs.CEO.alt}
-              />
-              <FourthRightText>최윤석 / CEO</FourthRightText>
-              <MobileFourthRightText>
-                최윤석
-                <MobileFourthRightSubText>CEO</MobileFourthRightSubText>
-              </MobileFourthRightText>
-            </FourthRightCard>
-          </FourthRightFloor>
-          <FourthRightFloor>
-            <FourthRightCard>
-              <FourthRightImg
-                src={profileImgs.DEV[0].img}
-                alt={profileImgs.DEV[0].alt}
-              />
-              <FourthRightText>나상우 / 개발</FourthRightText>
-              <MobileFourthRightText>
-                나상우
-                <MobileFourthRightSubText>개발</MobileFourthRightSubText>
-              </MobileFourthRightText>
-            </FourthRightCard>
-            <FourthRightCard>
-              <FourthRightImg
-                src={profileImgs.DEV[1].img}
-                alt={profileImgs.DEV[1].alt}
-              />
-              <FourthRightText>오범수 / 개발</FourthRightText>
-              <MobileFourthRightText>
-                오범수
-                <MobileFourthRightSubText>개발</MobileFourthRightSubText>
-              </MobileFourthRightText>
-            </FourthRightCard>
-            <FourthRightCard>
-              <FourthRightImg
-                src={profileImgs.DEV[2].img}
-                alt={profileImgs.DEV[2].alt}
-              />
-              <FourthRightText>조영현 / 개발</FourthRightText>
-              <MobileFourthRightText>
-                조영현
-                <MobileFourthRightSubText>개발</MobileFourthRightSubText>
-              </MobileFourthRightText>
-            </FourthRightCard>
-          </FourthRightFloor>
-          <FourthRightFloor>
-            <FourthRightCard>
-              <FourthRightImg
-                src={profileImgs.ARCH[0].img}
-                alt={profileImgs.ARCH[0].alt}
-              />
-              <FourthRightText>전정표 / 서비스 기획</FourthRightText>
-              <MobileFourthRightText>
-                전정표
-                <MobileFourthRightSubText>서비스 기획</MobileFourthRightSubText>
-              </MobileFourthRightText>
-            </FourthRightCard>
-            <FourthRightCard>
-              <FourthRightImg
-                src={profileImgs.ARCH[1].img}
-                alt={profileImgs.ARCH[1].alt}
-              />
-              <FourthRightText>문효원 / 서비스 기획</FourthRightText>
-              <MobileFourthRightText>
-                문효원
-                <MobileFourthRightSubText>서비스 기획</MobileFourthRightSubText>
-              </MobileFourthRightText>
-            </FourthRightCard>
-          </FourthRightFloor>
-          <FourthRightFloor>
-            <FourthRightCard>
-              <FourthRightImg
-                src={profileImgs.SALER[0].img}
-                alt={profileImgs.SALER[0].alt}
-              />
-              <FourthRightText>황성지 / 영업</FourthRightText>
-              <MobileFourthRightText>
-                황성지
-                <MobileFourthRightSubText>영업</MobileFourthRightSubText>
-              </MobileFourthRightText>
-            </FourthRightCard>
-            <FourthRightCard>
-              <FourthRightImg
-                src={profileImgs.SALER[1].img}
-                alt={profileImgs.SALER[1].alt}
-              />
-              <FourthRightText>이소정 / 영업</FourthRightText>
-              <MobileFourthRightText>
-                이소정
-                <MobileFourthRightSubText>영업</MobileFourthRightSubText>
-              </MobileFourthRightText>
-            </FourthRightCard>
-            <FourthRightCard>
-              <FourthRightImg
-                src={profileImgs.DESIGN.img}
-                alt={profileImgs.DESIGN.alt}
-              />
-              <FourthRightText>조성현 / 디자인</FourthRightText>
-              <MobileFourthRightText>
-                조성현
-                <MobileFourthRightSubText>디자인</MobileFourthRightSubText>
-              </MobileFourthRightText>
-            </FourthRightCard>
-          </FourthRightFloor>
-        </FourthRight>
-      </FourthContainer>
       <BottomMapContainer>
         <BottomMapDescWrapper>
           <BottomMapDescTitle>찾아오시는 길</BottomMapDescTitle>
@@ -471,9 +143,7 @@ const Team = () => {
             <br />
             창신관 3F
           </BottomMapDescText>
-          <BottomMapDescPhoneNumber>
-            T. 0507-1370-4711
-          </BottomMapDescPhoneNumber>
+          <BottomMapDescPhoneNumber>T. 0507-1370-4711</BottomMapDescPhoneNumber>
         </BottomMapDescWrapper>
         <MapContainer ref={mapRef} id="kakaoMap" />
       </BottomMapContainer>
