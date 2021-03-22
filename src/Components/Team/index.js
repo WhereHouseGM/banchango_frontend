@@ -2,221 +2,39 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 import { descImgs, profileImgs } from './Team';
-const Container = styled.div`
-  width: 100%;
-  font-family: 'paybooc-Medium', sans-serif;
-  text-align: center;
-  line-height: 1.3;
-`;
-const FirstContainer = styled.div`
-  background-color: #1e56a0;
-  padding: 40px;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @media (max-width: 768px) {
-    padding: 15px;
-  }
-`;
-const FirstLeftText = styled.div`
-  width: 20%;
-  min-width: 165.1px;
-  font-weight: bold;
-  font-size: 45px;
-  @media (max-width: 768px) {
-    text-align: center;
-    font-size: 25px;
-    min-width: 110px;
-    white-space: pre-wrap;
-  }
-`;
-const FirstRightText = styled.div`
-  font-family: 'notosans-Regular', sans-serif;
-  flex: 1;
-  max-width: 615px;
-  font-size: 14px;
-  line-height: 1.5;
-  white-space: normal;
-  @media (max-width: 768px) {
-    white-space: pre-wrap;
-    font-size: 11px;
-  }
-`;
-const SecondWrapper = styled.div`
-  width: 95%;
-  max-width: 1024px;
-  padding: 70px 0;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  text-align: left;
-`;
-const SecondLeftBox = styled.div`
-  width: 28%;
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  line-height: 1.5;
-  font-size: 28px;
-  font-weight: bold;
-  @media (max-width: 768px) {
-    width: 100%;
-    text-align: center;
-    height: auto;
-    padding: 20px 0;
-  }
-`;
-const SecondLeftFirst = styled.div`
-  color: #1e56a0;
-`;
-const SecondLeftSecond = styled.div`
-  color: black;
-`;
-const SecondLeftThird = styled.div`
-  color: #1e56a0;
-`;
-const SecondRightBox = styled.div`
-  font-family: 'notosans-Regular', sans-serif;
-  width: 70%;
-  height: 200px;
-  padding: 50px 0px 20px 40px;
-  font-size: 18px;
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-const MobileSecondRightBox = styled.div`
-  font-family: 'notosans-Regular', sans-serif;
-  display: none;
-  @media (max-width: 768px) {
-    display: block;
-    font-size: 12px;
-    text-align: center;
-    height: auto;
-    width: 100%;
-    padding: 0 20px 20px 20px;
-  }
-`;
-const ThirdContainer = styled.div`
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-`;
-const ThirdBox = styled.div`
-  width: 50%;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
-const ThirdBoxText = styled.div`
-  color: #1e56a0;
-  margin: 20px 0;
-  font-weight: bold;
-  font-size: 25px;
-`;
-const ThirdBoxImg = styled.img`
-  width: 100%;
-  @media (max-width: 768px) {
-    width: 80%;
-  }
-`;
-const FourthContainer = styled.div`
-  width: 90%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 100px 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
-const FourthLeft = styled.div`
-  width: 38%;
-  height: 200px;
-  color: #1e56a0;
-  @media (max-width: 768px) {
-    width: 100%;
-    height: auto;
-    padding: 20px 0;
-  }
-`;
-const FourthLeftLine = styled.div`
-  width: 25px;
-  height: 1px;
-  margin-bottom: 10px;
-  border-bottom: 3px solid #1e56a0;
-`;
-const FourthLeftTitle = styled.div`
-  text-align: left;
-  font-size: 20px;
-  font-weight: bold;
-`;
-const FourthRight = styled.div`
-  width: 62%;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
-const FourthRightFloor = styled.div`
-  width: 100%;
-  display: flex;
-  color: #1e56a0;
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
-`;
-const FourthRightCard = styled.div`
-  width: 20%;
-  margin: 20px;
-`;
-const FourthRightImg = styled.img`
-  width: 100%;
-`;
-const FourthRightText = styled.div`
-  font-size: 16px;
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-const MobileFourthRightText = styled.div`
-  display: none;
-  @media (max-width: 768px) {
-    font-size: 14px;
-    display: block;
-    color: black;
-  }
-`;
-const MobileFourthRightSubText = styled.div`
-  font-size: 12px;
-  color: #1e56a0;
-`;
-const BottomMapContainer = styled.div`
-  width: 95%;
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-`;
-const BottomMapDescWrapper = styled.div`
-  width: 300px;
-  align-self: flex-start;
-  text-align: left;
-  font-size: 20px;
-`;
-const BottomMapDescTitle = styled.div`
-  font-weight: bold;
-`;
-const BottomMapDescText = styled.div``;
-const BottomMapDescPhoneNumber = styled.div`
-  margin: 15px;
-`;
+import {
+  Container,
+  FirstContainer,
+  FirstLeftText,
+  FirstRightText,
+  SecondWrapper,
+  SecondLeftBox,
+  SecondLeftFirst,
+  SecondLeftSecond,
+  SecondLeftThird,
+  SecondRightBox,
+  MobileSecondRightBox,
+  ThirdBox,
+  ThirdBoxImg,
+  ThirdBoxText,
+  ThirdContainer,
+  FourthContainer,
+  FourthLeft,
+  FourthLeftLine,
+  FourthLeftTitle,
+  FourthRight,
+  FourthRightCard,
+  FourthRightImg,
+  FourthRightText,
+  FourthRightFloor,
+  MobileFourthRightSubText,
+  MobileFourthRightText,
+  BottomMapContainer,
+  BottomMapDescPhoneNumber,
+  BottomMapDescText,
+  BottomMapDescTitle,
+  BottomMapDescWrapper,
+} from './styles';
 
 const MapContainer = styled.div`
   width: 700px;
@@ -471,9 +289,7 @@ const Team = () => {
             <br />
             창신관 3F
           </BottomMapDescText>
-          <BottomMapDescPhoneNumber>
-            T. 0507-1370-4711
-          </BottomMapDescPhoneNumber>
+          <BottomMapDescPhoneNumber>T. 0507-1370-4711</BottomMapDescPhoneNumber>
         </BottomMapDescWrapper>
         <MapContainer ref={mapRef} id="kakaoMap" />
       </BottomMapContainer>
